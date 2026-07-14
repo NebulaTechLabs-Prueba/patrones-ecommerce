@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import '@/styles/globals.css';
 
 // Unica familia web de la marca. Gotham (del logo) NO se usa en la web.
@@ -20,7 +22,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={nunitoSans.variable}>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,0 +1,104 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ptr-radius-lg);
+  overflow: hidden;
+  background-color: var(--ptr-white);
+  border: 1px solid var(--ptr-neutral-200);
+  transition:
+    transform var(--ptr-duration-base) var(--ptr-ease),
+    box-shadow var(--ptr-duration-base) var(--ptr-ease);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ptr-shadow-2);
+}
+
+.media {
+  position: relative;
+}
+
+.ownLine,
+.setTag {
+  position: absolute;
+  top: var(--ptr-space-3);
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  padding: var(--ptr-space-1) var(--ptr-space-2);
+  border-radius: var(--ptr-radius-sm);
+}
+
+.ownLine {
+  left: var(--ptr-space-3);
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+}
+
+.setTag {
+  right: var(--ptr-space-3);
+  background-color: var(--ptr-cream);
+  color: var(--ptr-primary);
+}
+
+.body {
+  padding: var(--ptr-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-2);
+}
+
+.brand {
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  color: var(--ptr-neutral-400);
+}
+
+.name {
+  font-size: var(--ptr-text-base);
+  font-weight: var(--ptr-weight-semibold);
+  line-height: var(--ptr-leading-tight);
+  color: var(--ptr-ink);
+}
+
+.swatches {
+  display: flex;
+  gap: var(--ptr-space-2);
+  list-style: none;
+  padding: 0;
+}
+
+.swatchItem {
+  display: inline-flex;
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--ptr-radius-full);
+  border: 1px solid var(--ptr-neutral-200);
+  display: block;
+}
+
+.price {
+  margin-top: var(--ptr-space-1);
+  font-size: var(--ptr-text-lg);
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-ink);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

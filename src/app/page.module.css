@@ -1,0 +1,146 @@
+/* Home. Ritmo cinematico en el hero (§16.2), contenido sobrio en el resto. */
+
+.hero {
+  background-color: var(--ptr-cream);
+  border-bottom: 1px solid var(--ptr-neutral-200);
+}
+
+.heroInner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--ptr-space-9) var(--ptr-space-5);
+}
+
+.heroEyebrow {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-primary-soft);
+  margin-bottom: var(--ptr-space-4);
+}
+
+.heroTitle {
+  font-size: var(--ptr-text-3xl);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-tight);
+  line-height: var(--ptr-leading-tight);
+  color: var(--ptr-ink);
+  max-width: 16ch;
+}
+
+.heroLead {
+  margin-top: var(--ptr-space-5);
+  font-size: var(--ptr-text-lg);
+  line-height: var(--ptr-leading-relaxed);
+  color: var(--ptr-neutral-600);
+  max-width: 52ch;
+}
+
+.heroActions {
+  margin-top: var(--ptr-space-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ptr-space-3);
+}
+
+.primaryCta,
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+  border-radius: var(--ptr-radius-md);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  transition:
+    background-color var(--ptr-duration-fast) var(--ptr-ease),
+    color var(--ptr-duration-fast) var(--ptr-ease);
+}
+
+.primaryCta {
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+}
+
+.primaryCta:hover {
+  background-color: var(--ptr-primary-soft);
+}
+
+.secondaryCta {
+  border: 1px solid var(--ptr-primary);
+  color: var(--ptr-primary);
+}
+
+.secondaryCta:hover {
+  background-color: var(--ptr-white);
+}
+
+.section {
+  max-width: var(--ptr-container);
+  margin: 0 auto;
+  padding: var(--ptr-space-8) var(--ptr-space-5);
+}
+
+.doors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--ptr-space-5);
+}
+
+/* Teaser Línea PATRONES */
+.ownLineBanner {
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+  border-radius: var(--ptr-radius-lg);
+  padding: var(--ptr-space-7) var(--ptr-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-5);
+  flex-wrap: wrap;
+}
+
+.ownLineEyebrow {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: var(--ptr-space-2);
+}
+
+.ownLineTitle {
+  font-size: var(--ptr-text-2xl);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-tight);
+}
+
+.ownLineLead {
+  margin-top: var(--ptr-space-2);
+  font-size: var(--ptr-text-base);
+  line-height: var(--ptr-leading-relaxed);
+  opacity: 0.9;
+  max-width: 46ch;
+}
+
+.ownLineCta {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+  border-radius: var(--ptr-radius-md);
+  background-color: var(--ptr-white);
+  color: var(--ptr-primary);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: var(--ptr-text-4xl);
+  }
+}
