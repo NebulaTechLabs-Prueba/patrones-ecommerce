@@ -1,0 +1,20 @@
+# dependencias
+/node_modules
+
+# build / export
+/.next
+/out
+next-env.d.ts
+
+# entorno
+.env
+.env.*
+!.env.example
+
+# tests
+/coverage
+
+# sistema
+.DS_Store
+Thumbs.db
+*.log
