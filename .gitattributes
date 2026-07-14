@@ -1,0 +1,11 @@
+# Normalizar fin de linea a LF en el repo (evita churn Windows/OneDrive <-> CI).
+* text=auto eol=lf
+
+# Binarios: sin conversion.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
