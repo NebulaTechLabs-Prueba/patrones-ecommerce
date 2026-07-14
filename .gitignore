@@ -14,6 +14,10 @@ next-env.d.ts
 # tests
 /coverage
 
+# contexto local (estrategia de negocio, no se publica)
+/.claude-context
+*.local.md
+
 # sistema
 .DS_Store
 Thumbs.db
