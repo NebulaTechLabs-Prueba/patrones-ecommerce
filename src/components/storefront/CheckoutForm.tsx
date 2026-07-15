@@ -318,8 +318,11 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
               onChange={(e) => setAcceptNoReturns(e.target.checked ? 'yes' : '')}
             />
             <span>
-              He leído y acepto los Términos y Condiciones, incluida la política de no
-              devolución.
+              He leído y acepto los{' '}
+              <a href="/terminos/" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>
+                Términos y Condiciones
+              </a>
+              , incluida la política de no devolución.
             </span>
           </label>
 

@@ -217,6 +217,11 @@
   margin-top: 3px;
 }
 
+.inlineLink {
+  color: var(--ptr-primary);
+  text-decoration: underline;
+}
+
 .primary {
   display: inline-flex;
   justify-content: center;

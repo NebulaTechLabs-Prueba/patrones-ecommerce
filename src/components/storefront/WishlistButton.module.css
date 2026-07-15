@@ -1,0 +1,37 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ptr-space-2);
+  border: 0;
+  background: transparent;
+  color: var(--ptr-neutral-600);
+  transition: color var(--ptr-duration-fast) var(--ptr-ease);
+}
+
+.btn:hover {
+  color: var(--ptr-primary);
+}
+
+.active {
+  color: var(--ptr-primary);
+}
+
+/* Sobre la imagen de la card. */
+.floating {
+  position: absolute;
+  top: var(--ptr-space-3);
+  right: var(--ptr-space-3);
+  width: 34px;
+  height: 34px;
+  justify-content: center;
+  border-radius: var(--ptr-radius-full);
+  background-color: var(--ptr-white);
+  box-shadow: var(--ptr-shadow-1);
+}
+
+/* En línea, en la PDP. */
+.inline {
+  padding: var(--ptr-space-2) 0;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+}

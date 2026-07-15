@@ -19,6 +19,7 @@ import { ProductGallery } from '@/components/storefront/ProductGallery';
 import { SizeChartSection } from '@/components/storefront/SizeChartSection';
 import { SuggestedSet, type SuggestedProductData } from '@/components/storefront/SuggestedSet';
 import { VariantSelector, type SelectableVariant } from '@/components/storefront/VariantSelector';
+import { WishlistButton } from '@/components/storefront/WishlistButton';
 import { productRepo, settingsRepo } from '@/lib/data';
 import { filterAvailableVariants, getAvailableStock } from '@/lib/domains/availability';
 import { getBrandsById, getProductDetail, getVisibleProductSlugs } from '@/lib/storefront/catalog';
@@ -134,6 +135,16 @@ export default async function ProductPage({ params }: PageProps) {
             ) : null}
             <h1 className={styles.title}>{product.name}</h1>
             {model ? <p className={styles.model}>Modelo {model.name}</p> : null}
+            <WishlistButton
+              variant="inline"
+              item={{
+                productId: product.id,
+                slug: product.slug,
+                name: product.name,
+                priceCents: product.price,
+                imageUrl: product.images[0]?.url ?? null,
+              }}
+            />
           </div>
 
           <VariantSelector

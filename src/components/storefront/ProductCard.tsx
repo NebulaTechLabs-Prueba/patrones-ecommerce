@@ -12,6 +12,7 @@
 import Link from 'next/link';
 import { PlaceholderImage } from '@/components/brand/PlaceholderImage';
 import { Money } from '@/components/ui/Money';
+import { WishlistButton } from './WishlistButton';
 import type { Product, VariantColor } from '@/lib/data/types';
 import styles from './ProductCard.module.css';
 
@@ -33,6 +34,15 @@ export function ProductCard({ product, availableColors, brandName, isOwnLine }: 
         <PlaceholderImage image={cover} label={product.name} ratio="4 / 5" />
         {isOwnLine ? <span className={styles.ownLine}>Línea PATRONES</span> : null}
         {product.type === 'set' ? <span className={styles.setTag}>Conjunto</span> : null}
+        <WishlistButton
+          item={{
+            productId: product.id,
+            slug: product.slug,
+            name: product.name,
+            priceCents: product.price,
+            imageUrl: cover?.url ?? null,
+          }}
+        />
       </div>
 
       <div className={styles.body}>
