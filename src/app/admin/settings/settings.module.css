@@ -32,3 +32,16 @@
   color: var(--ptr-ink);
   margin-bottom: var(--ptr-space-4);
 }
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--ptr-space-4);
+}
+
+.savedFlash {
+  margin-bottom: var(--ptr-space-4);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-success);
+}
