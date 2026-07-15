@@ -8,6 +8,7 @@
 
 import type { ExchangeRate, Promotion } from '@/lib/data/types';
 import type { PricingSettings } from '@/lib/domains/pricing/pricing';
+import { AuthProvider } from '@/lib/store/auth-context';
 import { CartProvider } from '@/lib/store/cart-context';
 import { CurrencyProvider } from '@/lib/store/currency-context';
 
@@ -20,10 +21,12 @@ interface StoreProvidersProps {
 
 export function StoreProviders({ rate, promotions, pricingSettings, children }: StoreProvidersProps) {
   return (
-    <CurrencyProvider rate={rate}>
-      <CartProvider promotions={promotions} pricingSettings={pricingSettings}>
-        {children}
-      </CartProvider>
-    </CurrencyProvider>
+    <AuthProvider>
+      <CurrencyProvider rate={rate}>
+        <CartProvider promotions={promotions} pricingSettings={pricingSettings}>
+          {children}
+        </CartProvider>
+      </CurrencyProvider>
+    </AuthProvider>
   );
 }

@@ -1,36 +1,3 @@
-.main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: var(--ptr-space-8) var(--ptr-space-5);
-}
-
-.header {
-  margin-bottom: var(--ptr-space-6);
-}
-
-.eyebrow {
-  font-size: var(--ptr-text-sm);
-  font-weight: var(--ptr-weight-semibold);
-  letter-spacing: var(--ptr-tracking-wider);
-  text-transform: uppercase;
-  color: var(--ptr-primary-soft);
-  margin-bottom: var(--ptr-space-2);
-}
-
-.title {
-  font-size: var(--ptr-text-3xl);
-  font-weight: var(--ptr-weight-bold);
-  letter-spacing: var(--ptr-tracking-tight);
-  color: var(--ptr-ink);
-}
-
-.demoNote {
-  margin-top: var(--ptr-space-3);
-  font-size: var(--ptr-text-sm);
-  color: var(--ptr-neutral-600);
-  line-height: var(--ptr-leading-relaxed);
-}
-
 .list {
   list-style: none;
   padding: 0;
@@ -146,7 +113,10 @@
   color: var(--ptr-ink);
 }
 
-.bs {
-  font-size: var(--ptr-text-sm);
-  color: var(--ptr-neutral-600);
+.footnote {
+  margin-top: var(--ptr-space-5);
+  font-size: var(--ptr-text-xs);
+  color: var(--ptr-neutral-400);
+  line-height: var(--ptr-leading-relaxed);
+  max-width: 70ch;
 }

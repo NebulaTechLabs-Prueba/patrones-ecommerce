@@ -1,15 +1,16 @@
 /**
- * Cuenta - Mis pedidos (§10, §13.1). Vista read-only de demostracion.
+ * Cuenta - Mis pedidos (§10, §13.1). Vive dentro del AccountShell (nav + guarda).
  *
  * Muestra las DOS maquinas de estado por separado: cumplimiento (status) y cobro
- * (payment_status) — "confianza hecho software" (§10). El monto en Bs es el
- * SNAPSHOT de la orden a su tasa; jamas se recalcula una orden historica (§11).
+ * (payment_status). Los montos se expresan en la moneda elegida a la TASA VIGENTE
+ * (presentacion); el monto OFICIAL de cada pedido queda fijado al comprar (§11) y
+ * es el que va a la nota de entrega.
  *
- * Sin auth en Fase 1: lee las ordenes mock como si fueran las del usuario.
+ * Sin auth real en Fase 1: lee las ordenes mock como si fueran las del usuario.
  */
 
 import type { Metadata } from 'next';
-import { OrderMoney } from '@/components/ui/OrderMoney';
+import { Money } from '@/components/ui/Money';
 import { orderRepo } from '@/lib/data';
 import type { OrderStatus, PaymentStatus } from '@/lib/data/types';
 import styles from './page.module.css';
@@ -38,7 +39,6 @@ const PAYMENT_LABELS: Record<PaymentStatus, string> = {
   partially_refunded: 'Reembolso parcial',
 };
 
-/** Tono semantico del estado (nunca el verde de marca como "exito", §5.1). */
 function orderTone(status: OrderStatus): string {
   if (status === 'delivered') return styles.success!;
   if (status === 'cancelled') return styles.danger!;
@@ -62,16 +62,7 @@ export default async function OrdersPage() {
   const orders = await orderRepo.listOrders();
 
   return (
-    <main className={styles.main}>
-      <header className={styles.header}>
-        <p className={styles.eyebrow}>Mi cuenta</p>
-        <h1 className={styles.title}>Mis pedidos</h1>
-        <p className={styles.demoNote}>
-          Vista de demostración. En producción verías aquí tus propios pedidos tras iniciar
-          sesión, con el historial de cada estado.
-        </p>
-      </header>
-
+    <div>
       <ul className={styles.list}>
         {orders.map((order) => (
           <li key={order.id} className={styles.order}>
@@ -101,7 +92,7 @@ export default async function OrdersPage() {
                     </span>
                   </span>
                   <span>
-                    <OrderMoney cents={line.line_total_cents} rateUsed={order.rate_used} />
+                    <Money cents={line.line_total_cents} />
                   </span>
                 </li>
               ))}
@@ -113,14 +104,18 @@ export default async function OrdersPage() {
               </span>
               <span className={styles.totals}>
                 <strong>
-                  <OrderMoney cents={order.total_cents} rateUsed={order.rate_used} />
+                  <Money cents={order.total_cents} />
                 </strong>
-                <span className={styles.bs}>a la tasa de la orden</span>
               </span>
             </div>
           </li>
         ))}
       </ul>
-    </main>
+
+      <p className={styles.footnote}>
+        Los montos en Bs se muestran a la tasa de hoy. El monto oficial de cada pedido queda
+        fijado al momento de la compra y es el que figura en la nota de entrega.
+      </p>
+    </div>
   );
 }

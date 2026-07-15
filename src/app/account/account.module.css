@@ -1,0 +1,56 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--ptr-space-4);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-2);
+  padding: var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background-color: var(--ptr-white);
+  transition:
+    transform var(--ptr-duration-base) var(--ptr-ease),
+    box-shadow var(--ptr-duration-base) var(--ptr-ease);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ptr-shadow-2);
+}
+
+.cardTitle {
+  font-size: var(--ptr-text-lg);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+}
+
+.cardDesc {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+  line-height: var(--ptr-leading-normal);
+}
+
+/* Placeholder simple para subsecciones aun no implementadas. */
+.placeholder {
+  padding: var(--ptr-space-6);
+  border: 1px dashed var(--ptr-neutral-400);
+  border-radius: var(--ptr-radius-lg);
+  background-color: var(--ptr-white);
+}
+
+.placeholderTitle {
+  font-size: var(--ptr-text-lg);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+  margin-bottom: var(--ptr-space-2);
+}
+
+.placeholderText {
+  color: var(--ptr-neutral-600);
+  line-height: var(--ptr-leading-relaxed);
+  max-width: 60ch;
+}

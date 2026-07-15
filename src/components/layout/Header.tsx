@@ -8,6 +8,7 @@
 
 import Link from 'next/link';
 import { Isologo } from '@/components/brand/Isologo';
+import { AccountMenu } from './AccountMenu';
 import { CartIndicator } from './CartIndicator';
 import { CurrencySwitch } from './CurrencySwitch';
 import { productRepo } from '@/lib/data';
@@ -38,6 +39,7 @@ export async function Header() {
 
         <div className={styles.controls}>
           <CurrencySwitch />
+          <AccountMenu />
           <CartIndicator />
         </div>
       </div>

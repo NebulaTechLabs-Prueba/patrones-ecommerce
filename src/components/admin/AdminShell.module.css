@@ -1,0 +1,123 @@
+.shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100dvh;
+}
+
+.sidebar {
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+  padding: var(--ptr-space-5) var(--ptr-space-4);
+}
+
+.brand {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  margin-bottom: var(--ptr-space-6);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-5);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.groupTitle {
+  font-size: var(--ptr-text-xs);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: var(--ptr-space-2);
+}
+
+.link {
+  padding: var(--ptr-space-2) var(--ptr-space-3);
+  border-radius: var(--ptr-radius-sm);
+  color: var(--ptr-white);
+  font-size: var(--ptr-text-sm);
+  opacity: 0.85;
+}
+
+.link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.16);
+  opacity: 1;
+  font-weight: var(--ptr-weight-semibold);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ptr-neutral-50);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ptr-space-4) var(--ptr-space-6);
+  background-color: var(--ptr-white);
+  border-bottom: 1px solid var(--ptr-neutral-200);
+}
+
+.userName {
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-4);
+}
+
+.viewStore {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-primary);
+  font-weight: var(--ptr-weight-medium);
+}
+
+.logout {
+  padding: var(--ptr-space-2) var(--ptr-space-4);
+  border: 1px solid var(--ptr-neutral-400);
+  border-radius: var(--ptr-radius-md);
+  background-color: transparent;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+}
+
+.content {
+  padding: var(--ptr-space-6);
+}
+
+@media (max-width: 768px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    padding: var(--ptr-space-4);
+  }
+
+  .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--ptr-space-3);
+  }
+
+  .groupTitle {
+    display: none;
+  }
+}

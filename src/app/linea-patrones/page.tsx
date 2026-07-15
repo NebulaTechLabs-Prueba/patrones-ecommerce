@@ -11,6 +11,7 @@ import { CatalogHero } from '@/components/storefront/CatalogHero';
 import { EmptyState } from '@/components/storefront/EmptyState';
 import { ProductGrid } from '@/components/storefront/ProductGrid';
 import { getBrandsById, getOwnLineProducts } from '@/lib/storefront/catalog';
+import { assetPath } from '@/lib/asset';
 
 export const metadata: Metadata = {
   title: 'Línea PATRONES',
@@ -27,6 +28,12 @@ export default async function OwnLinePage() {
         eyebrow="Línea propia"
         title="Línea PATRONES"
         description="Diseñada y producida por PATRONES. Nuestra confección propia, con el estándar que define a la casa, disponible en todos los rubros."
+        image={{
+          url: assetPath('/brand/etiqueta.jpg'),
+          alt: 'Etiqueta tejida de la Línea PATRONES',
+          is_placeholder: false,
+          sort_order: 0,
+        }}
       />
 
       <section
