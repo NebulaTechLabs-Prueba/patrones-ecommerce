@@ -56,7 +56,6 @@ export default async function AdminSettingsPage() {
           <thead>
             <tr>
               <th>Método</th>
-              <th>Tipo</th>
               <th>Modo</th>
               <th>Estado</th>
             </tr>
@@ -65,8 +64,7 @@ export default async function AdminSettingsPage() {
             {methods.map((m) => (
               <tr key={m.id}>
                 <td>{m.label}</td>
-                <td className={ui.mono}>{m.kind}</td>
-                <td>{m.is_offline ? 'Offline (comprobante)' : 'Online'}</td>
+                <td>{m.is_offline ? 'Con comprobante' : 'En línea'}</td>
                 <td>
                   <span className={`${ui.badge} ${m.is_enabled ? ui.success : ui.neutral}`}>
                     {m.is_enabled ? 'Habilitado' : 'Modelado'}

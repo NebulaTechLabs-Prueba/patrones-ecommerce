@@ -9,7 +9,7 @@
 import { useMemo, useState } from 'react';
 import type { Order, PaymentStatus } from '@/lib/data/types';
 import { canTransitionPayment } from '@/lib/domains/payments/payments';
-import { PAYMENT_STATUS_LABELS } from '@/lib/labels';
+import { PAYMENT_METHOD_LABELS, PAYMENT_STATUS_LABELS } from '@/lib/labels';
 import { formatUsd } from '@/lib/format';
 import ui from './adminUI.module.css';
 
@@ -97,7 +97,7 @@ export function AdminPayments({ initialOrders }: { initialOrders: Order[] }) {
                   <td>
                     <strong>{o.number}</strong>
                   </td>
-                  <td className={ui.mono}>{o.payment_method}</td>
+                  <td>{PAYMENT_METHOD_LABELS[o.payment_method]}</td>
                   <td>{formatUsd(o.total_cents)}</td>
                   <td>
                     <span className={`${ui.badge} ${tone(o.payment_status)}`}>

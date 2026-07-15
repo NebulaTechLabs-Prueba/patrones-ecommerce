@@ -14,7 +14,7 @@ import {
   isTerminalOrderStatus,
   nextOrderStates,
 } from '@/lib/domains/orders/orders';
-import { ORDER_STATUS_LABELS, PAYMENT_STATUS_LABELS } from '@/lib/labels';
+import { ORDER_STATUS_LABELS, PAYMENT_STATUS_LABELS, SHIPPING_METHOD_LABELS } from '@/lib/labels';
 import ui from './adminUI.module.css';
 
 function paymentTone(status: string): string {
@@ -78,7 +78,7 @@ export function AdminOrders({ initialOrders }: { initialOrders: Order[] }) {
                     {PAYMENT_STATUS_LABELS[o.payment_status]}
                   </span>
                 </td>
-                <td className={ui.mono}>{o.shipping_method}</td>
+                <td>{SHIPPING_METHOD_LABELS[o.shipping_method]}</td>
                 <td>
                   {isTerminalOrderStatus(o.status) ? (
                     <span className={ui.terminal}>Estado final</span>

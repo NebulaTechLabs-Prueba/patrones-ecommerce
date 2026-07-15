@@ -7,6 +7,7 @@
 import { productRepo } from '@/lib/data';
 import type { Promotion, PromotionType } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
+import { PROMOTION_SCOPE_LABELS } from '@/lib/labels';
 import ui from '@/components/admin/adminUI.module.css';
 
 const TYPE_LABELS: Record<PromotionType, string> = {
@@ -87,7 +88,7 @@ export default async function AdminDiscountsPage() {
               <tr key={p.id}>
                 <td>{p.name}</td>
                 <td>{TYPE_LABELS[p.type]}</td>
-                <td className={ui.mono}>{p.scope}</td>
+                <td>{PROMOTION_SCOPE_LABELS[p.scope]}</td>
                 <td>{target(p)}</td>
                 <td>{formatValue(p)}</td>
                 <td>{p.stackable ? 'Sí' : 'No'}</td>

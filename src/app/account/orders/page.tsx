@@ -13,6 +13,7 @@ import type { Metadata } from 'next';
 import { Money } from '@/components/ui/Money';
 import { orderRepo } from '@/lib/data';
 import type { OrderStatus, PaymentStatus } from '@/lib/data/types';
+import { PAYMENT_METHOD_LABELS, SHIPPING_METHOD_LABELS } from '@/lib/labels';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -100,7 +101,8 @@ export default async function OrdersPage() {
 
             <div className={styles.orderFoot}>
               <span className={styles.method}>
-                {order.shipping_method.toUpperCase()} · {order.payment_method}
+                {SHIPPING_METHOD_LABELS[order.shipping_method]} ·{' '}
+                {PAYMENT_METHOD_LABELS[order.payment_method]}
               </span>
               <span className={styles.totals}>
                 <strong>
