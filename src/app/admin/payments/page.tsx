@@ -1,16 +1,12 @@
-import { AdminPlaceholder } from '@/components/admin/AdminPlaceholder';
+/**
+ * Admin - Pagos. El server entrega las ordenes; la verificacion/reembolso (maquina
+ * de cobro) vive en el client component.
+ */
 
-export default function AdminPaymentsPage() {
-  return (
-    <AdminPlaceholder
-      title="Pagos"
-      description="Cobro de pedidos. Verificación de pagos offline (comprobante + referencia), con auditoría."
-      planned={[
-        'Cola de pagos en verificación (badge con contador)',
-        'Aprobar (→ paid) o rechazar (→ rejected, con motivo)',
-        'Plazo de verificación: 3 días hábiles; vencido libera stock',
-        'Toda verificación auditada (quién, cuándo, monto, comprobante)',
-      ]}
-    />
-  );
+import { AdminPayments } from '@/components/admin/AdminPayments';
+import { orderRepo } from '@/lib/data';
+
+export default async function AdminPaymentsPage() {
+  const orders = await orderRepo.listOrders();
+  return <AdminPayments initialOrders={orders} />;
 }

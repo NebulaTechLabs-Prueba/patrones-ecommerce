@@ -12,9 +12,11 @@ interface CatalogHeroProps {
   title: string;
   description: string;
   image?: ProductImage | null;
+  /** Relacion de aspecto del media; se ajusta al encuadre real de la imagen. */
+  imageRatio?: string;
 }
 
-export function CatalogHero({ eyebrow, title, description, image }: CatalogHeroProps) {
+export function CatalogHero({ eyebrow, title, description, image, imageRatio = '16 / 10' }: CatalogHeroProps) {
   return (
     <section className={styles.hero}>
       <div className={styles.text}>
@@ -24,7 +26,7 @@ export function CatalogHero({ eyebrow, title, description, image }: CatalogHeroP
       </div>
       {image !== undefined ? (
         <div className={styles.media}>
-          <PlaceholderImage image={image ?? null} label={title} ratio="16 / 10" priority />
+          <PlaceholderImage image={image ?? null} label={title} ratio={imageRatio} priority />
         </div>
       ) : null}
     </section>

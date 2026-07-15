@@ -34,6 +34,7 @@ export default async function OwnLinePage() {
           is_placeholder: false,
           sort_order: 0,
         }}
+        imageRatio="4 / 5"
       />
 
       <section

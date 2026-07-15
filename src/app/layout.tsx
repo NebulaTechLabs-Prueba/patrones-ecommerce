@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ChromeGate } from '@/components/layout/ChromeGate';
 import { StoreProviders } from '@/components/providers/StoreProviders';
 import { productRepo, settingsRepo } from '@/lib/data';
 import '@/styles/globals.css';
@@ -42,9 +43,13 @@ export default async function RootLayout({
             quantityPromoEnabled: settings.quantity_promo_enabled,
           }}
         >
-          <Header />
+          <ChromeGate>
+            <Header />
+          </ChromeGate>
           {children}
-          <Footer />
+          <ChromeGate>
+            <Footer />
+          </ChromeGate>
         </StoreProviders>
       </body>
     </html>
