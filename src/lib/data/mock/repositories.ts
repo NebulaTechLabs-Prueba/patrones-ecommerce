@@ -81,6 +81,12 @@ export const mockProductRepository: ProductRepository = {
   async listActivePromotions() {
     return clone(promotions.filter((p) => p.is_active));
   },
+  async listPromotions() {
+    return clone(promotions);
+  },
+  async listSizeCharts() {
+    return clone(sizeCharts);
+  },
   async getSizeChartById(id) {
     return clone(sizeCharts.find((s) => s.id === id) ?? null);
   },

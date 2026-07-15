@@ -1,16 +1,62 @@
-import { AdminPlaceholder } from '@/components/admin/AdminPlaceholder';
+/**
+ * Admin - Productos (§9). Listado con marca, rubros, categorías, tipo, precio,
+ * featured, variantes y visibilidad al público (agotado no aparece, §7).
+ */
 
-export default function AdminProductsPage() {
+import { getAdminProducts } from '@/lib/admin/products';
+import { formatUsd } from '@/lib/format';
+import ui from '@/components/admin/adminUI.module.css';
+
+export default async function AdminProductsPage() {
+  const products = await getAdminProducts();
+
   return (
-    <AdminPlaceholder
-      title="Productos"
-      description="Alta y edición de productos, variantes (SKU por variante), precios y línea propia."
-      planned={[
-        'Listado con estado de visibilidad (agotado no aparece en el público)',
-        'Variantes: SKU provisto por PATRONES (se valida, no se genera)',
-        'Precio a nivel producto + override por variante',
-        'Marcar featured (con aviso si se concentran en un rubro)',
-      ]}
-    />
+    <div>
+      <h1 className={ui.pageTitle}>Productos</h1>
+      <p className={ui.pageSubtitle}>
+        El precio vive a nivel producto (override por variante). El SKU es por variante y lo
+        provee PATRONES. La edición con persistencia llega en Fase 2.
+      </p>
+
+      <div className={ui.tableWrap}>
+        <table className={ui.table}>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Marca</th>
+              <th>Rubros</th>
+              <th>Categoría</th>
+              <th>Tipo</th>
+              <th>Precio</th>
+              <th>Variantes</th>
+              <th>Featured</th>
+              <th>Visible</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((p) => (
+              <tr key={p.id}>
+                <td>{p.name}</td>
+                <td>
+                  {p.brand}
+                  {p.isOwnLine ? <span className={`${ui.badge} ${ui.success}`}> Línea</span> : null}
+                </td>
+                <td>{p.verticals}</td>
+                <td>{p.categories}</td>
+                <td>{p.type === 'set' ? 'Conjunto' : 'Simple'}</td>
+                <td>{formatUsd(p.priceCents)}</td>
+                <td>{p.variantCount}</td>
+                <td>{p.featured ? 'Sí' : '—'}</td>
+                <td>
+                  <span className={`${ui.badge} ${p.visible ? ui.success : ui.danger}`}>
+                    {p.visible ? 'Visible' : 'Oculto'}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

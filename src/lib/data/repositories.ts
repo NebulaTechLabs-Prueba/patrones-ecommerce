@@ -50,8 +50,11 @@ export interface ProductRepository {
 
   listBundles(): Promise<Bundle[]>;
   listActivePromotions(): Promise<Promotion[]>;
+  /** Todas las promociones (activas e inactivas), para el admin. */
+  listPromotions(): Promise<Promotion[]>;
 
   /** Tablas de medidas (§15). Un producto la referencia por size_chart_id. */
+  listSizeCharts(): Promise<SizeChart[]>;
   getSizeChartById(id: string): Promise<SizeChart | null>;
 }
 

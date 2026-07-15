@@ -1,0 +1,28 @@
+.section {
+  margin-bottom: var(--ptr-space-6);
+}
+
+.title {
+  font-size: var(--ptr-text-lg);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+  margin-bottom: var(--ptr-space-3);
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ptr-space-5);
+}
+
+.faqList {
+  padding-left: var(--ptr-space-5);
+  color: var(--ptr-neutral-600);
+  line-height: var(--ptr-leading-relaxed);
+}
+
+@media (max-width: 768px) {
+  .cols {
+    grid-template-columns: 1fr;
+  }
+}
