@@ -27,7 +27,12 @@ export function BundleSuggestion({ items }: BundleSuggestionProps) {
           <li key={product.id} className={styles.item}>
             <Link href={`/products/${product.slug}/`} className={styles.card}>
               <div className={styles.media}>
-                <PlaceholderImage image={product.images[0] ?? null} label={product.name} ratio="1 / 1" />
+                <PlaceholderImage
+                  image={product.images[0] ?? null}
+                  label={product.name}
+                  ratio="1 / 1"
+                  compact
+                />
               </div>
               <div className={styles.body}>
                 <span className={styles.name}>{product.name}</span>

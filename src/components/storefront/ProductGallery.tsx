@@ -29,7 +29,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
         <ul className={styles.thumbs}>
           {rest.map((image, i) => (
             <li key={`${image.url}-${i}`} className={styles.thumb}>
-              <PlaceholderImage image={image} label={productName} ratio="1 / 1" />
+              <PlaceholderImage image={image} label={productName} ratio="1 / 1" compact />
             </li>
           ))}
         </ul>

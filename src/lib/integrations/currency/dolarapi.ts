@@ -11,6 +11,7 @@
  */
 
 import type { ExchangeRate } from '@/lib/data/types';
+import { roundBs } from '@/lib/domains/currency/money';
 
 const ENDPOINT = 'https://ve.dolarapi.com/v1/dolares/oficial';
 
@@ -30,7 +31,8 @@ export async function fetchOfficialRate(signal?: AbortSignal): Promise<ExchangeR
     if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0) return null;
 
     return {
-      rate: value,
+      // La tasa se ajusta a maximo 2 decimales antes de usarse o mostrarse.
+      rate: roundBs(value),
       source: 'dolarapi.com · BCV oficial',
       captured_at: data.fechaActualizacion ?? new Date().toISOString(),
       is_stale: false,

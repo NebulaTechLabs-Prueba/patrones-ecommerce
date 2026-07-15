@@ -65,6 +65,7 @@ export function CartView() {
                     }
                     label={item.productName}
                     ratio="1 / 1"
+                    compact
                   />
                 </div>
 
@@ -136,7 +137,6 @@ export function CartView() {
               <dd>{formatCents(summary.totalCents)}</dd>
             </div>
           </dl>
-          <p className={styles.note}>Precio final. Sin impuestos. El envío se define en el checkout.</p>
           <Link href="/checkout/" className={styles.checkout}>
             Iniciar compra
           </Link>

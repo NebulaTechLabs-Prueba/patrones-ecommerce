@@ -1,3 +1,60 @@
+.currencyWrap {
+  position: relative;
+}
+
+/* Tooltip de marca: aparece al pasar el mouse o al enfocar el selector. */
+.tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 168px;
+  padding: var(--ptr-space-3) var(--ptr-space-4);
+  border-radius: var(--ptr-radius-md);
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+  box-shadow: var(--ptr-shadow-2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--ptr-duration-fast) var(--ptr-ease),
+    transform var(--ptr-duration-fast) var(--ptr-ease);
+  pointer-events: none;
+}
+
+/* Punta del tooltip, alineada al selector. */
+.tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  right: 18px;
+  border: 6px solid transparent;
+  border-bottom-color: var(--ptr-primary);
+}
+
+.currencyWrap:hover .tooltip,
+.currencyWrap:focus-within .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tooltipRate {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+}
+
+.tooltipSource {
+  font-size: var(--ptr-text-xs);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
 /* Segmented control tipo "track + thumb": cada botón es su propia píldora. */
 .currency {
   display: inline-flex;

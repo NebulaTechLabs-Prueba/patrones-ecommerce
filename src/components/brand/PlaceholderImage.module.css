@@ -38,6 +38,16 @@
   opacity: 0.7;
 }
 
+/* Miniatura: sin sello, rotulo compacto y centrado, sin solaparse. */
+.compact {
+  padding: var(--ptr-space-2);
+}
+
+.compact .label {
+  font-size: var(--ptr-text-xs);
+  letter-spacing: var(--ptr-tracking-normal);
+}
+
 /* --- Superficies de marca (nunca texto sobre texto): fondo + tinta legible --- */
 .surfaceMint {
   background-color: var(--ptr-mint);

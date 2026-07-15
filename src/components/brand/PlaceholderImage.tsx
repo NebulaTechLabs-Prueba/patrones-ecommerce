@@ -23,6 +23,8 @@ interface PlaceholderImageProps {
   ratio?: string;
   /** Prioriza el pintado (hero). */
   priority?: boolean;
+  /** Tile chico (miniaturas): oculta el sello y achica el rotulo para no solaparse. */
+  compact?: boolean;
 }
 
 /** Superficies de marca aptas como fondo (nunca texto). Elegidas de forma estable. */
@@ -38,7 +40,13 @@ function pickSurface(seed: string): string {
   return SURFACES[index] ?? SURFACES[0];
 }
 
-export function PlaceholderImage({ image, label, ratio = '4 / 5', priority = false }: PlaceholderImageProps) {
+export function PlaceholderImage({
+  image,
+  label,
+  ratio = '4 / 5',
+  priority = false,
+  compact = false,
+}: PlaceholderImageProps) {
   const alt = image?.alt ?? label;
   const showRealImage = image !== null && !image.is_placeholder && image.url.length > 0;
 
@@ -59,7 +67,7 @@ export function PlaceholderImage({ image, label, ratio = '4 / 5', priority = fal
 
   return (
     <div
-      className={`${styles.tile} ${styles[pickSurface(alt)]}`}
+      className={`${styles.tile} ${styles[pickSurface(alt)]} ${compact ? styles.compact : ''}`}
       style={{ aspectRatio: ratio }}
       role="img"
       aria-label={alt}
@@ -67,9 +75,11 @@ export function PlaceholderImage({ image, label, ratio = '4 / 5', priority = fal
       <span className={styles.label} aria-hidden="true">
         {label}
       </span>
-      <span className={styles.mark} aria-hidden="true">
-        Imagen de referencia
-      </span>
+      {!compact ? (
+        <span className={styles.mark} aria-hidden="true">
+          Imagen de referencia
+        </span>
+      ) : null}
     </div>
   );
 }

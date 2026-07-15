@@ -169,14 +169,8 @@
   color: var(--ptr-ink);
 }
 
-.note {
-  font-size: var(--ptr-text-xs);
-  color: var(--ptr-neutral-600);
-  margin: var(--ptr-space-3) 0 var(--ptr-space-4);
-  line-height: var(--ptr-leading-relaxed);
-}
-
 .checkout {
+  margin-top: var(--ptr-space-4);
   display: flex;
   justify-content: center;
   padding: var(--ptr-space-4);
