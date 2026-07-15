@@ -29,7 +29,7 @@ export function LoginForm() {
     e.preventDefault();
     const res = login(email, password);
     if (!res.ok || !res.role) {
-      setError('Credenciales inválidas. Probá con los accesos de demostración.');
+      setError('Credenciales inválidas. Probá con un acceso rápido.');
       return;
     }
     go(res.role);
@@ -57,12 +57,9 @@ export function LoginForm() {
           <Link href="/" className={styles.home} aria-label="Volver a la tienda">
             <Isologo />
           </Link>
-          <p className={styles.eyebrow}>Acceso de demostración</p>
+          <p className={styles.eyebrow}>Tu cuenta</p>
           <h1 className={styles.title}>Ingresá a tu cuenta</h1>
-          <p className={styles.lead}>
-            Autenticación simulada para revisar la demo. Usá un acceso rápido o cargá las
-            credenciales a mano.
-          </p>
+          <p className={styles.lead}>Usá un acceso rápido o ingresá tus credenciales.</p>
 
           <div className={styles.quick}>
             <button type="button" className={styles.quickBtn} onClick={() => quickLogin('customer')}>

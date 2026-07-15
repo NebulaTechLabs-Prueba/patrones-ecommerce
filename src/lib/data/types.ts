@@ -519,25 +519,23 @@ export interface Faq {
 }
 
 /**
- * Tabla de medidas (§15). Contenido como data (placeholder hasta que PATRONES
- * entregue las suyas; las marcas de terceros traen la propia). Un producto la
- * referencia por `size_chart_id`. Los valores son rangos de medidas corporales.
+ * Tabla de medidas (§15). Contenido como data. Es POR PRENDA: cada tipo (tops,
+ * pantalones, batas...) tiene sus propias columnas de medida, por eso se modela
+ * con headers + rows flexibles. Un producto la referencia por `size_chart_id`.
  */
-export interface SizeChartRow {
-  size: string;
-  chest: string;
-  waist: string;
-  hip: string;
-}
-
 export interface SizeChart {
   id: ID;
   name: string;
+  /** Tipo de prenda que cubre (p.ej. 'Tops', 'Pantalones'). */
+  garment: string;
   /** Unidad de las medidas, p.ej. 'in' o 'cm'. */
   unit: string;
-  /** Instrucciones de cómo medir cada zona. */
-  measure: { chest: string; waist: string; hip: string };
-  rows: SizeChartRow[];
+  /** Encabezados de columna, incluida la talla. */
+  headers: string[];
+  /** Filas alineadas a headers (cada celda es texto: rango o valor). */
+  rows: string[][];
+  /** Cómo medir cada zona relevante para esta prenda. */
+  measure: { label: string; text: string }[];
   /** Origen de los datos (p.ej. la marca fabricante). */
   source: string;
 }

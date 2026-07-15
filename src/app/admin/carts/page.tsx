@@ -34,7 +34,6 @@ export default async function AdminCartsPage() {
       <h1 className={ui.pageTitle}>Carritos olvidados</h1>
       <p className={ui.pageSubtitle}>
         Carritos sin cerrar de clientes registrados: intención de compra para dar seguimiento.
-        En Fase 2, cada uno linkea a la ficha del cliente y su contacto directo.
       </p>
 
       <div className={ui.tableWrap}>
@@ -83,8 +82,7 @@ export default async function AdminCartsPage() {
       </div>
 
       <p className={ui.note}>
-        El cliente puede recuperar sus carritos olvidados (hasta 5) desde su cuenta. El subtotal
-        es referencial; al recuperar se revalida disponibilidad y se recalculan promociones.
+        El cliente puede recuperar sus carritos olvidados (hasta 5) desde su cuenta.
       </p>
     </div>
   );

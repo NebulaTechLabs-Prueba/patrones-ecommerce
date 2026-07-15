@@ -48,8 +48,7 @@ export function AdminOrders({ initialOrders }: { initialOrders: Order[] }) {
     <div>
       <h1 className={ui.pageTitle}>Órdenes</h1>
       <p className={ui.pageSubtitle}>
-        Cumplimiento de pedidos. Cada transición valida el estado previo. El cobro
-        (pago) es una máquina de estado separada y se gestiona en Pagos.
+        Cumplimiento de pedidos. El cobro se gestiona en Pagos.
       </p>
 
       <div className={ui.tableWrap}>
@@ -104,10 +103,6 @@ export function AdminOrders({ initialOrders }: { initialOrders: Order[] }) {
         </table>
       </div>
 
-      <p className={ui.note}>
-        Demo: los cambios de estado no se guardan (se resetean al recargar). En Fase 2 cada
-        transición se valida y persiste server-side, y al despachar se carga el número de guía.
-      </p>
     </div>
   );
 }

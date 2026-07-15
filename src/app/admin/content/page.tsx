@@ -4,17 +4,16 @@
  * lectura en la demo); en Fase 2 se editan. No usamos CMS externo.
  */
 
-import { productRepo, settingsRepo } from '@/lib/data';
+import { productRepo } from '@/lib/data';
 import ui from '@/components/admin/adminUI.module.css';
 import styles from './content.module.css';
 
 export default async function AdminContentPage() {
-  const [verticals, brands, categories, collections, faqs, sizeCharts] = await Promise.all([
+  const [verticals, brands, categories, collections, sizeCharts] = await Promise.all([
     productRepo.listVerticals(),
     productRepo.listBrands(),
     productRepo.listCategories(),
     productRepo.listCollections(),
-    settingsRepo.listFaqs(),
     productRepo.listSizeCharts(),
   ]);
 
@@ -22,8 +21,7 @@ export default async function AdminContentPage() {
     <div>
       <h1 className={ui.pageTitle}>Contenido</h1>
       <p className={ui.pageSubtitle}>
-        El catálogo y el contenido del sitio son data, no código: agregar un rubro es una fila,
-        no un deploy. Este es el CMS de PATRONES (sin herramientas externas).
+        Rubros, marcas, categorías, colecciones y tablas de medidas del sitio.
       </p>
 
       <section className={styles.section}>
@@ -150,18 +148,6 @@ export default async function AdminContentPage() {
         </section>
       </div>
 
-      <section className={styles.section}>
-        <h2 className={styles.title}>FAQ ({faqs.length})</h2>
-        <ul className={styles.faqList}>
-          {faqs.map((f) => (
-            <li key={f.sort_order}>{f.question}</li>
-          ))}
-        </ul>
-        <p className={ui.note}>
-          Los textos legales (nota de entrega sin factura fiscal + no-devolución) se cargan como
-          data cuando lleguen; hoy pendientes (§15).
-        </p>
-      </section>
     </div>
   );
 }

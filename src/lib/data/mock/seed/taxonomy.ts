@@ -105,6 +105,7 @@ export const models: Model[] = [
   { id: 'm-ejecutiva', slug: 'ejecutiva', name: 'Ejecutiva', vertical_id: 'v-corporativo' },
   { id: 'm-terra', slug: 'terra', name: 'Terra', vertical_id: 'v-salud' },
   { id: 'm-figs-casma', slug: 'casma', name: 'Casma', vertical_id: 'v-salud' },
+  { id: 'm-figs-livingston', slug: 'livingston', name: 'Livingston', vertical_id: 'v-salud' },
 ];
 
 export { placeholder };

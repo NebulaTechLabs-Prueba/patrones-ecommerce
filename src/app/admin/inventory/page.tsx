@@ -14,10 +14,7 @@ export default async function AdminInventoryPage() {
   return (
     <div>
       <h1 className={ui.pageTitle}>Inventario</h1>
-      <p className={ui.pageSubtitle}>
-        Disponible = stock − reservado. Las variantes agotadas desaparecen del público; las de
-        bajo stock siguen a la venta (la escasez no se le muestra al cliente).
-      </p>
+      <p className={ui.pageSubtitle}>Disponible = stock − reservado. Las agotadas no se muestran al público.</p>
 
       <div className={ui.tableWrap}>
         <table className={ui.table}>
@@ -58,10 +55,6 @@ export default async function AdminInventoryPage() {
         </table>
       </div>
 
-      <p className={ui.note}>
-        En Fase 2 estas existencias se sincronizan con el sistema administrativo (fuente de
-        verdad del inventario): proyección + stale + alerta si su API no responde.
-      </p>
     </div>
   );
 }

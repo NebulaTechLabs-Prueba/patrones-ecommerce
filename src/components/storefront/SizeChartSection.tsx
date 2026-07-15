@@ -1,6 +1,6 @@
 /**
- * Tabla de medidas en la PDP (§15). <details> nativo (accesible, sin JS). Muestra
- * los rangos por talla y cómo medir. Los datos vienen de la marca (data, no código).
+ * Tabla de medidas en la PDP. <details> nativo (accesible, sin JS). Es por prenda:
+ * renderiza las columnas propias del tipo (tops, pantalones...).
  */
 
 import type { SizeChart } from '@/lib/data/types';
@@ -9,7 +9,7 @@ import styles from './SizeChartSection.module.css';
 export function SizeChartSection({ chart }: { chart: SizeChart }) {
   return (
     <details className={styles.details}>
-      <summary className={styles.summary}>Tabla de medidas</summary>
+      <summary className={styles.summary}>Tabla de medidas · {chart.garment}</summary>
 
       <div className={styles.body}>
         <p className={styles.source}>
@@ -21,19 +21,19 @@ export function SizeChartSection({ chart }: { chart: SizeChart }) {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Talla</th>
-                <th>Busto/Pecho</th>
-                <th>Cintura</th>
-                <th>Cadera</th>
+                {chart.headers.map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
               {chart.rows.map((row) => (
-                <tr key={row.size}>
-                  <td className={styles.size}>{row.size}</td>
-                  <td>{row.chest}</td>
-                  <td>{row.waist}</td>
-                  <td>{row.hip}</td>
+                <tr key={row[0]}>
+                  {row.map((cell, i) => (
+                    <td key={i} className={i === 0 ? styles.size : undefined}>
+                      {cell}
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>
@@ -41,15 +41,11 @@ export function SizeChartSection({ chart }: { chart: SizeChart }) {
         </div>
 
         <ul className={styles.measure}>
-          <li>
-            <strong>Busto/Pecho:</strong> {chart.measure.chest}
-          </li>
-          <li>
-            <strong>Cintura:</strong> {chart.measure.waist}
-          </li>
-          <li>
-            <strong>Cadera:</strong> {chart.measure.hip}
-          </li>
+          {chart.measure.map((m) => (
+            <li key={m.label}>
+              <strong>{m.label}:</strong> {m.text}
+            </li>
+          ))}
         </ul>
       </div>
     </details>

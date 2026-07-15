@@ -64,8 +64,7 @@ export default async function AdminDiscountsPage() {
     <div>
       <h1 className={ui.pageTitle}>Descuentos</h1>
       <p className={ui.pageSubtitle}>
-        Las promociones se acumulan según lo que el admin marque como apilable, en orden de
-        prioridad. El cálculo es determinista y server-side, con piso de precio.
+        Las promociones se acumulan según lo que marques como apilable, en orden de prioridad.
       </p>
 
       <div className={ui.tableWrap}>

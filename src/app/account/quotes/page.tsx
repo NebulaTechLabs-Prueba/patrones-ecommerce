@@ -6,8 +6,7 @@ export default function AccountQuotesPage() {
       <p className={styles.placeholderTitle}>Cotizaciones</p>
       <p className={styles.placeholderText}>
         Acá verás tus cotizaciones con precios, promociones y tasa congelados, y podrás
-        convertirlas en pedido revalidando la disponibilidad. Disponible con la cuenta real
-        (Fase 2).
+        convertirlas en pedido revalidando la disponibilidad.
       </p>
     </div>
   );

@@ -45,10 +45,7 @@ export default async function AdminDashboardPage() {
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Alertas de stock</h2>
-        <p className={styles.sectionNote}>
-          Ordenadas por criticidad. Agotadas ya no se muestran al público; las de bajo stock
-          siguen a la venta (la escasez no se le muestra al cliente).
-        </p>
+        <p className={styles.sectionNote}>Ordenadas por criticidad.</p>
         {alerts.length === 0 ? (
           <p className={styles.empty}>Sin alertas de stock.</p>
         ) : (

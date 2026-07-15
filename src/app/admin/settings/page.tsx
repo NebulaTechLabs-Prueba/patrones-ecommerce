@@ -39,10 +39,7 @@ export default async function AdminSettingsPage() {
   return (
     <div>
       <h1 className={ui.pageTitle}>Ajustes</h1>
-      <p className={ui.pageSubtitle}>
-        Configuración del negocio. En Fase 2 es editable con confirmación; las keys de pago
-        viven en la DB y se muestran enmascaradas.
-      </p>
+      <p className={ui.pageSubtitle}>Parámetros del negocio y métodos de pago.</p>
 
       <dl className={styles.grid}>
         {items.map((it) => (

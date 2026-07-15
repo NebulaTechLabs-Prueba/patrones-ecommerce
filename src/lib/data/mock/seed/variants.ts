@@ -130,6 +130,14 @@ export const variants: ProductVariant[] = [
     { sku: 'FIGS-CAS-TOP-VN-M', size: 'M', color: vino, stock: 7 },
   ]),
 
+  // --- Pantalon FIGS Livingston: tercero, tabla de medidas de PANTALON. ------
+  ...variantsFor('p-figs-livingston', [
+    { sku: 'FIGS-LIV-PAN-AM-XS', size: 'XS', color: azulMarino, stock: 7 },
+    { sku: 'FIGS-LIV-PAN-AM-S', size: 'S', color: azulMarino, stock: 10 },
+    { sku: 'FIGS-LIV-PAN-AM-M', size: 'M', color: azulMarino, stock: 5 },
+    { sku: 'FIGS-LIV-PAN-AM-L', size: 'L', color: azulMarino, stock: 8 },
+  ]),
+
   // --- Zueco Terra: calzado por numeracion, N:N salud+gastronomia. ----------
   ...variantsFor('p-zueco-terra', [
     { sku: 'CHL-TRR-ZUE-BL-38', size: '38', color: blanco, stock: 10 },

@@ -1,11 +1,12 @@
 'use client';
 
 /**
- * Shell del panel admin: guarda por rol + sidebar + topbar. Cero animacion
- * decorativa (§16.2). La nav lista las secciones de §16.5 (varias son stubs que
- * se completan por tanda).
+ * Shell del panel admin: guarda por rol + sidebar desplegable + topbar.
+ * Responsive: en escritorio el sidebar se minimiza con el botón; en mobile es un
+ * panel deslizable con backdrop.
  */
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { RequireRole } from '@/components/auth/RequireRole';
@@ -50,15 +51,32 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, logout } = useAuth();
+  const [open, setOpen] = useState(false);
+
+  // Abierto por defecto en escritorio; cerrado (panel deslizable) en mobile.
+  useEffect(() => {
+    setOpen(window.innerWidth > 768);
+  }, []);
 
   function handleLogout() {
     logout();
     router.replace('/login/');
   }
 
+  function handleNavClick() {
+    if (window.innerWidth <= 768) setOpen(false);
+  }
+
   return (
     <RequireRole role="admin">
-      <div className={styles.shell}>
+      <div className={`${styles.shell} ${open ? styles.open : ''}`}>
+        <button
+          type="button"
+          className={styles.backdrop}
+          aria-label="Cerrar menú"
+          onClick={() => setOpen(false)}
+        />
+
         <aside className={styles.sidebar}>
           <p className={styles.brand}>PATRONES · Admin</p>
           <nav className={styles.nav}>
@@ -72,6 +90,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                       key={item.href}
                       href={item.href}
                       className={`${styles.link} ${active ? styles.active : ''}`}
+                      onClick={handleNavClick}
                     >
                       {item.label}
                     </Link>
@@ -84,7 +103,18 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
         <div className={styles.body}>
           <header className={styles.topbar}>
-            <span className={styles.userName}>{user?.name}</span>
+            <div className={styles.topLeft}>
+              <button
+                type="button"
+                className={styles.toggle}
+                aria-label={open ? 'Minimizar menú' : 'Abrir menú'}
+                aria-expanded={open}
+                onClick={() => setOpen((v) => !v)}
+              >
+                <span aria-hidden="true">☰</span>
+              </button>
+              <span className={styles.userName}>{user?.name}</span>
+            </div>
             <div className={styles.topActions}>
               <Link href="/" className={styles.viewStore}>
                 Ver tienda

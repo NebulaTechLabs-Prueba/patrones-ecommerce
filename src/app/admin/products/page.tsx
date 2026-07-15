@@ -14,8 +14,7 @@ export default async function AdminProductsPage() {
     <div>
       <h1 className={ui.pageTitle}>Productos</h1>
       <p className={ui.pageSubtitle}>
-        El precio vive a nivel producto (override por variante). El SKU es por variante y lo
-        provee PATRONES. La edición con persistencia llega en Fase 2.
+        Catálogo de productos: marca, rubros, categorías, precio, variantes y visibilidad.
       </p>
 
       <div className={ui.tableWrap}>

@@ -74,9 +74,8 @@ export function AdminPayments({ initialOrders }: { initialOrders: Order[] }) {
       <h1 className={ui.pageTitle}>Pagos</h1>
       <p className={ui.pageSubtitle}>
         {pending > 0
-          ? `${pending} pago(s) esperando verificación. `
-          : 'Sin pagos pendientes de verificación. '}
-        Aprobar o rechazar es auditable en Fase 2 (quién, cuándo, monto, comprobante).
+          ? `${pending} pago(s) esperando verificación.`
+          : 'Sin pagos pendientes de verificación.'}
       </p>
 
       <div className={ui.tableWrap}>
@@ -131,10 +130,9 @@ export function AdminPayments({ initialOrders }: { initialOrders: Order[] }) {
       </div>
 
       <p className={ui.note}>
-        El reembolso se procesa por fuera del sistema; acá el admin solo actualiza/notifica el
-        estado, y únicamente un pago Verificado puede marcarse como reembolsado. Demo: los
-        cambios no se guardan (se resetean al recargar). Una orden en verificación mantiene el
-        stock reservado hasta aprobarse o vencer (3 días hábiles).
+        El reembolso se procesa por fuera del sistema: acá solo se actualiza el estado, y solo
+        un pago Verificado puede marcarse como reembolsado. Una orden en verificación mantiene el
+        stock reservado hasta aprobarse o vencer.
       </p>
     </div>
   );

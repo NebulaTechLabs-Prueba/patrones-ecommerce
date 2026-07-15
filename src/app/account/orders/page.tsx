@@ -112,10 +112,6 @@ export default async function OrdersPage() {
         ))}
       </ul>
 
-      <p className={styles.footnote}>
-        Los montos en Bs se muestran a la tasa de hoy. El monto oficial de cada pedido queda
-        fijado al momento de la compra y es el que figura en la nota de entrega.
-      </p>
     </div>
   );
 }

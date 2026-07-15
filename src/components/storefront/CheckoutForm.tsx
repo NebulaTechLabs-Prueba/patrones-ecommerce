@@ -99,12 +99,10 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
     return (
       <main className={styles.main}>
         <div className={styles.confirmation}>
-          <p className={styles.demoTag}>Demo</p>
           <h1 className={styles.title}>Recibimos tu pedido</h1>
           <p className={styles.muted}>
-            Esta es una demostración: no se registró una orden ni se procesó ningún pago.
-            En producción, acá confirmarías tu cuenta, cargarías el comprobante (si el pago
-            es offline) y verías el estado de tu pago en todo momento.
+            Te contactaremos para coordinar el pago y la entrega. Podés seguir el estado desde
+            tu cuenta.
           </p>
           <p className={styles.summaryLine}>
             Total del pedido: <strong>{formatCents(totalWithShipping)}</strong>
@@ -263,7 +261,7 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
                     <span className={styles.optionNote}>
                       {m.is_offline
                         ? 'Cargás el comprobante y verificamos el pago antes de confirmar.'
-                        : 'Pago con tarjeta (redirección segura en producción).'}
+                        : 'Pago con tarjeta.'}
                     </span>
                   </span>
                 </label>
@@ -271,8 +269,8 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
             </div>
             {selectedPayment?.is_offline ? (
               <p className={styles.help}>
-                Datos de la cuenta receptora demostrativos: se muestran los reales tras el
-                lanzamiento. Tu pago queda en verificación hasta que lo aprobemos.
+                Al confirmar te mostramos los datos de la cuenta y cargás el comprobante. Tu
+                pago queda en verificación hasta que lo aprobemos.
               </p>
             ) : null}
           </section>

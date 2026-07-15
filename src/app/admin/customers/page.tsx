@@ -58,10 +58,6 @@ export default async function AdminCustomersPage() {
         </table>
       </div>
 
-      <p className={ui.note}>
-        En Fase 2, con auth real y RLS estricta, la ficha de cada cliente abre su detalle
-        completo (pedidos, pagos, cotizaciones) y la segmentación institucional.
-      </p>
     </div>
   );
 }
