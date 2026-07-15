@@ -16,9 +16,10 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ProductGallery } from '@/components/storefront/ProductGallery';
+import { SizeChartSection } from '@/components/storefront/SizeChartSection';
 import { SuggestedSet, type SuggestedProductData } from '@/components/storefront/SuggestedSet';
 import { VariantSelector, type SelectableVariant } from '@/components/storefront/VariantSelector';
-import { settingsRepo } from '@/lib/data';
+import { productRepo, settingsRepo } from '@/lib/data';
 import { filterAvailableVariants, getAvailableStock } from '@/lib/domains/availability';
 import { getBrandsById, getProductDetail, getVisibleProductSlugs } from '@/lib/storefront/catalog';
 import { SelectedVariantProvider } from '@/lib/store/selected-variant-context';
@@ -54,6 +55,10 @@ export default async function ProductPage({ params }: PageProps) {
   if (!detail) notFound();
 
   const { product, variants, brand, model, verticals, suggested } = detail;
+
+  const sizeChart = product.size_chart_id
+    ? await productRepo.getSizeChartById(product.size_chart_id)
+    : null;
 
   // Datos de la sugerencia coordinada (§9.3): variantes disponibles del producto
   // sugerido, para que el cliente pueda coordinar talla/color con su seleccion.
@@ -160,6 +165,8 @@ export default async function ProductPage({ params }: PageProps) {
               </p>
             </section>
           ) : null}
+
+          {sizeChart ? <SizeChartSection chart={sizeChart} /> : null}
 
           <SuggestedSet items={suggestedData} />
         </div>

@@ -76,6 +76,13 @@ export const brands: Brand[] = [
     is_own_line: false,
     logo_image: null,
   },
+  {
+    id: 'b-figs',
+    slug: 'figs',
+    name: 'FIGS',
+    is_own_line: false,
+    logo_image: null,
+  },
 ];
 
 export const categories: Category[] = [
@@ -97,6 +104,7 @@ export const models: Model[] = [
   { id: 'm-oxford', slug: 'oxford', name: 'Oxford', vertical_id: 'v-corporativo' },
   { id: 'm-ejecutiva', slug: 'ejecutiva', name: 'Ejecutiva', vertical_id: 'v-corporativo' },
   { id: 'm-terra', slug: 'terra', name: 'Terra', vertical_id: 'v-salud' },
+  { id: 'm-figs-casma', slug: 'casma', name: 'Casma', vertical_id: 'v-salud' },
 ];
 
 export { placeholder };

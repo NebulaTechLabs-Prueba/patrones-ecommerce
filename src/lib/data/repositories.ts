@@ -29,6 +29,7 @@ import type {
   ProductVariant,
   Promotion,
   Quote,
+  SizeChart,
   Vertical,
 } from './types';
 
@@ -49,6 +50,9 @@ export interface ProductRepository {
 
   listBundles(): Promise<Bundle[]>;
   listActivePromotions(): Promise<Promotion[]>;
+
+  /** Tablas de medidas (§15). Un producto la referencia por size_chart_id. */
+  getSizeChartById(id: string): Promise<SizeChart | null>;
 }
 
 /**

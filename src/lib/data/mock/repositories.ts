@@ -33,6 +33,7 @@ import {
   products,
   promotions,
   quotes,
+  sizeCharts,
   variants,
   verticals,
 } from './seed';
@@ -79,6 +80,9 @@ export const mockProductRepository: ProductRepository = {
   },
   async listActivePromotions() {
     return clone(promotions.filter((p) => p.is_active));
+  },
+  async getSizeChartById(id) {
+    return clone(sizeCharts.find((s) => s.id === id) ?? null);
   },
 };
 

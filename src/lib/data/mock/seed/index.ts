@@ -19,3 +19,4 @@ export {
   exchangeRate,
 } from './commerce';
 export { appSettings, faqs, paymentMethods } from './settings';
+export { sizeCharts } from './size-charts';

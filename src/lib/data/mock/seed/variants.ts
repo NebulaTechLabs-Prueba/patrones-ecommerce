@@ -120,6 +120,16 @@ export const variants: ProductVariant[] = [
     { sku: 'PTR-EJE-CHQ-NG-M', size: 'M', color: negro, stock: 8 },
   ]),
 
+  // --- Scrub Top FIGS Casma: marca de terceros, tallas con su tabla propia. --
+  ...variantsFor('p-figs-casma', [
+    { sku: 'FIGS-CAS-TOP-AM-XS', size: 'XS', color: azulMarino, stock: 8 },
+    { sku: 'FIGS-CAS-TOP-AM-S', size: 'S', color: azulMarino, stock: 12 },
+    { sku: 'FIGS-CAS-TOP-AM-M', size: 'M', color: azulMarino, stock: 4 }, // bajo
+    { sku: 'FIGS-CAS-TOP-AM-L', size: 'L', color: azulMarino, stock: 9 },
+    { sku: 'FIGS-CAS-TOP-VN-S', size: 'S', color: vino, stock: 6 },
+    { sku: 'FIGS-CAS-TOP-VN-M', size: 'M', color: vino, stock: 7 },
+  ]),
+
   // --- Zueco Terra: calzado por numeracion, N:N salud+gastronomia. ----------
   ...variantsFor('p-zueco-terra', [
     { sku: 'CHL-TRR-ZUE-BL-38', size: '38', color: blanco, stock: 10 },

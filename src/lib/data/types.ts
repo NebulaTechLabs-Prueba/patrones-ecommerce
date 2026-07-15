@@ -148,6 +148,9 @@ export interface Product {
   /** Solo cuando type === 'set'. Descriptivo. */
   set_pieces: SetPiece[];
 
+  /** FK opcional a la tabla de medidas (§15). null si no tiene una asignada. */
+  size_chart_id?: ID | null;
+
   created_at: ISODate;
 }
 
@@ -473,4 +476,28 @@ export interface Faq {
   question: string;
   answer: string;
   sort_order: number;
+}
+
+/**
+ * Tabla de medidas (§15). Contenido como data (placeholder hasta que PATRONES
+ * entregue las suyas; las marcas de terceros traen la propia). Un producto la
+ * referencia por `size_chart_id`. Los valores son rangos de medidas corporales.
+ */
+export interface SizeChartRow {
+  size: string;
+  chest: string;
+  waist: string;
+  hip: string;
+}
+
+export interface SizeChart {
+  id: ID;
+  name: string;
+  /** Unidad de las medidas, p.ej. 'in' o 'cm'. */
+  unit: string;
+  /** Instrucciones de cómo medir cada zona. */
+  measure: { chest: string; waist: string; hip: string };
+  rows: SizeChartRow[];
+  /** Origen de los datos (p.ej. la marca fabricante). */
+  source: string;
 }
