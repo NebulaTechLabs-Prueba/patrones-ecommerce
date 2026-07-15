@@ -10,6 +10,17 @@
   color: var(--ptr-neutral-600);
 }
 
+.warning {
+  margin-top: var(--ptr-space-4);
+  padding: var(--ptr-space-4) var(--ptr-space-5);
+  border-left: 3px solid var(--ptr-warning);
+  border-radius: var(--ptr-radius-md);
+  background-color: rgba(181, 138, 46, 0.1);
+  color: var(--ptr-ink);
+  font-size: var(--ptr-text-sm);
+  line-height: var(--ptr-leading-relaxed);
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));

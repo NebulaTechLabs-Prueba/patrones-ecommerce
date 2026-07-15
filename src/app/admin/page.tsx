@@ -7,7 +7,8 @@ import { getAdminDashboard } from '@/lib/admin/dashboard';
 import styles from './dashboard.module.css';
 
 export default async function AdminDashboardPage() {
-  const { counts, alerts } = await getAdminDashboard();
+  const { counts, alerts, featured } = await getAdminDashboard();
+  const featuredConcentrated = featured.count > 1 && featured.verticalsCovered < 2;
 
   const cards: Array<{ label: string; value: number; tone?: 'warning' | 'danger' }> = [
     { label: 'Productos', value: counts.products },
@@ -33,6 +34,13 @@ export default async function AdminDashboardPage() {
     <div>
       <h1 className={styles.title}>Dashboard</h1>
       <p className={styles.subtitle}>Resumen operativo. El bajo stock es visible solo acá.</p>
+
+      {featuredConcentrated ? (
+        <div className={styles.warning} role="alert">
+          Los destacados de la home están concentrados en un solo rubro. La home es el
+          instrumento del reposicionamiento: conviene destacar prendas de varios rubros.
+        </div>
+      ) : null}
 
       <div className={styles.cards}>
         {cards.map((c) => (

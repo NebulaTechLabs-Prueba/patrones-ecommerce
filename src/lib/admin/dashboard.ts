@@ -28,6 +28,8 @@ export interface AdminDashboard {
     outOfStock: number;
   };
   alerts: StockAlertRow[];
+  /** Concentracion de featured por rubro (§9.4): advierte si estan en uno solo. */
+  featured: { count: number; verticalsCovered: number };
 }
 
 export async function getAdminDashboard(): Promise<AdminDashboard> {
@@ -39,9 +41,16 @@ export async function getAdminDashboard(): Promise<AdminDashboard> {
 
   const threshold = settings.low_stock_threshold_global;
   const alerts: StockAlertRow[] = [];
+  const featuredVerticals = new Set<string>();
+  let featuredCount = 0;
 
   for (const product of products) {
     const variants = await productRepo.listVariants(product.id);
+    // Featured visible: cuenta para la advertencia de concentracion (§9.4).
+    if (product.featured && variants.some((v) => getAvailableStock(v) > 0)) {
+      featuredCount += 1;
+      product.vertical_ids.forEach((id) => featuredVerticals.add(id));
+    }
     for (const v of variants) {
       const level = getStockAlertLevel(v, product, threshold);
       if (level === 'low' || level === 'out') {
@@ -72,5 +81,6 @@ export async function getAdminDashboard(): Promise<AdminDashboard> {
       outOfStock: alerts.filter((a) => a.level === 'out').length,
     },
     alerts,
+    featured: { count: featuredCount, verticalsCovered: featuredVerticals.size },
   };
 }

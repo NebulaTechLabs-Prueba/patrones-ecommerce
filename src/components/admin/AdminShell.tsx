@@ -47,7 +47,13 @@ const NAV: NavGroup[] = [
   },
 ];
 
-export function AdminShell({ children }: { children: React.ReactNode }) {
+export function AdminShell({
+  children,
+  pendingPayments = 0,
+}: {
+  children: React.ReactNode;
+  pendingPayments?: number;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, logout } = useAuth();
@@ -92,7 +98,10 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                       className={`${styles.link} ${active ? styles.active : ''}`}
                       onClick={handleNavClick}
                     >
-                      {item.label}
+                      <span>{item.label}</span>
+                      {item.href === '/admin/payments/' && pendingPayments > 0 ? (
+                        <span className={styles.navBadge}>{pendingPayments}</span>
+                      ) : null}
                     </Link>
                   );
                 })}
