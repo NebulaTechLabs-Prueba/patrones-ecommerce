@@ -1,15 +1,16 @@
-import { AdminPlaceholder } from '@/components/admin/AdminPlaceholder';
+/**
+ * Admin - Cotizaciones. El server entrega las cotizaciones y los clientes; la
+ * conversión a orden (en memoria) vive en el client component.
+ */
 
-export default function AdminQuotesPage() {
-  return (
-    <AdminPlaceholder
-      title="Cotizaciones"
-      description="Cotizaciones institucionales: congelan precios, promociones y tasa; convertibles a orden revalidando disponibilidad."
-      planned={[
-        'Crear cotización desde un carrito, con vigencia (72h)',
-        'Desglose de tallas (30 conjuntos: X en S, Y en M…)',
-        'PDF + email; convertir a orden en un click',
-      ]}
-    />
-  );
+import { AdminQuotes } from '@/components/admin/AdminQuotes';
+import { customerRepo, orderRepo } from '@/lib/data';
+
+export default async function AdminQuotesPage() {
+  const [quotes, customers] = await Promise.all([
+    orderRepo.listQuotes(),
+    customerRepo.listCustomers(),
+  ]);
+
+  return <AdminQuotes initial={quotes} customers={customers} />;
 }

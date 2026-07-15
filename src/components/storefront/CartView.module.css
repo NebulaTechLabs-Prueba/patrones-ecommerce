@@ -183,6 +183,31 @@
   text-transform: uppercase;
 }
 
+.quoteBtn {
+  width: 100%;
+  margin-top: var(--ptr-space-3);
+  padding: var(--ptr-space-4);
+  border: 1px solid var(--ptr-primary);
+  border-radius: var(--ptr-radius-md);
+  background-color: var(--ptr-white);
+  color: var(--ptr-primary);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+}
+
+.quoteOk {
+  margin-top: var(--ptr-space-3);
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-success);
+}
+
+.quoteOk a {
+  color: var(--ptr-primary);
+  text-decoration: underline;
+}
+
 @media (max-width: 860px) {
   .layout {
     grid-template-columns: 1fr;

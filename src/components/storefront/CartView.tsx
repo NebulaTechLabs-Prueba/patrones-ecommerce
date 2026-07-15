@@ -7,16 +7,45 @@
  * capturada al agregar (§7). Estados: cargando / vacio / con items (§16.1).
  */
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { PlaceholderImage } from '@/components/brand/PlaceholderImage';
 import { EmptyState } from './EmptyState';
 import { useCart } from '@/lib/store/cart-context';
 import { useCurrency } from '@/lib/store/currency-context';
+import { useQuotes } from '@/lib/store/quotes-context';
 import styles from './CartView.module.css';
 
 export function CartView() {
   const { items, hydrated, summary, setQty, remove } = useCart();
   const { formatCents } = useCurrency();
+  const { add: addQuote } = useQuotes();
+  const [quoteNumber, setQuoteNumber] = useState<string | null>(null);
+
+  function requestQuote() {
+    const now = new Date();
+    const number = `COT-2026-${String(now.getTime()).slice(-5)}`;
+    const lines = summary.lines.map((l) => {
+      const item = items.find((i) => i.variantSku === l.lineId);
+      return {
+        productName: item?.productName ?? l.lineId,
+        variantSku: l.lineId,
+        quantity: l.quantity,
+        unitPriceCents: l.finalUnitCents,
+        lineTotalCents: l.lineTotalCents,
+      };
+    });
+    addQuote({
+      number,
+      createdAt: now.toISOString(),
+      expiresAt: new Date(now.getTime() + 72 * 3600 * 1000).toISOString(),
+      lines,
+      subtotalCents: summary.subtotalCents,
+      discountCents: summary.discountCents,
+      totalCents: summary.totalCents,
+    });
+    setQuoteNumber(number);
+  }
 
   if (!hydrated) {
     return (
@@ -140,6 +169,15 @@ export function CartView() {
           <Link href="/checkout/" className={styles.checkout}>
             Iniciar compra
           </Link>
+          <button type="button" className={styles.quoteBtn} onClick={requestQuote}>
+            Solicitar cotización
+          </button>
+          {quoteNumber ? (
+            <p className={styles.quoteOk} aria-live="polite">
+              Cotización {quoteNumber} creada. Vela en{' '}
+              <Link href="/account/quotes/">tu cuenta</Link>.
+            </p>
+          ) : null}
         </aside>
       </div>
     </main>

@@ -11,6 +11,7 @@ import type { PricingSettings } from '@/lib/domains/pricing/pricing';
 import { AuthProvider } from '@/lib/store/auth-context';
 import { CartProvider } from '@/lib/store/cart-context';
 import { CurrencyProvider } from '@/lib/store/currency-context';
+import { QuotesProvider } from '@/lib/store/quotes-context';
 import { WishlistProvider } from '@/lib/store/wishlist-context';
 
 interface StoreProvidersProps {
@@ -25,7 +26,9 @@ export function StoreProviders({ rate, promotions, pricingSettings, children }: 
     <AuthProvider>
       <CurrencyProvider rate={rate}>
         <CartProvider promotions={promotions} pricingSettings={pricingSettings}>
-          <WishlistProvider>{children}</WishlistProvider>
+          <WishlistProvider>
+            <QuotesProvider>{children}</QuotesProvider>
+          </WishlistProvider>
         </CartProvider>
       </CurrencyProvider>
     </AuthProvider>
