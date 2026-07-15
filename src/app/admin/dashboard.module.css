@@ -62,10 +62,67 @@
   margin-top: var(--ptr-space-7);
 }
 
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+  margin-bottom: var(--ptr-space-3);
+}
+
 .sectionTitle {
   font-size: var(--ptr-text-lg);
   font-weight: var(--ptr-weight-semibold);
   color: var(--ptr-ink);
+}
+
+.sectionLink {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-primary);
+  white-space: nowrap;
+}
+
+.alertList {
+  list-style: none;
+  padding: 0;
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background-color: var(--ptr-white);
+  overflow: hidden;
+}
+
+.alertRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+  padding: var(--ptr-space-3) var(--ptr-space-4);
+  border-bottom: 1px solid var(--ptr-neutral-200);
+  font-size: var(--ptr-text-sm);
+}
+
+.alertRow:last-child {
+  border-bottom: 0;
+}
+
+.alertName {
+  color: var(--ptr-ink);
+}
+
+.alertVariant {
+  color: var(--ptr-neutral-400);
+}
+
+.alertRight {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-3);
+  white-space: nowrap;
+}
+
+.alertAvail {
+  color: var(--ptr-neutral-600);
 }
 
 .sectionNote {

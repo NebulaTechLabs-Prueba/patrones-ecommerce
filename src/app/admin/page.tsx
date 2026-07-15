@@ -3,6 +3,7 @@
  * el resumen de BAJO STOCK (alerta solo de admin) y los pagos en verificacion.
  */
 
+import Link from 'next/link';
 import { getAdminDashboard } from '@/lib/admin/dashboard';
 import styles from './dashboard.module.css';
 
@@ -52,39 +53,37 @@ export default async function AdminDashboardPage() {
       </div>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Alertas de stock</h2>
-        <p className={styles.sectionNote}>Ordenadas por criticidad.</p>
+        <div className={styles.sectionHead}>
+          <h2 className={styles.sectionTitle}>Alertas de stock</h2>
+          <Link href="/admin/inventory/" className={styles.sectionLink}>
+            Ver inventario →
+          </Link>
+        </div>
         {alerts.length === 0 ? (
           <p className={styles.empty}>Sin alertas de stock.</p>
         ) : (
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>SKU</th>
-                <th>Variante</th>
-                <th>Disponible</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {alerts.map((a) => (
-                <tr key={a.sku}>
-                  <td>{a.productName}</td>
-                  <td className={styles.mono}>{a.sku}</td>
-                  <td>
-                    {a.size} · {a.color}
-                  </td>
-                  <td>{a.available}</td>
-                  <td>
+          <>
+            <ul className={styles.alertList}>
+              {alerts.slice(0, 5).map((a) => (
+                <li key={a.sku} className={styles.alertRow}>
+                  <span className={styles.alertName}>
+                    {a.productName} <span className={styles.alertVariant}>({a.size} · {a.color})</span>
+                  </span>
+                  <span className={styles.alertRight}>
+                    <span className={styles.alertAvail}>disp. {a.available}</span>
                     <span className={`${styles.badge} ${a.level === 'out' ? styles.danger : styles.warning}`}>
                       {a.level === 'out' ? 'Agotada' : 'Bajo stock'}
                     </span>
-                  </td>
-                </tr>
+                  </span>
+                </li>
               ))}
-            </tbody>
-          </table>
+            </ul>
+            {alerts.length > 5 ? (
+              <p className={styles.sectionNote}>
+                y {alerts.length - 5} más. Gestioná todo en Inventario.
+              </p>
+            ) : null}
+          </>
         )}
       </section>
     </div>

@@ -65,7 +65,9 @@ export function SuggestedSet({ items }: { items: SuggestedProductData[] }) {
     () =>
       items.map((item) => {
         const match = selected ? matchSuggestedVariant(selected, item.variants) : null;
-        const shown = match?.variant ?? (selected ? null : (item.variants[0] ?? null));
+        // No se ofrece agregar hasta que el cliente elija talla y color (§9.3): así
+        // se busca la coincidencia antes de ofrecer una alternativa.
+        const shown = match?.variant ?? null;
         let note = 'Elegí talla y color arriba para coordinar la combinación.';
         if (match) {
           if (match.level === 'exact') note = 'Coordina con tu selección.';
