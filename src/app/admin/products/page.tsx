@@ -1,61 +1,46 @@
 /**
- * Admin - Productos (§9). Listado con marca, rubros, categorías, tipo, precio,
- * featured, variantes y visibilidad al público (agotado no aparece, §7).
+ * Admin - Productos. El server arma las filas (con conteo de variantes y
+ * visibilidad) y las opciones; el CRUD vive en el client component.
  */
 
-import { getAdminProducts } from '@/lib/admin/products';
-import { formatUsd } from '@/lib/format';
-import ui from '@/components/admin/adminUI.module.css';
+import { AdminProducts, type ProductRow } from '@/components/admin/AdminProducts';
+import { productRepo } from '@/lib/data';
+import { isProductAvailable } from '@/lib/domains/availability';
 
 export default async function AdminProductsPage() {
-  const products = await getAdminProducts();
+  const [products, brands, verticals, categories] = await Promise.all([
+    productRepo.listProducts(),
+    productRepo.listBrands(),
+    productRepo.listVerticals(),
+    productRepo.listCategories(),
+  ]);
+
+  const rows: ProductRow[] = [];
+  for (const p of products) {
+    const variants = await productRepo.listVariants(p.id);
+    rows.push({
+      id: p.id,
+      name: p.name,
+      brandId: p.brand_id,
+      verticalIds: p.vertical_ids,
+      categoryIds: p.category_ids,
+      type: p.type,
+      priceCents: p.price,
+      featured: p.featured,
+      lowStockThreshold: p.low_stock_threshold,
+      variantCount: variants.length,
+      visible: isProductAvailable(variants),
+    });
+  }
 
   return (
-    <div>
-      <h1 className={ui.pageTitle}>Productos</h1>
-      <p className={ui.pageSubtitle}>
-        Catálogo de productos: marca, rubros, categorías, precio, variantes y visibilidad.
-      </p>
-
-      <div className={ui.tableWrap}>
-        <table className={ui.table}>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Marca</th>
-              <th>Rubros</th>
-              <th>Categoría</th>
-              <th>Tipo</th>
-              <th>Precio</th>
-              <th>Variantes</th>
-              <th>Featured</th>
-              <th>Visible</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((p) => (
-              <tr key={p.id}>
-                <td>{p.name}</td>
-                <td>
-                  {p.brand}
-                  {p.isOwnLine ? <span className={`${ui.badge} ${ui.success}`}> Línea</span> : null}
-                </td>
-                <td>{p.verticals}</td>
-                <td>{p.categories}</td>
-                <td>{p.type === 'set' ? 'Conjunto' : 'Simple'}</td>
-                <td>{formatUsd(p.priceCents)}</td>
-                <td>{p.variantCount}</td>
-                <td>{p.featured ? 'Sí' : '—'}</td>
-                <td>
-                  <span className={`${ui.badge} ${p.visible ? ui.success : ui.danger}`}>
-                    {p.visible ? 'Visible' : 'Oculto'}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <AdminProducts
+      initial={rows}
+      options={{
+        brands: brands.map((b) => ({ id: b.id, name: b.name })),
+        verticals: verticals.map((v) => ({ id: v.id, name: v.name })),
+        categories: categories.map((c) => ({ id: c.id, name: c.name })),
+      }}
+    />
   );
 }

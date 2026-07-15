@@ -145,3 +145,99 @@
   color: var(--ptr-neutral-400);
   line-height: var(--ptr-leading-relaxed);
 }
+
+/* --- Encabezado de sección con acción --- */
+.pageHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+  flex-wrap: wrap;
+}
+
+.newBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+  border: 0;
+  border-radius: var(--ptr-radius-md);
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* --- Formularios --- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-2);
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ptr-space-4);
+}
+
+.field > span {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-neutral-600);
+}
+
+.input,
+.select {
+  padding: var(--ptr-space-3);
+  border: 1px solid var(--ptr-neutral-400);
+  border-radius: var(--ptr-radius-md);
+  font: inherit;
+  color: var(--ptr-ink);
+  background-color: var(--ptr-white);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-3);
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-ink);
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ptr-space-3);
+  margin-top: var(--ptr-space-2);
+}
+
+.saveBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+  border: 0;
+  border-radius: var(--ptr-radius-md);
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+}
+
+.cancelBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-400);
+  border-radius: var(--ptr-radius-md);
+  background-color: var(--ptr-white);
+  color: var(--ptr-neutral-600);
+  font-size: var(--ptr-text-sm);
+}
+
+.formError {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-danger);
+}
