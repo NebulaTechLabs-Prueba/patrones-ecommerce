@@ -12,6 +12,7 @@
  */
 
 import type {
+  CustomerRepository,
   InventoryRepository,
   OrderRepository,
   ProductRepository,
@@ -23,6 +24,7 @@ import {
   bundles,
   categories,
   collections,
+  customers,
   exchangeRate,
   faqs,
   models,
@@ -100,6 +102,15 @@ export const mockOrderRepository: OrderRepository = {
   },
   async listQuotes() {
     return clone(quotes);
+  },
+};
+
+export const mockCustomerRepository: CustomerRepository = {
+  async listCustomers() {
+    return clone(customers);
+  },
+  async getCustomerById(id) {
+    return clone(customers.find((c) => c.id === id) ?? null);
   },
 };
 

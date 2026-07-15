@@ -8,12 +8,14 @@
  */
 
 import {
+  mockCustomerRepository,
   mockInventoryRepository,
   mockOrderRepository,
   mockProductRepository,
   mockSettingsRepository,
 } from './mock/repositories';
 import type {
+  CustomerRepository,
   InventoryRepository,
   OrderRepository,
   ProductRepository,
@@ -23,9 +25,11 @@ import type {
 export const productRepo: ProductRepository = mockProductRepository;
 export const inventoryRepo: InventoryRepository = mockInventoryRepository;
 export const orderRepo: OrderRepository = mockOrderRepository;
+export const customerRepo: CustomerRepository = mockCustomerRepository;
 export const settingsRepo: SettingsRepository = mockSettingsRepository;
 
 export type {
+  CustomerRepository,
   InventoryRepository,
   OrderRepository,
   ProductRepository,

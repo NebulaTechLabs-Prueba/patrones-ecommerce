@@ -22,6 +22,11 @@
   max-width: 380px;
 }
 
+.home {
+  display: inline-flex;
+  margin-bottom: var(--ptr-space-6);
+}
+
 .eyebrow {
   font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-semibold);
@@ -29,6 +34,18 @@
   text-transform: uppercase;
   color: var(--ptr-primary-soft);
   margin-bottom: var(--ptr-space-3);
+}
+
+.back {
+  display: inline-block;
+  margin-top: var(--ptr-space-5);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-primary);
+}
+
+.back:hover {
+  text-decoration: underline;
 }
 
 .title {

@@ -7,7 +7,9 @@
  */
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Isologo } from '@/components/brand/Isologo';
 import { assetPath } from '@/lib/asset';
 import { DEMO_ACCOUNTS, useAuth, type Role } from '@/lib/store/auth-context';
 import styles from './LoginForm.module.css';
@@ -52,6 +54,9 @@ export function LoginForm() {
 
       <div className={styles.formPanel}>
         <div className={styles.formInner}>
+          <Link href="/" className={styles.home} aria-label="Volver a la tienda">
+            <Isologo />
+          </Link>
           <p className={styles.eyebrow}>Acceso de demostración</p>
           <h1 className={styles.title}>Ingresá a tu cuenta</h1>
           <p className={styles.lead}>
@@ -104,6 +109,10 @@ export function LoginForm() {
           <p className={styles.hint}>
             Cliente: {DEMO_ACCOUNTS.customer.email} · Admin: {DEMO_ACCOUNTS.admin.email}
           </p>
+
+          <Link href="/" className={styles.back}>
+            ← Volver a la tienda
+          </Link>
         </div>
       </div>
     </main>

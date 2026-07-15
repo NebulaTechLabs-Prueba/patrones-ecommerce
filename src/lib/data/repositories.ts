@@ -19,6 +19,7 @@ import type {
   Bundle,
   Category,
   Collection,
+  Customer,
   ExchangeRate,
   Faq,
   Model,
@@ -64,6 +65,12 @@ export interface OrderRepository {
   listOrders(): Promise<Order[]>;
   getOrderByNumber(orderNumber: string): Promise<Order | null>;
   listQuotes(): Promise<Quote[]>;
+}
+
+/** Clientes (§8). Base del CRM del admin. En Fase 2, con RLS estricta. */
+export interface CustomerRepository {
+  listCustomers(): Promise<Customer[]>;
+  getCustomerById(id: string): Promise<Customer | null>;
 }
 
 export interface SettingsRepository {
