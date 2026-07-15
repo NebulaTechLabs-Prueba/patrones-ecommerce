@@ -1,0 +1,27 @@
+name: CI
+
+# Gate de calidad: la logica que cuesta plata (precio, tasa, promos, disponibilidad)
+# se valida en cada push y PR. El deploy lo hace Vercel al conectar el repo; para
+# que un test roto frene produccion, proteger la rama main exigiendo este check.
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Correr tests
+        run: npm test

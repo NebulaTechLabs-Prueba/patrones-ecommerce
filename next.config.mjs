@@ -1,24 +1,21 @@
 /**
- * Configuracion para la demo (Fase 1).
+ * Configuracion de la app (Next.js sobre Vercel).
  *
- * GitHub Pages solo sirve archivos estaticos => export estatico.
- * El basePath se inyecta por env desde el workflow de deploy (un solo lugar).
- * En local queda vacio para que `next dev` sirva en la raiz.
+ * Vercel corre Next con runtime real (SSR/ISR disponibles): ya no se usa export
+ * estatico ni basePath. Se mantiene trailingSlash para conservar las URLs con
+ * barra final que ya usan los enlaces internos.
  *
- * Fase 2 (backend real: Supabase, Stripe, API de inventario, server actions)
- * NO corre en Pages: migra al target con runtime (Hetzner + Caddy + PM2).
- * La frontera de datos en lib/data/ es lo que hace ese salto no-reescritura.
+ * NEXT_PUBLIC_BASE_PATH queda sin efecto (base vacia); lib/asset.ts y not-found.tsx
+ * lo leen con `?? ''`, asi que siguen funcionando y quedan listos para Fase 2
+ * (Supabase, Stripe, API de inventario, server actions), que corre nativa aca.
+ * La frontera de datos en lib/data/ hace ese salto sin reescritura.
  */
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   trailingSlash: true,
-  basePath,
   images: {
-    // Export estatico no tiene optimizador de imagenes en runtime.
+    // Placeholders locales por ahora; con fotos reales se habilita el optimizador.
     unoptimized: true,
   },
   reactStrictMode: true,
