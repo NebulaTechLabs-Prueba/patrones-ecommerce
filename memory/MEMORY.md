@@ -1,0 +1,1 @@
+- [decisiones-fase1-ui](decisiones-fase1-ui.md) — decisiones de producto tomadas durante el cableado UI de la Fase 1 (login/admin, sugerencia de conjunto, tasa, persistencia)

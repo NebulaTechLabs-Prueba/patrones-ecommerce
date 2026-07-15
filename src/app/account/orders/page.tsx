@@ -9,9 +9,9 @@
  */
 
 import type { Metadata } from 'next';
+import { OrderMoney } from '@/components/ui/OrderMoney';
 import { orderRepo } from '@/lib/data';
 import type { OrderStatus, PaymentStatus } from '@/lib/data/types';
-import { formatBs, formatUsd } from '@/lib/format';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -100,7 +100,9 @@ export default async function OrdersPage() {
                       ({line.size} · {line.color})
                     </span>
                   </span>
-                  <span>{formatUsd(line.line_total_cents)}</span>
+                  <span>
+                    <OrderMoney cents={line.line_total_cents} rateUsed={order.rate_used} />
+                  </span>
                 </li>
               ))}
             </ul>
@@ -110,8 +112,10 @@ export default async function OrdersPage() {
                 {order.shipping_method.toUpperCase()} · {order.payment_method}
               </span>
               <span className={styles.totals}>
-                <strong>{formatUsd(order.total_cents)}</strong>
-                <span className={styles.bs}>{formatBs(order.total_bs)}</span>
+                <strong>
+                  <OrderMoney cents={order.total_cents} rateUsed={order.rate_used} />
+                </strong>
+                <span className={styles.bs}>a la tasa de la orden</span>
               </span>
             </div>
           </li>

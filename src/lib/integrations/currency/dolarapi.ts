@@ -33,7 +33,7 @@ export async function fetchOfficialRate(signal?: AbortSignal): Promise<ExchangeR
     return {
       // La tasa se ajusta a maximo 2 decimales antes de usarse o mostrarse.
       rate: roundBs(value),
-      source: 'dolarapi.com · BCV oficial',
+      source: 'BCV oficial',
       captured_at: data.fechaActualizacion ?? new Date().toISOString(),
       is_stale: false,
     };

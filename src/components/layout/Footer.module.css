@@ -50,6 +50,21 @@
   line-height: var(--ptr-leading-relaxed);
 }
 
+.address {
+  display: inline-block;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-white);
+  opacity: 0.85;
+  line-height: var(--ptr-leading-relaxed);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity var(--ptr-duration-fast) var(--ptr-ease);
+}
+
+.address:hover {
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .inner {
     grid-template-columns: 1fr;

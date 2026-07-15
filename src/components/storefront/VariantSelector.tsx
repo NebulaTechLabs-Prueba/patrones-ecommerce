@@ -14,9 +14,10 @@
  *    iteracion; no se finge que funciona.
  */
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useCart } from '@/lib/store/cart-context';
 import { useCurrency } from '@/lib/store/currency-context';
+import { useSelectedVariant } from '@/lib/store/selected-variant-context';
 import styles from './VariantSelector.module.css';
 
 export interface SelectableVariant {
@@ -71,6 +72,7 @@ export function VariantSelector({
 }: VariantSelectorProps) {
   const { formatCents } = useCurrency();
   const { add } = useCart();
+  const { setSelected } = useSelectedVariant();
   const colors = useMemo(() => uniqueColors(variants), [variants]);
 
   const [color, setColor] = useState<string | null>(colors.length === 1 ? colors[0]!.name : null);
@@ -121,6 +123,15 @@ export function VariantSelector({
 
   const priceCents = selectedVariant?.priceCents ?? basePriceCents;
   const ready = selectedVariant !== null;
+
+  // Comparte la seleccion resuelta para que la sugerencia de conjunto coordine (§9.3).
+  useEffect(() => {
+    setSelected(
+      selectedVariant
+        ? { size: selectedVariant.size, colorName: selectedVariant.colorName }
+        : null,
+    );
+  }, [selectedVariant, setSelected]);
 
   function chooseColor(name: string) {
     setColor(name);

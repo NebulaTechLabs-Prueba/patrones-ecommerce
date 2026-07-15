@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { resolveSuggestedProductIds } from './bundles';
+import { matchSuggestedVariant, resolveSuggestedProductIds } from './bundles';
 import type { Bundle } from '@/lib/data/types';
 
 const bundles: Bundle[] = [
@@ -28,5 +28,38 @@ describe('bundles — sugeridos (§9.3)', () => {
 
   it('devuelve vacío si el producto no está en ningún bundle', () => {
     expect(resolveSuggestedProductIds('p-otro', bundles, () => true)).toEqual([]);
+  });
+});
+
+describe('bundles — coherencia de variante en la sugerencia (talla > color)', () => {
+  const candidates = [
+    { sku: 'A', size: 'M', colorName: 'Azul marino' },
+    { sku: 'B', size: 'L', colorName: 'Verde quirófano' },
+    { sku: 'C', size: 'M', colorName: 'Verde quirófano' },
+  ];
+
+  it('match exacto: misma talla y color', () => {
+    const m = matchSuggestedVariant({ size: 'M', colorName: 'Verde quirófano' }, candidates);
+    expect(m.level).toBe('exact');
+    expect(m.variant?.sku).toBe('C');
+  });
+
+  it('prioriza talla sobre color cuando no hay exacto', () => {
+    // Talla M existe (en otro color) y color "Vino" no existe -> gana la talla.
+    const m = matchSuggestedVariant({ size: 'M', colorName: 'Vino' }, candidates);
+    expect(m.level).toBe('size');
+    expect(m.variant?.size).toBe('M');
+  });
+
+  it('cae al color cuando la talla no existe', () => {
+    const m = matchSuggestedVariant({ size: 'XXL', colorName: 'Verde quirófano' }, candidates);
+    expect(m.level).toBe('color');
+    expect(m.variant?.colorName).toBe('Verde quirófano');
+  });
+
+  it('sin coincidencia: level none y variante nula (se vende individual)', () => {
+    const m = matchSuggestedVariant({ size: 'XXL', colorName: 'Vino' }, candidates);
+    expect(m.level).toBe('none');
+    expect(m.variant).toBeNull();
   });
 });

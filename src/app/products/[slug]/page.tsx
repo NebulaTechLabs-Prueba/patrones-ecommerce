@@ -15,12 +15,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { BundleSuggestion } from '@/components/storefront/BundleSuggestion';
 import { ProductGallery } from '@/components/storefront/ProductGallery';
+import { SuggestedSet, type SuggestedProductData } from '@/components/storefront/SuggestedSet';
 import { VariantSelector, type SelectableVariant } from '@/components/storefront/VariantSelector';
 import { settingsRepo } from '@/lib/data';
 import { filterAvailableVariants, getAvailableStock } from '@/lib/domains/availability';
-import { getProductDetail, getVisibleProductSlugs } from '@/lib/storefront/catalog';
+import { getBrandsById, getProductDetail, getVisibleProductSlugs } from '@/lib/storefront/catalog';
+import { SelectedVariantProvider } from '@/lib/store/selected-variant-context';
 import styles from './page.module.css';
 
 interface PageProps {
@@ -44,11 +45,36 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
-  const [detail, settings] = await Promise.all([getProductDetail(slug), settingsRepo.getSettings()]);
+  const [detail, settings, brandsById] = await Promise.all([
+    getProductDetail(slug),
+    settingsRepo.getSettings(),
+    getBrandsById(),
+  ]);
 
   if (!detail) notFound();
 
   const { product, variants, brand, model, verticals, suggested } = detail;
+
+  // Datos de la sugerencia coordinada (§9.3): variantes disponibles del producto
+  // sugerido, para que el cliente pueda coordinar talla/color con su seleccion.
+  const suggestedData: SuggestedProductData[] = suggested.map((s) => ({
+    productId: s.product.id,
+    name: s.product.name,
+    slug: s.product.slug,
+    imageUrl: s.product.images[0]?.url ?? null,
+    basePriceCents: s.product.price,
+    isOwnLine: brandsById.get(s.product.brand_id)?.is_own_line ?? false,
+    verticalIds: s.product.vertical_ids,
+    categoryIds: s.product.category_ids,
+    variants: filterAvailableVariants(s.variants).map((v) => ({
+      sku: v.sku,
+      size: v.size,
+      colorName: v.color.name,
+      colorHex: v.color.hex,
+      priceCents: v.price_override ?? s.product.price,
+      availableQty: getAvailableStock(v),
+    })),
+  }));
 
   // Solo variantes disponibles hacia el selector (§7). Precio resuelto por variante.
   const selectable: SelectableVariant[] = filterAvailableVariants(variants).map((v) => ({
@@ -92,6 +118,7 @@ export default async function ProductPage({ params }: PageProps) {
           <ProductGallery images={product.images} productName={product.name} />
         </div>
 
+        <SelectedVariantProvider>
         <div className={styles.infoCol}>
           <div className={styles.headings}>
             {brand ? (
@@ -134,8 +161,9 @@ export default async function ProductPage({ params }: PageProps) {
             </section>
           ) : null}
 
-          <BundleSuggestion items={suggested} />
+          <SuggestedSet items={suggestedData} />
         </div>
+        </SelectedVariantProvider>
       </div>
     </main>
   );

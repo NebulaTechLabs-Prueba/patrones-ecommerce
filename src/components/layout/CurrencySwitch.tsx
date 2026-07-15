@@ -29,7 +29,7 @@ export function CurrencySwitch() {
       <div id="currency-rate" role="note" className={styles.tooltip}>
         <span className={styles.tooltipRate}>1 USD = {formatBs(rate.rate)}</span>
         <span className={styles.tooltipSource}>
-          {rate.is_stale ? 'Tasa referencial' : 'BCV oficial · dolarapi'}
+          {rate.is_stale ? 'Tasa referencial' : 'Tasa oficial BCV'}
         </span>
       </div>
     </div>
