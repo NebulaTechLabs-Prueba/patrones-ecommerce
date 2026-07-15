@@ -1,17 +1,27 @@
+/* Segmented control tipo "track + thumb": cada botón es su propia píldora. */
 .currency {
   display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
   border: 1px solid var(--ptr-neutral-200);
   border-radius: var(--ptr-radius-full);
-  overflow: hidden;
+  background-color: var(--ptr-neutral-50);
 }
 
 .currencyBtn {
-  padding: 4px 10px;
-  font-size: calc(var(--ptr-text-sm) * 0.75);
+  min-width: 40px;
+  padding: 4px 12px;
+  border-radius: var(--ptr-radius-full);
+  font-size: calc(var(--ptr-text-sm) * 0.8);
   font-weight: var(--ptr-weight-semibold);
   letter-spacing: var(--ptr-tracking-wide);
+  line-height: 1.4;
   color: var(--ptr-neutral-600);
   background-color: transparent;
+  transition:
+    background-color var(--ptr-duration-fast) var(--ptr-ease),
+    color var(--ptr-duration-fast) var(--ptr-ease);
 }
 
 .currencyActive {
