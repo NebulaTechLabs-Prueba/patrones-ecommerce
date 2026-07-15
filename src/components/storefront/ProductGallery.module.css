@@ -1,0 +1,21 @@
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-3);
+}
+
+.cover {
+  width: 100%;
+}
+
+.thumbs {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--ptr-space-3);
+}
+
+.thumb {
+  width: 100%;
+}

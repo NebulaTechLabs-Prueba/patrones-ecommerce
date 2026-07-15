@@ -10,7 +10,7 @@
  */
 
 import { productRepo } from '@/lib/data';
-import type { Product, ProductVariant, Vertical } from '@/lib/data/types';
+import type { Brand, Model, Product, ProductVariant, Vertical } from '@/lib/data/types';
 import { getAvailableColors, isProductAvailable } from '@/lib/domains/availability';
 
 /** Un producto visible para el publico, con sus variantes disponibles ya resueltas. */
@@ -36,6 +36,12 @@ async function loadVisibleProducts(): Promise<VisibleProduct[]> {
     });
   }
   return visible;
+}
+
+/** Indice de marcas por id, util para resolver nombre/linea propia en las grillas. */
+export async function getBrandsById(): Promise<Map<string, Brand>> {
+  const brands = await productRepo.listBrands();
+  return new Map(brands.map((b) => [b.id, b]));
 }
 
 /** Rubro con la cuenta de productos VISIBLES que contiene (puerta de la home). */
@@ -71,4 +77,104 @@ export async function getFeatured(limit = 8): Promise<FeaturedResult> {
   const featured = visible.filter((p) => p.product.featured).slice(0, limit);
   const verticalsCovered = new Set(featured.flatMap((p) => p.product.vertical_ids)).size;
   return { products: featured, verticalsCovered };
+}
+
+// ---------------------------------------------------------------------------
+// PLP (listado por rubro) y Linea PATRONES
+// ---------------------------------------------------------------------------
+
+/** Slugs de rubros activos, para generateStaticParams del export estatico. */
+export async function getVerticalSlugs(): Promise<string[]> {
+  const verticals = await productRepo.listVerticals();
+  return verticals.filter((v) => v.is_active).map((v) => v.slug);
+}
+
+export interface VerticalCatalog {
+  vertical: Vertical;
+  products: VisibleProduct[];
+}
+
+/** Catalogo visible de un rubro. null si el rubro no existe o esta inactivo. */
+export async function getVerticalCatalog(slug: string): Promise<VerticalCatalog | null> {
+  const vertical = await productRepo.getVerticalBySlug(slug);
+  if (!vertical || !vertical.is_active) return null;
+  const visible = await loadVisibleProducts();
+  const products = visible.filter((p) => p.product.vertical_ids.includes(vertical.id));
+  return { vertical, products };
+}
+
+/** Productos visibles de la Linea propia PATRONES (§9.5). */
+export async function getOwnLineProducts(): Promise<VisibleProduct[]> {
+  const [visible, brands] = await Promise.all([loadVisibleProducts(), productRepo.listBrands()]);
+  const ownLineIds = new Set(brands.filter((b) => b.is_own_line).map((b) => b.id));
+  return visible.filter((p) => ownLineIds.has(p.product.brand_id));
+}
+
+// ---------------------------------------------------------------------------
+// PDP (ficha de producto)
+// ---------------------------------------------------------------------------
+
+/** Slugs de productos VISIBLES. Los agotados no se generan -> URL directa da 404 (§7f). */
+export async function getVisibleProductSlugs(): Promise<string[]> {
+  const visible = await loadVisibleProducts();
+  return visible.map((p) => p.product.slug);
+}
+
+export interface ProductDetail {
+  product: Product;
+  variants: ProductVariant[];
+  availableColors: ReturnType<typeof getAvailableColors>;
+  brand: Brand | null;
+  model: Model | null;
+  verticals: Vertical[];
+  /** Conjunto SUGERIDO: otros productos visibles del mismo bundle (§9.3). */
+  suggested: VisibleProduct[];
+}
+
+/**
+ * Ficha completa de un producto. null si no existe o esta agotado (§7f): con export
+ * estatico, no generar el slug ya produce 404; esto lo cubre tambien en runtime.
+ */
+export async function getProductDetail(slug: string): Promise<ProductDetail | null> {
+  const product = await productRepo.getProductBySlug(slug);
+  if (!product) return null;
+  const variants = await productRepo.listVariants(product.id);
+  if (!isProductAvailable(variants)) return null;
+
+  const [brands, models, allVerticals, bundles, visible] = await Promise.all([
+    productRepo.listBrands(),
+    productRepo.listModels(),
+    productRepo.listVerticals(),
+    productRepo.listBundles(),
+    loadVisibleProducts(),
+  ]);
+
+  const brand = brands.find((b) => b.id === product.brand_id) ?? null;
+  const model = models.find((m) => m.id === product.model_id) ?? null;
+  const verticals = allVerticals.filter((v) => product.vertical_ids.includes(v.id));
+
+  // Conjunto sugerido: solo lo disponible (§9.3). Prioridad manual por sort_order.
+  const visibleById = new Map(visible.map((p) => [p.product.id, p]));
+  const suggestedIds: string[] = [];
+  for (const bundle of [...bundles].sort((a, b) => a.sort_order - b.sort_order)) {
+    if (!bundle.product_ids.includes(product.id)) continue;
+    for (const pid of bundle.product_ids) {
+      if (pid !== product.id && visibleById.has(pid) && !suggestedIds.includes(pid)) {
+        suggestedIds.push(pid);
+      }
+    }
+  }
+  const suggested = suggestedIds
+    .map((id) => visibleById.get(id))
+    .filter((p): p is VisibleProduct => p !== undefined);
+
+  return {
+    product,
+    variants,
+    availableColors: getAvailableColors(variants),
+    brand,
+    model,
+    verticals,
+    suggested,
+  };
 }

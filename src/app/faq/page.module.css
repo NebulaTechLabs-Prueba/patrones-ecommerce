@@ -1,0 +1,75 @@
+.main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--ptr-space-8) var(--ptr-space-5);
+}
+
+.header {
+  margin-bottom: var(--ptr-space-6);
+}
+
+.eyebrow {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-primary-soft);
+  margin-bottom: var(--ptr-space-2);
+}
+
+.title {
+  font-size: var(--ptr-text-3xl);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-tight);
+  color: var(--ptr-ink);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  border-bottom: 1px solid var(--ptr-neutral-200);
+}
+
+.details {
+  padding: var(--ptr-space-4) 0;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+  font-size: var(--ptr-text-lg);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Indicador +/- que rota, respetando reduced-motion via el token de duracion. */
+.summary::after {
+  content: '+';
+  font-size: var(--ptr-text-xl);
+  font-weight: var(--ptr-weight-regular);
+  color: var(--ptr-primary);
+  transition: transform var(--ptr-duration-base) var(--ptr-ease);
+}
+
+.details[open] .summary::after {
+  content: '−';
+}
+
+.answer {
+  margin-top: var(--ptr-space-3);
+  font-size: var(--ptr-text-base);
+  line-height: var(--ptr-leading-relaxed);
+  color: var(--ptr-neutral-600);
+  max-width: 62ch;
+}
