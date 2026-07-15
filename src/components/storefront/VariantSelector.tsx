@@ -15,7 +15,8 @@
  */
 
 import { useMemo, useState } from 'react';
-import { formatUsd } from '@/lib/format';
+import { useCart } from '@/lib/store/cart-context';
+import { useCurrency } from '@/lib/store/currency-context';
 import styles from './VariantSelector.module.css';
 
 export interface SelectableVariant {
@@ -25,6 +26,19 @@ export interface SelectableVariant {
   colorHex: string | null;
   attributes: Record<string, string>;
   priceCents: number;
+  /** Disponibilidad (stock - reservado) de esta variante (§7). */
+  availableQty: number;
+}
+
+/** Clasificacion del producto para el motor de promociones (§13.2). */
+export interface ProductClassification {
+  productId: string;
+  productSlug: string;
+  verticalIds: string[];
+  categoryIds: string[];
+  collectionIds: string[];
+  isOwnLine: boolean;
+  imageUrl: string | null;
 }
 
 interface VariantSelectorProps {
@@ -32,6 +46,7 @@ interface VariantSelectorProps {
   basePriceCents: number;
   variants: SelectableVariant[];
   whatsappNumber: string;
+  classification: ProductClassification;
 }
 
 interface ColorOption {
@@ -52,12 +67,16 @@ export function VariantSelector({
   basePriceCents,
   variants,
   whatsappNumber,
+  classification,
 }: VariantSelectorProps) {
+  const { formatCents } = useCurrency();
+  const { add } = useCart();
   const colors = useMemo(() => uniqueColors(variants), [variants]);
 
   const [color, setColor] = useState<string | null>(colors.length === 1 ? colors[0]!.name : null);
   const [size, setSize] = useState<string | null>(null);
   const [attrs, setAttrs] = useState<Record<string, string>>({});
+  const [justAdded, setJustAdded] = useState(false);
 
   const sizes = useMemo(() => {
     if (color === null) return [];
@@ -107,11 +126,32 @@ export function VariantSelector({
     setColor(name);
     setSize(null);
     setAttrs({});
+    setJustAdded(false);
   }
 
   function chooseSize(value: string) {
     setSize(value);
     setAttrs({});
+    setJustAdded(false);
+  }
+
+  function addToCart() {
+    if (!selectedVariant) return;
+    add({
+      variantSku: selectedVariant.sku,
+      productId: classification.productId,
+      productName,
+      unitPriceCents: selectedVariant.priceCents,
+      quantity: 1,
+      verticalIds: classification.verticalIds,
+      categoryIds: classification.categoryIds,
+      collectionIds: classification.collectionIds,
+      isOwnLine: classification.isOwnLine,
+      maxQty: selectedVariant.availableQty,
+      productSlug: classification.productSlug,
+      imageUrl: classification.imageUrl,
+    });
+    setJustAdded(true);
   }
 
   const whatsappHref = useMemo(() => {
@@ -133,7 +173,7 @@ export function VariantSelector({
 
   return (
     <div className={styles.wrap}>
-      <p className={styles.price}>{formatUsd(priceCents)}</p>
+      <p className={styles.price}>{formatCents(priceCents)}</p>
 
       {/* Color */}
       <fieldset className={styles.group}>
@@ -197,11 +237,23 @@ export function VariantSelector({
       ))}
 
       <div className={styles.actions}>
-        {/* El carrito llega en otra iteracion: boton presente pero honesto. */}
-        <button type="button" className={styles.addToCart} disabled aria-disabled="true">
+        <button
+          type="button"
+          className={styles.addToCart}
+          disabled={!ready}
+          aria-disabled={!ready}
+          onClick={addToCart}
+        >
           Agregar al carrito
         </button>
-        <span className={styles.soon}>Compra en línea disponible pronto</span>
+
+        <span className={styles.feedback} aria-live="polite">
+          {!ready
+            ? 'Elegí color y talla para agregar.'
+            : justAdded
+              ? 'Agregado al carrito.'
+              : ' '}
+        </span>
 
         <a
           className={styles.whatsapp}
@@ -211,11 +263,6 @@ export function VariantSelector({
         >
           Consultar por WhatsApp
         </a>
-        {!ready ? (
-          <p className={styles.hint} aria-live="polite">
-            Elegí color y talla para consultar por una variante puntual.
-          </p>
-        ) : null}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@
  * = cambiar el origen, no reescribir. Las 7 preguntas del MVP.
  */
 
-import type { AppSettings, Faq } from '../../types';
+import type { AppSettings, Faq, PaymentMethod } from '../../types';
 
 export const appSettings: AppSettings = {
   low_stock_threshold_global: 5,
@@ -32,6 +32,20 @@ export const appSettings: AppSettings = {
   },
   whatsapp_number: '+58 414 5551234',
 };
+
+/**
+ * Metodos de pago (§10). MVP habilitado: Pago Movil, transferencia y Stripe.
+ * El resto se modela desde el dia 1 con is_enabled=false (§10).
+ */
+export const paymentMethods: PaymentMethod[] = [
+  { id: 'pm-pago-movil', kind: 'pago_movil', label: 'Pago Móvil', is_enabled: true, is_offline: true, sort_order: 1 },
+  { id: 'pm-transferencia', kind: 'transferencia', label: 'Transferencia bancaria', is_enabled: true, is_offline: true, sort_order: 2 },
+  { id: 'pm-stripe', kind: 'stripe', label: 'Tarjeta (Stripe)', is_enabled: true, is_offline: false, sort_order: 3 },
+  { id: 'pm-zelle', kind: 'zelle', label: 'Zelle', is_enabled: false, is_offline: true, sort_order: 4 },
+  { id: 'pm-usdt', kind: 'usdt', label: 'USDT', is_enabled: false, is_offline: true, sort_order: 5 },
+  { id: 'pm-banesco-panama', kind: 'banesco_panama', label: 'Banesco Panamá', is_enabled: false, is_offline: true, sort_order: 6 },
+  { id: 'pm-divisa', kind: 'divisa', label: 'Divisa en efectivo', is_enabled: false, is_offline: true, sort_order: 7 },
+];
 
 export const faqs: Faq[] = [
   {

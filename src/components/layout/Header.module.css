@@ -47,6 +47,12 @@
   font-weight: var(--ptr-weight-semibold);
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-4);
+}
+
 /* Mobile: la nav de rubros pasa a una fila desplazable bajo el isologo. */
 @media (max-width: 640px) {
   .inner {

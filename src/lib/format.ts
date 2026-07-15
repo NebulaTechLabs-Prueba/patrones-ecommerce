@@ -7,7 +7,7 @@
  * para mostrarlo. Nada que dependa de tasa ni de descuentos pasa por aca.
  */
 
-import type { UsdCents } from '@/lib/data/types';
+import type { Bs, UsdCents } from '@/lib/data/types';
 
 /** Formatea centavos USD como "$28,00" (es-VE usa coma decimal). */
 export function formatUsd(cents: UsdCents): string {
@@ -16,4 +16,13 @@ export function formatUsd(cents: UsdCents): string {
     currency: 'USD',
     currencyDisplay: 'narrowSymbol',
   }).format(cents / 100);
+}
+
+/** Formatea un monto en Bs (ya redondeado a 2 decimales por money.ts) como "Bs 1.127,00". */
+export function formatBs(amount: Bs): string {
+  const formatted = new Intl.NumberFormat('es-VE', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+  return `Bs ${formatted}`;
 }

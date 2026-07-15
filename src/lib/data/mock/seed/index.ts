@@ -18,4 +18,4 @@ export {
   quotes,
   exchangeRate,
 } from './commerce';
-export { appSettings, faqs } from './settings';
+export { appSettings, faqs, paymentMethods } from './settings';

@@ -23,9 +23,11 @@ import {
   bundles,
   categories,
   collections,
+  exchangeRate,
   faqs,
   models,
   orders,
+  paymentMethods,
   products,
   promotions,
   quotes,
@@ -107,5 +109,11 @@ export const mockSettingsRepository: SettingsRepository = {
   },
   async listFaqs() {
     return clone([...faqs].sort((a, b) => a.sort_order - b.sort_order));
+  },
+  async listPaymentMethods() {
+    return clone([...paymentMethods].sort((a, b) => a.sort_order - b.sort_order));
+  },
+  async getExchangeRate() {
+    return clone(exchangeRate);
   },
 };

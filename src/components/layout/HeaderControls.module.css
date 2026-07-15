@@ -1,0 +1,50 @@
+.currency {
+  display: inline-flex;
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-full);
+  overflow: hidden;
+}
+
+.currencyBtn {
+  padding: 4px 10px;
+  font-size: calc(var(--ptr-text-sm) * 0.75);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  color: var(--ptr-neutral-600);
+  background-color: transparent;
+}
+
+.currencyActive {
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+}
+
+.cart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ptr-space-2);
+  font-size: calc(var(--ptr-text-sm) * 0.65);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  color: var(--ptr-ink);
+}
+
+.cart:hover {
+  color: var(--ptr-primary);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--ptr-radius-full);
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-size: 11px;
+  line-height: 1;
+}

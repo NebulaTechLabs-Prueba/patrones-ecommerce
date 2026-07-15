@@ -8,8 +8,8 @@
 
 import Link from 'next/link';
 import { PlaceholderImage } from '@/components/brand/PlaceholderImage';
+import { Money } from '@/components/ui/Money';
 import type { VisibleProduct } from '@/lib/storefront/catalog';
-import { formatUsd } from '@/lib/format';
 import styles from './BundleSuggestion.module.css';
 
 interface BundleSuggestionProps {
@@ -31,7 +31,9 @@ export function BundleSuggestion({ items }: BundleSuggestionProps) {
               </div>
               <div className={styles.body}>
                 <span className={styles.name}>{product.name}</span>
-                <span className={styles.price}>{formatUsd(product.price)}</span>
+                <span className={styles.price}>
+                  <Money cents={product.price} />
+                </span>
               </div>
             </Link>
           </li>

@@ -108,9 +108,11 @@
   cursor: not-allowed;
 }
 
-.soon {
-  font-size: var(--ptr-text-xs);
-  color: var(--ptr-neutral-600);
+.feedback {
+  min-height: 1.1em;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-success);
+  font-weight: var(--ptr-weight-medium);
 }
 
 .whatsapp {
@@ -133,7 +135,3 @@
   background-color: var(--ptr-mint);
 }
 
-.hint {
-  font-size: var(--ptr-text-sm);
-  color: var(--ptr-neutral-600);
-}

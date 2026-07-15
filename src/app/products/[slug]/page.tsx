@@ -19,7 +19,7 @@ import { BundleSuggestion } from '@/components/storefront/BundleSuggestion';
 import { ProductGallery } from '@/components/storefront/ProductGallery';
 import { VariantSelector, type SelectableVariant } from '@/components/storefront/VariantSelector';
 import { settingsRepo } from '@/lib/data';
-import { filterAvailableVariants } from '@/lib/domains/availability';
+import { filterAvailableVariants, getAvailableStock } from '@/lib/domains/availability';
 import { getProductDetail, getVisibleProductSlugs } from '@/lib/storefront/catalog';
 import styles from './page.module.css';
 
@@ -58,7 +58,18 @@ export default async function ProductPage({ params }: PageProps) {
     colorHex: v.color.hex,
     attributes: v.attributes,
     priceCents: v.price_override ?? product.price,
+    availableQty: getAvailableStock(v),
   }));
+
+  const classification = {
+    productId: product.id,
+    productSlug: product.slug,
+    verticalIds: product.vertical_ids,
+    categoryIds: product.category_ids,
+    collectionIds: [],
+    isOwnLine: brand?.is_own_line ?? false,
+    imageUrl: product.images[0]?.url ?? null,
+  };
 
   const isSet = product.type === 'set';
 
@@ -98,6 +109,7 @@ export default async function ProductPage({ params }: PageProps) {
             basePriceCents={product.price}
             variants={selectable}
             whatsappNumber={settings.whatsapp_number}
+            classification={classification}
           />
 
           <p className={styles.description}>{product.description}</p>

@@ -8,6 +8,8 @@
 
 import Link from 'next/link';
 import { Isologo } from '@/components/brand/Isologo';
+import { CartIndicator } from './CartIndicator';
+import { CurrencySwitch } from './CurrencySwitch';
 import { productRepo } from '@/lib/data';
 import styles from './Header.module.css';
 
@@ -33,6 +35,11 @@ export async function Header() {
             Línea PATRONES
           </Link>
         </nav>
+
+        <div className={styles.controls}>
+          <CurrencySwitch />
+          <CartIndicator />
+        </div>
       </div>
     </header>
   );

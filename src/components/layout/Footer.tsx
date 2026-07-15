@@ -45,6 +45,9 @@ export async function Footer() {
           <Link href="/faq/" className={styles.link}>
             Preguntas frecuentes
           </Link>
+          <Link href="/account/orders/" className={styles.link}>
+            Mis pedidos
+          </Link>
         </div>
 
         <div className={styles.col}>

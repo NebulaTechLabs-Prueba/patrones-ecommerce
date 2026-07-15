@@ -11,8 +11,8 @@
 
 import Link from 'next/link';
 import { PlaceholderImage } from '@/components/brand/PlaceholderImage';
+import { Money } from '@/components/ui/Money';
 import type { Product, VariantColor } from '@/lib/data/types';
-import { formatUsd } from '@/lib/format';
 import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
@@ -54,7 +54,9 @@ export function ProductCard({ product, availableColors, brandName, isOwnLine }: 
           </ul>
         ) : null}
 
-        <p className={styles.price}>{formatUsd(product.price)}</p>
+        <p className={styles.price}>
+          <Money cents={product.price} />
+        </p>
       </div>
     </Link>
   );

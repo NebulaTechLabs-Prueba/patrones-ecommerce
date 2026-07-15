@@ -19,9 +19,11 @@ import type {
   Bundle,
   Category,
   Collection,
+  ExchangeRate,
   Faq,
   Model,
   Order,
+  PaymentMethod,
   Product,
   ProductVariant,
   Promotion,
@@ -67,4 +69,11 @@ export interface OrderRepository {
 export interface SettingsRepository {
   getSettings(): Promise<AppSettings>;
   listFaqs(): Promise<Faq[]>;
+  /** Metodos de pago habilitados/modelados (§10, §14). */
+  listPaymentMethods(): Promise<PaymentMethod[]>;
+  /**
+   * Tasa vigente (§11). En Fase 2 la provee dolarapi/BCV detras del RateProvider;
+   * en la demo devuelve la tasa mock. Bs siempre es presentacion.
+   */
+  getExchangeRate(): Promise<ExchangeRate>;
 }
