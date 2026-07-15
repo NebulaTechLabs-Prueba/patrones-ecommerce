@@ -7,9 +7,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useCatalog } from '@/lib/store/catalog-context';
 import styles from './RubrosNav.module.css';
 
-export function RubrosNav({ rubros }: { rubros: Array<{ name: string; slug: string }> }) {
+export function RubrosNav() {
+  const { verticals } = useCatalog();
+  const rubros = [...verticals]
+    .filter((v) => v.is_active)
+    .sort((a, b) => a.sort_order - b.sort_order);
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 

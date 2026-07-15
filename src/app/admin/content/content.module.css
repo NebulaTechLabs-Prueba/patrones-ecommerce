@@ -21,6 +21,18 @@
   line-height: var(--ptr-leading-relaxed);
 }
 
+/* Lista de productos seleccionables dentro del modal de colección. */
+.checkList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-2);
+  max-height: 220px;
+  overflow-y: auto;
+  padding: var(--ptr-space-3);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-md);
+}
+
 @media (max-width: 768px) {
   .cols {
     grid-template-columns: 1fr;

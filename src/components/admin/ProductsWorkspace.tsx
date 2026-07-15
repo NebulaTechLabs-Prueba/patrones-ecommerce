@@ -11,7 +11,7 @@ import { AdminProducts, type ProductRow } from './AdminProducts';
 import { BrandsCrud } from './crud/BrandsCrud';
 import { CategoriesCrud } from './crud/CategoriesCrud';
 import { VerticalsCrud } from './crud/VerticalsCrud';
-import type { Brand, Category, Vertical } from '@/lib/data/types';
+import { useCatalog } from '@/lib/store/catalog-context';
 import ui from './adminUI.module.css';
 
 type Tab = 'products' | 'brands' | 'verticals' | 'categories';
@@ -25,17 +25,15 @@ const TABS: Array<{ id: Tab; label: string }> = [
 
 interface Props {
   initialProducts: ProductRow[];
-  initialBrands: Brand[];
-  initialVerticals: Vertical[];
-  initialCategories: Category[];
 }
 
-export function ProductsWorkspace({ initialProducts, initialBrands, initialVerticals, initialCategories }: Props) {
+export function ProductsWorkspace({ initialProducts }: Props) {
+  // Marcas, rubros y categorías viven en el store compartido: editarlas acá se
+  // refleja en el lado público (navbar de rubros, filtros). Los productos aún son
+  // locales al panel (no se generan sus páginas de detalle en export estático).
+  const { brands, verticals, categories, setBrands, setVerticals, setCategories } = useCatalog();
   const [tab, setTab] = useState<Tab>('products');
   const [products, setProducts] = useState(initialProducts);
-  const [brands, setBrands] = useState(initialBrands);
-  const [verticals, setVerticals] = useState(initialVerticals);
-  const [categories, setCategories] = useState(initialCategories);
 
   return (
     <div>

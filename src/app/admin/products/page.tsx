@@ -1,7 +1,7 @@
 /**
  * Admin - Productos. El server arma las filas (con conteo de variantes y
- * visibilidad) y entrega marcas/rubros/categorías; el workspace (client) maneja
- * las pestañas y el estado compartido.
+ * visibilidad); el workspace (client) maneja las pestañas. Marcas/rubros/categorías
+ * salen del store compartido, no de props.
  */
 
 import { ProductsWorkspace } from '@/components/admin/ProductsWorkspace';
@@ -9,12 +9,7 @@ import type { ProductRow } from '@/components/admin/AdminProducts';
 import { productRepo } from '@/lib/data';
 
 export default async function AdminProductsPage() {
-  const [products, brands, verticals, categories] = await Promise.all([
-    productRepo.listProducts(),
-    productRepo.listBrands(),
-    productRepo.listVerticals(),
-    productRepo.listCategories(),
-  ]);
+  const products = await productRepo.listProducts();
 
   const rows: ProductRow[] = [];
   for (const p of products) {
@@ -40,12 +35,5 @@ export default async function AdminProductsPage() {
     });
   }
 
-  return (
-    <ProductsWorkspace
-      initialProducts={rows}
-      initialBrands={brands}
-      initialVerticals={verticals}
-      initialCategories={categories}
-    />
-  );
+  return <ProductsWorkspace initialProducts={rows} />;
 }

@@ -24,13 +24,23 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // Datos para los contextos client (tasa, promos, pricing). En export estatico
-  // se resuelven en build; los componentes client los reciben ya serializados.
-  const [rate, promotions, settings] = await Promise.all([
-    settingsRepo.getExchangeRate(),
-    productRepo.listActivePromotions(),
-    settingsRepo.getSettings(),
-  ]);
+  // Datos para los contextos client (tasa, promos, pricing, catalogo). En export
+  // estatico se resuelven en build; los componentes client los reciben serializados.
+  const [rate, promotions, settings, verticals, brands, categories, products, collections] =
+    await Promise.all([
+      settingsRepo.getExchangeRate(),
+      productRepo.listActivePromotions(),
+      settingsRepo.getSettings(),
+      productRepo.listVerticals(),
+      productRepo.listBrands(),
+      productRepo.listCategories(),
+      productRepo.listProducts(),
+      productRepo.listCollections(),
+    ]);
+
+  const variants = (
+    await Promise.all(products.map((p) => productRepo.listVariants(p.id)))
+  ).flat();
 
   return (
     <html lang="es" className={nunitoSans.variable}>
@@ -43,6 +53,7 @@ export default async function RootLayout({
             quantityPromoThreshold: settings.quantity_promo_threshold,
             quantityPromoEnabled: settings.quantity_promo_enabled,
           }}
+          catalog={{ verticals, brands, categories, products, variants, collections }}
         >
           <ChromeGate>
             <Header />

@@ -108,9 +108,24 @@ export async function getVerticalCatalog(slug: string): Promise<VerticalCatalog 
 // Colecciones
 // ---------------------------------------------------------------------------
 
+/**
+ * ¿La colección está vigente hoy? Fuera de su ventana (starts_at..ends_at) no se
+ * publica; sin fechas, siempre vigente. Comparación por fecha ISO (YYYY-MM-DD).
+ */
+export function isCollectionLive(collection: Collection, today: string): boolean {
+  if (collection.starts_at && today < collection.starts_at) return false;
+  if (collection.ends_at && today > collection.ends_at) return false;
+  return true;
+}
+
+function todayISO(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export async function getCollectionSlugs(): Promise<string[]> {
   const collections = await productRepo.listCollections();
-  return collections.map((c) => c.slug);
+  const today = todayISO();
+  return collections.filter((c) => isCollectionLive(c, today)).map((c) => c.slug);
 }
 
 export interface CollectionCatalog {
@@ -121,7 +136,7 @@ export interface CollectionCatalog {
 /** Catalogo visible de una coleccion, respetando el orden de la coleccion. */
 export async function getCollectionCatalog(slug: string): Promise<CollectionCatalog | null> {
   const collection = await productRepo.getCollectionBySlug(slug);
-  if (!collection) return null;
+  if (!collection || !isCollectionLive(collection, todayISO())) return null;
   const visible = await loadVisibleProducts();
   const byId = new Map(visible.map((p) => [p.product.id, p]));
   const products = collection.product_ids
@@ -133,7 +148,8 @@ export async function getCollectionCatalog(slug: string): Promise<CollectionCata
 /** Coleccion destacada para la home (la primera disponible). */
 export async function getFeaturedCollection(): Promise<Collection | null> {
   const collections = await productRepo.listCollections();
-  return collections[0] ?? null;
+  const today = todayISO();
+  return collections.find((c) => isCollectionLive(c, today)) ?? null;
 }
 
 /** Productos visibles de la Linea propia PATRONES (§9.5). */

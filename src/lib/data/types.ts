@@ -207,6 +207,10 @@ export interface Collection {
   description: string;
   product_ids: ID[];
   hero_image: ProductImage | null;
+  /** Vigencia opcional (ISO 'YYYY-MM-DD'). Fuera del rango la colección no se
+   *  publica. null en ambos extremos = siempre vigente. */
+  starts_at: string | null;
+  ends_at: string | null;
 }
 
 // ---------------------------------------------------------------------------

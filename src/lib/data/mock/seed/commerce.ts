@@ -51,6 +51,8 @@ export const collections: Collection[] = [
       'Lo que sostiene un turno completo: scrubs, calzado y el conjunto quirúrgico, en una sola selección.',
     product_ids: ['p-scrub-aura', 'p-jogger-aura', 'p-conjunto-quirurgico', 'p-zueco-terra'],
     hero_image: null,
+    starts_at: null,
+    ends_at: null,
   },
 ];
 
