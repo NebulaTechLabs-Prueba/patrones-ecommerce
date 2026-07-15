@@ -12,6 +12,7 @@
  */
 
 import type {
+  CartRepository,
   CustomerRepository,
   InventoryRepository,
   OrderRepository,
@@ -19,6 +20,7 @@ import type {
   SettingsRepository,
 } from '../repositories';
 import {
+  abandonedCarts,
   appSettings,
   brands,
   bundles,
@@ -121,6 +123,19 @@ export const mockCustomerRepository: CustomerRepository = {
   },
   async getCustomerById(id) {
     return clone(customers.find((c) => c.id === id) ?? null);
+  },
+};
+
+export const mockCartRepository: CartRepository = {
+  async listAbandonedCarts() {
+    return clone([...abandonedCarts].sort((a, b) => b.updated_at.localeCompare(a.updated_at)));
+  },
+  async listAbandonedCartsByCustomer(customerId) {
+    return clone(
+      abandonedCarts
+        .filter((c) => c.customer_id === customerId)
+        .sort((a, b) => b.updated_at.localeCompare(a.updated_at)),
+    );
   },
 };
 

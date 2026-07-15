@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 const LINKS = [
   { title: 'Pedidos', description: 'Seguí el estado de tus compras y de tus pagos.', href: '/account/orders/' },
   { title: 'Cotizaciones', description: 'Tus cotizaciones con precios y tasa congelados.', href: '/account/quotes/' },
+  { title: 'Carritos guardados', description: 'Retomá tus carritos sin cerrar (hasta 5).', href: '/account/carts/' },
   { title: 'Lista de deseados', description: 'Prendas guardadas; te avisamos cuando vuelvan.', href: '/account/wishlist/' },
   { title: 'Mis datos', description: 'Contacto, dirección y documento (cédula/RIF).', href: '/account/profile/' },
 ];

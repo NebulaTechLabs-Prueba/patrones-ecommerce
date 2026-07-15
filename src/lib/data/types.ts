@@ -423,6 +423,46 @@ export interface Quote {
 }
 
 // ---------------------------------------------------------------------------
+// Carrito olvidado (§8, §14) - solo clientes registrados
+// ---------------------------------------------------------------------------
+
+/**
+ * Linea de un carrito olvidado. Lleva lo necesario para RECUPERARLO al carrito
+ * activo (respetando disponibilidad) y para que el admin lo lea como intencion.
+ */
+export interface AbandonedCartLine {
+  variant_sku: string;
+  product_id: string;
+  product_slug: string;
+  product_name: string;
+  size: string;
+  color: string;
+  unit_price_cents: UsdCents;
+  quantity: number;
+  image_url: string | null;
+  vertical_ids: ID[];
+  category_ids: ID[];
+  is_own_line: boolean;
+  /** Disponibilidad snapshot al guardarse (la real se revalida al recuperar). */
+  available_qty: number;
+}
+
+/**
+ * Carrito olvidado (abandonado). SOLO de clientes registrados (tiene customer_id):
+ * un invitado no deja rastro recuperable. El cliente recupera hasta 5; el admin los
+ * ve con su dueño porque son intencion de compra (seguimiento). TTL en app_settings.
+ */
+export interface AbandonedCart {
+  id: ID;
+  customer_id: ID;
+  lines: AbandonedCartLine[];
+  /** Subtotal referencial (sin promos; el total real se recalcula al recuperar). */
+  subtotal_cents: UsdCents;
+  /** Ultima actividad; base para el TTL de "olvidado". */
+  updated_at: ISODate;
+}
+
+// ---------------------------------------------------------------------------
 // Moneda (§11)
 // ---------------------------------------------------------------------------
 

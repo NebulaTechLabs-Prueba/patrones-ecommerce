@@ -33,6 +33,7 @@ const NAV: NavGroup[] = [
       { label: 'Órdenes', href: '/admin/orders/' },
       { label: 'Pagos', href: '/admin/payments/' },
       { label: 'Cotizaciones', href: '/admin/quotes/' },
+      { label: 'Carritos', href: '/admin/carts/' },
     ],
   },
   {

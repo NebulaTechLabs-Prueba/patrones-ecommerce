@@ -14,6 +14,7 @@
  */
 
 import type {
+  AbandonedCart,
   AppSettings,
   Brand,
   Bundle,
@@ -78,6 +79,15 @@ export interface OrderRepository {
 export interface CustomerRepository {
   listCustomers(): Promise<Customer[]>;
   getCustomerById(id: string): Promise<Customer | null>;
+}
+
+/**
+ * Carritos olvidados (§8, §14). Solo de clientes registrados. El cliente recupera
+ * los suyos (hasta 5); el admin los ve todos, como intencion de compra.
+ */
+export interface CartRepository {
+  listAbandonedCarts(): Promise<AbandonedCart[]>;
+  listAbandonedCartsByCustomer(customerId: string): Promise<AbandonedCart[]>;
 }
 
 export interface SettingsRepository {

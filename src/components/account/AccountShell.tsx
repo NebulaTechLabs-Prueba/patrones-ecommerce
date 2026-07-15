@@ -15,6 +15,7 @@ const TABS = [
   { label: 'Resumen', href: '/account/' },
   { label: 'Pedidos', href: '/account/orders/' },
   { label: 'Cotizaciones', href: '/account/quotes/' },
+  { label: 'Carritos', href: '/account/carts/' },
   { label: 'Deseados', href: '/account/wishlist/' },
   { label: 'Datos', href: '/account/profile/' },
 ];

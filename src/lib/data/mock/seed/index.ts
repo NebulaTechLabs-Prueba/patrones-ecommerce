@@ -20,3 +20,4 @@ export {
 } from './commerce';
 export { appSettings, faqs, paymentMethods } from './settings';
 export { sizeCharts } from './size-charts';
+export { abandonedCarts } from './abandoned-carts';
