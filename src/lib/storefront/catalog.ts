@@ -12,6 +12,7 @@
 import { productRepo } from '@/lib/data';
 import type { Brand, Model, Product, ProductVariant, Vertical } from '@/lib/data/types';
 import { getAvailableColors, isProductAvailable } from '@/lib/domains/availability';
+import { resolveSuggestedProductIds } from '@/lib/domains/bundles/bundles';
 
 /** Un producto visible para el publico, con sus variantes disponibles ya resueltas. */
 export interface VisibleProduct {
@@ -154,17 +155,9 @@ export async function getProductDetail(slug: string): Promise<ProductDetail | nu
   const verticals = allVerticals.filter((v) => product.vertical_ids.includes(v.id));
 
   // Conjunto sugerido: solo lo disponible (§9.3). Prioridad manual por sort_order.
+  // La logica pura vive en lib/domains/bundles; aca solo se resuelven los productos.
   const visibleById = new Map(visible.map((p) => [p.product.id, p]));
-  const suggestedIds: string[] = [];
-  for (const bundle of [...bundles].sort((a, b) => a.sort_order - b.sort_order)) {
-    if (!bundle.product_ids.includes(product.id)) continue;
-    for (const pid of bundle.product_ids) {
-      if (pid !== product.id && visibleById.has(pid) && !suggestedIds.includes(pid)) {
-        suggestedIds.push(pid);
-      }
-    }
-  }
-  const suggested = suggestedIds
+  const suggested = resolveSuggestedProductIds(product.id, bundles, (id) => visibleById.has(id))
     .map((id) => visibleById.get(id))
     .filter((p): p is VisibleProduct => p !== undefined);
 
