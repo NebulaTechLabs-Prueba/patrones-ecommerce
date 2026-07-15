@@ -2,18 +2,28 @@
 
 /**
  * CRUD simulado de Productos (§9), controlado por el workspace. Marca, rubros y
- * categorías se eligen de las existentes; su alta/edición/baja se hace en las
- * pestañas Marcas/Rubros/Categorías (estado compartido).
+ * categorías se eligen de las existentes (su CRUD está en las otras pestañas). Las
+ * variantes (SKU/talla/color/stock) se gestionan por producto. En memoria.
  */
 
 import { useState } from 'react';
 import { AdminModal } from './AdminModal';
+import { ProductVariants } from './ProductVariants';
 import { formatUsd } from '@/lib/format';
 import ui from './adminUI.module.css';
 
 interface Facet {
   id: string;
   name: string;
+}
+
+export interface VariantRow {
+  sku: string;
+  size: string;
+  colorName: string;
+  colorHex: string | null;
+  stock: number;
+  reserved: number;
 }
 
 export interface ProductRow {
@@ -26,8 +36,7 @@ export interface ProductRow {
   priceCents: number;
   featured: boolean;
   lowStockThreshold: number | null;
-  variantCount: number;
-  visible: boolean;
+  variants: VariantRow[];
 }
 
 interface Draft {
@@ -40,12 +49,14 @@ interface Draft {
   price: string;
   featured: boolean;
   lowStockThreshold: string;
-  variantCount: number;
-  visible: boolean;
 }
 
 function toggleId(list: string[], id: string): string[] {
   return list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
+}
+
+function isVisible(variants: VariantRow[]): boolean {
+  return variants.some((v) => v.stock - v.reserved > 0);
 }
 
 interface Props {
@@ -59,6 +70,7 @@ interface Props {
 export function AdminProducts({ products, onChange, brands, verticals, categories }: Props) {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState('');
+  const [variantsFor, setVariantsFor] = useState<ProductRow | null>(null);
 
   const brandName = new Map(brands.map((b) => [b.id, b.name]));
   const vName = new Map(verticals.map((v) => [v.id, v.name]));
@@ -75,8 +87,6 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
       price: '',
       featured: false,
       lowStockThreshold: '',
-      variantCount: 0,
-      visible: false,
     };
   }
 
@@ -91,8 +101,6 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
       price: String(r.priceCents / 100),
       featured: r.featured,
       lowStockThreshold: r.lowStockThreshold != null ? String(r.lowStockThreshold) : '',
-      variantCount: r.variantCount,
-      visible: r.visible,
     };
   }
 
@@ -104,6 +112,7 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
     if (!draft.brandId) return setError('Elegí una marca.');
     if (draft.verticalIds.length === 0) return setError('Elegí al menos un rubro.');
 
+    const existing = draft.id ? products.find((r) => r.id === draft.id) : null;
     const row: ProductRow = {
       id: draft.id ?? `p-${Date.now()}`,
       name: draft.name.trim(),
@@ -114,13 +123,18 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
       priceCents: Math.round(price * 100),
       featured: draft.featured,
       lowStockThreshold: draft.lowStockThreshold ? Number(draft.lowStockThreshold) : null,
-      variantCount: draft.variantCount,
-      visible: draft.visible,
+      variants: existing?.variants ?? [],
     };
 
     onChange(draft.id ? products.map((r) => (r.id === draft.id ? row : r)) : [...products, row]);
     setDraft(null);
     setError('');
+  }
+
+  function updateVariants(vars: VariantRow[]) {
+    if (!variantsFor) return;
+    onChange(products.map((p) => (p.id === variantsFor.id ? { ...p, variants: vars } : p)));
+    setVariantsFor({ ...variantsFor, variants: vars });
   }
 
   const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
@@ -129,7 +143,7 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
     <div>
       <div className={ui.pageHead}>
         <p className={ui.pageSubtitle}>
-          Marca, rubros, categorías, precio, variantes y visibilidad. El SKU es por variante.
+          Marca, rubros, categorías, precio y variantes. El SKU es por variante.
         </p>
         <button
           type="button"
@@ -160,44 +174,50 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
             </tr>
           </thead>
           <tbody>
-            {sorted.map((r) => (
-              <tr key={r.id}>
-                <td>{r.name}</td>
-                <td>{brandName.get(r.brandId) ?? '—'}</td>
-                <td>{r.verticalIds.map((id) => vName.get(id) ?? id).join(', ') || '—'}</td>
-                <td>{r.categoryIds.map((id) => cName.get(id) ?? id).join(', ') || '—'}</td>
-                <td>{r.type === 'set' ? 'Conjunto' : 'Simple'}</td>
-                <td>{formatUsd(r.priceCents)}</td>
-                <td>{r.variantCount}</td>
-                <td>{r.featured ? 'Sí' : '—'}</td>
-                <td>
-                  <span className={`${ui.badge} ${r.visible ? ui.success : ui.danger}`}>
-                    {r.visible ? 'Visible' : 'Oculto'}
-                  </span>
-                </td>
-                <td>
-                  <div className={ui.actions}>
-                    <button type="button" className={ui.actionBtn} onClick={() => setDraft(toDraft(r))}>
-                      Editar
-                    </button>
-                    <button
-                      type="button"
-                      className={ui.actionBtn}
-                      onClick={() => onChange(products.map((x) => (x.id === r.id ? { ...x, featured: !x.featured } : x)))}
-                    >
-                      {r.featured ? 'Quitar featured' : 'Featured'}
-                    </button>
-                    <button
-                      type="button"
-                      className={`${ui.actionBtn} ${ui.actionDanger}`}
-                      onClick={() => onChange(products.filter((x) => x.id !== r.id))}
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {sorted.map((r) => {
+              const visible = isVisible(r.variants);
+              return (
+                <tr key={r.id}>
+                  <td>{r.name}</td>
+                  <td>{brandName.get(r.brandId) ?? '—'}</td>
+                  <td>{r.verticalIds.map((id) => vName.get(id) ?? id).join(', ') || '—'}</td>
+                  <td>{r.categoryIds.map((id) => cName.get(id) ?? id).join(', ') || '—'}</td>
+                  <td>{r.type === 'set' ? 'Conjunto' : 'Simple'}</td>
+                  <td>{formatUsd(r.priceCents)}</td>
+                  <td>{r.variants.length}</td>
+                  <td>{r.featured ? 'Sí' : '—'}</td>
+                  <td>
+                    <span className={`${ui.badge} ${visible ? ui.success : ui.danger}`}>
+                      {visible ? 'Visible' : 'Oculto'}
+                    </span>
+                  </td>
+                  <td>
+                    <div className={ui.actions}>
+                      <button type="button" className={ui.actionBtn} onClick={() => setDraft(toDraft(r))}>
+                        Editar
+                      </button>
+                      <button type="button" className={ui.actionBtn} onClick={() => setVariantsFor(r)}>
+                        Variantes
+                      </button>
+                      <button
+                        type="button"
+                        className={ui.actionBtn}
+                        onClick={() => onChange(products.map((x) => (x.id === r.id ? { ...x, featured: !x.featured } : x)))}
+                      >
+                        {r.featured ? 'Quitar featured' : 'Featured'}
+                      </button>
+                      <button
+                        type="button"
+                        className={`${ui.actionBtn} ${ui.actionDanger}`}
+                        onClick={() => onChange(products.filter((x) => x.id !== r.id))}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -278,6 +298,15 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
             </div>
           </div>
         </AdminModal>
+      ) : null}
+
+      {variantsFor ? (
+        <ProductVariants
+          productName={variantsFor.name}
+          variants={variantsFor.variants}
+          onChange={updateVariants}
+          onClose={() => setVariantsFor(null)}
+        />
       ) : null}
     </div>
   );

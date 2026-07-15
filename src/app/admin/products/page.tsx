@@ -7,7 +7,6 @@
 import { ProductsWorkspace } from '@/components/admin/ProductsWorkspace';
 import type { ProductRow } from '@/components/admin/AdminProducts';
 import { productRepo } from '@/lib/data';
-import { isProductAvailable } from '@/lib/domains/availability';
 
 export default async function AdminProductsPage() {
   const [products, brands, verticals, categories] = await Promise.all([
@@ -30,8 +29,14 @@ export default async function AdminProductsPage() {
       priceCents: p.price,
       featured: p.featured,
       lowStockThreshold: p.low_stock_threshold,
-      variantCount: variants.length,
-      visible: isProductAvailable(variants),
+      variants: variants.map((v) => ({
+        sku: v.sku,
+        size: v.size,
+        colorName: v.color.name,
+        colorHex: v.color.hex,
+        stock: v.stock_qty,
+        reserved: v.reserved_qty,
+      })),
     });
   }
 
