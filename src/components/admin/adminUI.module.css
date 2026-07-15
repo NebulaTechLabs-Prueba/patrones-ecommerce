@@ -241,3 +241,13 @@
   font-size: var(--ptr-text-sm);
   color: var(--ptr-danger);
 }
+
+.inlineAdd {
+  display: flex;
+  gap: var(--ptr-space-2);
+  margin-top: var(--ptr-space-2);
+}
+
+.inlineAdd .input {
+  flex: 1;
+}

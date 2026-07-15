@@ -1,9 +1,9 @@
 'use client';
 
 /**
- * CRUD simulado de Productos (§9). Crear/editar/eliminar/destacar en memoria (se
- * resetea al recargar). El SKU y las variantes se gestionan aparte; acá se edita
- * el producto (marca, rubros, categorías, precio, featured).
+ * CRUD simulado de Productos (§9). Crear/editar/eliminar/destacar en memoria. La
+ * marca, los rubros y las categorías son editables: se pueden elegir de las
+ * existentes o CREAR una nueva al vuelo desde el mismo formulario.
  */
 
 import { useState } from 'react';
@@ -56,18 +56,22 @@ function toggleId(list: string[], id: string): string[] {
 
 export function AdminProducts({ initial, options }: { initial: ProductRow[]; options: Options }) {
   const [rows, setRows] = useState<ProductRow[]>(initial);
+  const [opts, setOpts] = useState<Options>(options);
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState('');
+  const [newBrand, setNewBrand] = useState('');
+  const [newVertical, setNewVertical] = useState('');
+  const [newCategory, setNewCategory] = useState('');
 
-  const brandName = new Map(options.brands.map((b) => [b.id, b.name]));
-  const vName = new Map(options.verticals.map((v) => [v.id, v.name]));
-  const cName = new Map(options.categories.map((c) => [c.id, c.name]));
+  const brandName = new Map(opts.brands.map((b) => [b.id, b.name]));
+  const vName = new Map(opts.verticals.map((v) => [v.id, v.name]));
+  const cName = new Map(opts.categories.map((c) => [c.id, c.name]));
 
   function emptyDraft(): Draft {
     return {
       id: null,
       name: '',
-      brandId: options.brands[0]?.id ?? '',
+      brandId: opts.brands[0]?.id ?? '',
       verticalIds: [],
       categoryIds: [],
       type: 'simple',
@@ -93,6 +97,31 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
       variantCount: r.variantCount,
       visible: r.visible,
     };
+  }
+
+  function addBrand() {
+    const name = newBrand.trim();
+    if (!name || !draft) return;
+    const id = `b-${Date.now()}`;
+    setOpts((o) => ({ ...o, brands: [...o.brands, { id, name }] }));
+    setDraft({ ...draft, brandId: id });
+    setNewBrand('');
+  }
+  function addVertical() {
+    const name = newVertical.trim();
+    if (!name || !draft) return;
+    const id = `v-${Date.now()}`;
+    setOpts((o) => ({ ...o, verticals: [...o.verticals, { id, name }] }));
+    setDraft({ ...draft, verticalIds: [...draft.verticalIds, id] });
+    setNewVertical('');
+  }
+  function addCategory() {
+    const name = newCategory.trim();
+    if (!name || !draft) return;
+    const id = `cat-${Date.now()}`;
+    setOpts((o) => ({ ...o, categories: [...o.categories, { id, name }] }));
+    setDraft({ ...draft, categoryIds: [...draft.categoryIds, id] });
+    setNewCategory('');
   }
 
   function save() {
@@ -228,12 +257,23 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
                   value={draft.brandId}
                   onChange={(e) => setDraft({ ...draft, brandId: e.target.value })}
                 >
-                  {options.brands.map((b) => (
+                  {opts.brands.map((b) => (
                     <option key={b.id} value={b.id}>
                       {b.name}
                     </option>
                   ))}
                 </select>
+                <div className={ui.inlineAdd}>
+                  <input
+                    className={ui.input}
+                    placeholder="Nueva marca…"
+                    value={newBrand}
+                    onChange={(e) => setNewBrand(e.target.value)}
+                  />
+                  <button type="button" className={ui.actionBtn} onClick={addBrand}>
+                    Agregar
+                  </button>
+                </div>
               </label>
               <label className={ui.field}>
                 <span>Tipo</span>
@@ -275,7 +315,7 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
             <div className={ui.field}>
               <span>Rubros</span>
               <div className={ui.actions}>
-                {options.verticals.map((v) => (
+                {opts.verticals.map((v) => (
                   <label key={v.id} className={ui.check}>
                     <input
                       type="checkbox"
@@ -286,12 +326,23 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
                   </label>
                 ))}
               </div>
+              <div className={ui.inlineAdd}>
+                <input
+                  className={ui.input}
+                  placeholder="Nuevo rubro…"
+                  value={newVertical}
+                  onChange={(e) => setNewVertical(e.target.value)}
+                />
+                <button type="button" className={ui.actionBtn} onClick={addVertical}>
+                  Agregar
+                </button>
+              </div>
             </div>
 
             <div className={ui.field}>
               <span>Categorías</span>
               <div className={ui.actions}>
-                {options.categories.map((c) => (
+                {opts.categories.map((c) => (
                   <label key={c.id} className={ui.check}>
                     <input
                       type="checkbox"
@@ -301,6 +352,17 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
                     <span>{c.name}</span>
                   </label>
                 ))}
+              </div>
+              <div className={ui.inlineAdd}>
+                <input
+                  className={ui.input}
+                  placeholder="Nueva categoría…"
+                  value={newCategory}
+                  onChange={(e) => setNewCategory(e.target.value)}
+                />
+                <button type="button" className={ui.actionBtn} onClick={addCategory}>
+                  Agregar
+                </button>
               </div>
             </div>
 
