@@ -29,7 +29,8 @@
 }
 
 .link {
-  font-size: var(--ptr-text-sm);
+  /* Reducidas 35% respecto al tamaño base (pedido del cliente). */
+  font-size: calc(var(--ptr-text-sm) * 0.65);
   font-weight: var(--ptr-weight-medium);
   letter-spacing: var(--ptr-tracking-wide);
   text-transform: uppercase;

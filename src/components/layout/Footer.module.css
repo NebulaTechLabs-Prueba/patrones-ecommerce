@@ -50,19 +50,6 @@
   line-height: var(--ptr-leading-relaxed);
 }
 
-.legal {
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.mutedSmall {
-  max-width: var(--ptr-container);
-  margin: 0 auto;
-  padding: var(--ptr-space-4) var(--ptr-space-5);
-  font-size: var(--ptr-text-xs);
-  opacity: 0.75;
-  line-height: var(--ptr-leading-relaxed);
-}
-
 @media (max-width: 768px) {
   .inner {
     grid-template-columns: 1fr;

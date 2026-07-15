@@ -55,13 +55,6 @@ export async function Footer() {
           <p className={styles.muted}>Puerto Ordaz, Venezuela · C.C. Costa Granada</p>
         </div>
       </div>
-
-      <div className={styles.legal}>
-        <p className={styles.mutedSmall}>
-          Las compras se documentan con una nota de entrega (documento comercial, no
-          factura fiscal), bajo conformidad de ambas partes.
-        </p>
-      </div>
     </footer>
   );
 }
