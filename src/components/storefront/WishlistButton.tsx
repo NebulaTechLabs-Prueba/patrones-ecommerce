@@ -29,10 +29,12 @@ export function WishlistButton({ item, variant = 'floating' }: { item: WishlistI
     >
       <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
         <path
-          d="M12 21s-7.5-4.6-10-9.1C.6 9.2 1.6 5.9 4.6 5.1 6.7 4.5 8.7 5.3 10 7c1.3-1.7 3.3-2.5 5.4-1.9 3 .8 4 4.1 2.6 6.8C19.5 16.4 12 21 12 21Z"
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
           fill={active ? 'currentColor' : 'none'}
           stroke="currentColor"
           strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
       {variant === 'inline' ? (

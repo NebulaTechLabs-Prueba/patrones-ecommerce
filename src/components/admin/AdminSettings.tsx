@@ -8,6 +8,7 @@
 import { useState } from 'react';
 import { AdminModal } from './AdminModal';
 import type { AppSettings, PaymentMethod, PaymentMethodKind } from '@/lib/data/types';
+import { PAYMENT_METHOD_LABELS } from '@/lib/labels';
 import ui from './adminUI.module.css';
 import styles from '@/app/admin/settings/settings.module.css';
 
@@ -265,7 +266,7 @@ export function AdminSettings({
               >
                 {PAYMENT_KINDS.map((k) => (
                   <option key={k} value={k}>
-                    {k}
+                    {PAYMENT_METHOD_LABELS[k]}
                   </option>
                 ))}
               </select>
@@ -276,7 +277,7 @@ export function AdminSettings({
                 checked={methodDraft.isOffline}
                 onChange={(e) => setMethodDraft({ ...methodDraft, isOffline: e.target.checked })}
               />
-              <span>Requiere comprobante (offline)</span>
+              <span>Requiere comprobante de pago</span>
             </label>
             <label className={ui.check}>
               <input

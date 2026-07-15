@@ -6,11 +6,12 @@
  * categoría se refleja en el formulario de producto.
  */
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AdminProducts, type ProductRow } from './AdminProducts';
 import { BrandsCrud } from './crud/BrandsCrud';
 import { CategoriesCrud } from './crud/CategoriesCrud';
 import { VerticalsCrud } from './crud/VerticalsCrud';
+import { applyProductRows, toProductRows } from './productRowMap';
 import { useCatalog } from '@/lib/store/catalog-context';
 import ui from './adminUI.module.css';
 
@@ -23,17 +24,31 @@ const TABS: Array<{ id: Tab; label: string }> = [
   { id: 'categories', label: 'Categorías' },
 ];
 
-interface Props {
-  initialProducts: ProductRow[];
-}
-
-export function ProductsWorkspace({ initialProducts }: Props) {
-  // Marcas, rubros y categorías viven en el store compartido: editarlas acá se
-  // refleja en el lado público (navbar de rubros, filtros). Los productos aún son
-  // locales al panel (no se generan sus páginas de detalle en export estático).
-  const { brands, verticals, categories, setBrands, setVerticals, setCategories } = useCatalog();
+export function ProductsWorkspace() {
+  // Todo el catálogo vive en el store compartido: editar marcas, rubros, categorías,
+  // productos o variantes se refleja en el lado público (navbar, filtros y, para
+  // rubros sin página propia, su catálogo en cliente). El SKU es por variante.
+  const {
+    brands,
+    verticals,
+    categories,
+    products: storeProducts,
+    variants: storeVariants,
+    setBrands,
+    setVerticals,
+    setCategories,
+    setProducts,
+    setVariants,
+  } = useCatalog();
   const [tab, setTab] = useState<Tab>('products');
-  const [products, setProducts] = useState(initialProducts);
+
+  const rows = useMemo(() => toProductRows(storeProducts, storeVariants), [storeProducts, storeVariants]);
+
+  function handleRowsChange(next: ProductRow[]) {
+    const { products, variants } = applyProductRows(next, storeProducts, storeVariants, new Date().toISOString());
+    setProducts(products);
+    setVariants(variants);
+  }
 
   return (
     <div>
@@ -56,8 +71,8 @@ export function ProductsWorkspace({ initialProducts }: Props) {
 
       {tab === 'products' ? (
         <AdminProducts
-          products={products}
-          onChange={setProducts}
+          products={rows}
+          onChange={handleRowsChange}
           brands={brands.map((b) => ({ id: b.id, name: b.name }))}
           verticals={verticals.map((v) => ({ id: v.id, name: v.name }))}
           categories={categories.map((c) => ({ id: c.id, name: c.name }))}
