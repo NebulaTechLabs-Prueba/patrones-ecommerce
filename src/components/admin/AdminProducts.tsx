@@ -1,9 +1,9 @@
 'use client';
 
 /**
- * CRUD simulado de Productos (§9). Crear/editar/eliminar/destacar en memoria. La
- * marca, los rubros y las categorías son editables: se pueden elegir de las
- * existentes o CREAR una nueva al vuelo desde el mismo formulario.
+ * CRUD simulado de Productos (§9), controlado por el workspace. Marca, rubros y
+ * categorías se eligen de las existentes; su alta/edición/baja se hace en las
+ * pestañas Marcas/Rubros/Categorías (estado compartido).
  */
 
 import { useState } from 'react';
@@ -30,12 +30,6 @@ export interface ProductRow {
   visible: boolean;
 }
 
-interface Options {
-  brands: Facet[];
-  verticals: Facet[];
-  categories: Facet[];
-}
-
 interface Draft {
   id: string | null;
   name: string;
@@ -54,24 +48,27 @@ function toggleId(list: string[], id: string): string[] {
   return list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
 }
 
-export function AdminProducts({ initial, options }: { initial: ProductRow[]; options: Options }) {
-  const [rows, setRows] = useState<ProductRow[]>(initial);
-  const [opts, setOpts] = useState<Options>(options);
+interface Props {
+  products: ProductRow[];
+  onChange: (rows: ProductRow[]) => void;
+  brands: Facet[];
+  verticals: Facet[];
+  categories: Facet[];
+}
+
+export function AdminProducts({ products, onChange, brands, verticals, categories }: Props) {
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState('');
-  const [newBrand, setNewBrand] = useState('');
-  const [newVertical, setNewVertical] = useState('');
-  const [newCategory, setNewCategory] = useState('');
 
-  const brandName = new Map(opts.brands.map((b) => [b.id, b.name]));
-  const vName = new Map(opts.verticals.map((v) => [v.id, v.name]));
-  const cName = new Map(opts.categories.map((c) => [c.id, c.name]));
+  const brandName = new Map(brands.map((b) => [b.id, b.name]));
+  const vName = new Map(verticals.map((v) => [v.id, v.name]));
+  const cName = new Map(categories.map((c) => [c.id, c.name]));
 
   function emptyDraft(): Draft {
     return {
       id: null,
       name: '',
-      brandId: opts.brands[0]?.id ?? '',
+      brandId: brands[0]?.id ?? '',
       verticalIds: [],
       categoryIds: [],
       type: 'simple',
@@ -99,31 +96,6 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
     };
   }
 
-  function addBrand() {
-    const name = newBrand.trim();
-    if (!name || !draft) return;
-    const id = `b-${Date.now()}`;
-    setOpts((o) => ({ ...o, brands: [...o.brands, { id, name }] }));
-    setDraft({ ...draft, brandId: id });
-    setNewBrand('');
-  }
-  function addVertical() {
-    const name = newVertical.trim();
-    if (!name || !draft) return;
-    const id = `v-${Date.now()}`;
-    setOpts((o) => ({ ...o, verticals: [...o.verticals, { id, name }] }));
-    setDraft({ ...draft, verticalIds: [...draft.verticalIds, id] });
-    setNewVertical('');
-  }
-  function addCategory() {
-    const name = newCategory.trim();
-    if (!name || !draft) return;
-    const id = `cat-${Date.now()}`;
-    setOpts((o) => ({ ...o, categories: [...o.categories, { id, name }] }));
-    setDraft({ ...draft, categoryIds: [...draft.categoryIds, id] });
-    setNewCategory('');
-  }
-
   function save() {
     if (!draft) return;
     if (!draft.name.trim()) return setError('Poné un nombre.');
@@ -146,22 +118,19 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
       visible: draft.visible,
     };
 
-    setRows((prev) => (draft.id ? prev.map((r) => (r.id === draft.id ? row : r)) : [...prev, row]));
+    onChange(draft.id ? products.map((r) => (r.id === draft.id ? row : r)) : [...products, row]);
     setDraft(null);
     setError('');
   }
 
-  const sorted = [...rows].sort((a, b) => a.name.localeCompare(b.name));
+  const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div>
       <div className={ui.pageHead}>
-        <div>
-          <h1 className={ui.pageTitle}>Productos</h1>
-          <p className={ui.pageSubtitle}>
-            Marca, rubros, categorías, precio, variantes y visibilidad. El SKU es por variante.
-          </p>
-        </div>
+        <p className={ui.pageSubtitle}>
+          Marca, rubros, categorías, precio, variantes y visibilidad. El SKU es por variante.
+        </p>
         <button
           type="button"
           className={ui.newBtn}
@@ -214,18 +183,14 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
                     <button
                       type="button"
                       className={ui.actionBtn}
-                      onClick={() =>
-                        setRows((prev) =>
-                          prev.map((x) => (x.id === r.id ? { ...x, featured: !x.featured } : x)),
-                        )
-                      }
+                      onClick={() => onChange(products.map((x) => (x.id === r.id ? { ...x, featured: !x.featured } : x)))}
                     >
                       {r.featured ? 'Quitar featured' : 'Featured'}
                     </button>
                     <button
                       type="button"
                       className={`${ui.actionBtn} ${ui.actionDanger}`}
-                      onClick={() => setRows((prev) => prev.filter((x) => x.id !== r.id))}
+                      onClick={() => onChange(products.filter((x) => x.id !== r.id))}
                     >
                       Eliminar
                     </button>
@@ -242,46 +207,23 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
           <div className={ui.form}>
             <label className={ui.field}>
               <span>Nombre</span>
-              <input
-                className={ui.input}
-                value={draft.name}
-                onChange={(e) => setDraft({ ...draft, name: e.target.value })}
-              />
+              <input className={ui.input} value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} />
             </label>
 
             <div className={ui.fieldRow}>
               <label className={ui.field}>
                 <span>Marca</span>
-                <select
-                  className={ui.select}
-                  value={draft.brandId}
-                  onChange={(e) => setDraft({ ...draft, brandId: e.target.value })}
-                >
-                  {opts.brands.map((b) => (
+                <select className={ui.select} value={draft.brandId} onChange={(e) => setDraft({ ...draft, brandId: e.target.value })}>
+                  {brands.map((b) => (
                     <option key={b.id} value={b.id}>
                       {b.name}
                     </option>
                   ))}
                 </select>
-                <div className={ui.inlineAdd}>
-                  <input
-                    className={ui.input}
-                    placeholder="Nueva marca…"
-                    value={newBrand}
-                    onChange={(e) => setNewBrand(e.target.value)}
-                  />
-                  <button type="button" className={ui.actionBtn} onClick={addBrand}>
-                    Agregar
-                  </button>
-                </div>
               </label>
               <label className={ui.field}>
                 <span>Tipo</span>
-                <select
-                  className={ui.select}
-                  value={draft.type}
-                  onChange={(e) => setDraft({ ...draft, type: e.target.value as 'simple' | 'set' })}
-                >
+                <select className={ui.select} value={draft.type} onChange={(e) => setDraft({ ...draft, type: e.target.value as 'simple' | 'set' })}>
                   <option value="simple">Simple</option>
                   <option value="set">Conjunto</option>
                 </select>
@@ -291,99 +233,48 @@ export function AdminProducts({ initial, options }: { initial: ProductRow[]; opt
             <div className={ui.fieldRow}>
               <label className={ui.field}>
                 <span>Precio (USD)</span>
-                <input
-                  className={ui.input}
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={draft.price}
-                  onChange={(e) => setDraft({ ...draft, price: e.target.value })}
-                />
+                <input className={ui.input} type="number" min="0" step="0.01" value={draft.price} onChange={(e) => setDraft({ ...draft, price: e.target.value })} />
               </label>
               <label className={ui.field}>
                 <span>Umbral bajo stock (opcional)</span>
-                <input
-                  className={ui.input}
-                  type="number"
-                  min="0"
-                  value={draft.lowStockThreshold}
-                  onChange={(e) => setDraft({ ...draft, lowStockThreshold: e.target.value })}
-                />
+                <input className={ui.input} type="number" min="0" value={draft.lowStockThreshold} onChange={(e) => setDraft({ ...draft, lowStockThreshold: e.target.value })} />
               </label>
             </div>
 
             <div className={ui.field}>
               <span>Rubros</span>
               <div className={ui.actions}>
-                {opts.verticals.map((v) => (
+                {verticals.map((v) => (
                   <label key={v.id} className={ui.check}>
-                    <input
-                      type="checkbox"
-                      checked={draft.verticalIds.includes(v.id)}
-                      onChange={() => setDraft({ ...draft, verticalIds: toggleId(draft.verticalIds, v.id) })}
-                    />
+                    <input type="checkbox" checked={draft.verticalIds.includes(v.id)} onChange={() => setDraft({ ...draft, verticalIds: toggleId(draft.verticalIds, v.id) })} />
                     <span>{v.name}</span>
                   </label>
                 ))}
-              </div>
-              <div className={ui.inlineAdd}>
-                <input
-                  className={ui.input}
-                  placeholder="Nuevo rubro…"
-                  value={newVertical}
-                  onChange={(e) => setNewVertical(e.target.value)}
-                />
-                <button type="button" className={ui.actionBtn} onClick={addVertical}>
-                  Agregar
-                </button>
               </div>
             </div>
 
             <div className={ui.field}>
               <span>Categorías</span>
               <div className={ui.actions}>
-                {opts.categories.map((c) => (
+                {categories.map((c) => (
                   <label key={c.id} className={ui.check}>
-                    <input
-                      type="checkbox"
-                      checked={draft.categoryIds.includes(c.id)}
-                      onChange={() => setDraft({ ...draft, categoryIds: toggleId(draft.categoryIds, c.id) })}
-                    />
+                    <input type="checkbox" checked={draft.categoryIds.includes(c.id)} onChange={() => setDraft({ ...draft, categoryIds: toggleId(draft.categoryIds, c.id) })} />
                     <span>{c.name}</span>
                   </label>
                 ))}
               </div>
-              <div className={ui.inlineAdd}>
-                <input
-                  className={ui.input}
-                  placeholder="Nueva categoría…"
-                  value={newCategory}
-                  onChange={(e) => setNewCategory(e.target.value)}
-                />
-                <button type="button" className={ui.actionBtn} onClick={addCategory}>
-                  Agregar
-                </button>
-              </div>
             </div>
 
             <label className={ui.check}>
-              <input
-                type="checkbox"
-                checked={draft.featured}
-                onChange={(e) => setDraft({ ...draft, featured: e.target.checked })}
-              />
+              <input type="checkbox" checked={draft.featured} onChange={(e) => setDraft({ ...draft, featured: e.target.checked })} />
               <span>Destacado en la home (featured)</span>
             </label>
 
             {error ? <p className={ui.formError}>{error}</p> : null}
 
             <div className={ui.formActions}>
-              <button type="button" className={ui.cancelBtn} onClick={() => setDraft(null)}>
-                Cancelar
-              </button>
-              <button type="button" className={ui.saveBtn} onClick={save}>
-                Guardar
-              </button>
+              <button type="button" className={ui.cancelBtn} onClick={() => setDraft(null)}>Cancelar</button>
+              <button type="button" className={ui.saveBtn} onClick={save}>Guardar</button>
             </div>
           </div>
         </AdminModal>

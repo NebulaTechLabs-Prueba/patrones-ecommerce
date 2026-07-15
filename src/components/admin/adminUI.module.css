@@ -146,6 +146,37 @@
   line-height: var(--ptr-leading-relaxed);
 }
 
+/* --- Pills para alternar tablas --- */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ptr-space-2);
+  margin: var(--ptr-space-4) 0 var(--ptr-space-5);
+  border-bottom: 1px solid var(--ptr-neutral-200);
+  padding-bottom: var(--ptr-space-3);
+}
+
+.pill {
+  padding: var(--ptr-space-2) var(--ptr-space-4);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-full);
+  background-color: var(--ptr-white);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-neutral-600);
+}
+
+.pill:hover {
+  border-color: var(--ptr-primary);
+  color: var(--ptr-primary);
+}
+
+.pillActive {
+  background-color: var(--ptr-primary);
+  border-color: var(--ptr-primary);
+  color: var(--ptr-white);
+}
+
 /* --- Encabezado de sección con acción --- */
 .pageHead {
   display: flex;

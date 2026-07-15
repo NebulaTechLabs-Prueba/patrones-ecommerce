@@ -1,9 +1,11 @@
 /**
  * Admin - Productos. El server arma las filas (con conteo de variantes y
- * visibilidad) y las opciones; el CRUD vive en el client component.
+ * visibilidad) y entrega marcas/rubros/categorías; el workspace (client) maneja
+ * las pestañas y el estado compartido.
  */
 
-import { AdminProducts, type ProductRow } from '@/components/admin/AdminProducts';
+import { ProductsWorkspace } from '@/components/admin/ProductsWorkspace';
+import type { ProductRow } from '@/components/admin/AdminProducts';
 import { productRepo } from '@/lib/data';
 import { isProductAvailable } from '@/lib/domains/availability';
 
@@ -34,13 +36,11 @@ export default async function AdminProductsPage() {
   }
 
   return (
-    <AdminProducts
-      initial={rows}
-      options={{
-        brands: brands.map((b) => ({ id: b.id, name: b.name })),
-        verticals: verticals.map((v) => ({ id: v.id, name: v.name })),
-        categories: categories.map((c) => ({ id: c.id, name: c.name })),
-      }}
+    <ProductsWorkspace
+      initialProducts={rows}
+      initialBrands={brands}
+      initialVerticals={verticals}
+      initialCategories={categories}
     />
   );
 }
