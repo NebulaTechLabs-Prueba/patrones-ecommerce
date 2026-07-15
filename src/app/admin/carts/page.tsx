@@ -42,30 +42,32 @@ export default async function AdminCartsPage() {
           const items = cart.lines.reduce((n, l) => n + l.quantity, 0);
           const age = daysAgo(cart.updated_at);
           return (
-            <li key={cart.id} className={styles.card}>
-              <div className={styles.head}>
-                <div>
-                  <p className={styles.name}>
-                    {customer ? `${customer.first_name} ${customer.last_name}` : cart.customer_id}
-                    {customer?.customer_type === 'institucion' ? (
-                      <span className={`${ui.badge} ${ui.warning}`}> Institución</span>
-                    ) : null}
-                  </p>
-                  {customer ? (
-                    <p className={styles.contact}>
-                      {customer.email} · {customer.phone}
+            <li key={cart.id}>
+              <details className={styles.card}>
+                <summary className={styles.summary}>
+                  <div>
+                    <p className={styles.name}>
+                      {customer ? `${customer.first_name} ${customer.last_name}` : cart.customer_id}
+                      {customer?.customer_type === 'institucion' ? (
+                        <span className={`${ui.badge} ${ui.warning}`}> Institución</span>
+                      ) : null}
                     </p>
-                  ) : null}
-                </div>
-                <div className={styles.headMeta}>
-                  <span className={`${ui.badge} ${age >= 7 ? ui.warning : ui.neutral}`}>
-                    hace {age} día{age === 1 ? '' : 's'}
-                  </span>
-                  <span className={styles.date}>{formatDate(cart.updated_at)}</span>
-                </div>
-              </div>
+                    <p className={styles.contact}>
+                      {items} ítem{items === 1 ? '' : 's'} · {formatUsd(cart.subtotal_cents)}
+                      {customer ? ` · ${customer.phone}` : ''}
+                    </p>
+                  </div>
+                  <div className={styles.headMeta}>
+                    <span className={`${ui.badge} ${age >= 7 ? ui.warning : ui.neutral}`}>
+                      hace {age} día{age === 1 ? '' : 's'}
+                    </span>
+                    <span className={styles.date}>{formatDate(cart.updated_at)}</span>
+                  </div>
+                </summary>
 
-              <table className={styles.items}>
+                {customer ? <p className={styles.email}>{customer.email}</p> : null}
+
+                <table className={styles.items}>
                 <thead>
                   <tr>
                     <th>Producto</th>
@@ -88,12 +90,13 @@ export default async function AdminCartsPage() {
                 </tbody>
               </table>
 
-              <div className={styles.foot}>
-                <span>
-                  {items} ítem{items === 1 ? '' : 's'}
-                </span>
-                <span className={styles.subtotal}>Subtotal {formatUsd(cart.subtotal_cents)}</span>
-              </div>
+                <div className={styles.foot}>
+                  <span>
+                    {items} ítem{items === 1 ? '' : 's'}
+                  </span>
+                  <span className={styles.subtotal}>Subtotal {formatUsd(cart.subtotal_cents)}</span>
+                </div>
+              </details>
             </li>
           );
         })}

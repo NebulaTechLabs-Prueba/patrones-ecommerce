@@ -6,9 +6,28 @@
  */
 
 import { useState } from 'react';
-import type { AppSettings, PaymentMethod } from '@/lib/data/types';
+import { AdminModal } from './AdminModal';
+import type { AppSettings, PaymentMethod, PaymentMethodKind } from '@/lib/data/types';
 import ui from './adminUI.module.css';
 import styles from '@/app/admin/settings/settings.module.css';
+
+const PAYMENT_KINDS: PaymentMethodKind[] = [
+  'stripe',
+  'pago_movil',
+  'transferencia',
+  'zelle',
+  'usdt',
+  'banesco_panama',
+  'divisa',
+];
+
+interface MethodDraft {
+  id: string | null;
+  label: string;
+  kind: PaymentMethodKind;
+  isOffline: boolean;
+  isEnabled: boolean;
+}
 
 const DAYS = [
   { n: 1, label: 'Lun' },
@@ -30,6 +49,28 @@ export function AdminSettings({
   const [s, setS] = useState<AppSettings>(initial);
   const [methods, setMethods] = useState(initialMethods);
   const [saved, setSaved] = useState(false);
+  const [methodDraft, setMethodDraft] = useState<MethodDraft | null>(null);
+  const [methodError, setMethodError] = useState('');
+
+  function saveMethod() {
+    if (!methodDraft) return;
+    if (!methodDraft.label.trim()) return setMethodError('Poné un nombre.');
+    const rec: PaymentMethod = {
+      id: methodDraft.id ?? `pm-${Date.now()}`,
+      kind: methodDraft.kind,
+      label: methodDraft.label.trim(),
+      is_enabled: methodDraft.isEnabled,
+      is_offline: methodDraft.isOffline,
+      sort_order: methodDraft.id
+        ? (methods.find((m) => m.id === methodDraft.id)?.sort_order ?? methods.length + 1)
+        : methods.length + 1,
+    };
+    setMethods((prev) =>
+      methodDraft.id ? prev.map((m) => (m.id === methodDraft.id ? rec : m)) : [...prev, rec],
+    );
+    setMethodDraft(null);
+    setMethodError('');
+  }
 
   function update<K extends keyof AppSettings>(key: K, value: AppSettings[K]) {
     setS((prev) => ({ ...prev, [key]: value }));
@@ -130,9 +171,21 @@ export function AdminSettings({
         <span>Mayoreo activo</span>
       </label>
 
-      <h2 className={styles.subtitle} style={{ marginTop: 'var(--ptr-space-7)' }}>
-        Métodos de pago
-      </h2>
+      <div className={ui.pageHead} style={{ marginTop: 'var(--ptr-space-7)' }}>
+        <h2 className={styles.subtitle} style={{ marginBottom: 0 }}>
+          Métodos de pago
+        </h2>
+        <button
+          type="button"
+          className={ui.newBtn}
+          onClick={() => {
+            setMethodError('');
+            setMethodDraft({ id: null, label: '', kind: 'pago_movil', isOffline: true, isEnabled: true });
+          }}
+        >
+          Nuevo método
+        </button>
+      </div>
       <div className={ui.tableWrap}>
         <table className={ui.table}>
           <thead>
@@ -154,21 +207,97 @@ export function AdminSettings({
                   </span>
                 </td>
                 <td>
-                  <button
-                    type="button"
-                    className={ui.actionBtn}
-                    onClick={() =>
-                      setMethods((prev) => prev.map((x) => (x.id === m.id ? { ...x, is_enabled: !x.is_enabled } : x)))
-                    }
-                  >
-                    {m.is_enabled ? 'Deshabilitar' : 'Habilitar'}
-                  </button>
+                  <div className={ui.actions}>
+                    <button
+                      type="button"
+                      className={ui.actionBtn}
+                      onClick={() => {
+                        setMethodError('');
+                        setMethodDraft({ id: m.id, label: m.label, kind: m.kind, isOffline: m.is_offline, isEnabled: m.is_enabled });
+                      }}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      className={ui.actionBtn}
+                      onClick={() =>
+                        setMethods((prev) => prev.map((x) => (x.id === m.id ? { ...x, is_enabled: !x.is_enabled } : x)))
+                      }
+                    >
+                      {m.is_enabled ? 'Deshabilitar' : 'Habilitar'}
+                    </button>
+                    <button
+                      type="button"
+                      className={`${ui.actionBtn} ${ui.actionDanger}`}
+                      onClick={() => setMethods((prev) => prev.filter((x) => x.id !== m.id))}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {methodDraft ? (
+        <AdminModal
+          title={methodDraft.id ? 'Editar método de pago' : 'Nuevo método de pago'}
+          onClose={() => setMethodDraft(null)}
+        >
+          <div className={ui.form}>
+            <label className={ui.field}>
+              <span>Nombre visible</span>
+              <input
+                className={ui.input}
+                value={methodDraft.label}
+                onChange={(e) => setMethodDraft({ ...methodDraft, label: e.target.value })}
+              />
+            </label>
+            <label className={ui.field}>
+              <span>Tipo</span>
+              <select
+                className={ui.select}
+                value={methodDraft.kind}
+                onChange={(e) => setMethodDraft({ ...methodDraft, kind: e.target.value as PaymentMethodKind })}
+              >
+                {PAYMENT_KINDS.map((k) => (
+                  <option key={k} value={k}>
+                    {k}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className={ui.check}>
+              <input
+                type="checkbox"
+                checked={methodDraft.isOffline}
+                onChange={(e) => setMethodDraft({ ...methodDraft, isOffline: e.target.checked })}
+              />
+              <span>Requiere comprobante (offline)</span>
+            </label>
+            <label className={ui.check}>
+              <input
+                type="checkbox"
+                checked={methodDraft.isEnabled}
+                onChange={(e) => setMethodDraft({ ...methodDraft, isEnabled: e.target.checked })}
+              />
+              <span>Habilitado</span>
+            </label>
+            {methodError ? <p className={ui.formError}>{methodError}</p> : null}
+            <div className={ui.formActions}>
+              <button type="button" className={ui.cancelBtn} onClick={() => setMethodDraft(null)}>
+                Cancelar
+              </button>
+              <button type="button" className={ui.saveBtn} onClick={saveMethod}>
+                Guardar
+              </button>
+            </div>
+          </div>
+        </AdminModal>
+      ) : null}
     </div>
   );
 }

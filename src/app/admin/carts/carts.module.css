@@ -13,13 +13,34 @@
   padding: var(--ptr-space-5);
 }
 
-.head {
+.summary {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--ptr-space-4);
   flex-wrap: wrap;
-  margin-bottom: var(--ptr-space-4);
+  cursor: pointer;
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary::before {
+  content: '▸';
+  margin-right: var(--ptr-space-2);
+  color: var(--ptr-primary);
+}
+
+.card[open] .summary::before {
+  content: '▾';
+}
+
+.email {
+  margin: var(--ptr-space-3) 0 0;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
 }
 
 .name {

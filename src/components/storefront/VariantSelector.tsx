@@ -72,7 +72,7 @@ export function VariantSelector({
 }: VariantSelectorProps) {
   const { formatCents } = useCurrency();
   const { add } = useCart();
-  const { setSelected } = useSelectedVariant();
+  const { setSelected, setMainItem } = useSelectedVariant();
   const colors = useMemo(() => uniqueColors(variants), [variants]);
 
   const [color, setColor] = useState<string | null>(colors.length === 1 ? colors[0]!.name : null);
@@ -126,12 +126,27 @@ export function VariantSelector({
 
   // Comparte la seleccion resuelta para que la sugerencia de conjunto coordine (§9.3).
   useEffect(() => {
-    setSelected(
-      selectedVariant
-        ? { size: selectedVariant.size, colorName: selectedVariant.colorName }
-        : null,
-    );
-  }, [selectedVariant, setSelected]);
+    if (selectedVariant) {
+      setSelected({ size: selectedVariant.size, colorName: selectedVariant.colorName });
+      setMainItem({
+        variantSku: selectedVariant.sku,
+        productId: classification.productId,
+        productName,
+        unitPriceCents: selectedVariant.priceCents,
+        quantity: 1,
+        verticalIds: classification.verticalIds,
+        categoryIds: classification.categoryIds,
+        collectionIds: classification.collectionIds,
+        isOwnLine: classification.isOwnLine,
+        maxQty: selectedVariant.availableQty,
+        productSlug: classification.productSlug,
+        imageUrl: classification.imageUrl,
+      });
+    } else {
+      setSelected(null);
+      setMainItem(null);
+    }
+  }, [selectedVariant, setSelected, setMainItem, classification, productName]);
 
   function chooseColor(name: string) {
     setColor(name);

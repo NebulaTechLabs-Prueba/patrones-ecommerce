@@ -11,6 +11,7 @@ import { Isologo } from '@/components/brand/Isologo';
 import { AccountMenu } from './AccountMenu';
 import { CartIndicator } from './CartIndicator';
 import { CurrencySwitch } from './CurrencySwitch';
+import { RubrosNav } from './RubrosNav';
 import { productRepo } from '@/lib/data';
 import styles from './Header.module.css';
 
@@ -26,12 +27,8 @@ export async function Header() {
           <Isologo />
         </Link>
 
-        <nav className={styles.nav} aria-label="Rubros">
-          {verticals.map((v) => (
-            <Link key={v.id} href={`/uniformes/${v.slug}/`} className={styles.link}>
-              {v.name}
-            </Link>
-          ))}
+        <nav className={styles.nav} aria-label="Navegación">
+          <RubrosNav rubros={verticals.map((v) => ({ name: v.name, slug: v.slug }))} />
           <Link href="/linea-patrones/" className={`${styles.link} ${styles.ownLine}`}>
             Línea PATRONES
           </Link>

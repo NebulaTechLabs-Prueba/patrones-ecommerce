@@ -11,7 +11,6 @@ import ui from '../adminUI.module.css';
 interface Draft {
   id: string | null;
   name: string;
-  slug: string;
   isOwnLine: boolean;
 }
 
@@ -24,7 +23,7 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
     if (!draft.name.trim()) return setError('Poné un nombre.');
     const rec: Brand = {
       id: draft.id ?? `b-${Date.now()}`,
-      slug: draft.slug.trim() || slugify(draft.name),
+      slug: draft.id ? (items.find((b) => b.id === draft.id)?.slug ?? slugify(draft.name)) : slugify(draft.name),
       name: draft.name.trim(),
       is_own_line: draft.isOwnLine,
       logo_image: null,
@@ -43,7 +42,7 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
           className={ui.newBtn}
           onClick={() => {
             setError('');
-            setDraft({ id: null, name: '', slug: '', isOwnLine: false });
+            setDraft({ id: null, name: '', isOwnLine: false });
           }}
         >
           Nueva marca
@@ -55,7 +54,6 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
           <thead>
             <tr>
               <th>Marca</th>
-              <th>Slug</th>
               <th>Línea propia</th>
               <th>Acciones</th>
             </tr>
@@ -64,11 +62,10 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
             {items.map((b) => (
               <tr key={b.id}>
                 <td>{b.name}</td>
-                <td className={ui.mono}>{b.slug}</td>
                 <td>{b.is_own_line ? 'Sí' : '—'}</td>
                 <td>
                   <div className={ui.actions}>
-                    <button type="button" className={ui.actionBtn} onClick={() => setDraft({ id: b.id, name: b.name, slug: b.slug, isOwnLine: b.is_own_line })}>
+                    <button type="button" className={ui.actionBtn} onClick={() => setDraft({ id: b.id, name: b.name, isOwnLine: b.is_own_line })}>
                       Editar
                     </button>
                     <button type="button" className={`${ui.actionBtn} ${ui.actionDanger}`} onClick={() => onChange(items.filter((x) => x.id !== b.id))}>
@@ -85,16 +82,10 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
       {draft ? (
         <AdminModal title={draft.id ? 'Editar marca' : 'Nueva marca'} onClose={() => setDraft(null)}>
           <div className={ui.form}>
-            <div className={ui.fieldRow}>
-              <label className={ui.field}>
-                <span>Nombre</span>
-                <input className={ui.input} value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} />
-              </label>
-              <label className={ui.field}>
-                <span>Slug (opcional)</span>
-                <input className={ui.input} value={draft.slug} placeholder="se genera del nombre" onChange={(e) => setDraft({ ...draft, slug: e.target.value })} />
-              </label>
-            </div>
+            <label className={ui.field}>
+              <span>Nombre</span>
+              <input className={ui.input} value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} />
+            </label>
             <label className={ui.check}>
               <input type="checkbox" checked={draft.isOwnLine} onChange={(e) => setDraft({ ...draft, isOwnLine: e.target.checked })} />
               <span>Es la Línea propia PATRONES</span>

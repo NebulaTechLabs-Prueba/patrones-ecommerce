@@ -6,13 +6,33 @@
   background-color: var(--ptr-cream);
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--ptr-space-4);
+}
+
 .heading {
   font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-semibold);
   letter-spacing: var(--ptr-tracking-wide);
   text-transform: uppercase;
   color: var(--ptr-primary);
-  margin-bottom: var(--ptr-space-4);
+}
+
+.complete {
+  padding: var(--ptr-space-2) var(--ptr-space-4);
+  border: 0;
+  border-radius: var(--ptr-radius-md);
+  background-color: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
 }
 
 .list {
