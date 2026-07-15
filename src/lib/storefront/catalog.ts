@@ -10,7 +10,7 @@
  */
 
 import { productRepo } from '@/lib/data';
-import type { Brand, Model, Product, ProductVariant, Vertical } from '@/lib/data/types';
+import type { Brand, Collection, Model, Product, ProductVariant, Vertical } from '@/lib/data/types';
 import { getAvailableColors, isProductAvailable } from '@/lib/domains/availability';
 import { resolveSuggestedProductIds } from '@/lib/domains/bundles/bundles';
 
@@ -102,6 +102,38 @@ export async function getVerticalCatalog(slug: string): Promise<VerticalCatalog 
   const visible = await loadVisibleProducts();
   const products = visible.filter((p) => p.product.vertical_ids.includes(vertical.id));
   return { vertical, products };
+}
+
+// ---------------------------------------------------------------------------
+// Colecciones
+// ---------------------------------------------------------------------------
+
+export async function getCollectionSlugs(): Promise<string[]> {
+  const collections = await productRepo.listCollections();
+  return collections.map((c) => c.slug);
+}
+
+export interface CollectionCatalog {
+  collection: Collection;
+  products: VisibleProduct[];
+}
+
+/** Catalogo visible de una coleccion, respetando el orden de la coleccion. */
+export async function getCollectionCatalog(slug: string): Promise<CollectionCatalog | null> {
+  const collection = await productRepo.getCollectionBySlug(slug);
+  if (!collection) return null;
+  const visible = await loadVisibleProducts();
+  const byId = new Map(visible.map((p) => [p.product.id, p]));
+  const products = collection.product_ids
+    .map((id) => byId.get(id))
+    .filter((p): p is VisibleProduct => p !== undefined);
+  return { collection, products };
+}
+
+/** Coleccion destacada para la home (la primera disponible). */
+export async function getFeaturedCollection(): Promise<Collection | null> {
+  const collections = await productRepo.listCollections();
+  return collections[0] ?? null;
 }
 
 /** Productos visibles de la Linea propia PATRONES (§9.5). */

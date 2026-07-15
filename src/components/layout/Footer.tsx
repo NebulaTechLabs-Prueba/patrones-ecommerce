@@ -42,14 +42,17 @@ export async function Footer() {
           <Link href="/linea-patrones/" className={styles.link}>
             Línea PATRONES
           </Link>
+          <Link href="/about/" className={styles.link}>
+            Nosotros
+          </Link>
+          <Link href="/contact/" className={styles.link}>
+            Contacto
+          </Link>
           <Link href="/tallas/" className={styles.link}>
             Guía de tallas
           </Link>
           <Link href="/faq/" className={styles.link}>
             Preguntas frecuentes
-          </Link>
-          <Link href="/account/orders/" className={styles.link}>
-            Mis pedidos
           </Link>
         </div>
 

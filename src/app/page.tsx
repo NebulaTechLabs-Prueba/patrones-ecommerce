@@ -18,14 +18,15 @@ import { VerticalCard } from '@/components/storefront/VerticalCard';
 import { ProductGrid } from '@/components/storefront/ProductGrid';
 import { productRepo } from '@/lib/data';
 import type { Brand } from '@/lib/data/types';
-import { getFeatured, getVerticalDoors } from '@/lib/storefront/catalog';
+import { getFeatured, getFeaturedCollection, getVerticalDoors } from '@/lib/storefront/catalog';
 import styles from './page.module.css';
 
 export default async function HomePage() {
-  const [doors, featured, brands] = await Promise.all([
+  const [doors, featured, brands, collection] = await Promise.all([
     getVerticalDoors(),
     getFeatured(),
     productRepo.listBrands(),
+    getFeaturedCollection(),
   ]);
 
   const brandsById = new Map<string, Brand>(brands.map((b) => [b.id, b]));
@@ -80,7 +81,23 @@ export default async function HomePage() {
         </section>
       ) : null}
 
-      {/* 4. Teaser Línea PATRONES */}
+      {/* 4. Colección destacada */}
+      {collection ? (
+        <section className={styles.section}>
+          <Link href={`/collections/${collection.slug}/`} className={styles.collection}>
+            <div>
+              <p className={styles.collectionEyebrow}>Colección</p>
+              <h2 className={styles.collectionTitle}>{collection.name}</h2>
+              <p className={styles.collectionLead}>{collection.description}</p>
+            </div>
+            <span className={styles.collectionCta} aria-hidden="true">
+              Ver colección →
+            </span>
+          </Link>
+        </section>
+      ) : null}
+
+      {/* 5. Teaser Línea PATRONES */}
       <section className={styles.section}>
         <div className={styles.ownLineBanner}>
           <div>

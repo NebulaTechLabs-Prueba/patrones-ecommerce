@@ -35,6 +35,12 @@ export async function Header() {
           <Link href="/linea-patrones/" className={`${styles.link} ${styles.ownLine}`}>
             Línea PATRONES
           </Link>
+          <Link href="/about/" className={styles.link}>
+            Nosotros
+          </Link>
+          <Link href="/contact/" className={styles.link}>
+            Contacto
+          </Link>
         </nav>
 
         <div className={styles.controls}>

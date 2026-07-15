@@ -3,6 +3,7 @@ import { Nunito_Sans } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ChromeGate } from '@/components/layout/ChromeGate';
+import { WhatsappFab } from '@/components/layout/WhatsappFab';
 import { StoreProviders } from '@/components/providers/StoreProviders';
 import { productRepo, settingsRepo } from '@/lib/data';
 import '@/styles/globals.css';
@@ -49,6 +50,7 @@ export default async function RootLayout({
           {children}
           <ChromeGate>
             <Footer />
+            <WhatsappFab phone={settings.whatsapp_number} />
           </ChromeGate>
         </StoreProviders>
       </body>

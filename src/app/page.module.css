@@ -89,6 +89,57 @@
   gap: var(--ptr-space-5);
 }
 
+/* Teaser de colección */
+.collection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-5);
+  flex-wrap: wrap;
+  padding: var(--ptr-space-7) var(--ptr-space-6);
+  border-radius: var(--ptr-radius-lg);
+  background-color: var(--ptr-cream);
+  border: 1px solid var(--ptr-neutral-200);
+  transition: box-shadow var(--ptr-duration-base) var(--ptr-ease);
+}
+
+.collection:hover {
+  box-shadow: var(--ptr-shadow-2);
+}
+
+.collectionEyebrow {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-primary-soft);
+  margin-bottom: var(--ptr-space-2);
+}
+
+.collectionTitle {
+  font-size: var(--ptr-text-2xl);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-tight);
+  color: var(--ptr-ink);
+}
+
+.collectionLead {
+  margin-top: var(--ptr-space-2);
+  font-size: var(--ptr-text-base);
+  line-height: var(--ptr-leading-relaxed);
+  color: var(--ptr-neutral-600);
+  max-width: 52ch;
+}
+
+.collectionCta {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  color: var(--ptr-primary);
+  white-space: nowrap;
+}
+
 /* Teaser Línea PATRONES */
 .ownLineBanner {
   background-color: var(--ptr-primary);
