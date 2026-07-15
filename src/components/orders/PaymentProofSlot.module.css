@@ -1,0 +1,73 @@
+.wrap {
+  margin: var(--ptr-space-5) 0;
+  padding: var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background-color: var(--ptr-white);
+}
+
+.title {
+  font-size: var(--ptr-text-lg);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+  margin-bottom: var(--ptr-space-4);
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-5);
+  flex-wrap: wrap;
+}
+
+.media {
+  width: 200px;
+  max-width: 100%;
+}
+
+.pdf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ptr-space-2);
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background-color: var(--ptr-neutral-50);
+}
+
+.pdfBadge {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-wide);
+  color: var(--ptr-white);
+  background-color: var(--ptr-danger);
+  padding: 2px var(--ptr-space-2);
+  border-radius: var(--ptr-radius-sm);
+}
+
+.pdfName {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-1);
+}
+
+.ref {
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+}
+
+.date {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+}
+
+.empty {
+  color: var(--ptr-neutral-600);
+}

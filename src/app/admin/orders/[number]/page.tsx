@@ -6,6 +6,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { OrderDetail } from '@/components/orders/OrderDetail';
+import { PaymentProofSlot } from '@/components/orders/PaymentProofSlot';
 import { customerRepo, orderRepo } from '@/lib/data';
 import ui from '@/components/admin/adminUI.module.css';
 import styles from './page.module.css';
@@ -62,6 +63,8 @@ export default async function AdminOrderDetailPage({ params }: PageProps) {
           </div>
         </div>
       ) : null}
+
+      <PaymentProofSlot proof={order.payment_proof} method={order.payment_method} />
 
       <OrderDetail order={order} />
     </div>

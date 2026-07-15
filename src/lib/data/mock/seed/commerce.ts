@@ -183,6 +183,12 @@ export const orders: Order[] = [
     status: 'pending',
     payment_status: 'awaiting_verification',
     payment_method: 'pago_movil',
+    payment_proof: {
+      kind: 'image',
+      url: '/img/comprobantes/ord-2.jpg',
+      reference: 'PM-884213',
+      uploaded_at: '2026-07-13T16:05:00-04:00',
+    },
     lines: [
       line({
         product_name: 'Conjunto Quirúrgico Estéril',
@@ -219,6 +225,12 @@ export const orders: Order[] = [
     status: 'cancelled',
     payment_status: 'rejected',
     payment_method: 'transferencia',
+    payment_proof: {
+      kind: 'pdf',
+      url: '/img/comprobantes/ord-3.pdf',
+      reference: 'TRF-771029',
+      uploaded_at: '2026-07-11T11:02:00-04:00',
+    },
     lines: [
       line({
         product_name: 'Camisa Corporativa Oxford',

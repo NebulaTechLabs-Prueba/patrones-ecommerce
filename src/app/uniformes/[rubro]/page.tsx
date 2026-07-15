@@ -1,16 +1,14 @@
 /**
- * PLP - Landing/listado de un rubro (§4, §16.2).
- *
- * Export estatico: generateStaticParams enumera los rubros activos. Un rubro
- * inexistente o inactivo -> notFound() (404). La grilla solo muestra productos
- * con existencia disponible (la capa de catalogo ya aplico §7).
+ * PLP - Landing/listado de un rubro (§4, §16.2). Con búsqueda y filtros derivados
+ * de lo disponible (§7). Export estático: generateStaticParams enumera los rubros.
  */
 
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { CatalogHero } from '@/components/storefront/CatalogHero';
 import { EmptyState } from '@/components/storefront/EmptyState';
-import { ProductGrid } from '@/components/storefront/ProductGrid';
+import { ProductBrowser, type BrowserItem } from '@/components/storefront/ProductBrowser';
+import { productRepo } from '@/lib/data';
 import { getBrandsById, getVerticalCatalog, getVerticalSlugs } from '@/lib/storefront/catalog';
 
 interface PageProps {
@@ -26,19 +24,42 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { rubro } = await params;
   const catalog = await getVerticalCatalog(rubro);
   if (!catalog) return { title: 'Rubro no encontrado — PATRONES' };
-  return {
-    title: `${catalog.vertical.name} — PATRONES`,
-    description: catalog.vertical.tagline,
-  };
+  return { title: `${catalog.vertical.name} — PATRONES`, description: catalog.vertical.tagline };
 }
 
 export default async function VerticalPage({ params }: PageProps) {
   const { rubro } = await params;
-  const [catalog, brandsById] = await Promise.all([getVerticalCatalog(rubro), getBrandsById()]);
+  const [catalog, brandsById, allCategories] = await Promise.all([
+    getVerticalCatalog(rubro),
+    getBrandsById(),
+    productRepo.listCategories(),
+  ]);
 
   if (!catalog) notFound();
 
   const { vertical, products } = catalog;
+
+  // Items para el browser (serializables).
+  const items: BrowserItem[] = products.map((p) => ({
+    product: p.product,
+    availableColors: p.availableColors,
+    brandName: brandsById.get(p.product.brand_id)?.name ?? '',
+    isOwnLine: brandsById.get(p.product.brand_id)?.is_own_line ?? false,
+  }));
+
+  // Facetas presentes: solo lo que existe entre los productos visibles (§7).
+  const catIds = new Set(products.flatMap((p) => p.product.category_ids));
+  const categories = allCategories
+    .filter((c) => catIds.has(c.id))
+    .map((c) => ({ id: c.id, name: c.name }));
+
+  const brandIds = [...new Set(products.map((p) => p.product.brand_id))];
+  const brands = brandIds
+    .map((id) => brandsById.get(id))
+    .filter((b): b is NonNullable<typeof b> => b !== undefined)
+    .map((b) => ({ id: b.id, name: b.name }));
+
+  const colors = [...new Set(products.flatMap((p) => p.availableColors.map((c) => c.name)))];
 
   return (
     <main>
@@ -56,8 +77,8 @@ export default async function VerticalPage({ params }: PageProps) {
           padding: '0 var(--ptr-space-5) var(--ptr-space-8)',
         }}
       >
-        {products.length > 0 ? (
-          <ProductGrid items={products} brandsById={brandsById} />
+        {items.length > 0 ? (
+          <ProductBrowser items={items} categories={categories} brands={brands} colors={colors} />
         ) : (
           <EmptyState
             title="Sin productos disponibles por ahora"

@@ -372,6 +372,18 @@ export interface OrderLine {
   image_url: string;
 }
 
+/**
+ * Comprobante de pago offline (§10). El cliente carga imagen o PDF + referencia;
+ * el admin lo revisa para aprobar o rechazar. En Fase 2 vive en Storage privado
+ * con signed URL corta; aca la url es un placeholder.
+ */
+export interface PaymentProof {
+  kind: 'image' | 'pdf';
+  url: string;
+  reference: string;
+  uploaded_at: ISODate;
+}
+
 export interface Order {
   id: ID;
   /** Numero legible: ORD-2026-00147. */
@@ -381,6 +393,8 @@ export interface Order {
   status: OrderStatus;
   payment_status: PaymentStatus;
   payment_method: PaymentMethodKind;
+  /** Comprobante de pago (solo metodos offline). null si aun no se cargo. */
+  payment_proof?: PaymentProof | null;
 
   lines: OrderLine[];
 
