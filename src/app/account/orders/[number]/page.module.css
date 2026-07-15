@@ -1,0 +1,11 @@
+.back {
+  display: inline-block;
+  margin-bottom: var(--ptr-space-4);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-primary);
+}
+
+.back:hover {
+  text-decoration: underline;
+}

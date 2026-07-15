@@ -7,6 +7,7 @@
  */
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import type { Order, PaymentStatus } from '@/lib/data/types';
 import { canTransitionPayment } from '@/lib/domains/payments/payments';
 import { PAYMENT_METHOD_LABELS, PAYMENT_STATUS_LABELS } from '@/lib/labels';
@@ -95,7 +96,9 @@ export function AdminPayments({ initialOrders }: { initialOrders: Order[] }) {
               return (
                 <tr key={o.id}>
                   <td>
-                    <strong>{o.number}</strong>
+                    <Link href={`/admin/orders/${o.number}/`} className={ui.rowLink}>
+                      {o.number}
+                    </Link>
                   </td>
                   <td>{PAYMENT_METHOD_LABELS[o.payment_method]}</td>
                   <td>{formatUsd(o.total_cents)}</td>

@@ -10,6 +10,7 @@
  */
 
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Money } from '@/components/ui/Money';
 import { orderRepo } from '@/lib/data';
 import type { OrderStatus, PaymentStatus } from '@/lib/data/types';
@@ -69,7 +70,9 @@ export default async function OrdersPage() {
           <li key={order.id} className={styles.order}>
             <div className={styles.orderHead}>
               <div>
-                <p className={styles.number}>{order.number}</p>
+                <Link href={`/account/orders/${order.number}/`} className={styles.number}>
+                  {order.number}
+                </Link>
                 <p className={styles.date}>{formatDate(order.created_at)}</p>
               </div>
               <div className={styles.badges}>

@@ -8,6 +8,7 @@
  */
 
 import { useState } from 'react';
+import Link from 'next/link';
 import type { Order, OrderStatus } from '@/lib/data/types';
 import {
   canTransitionOrder,
@@ -66,7 +67,9 @@ export function AdminOrders({ initialOrders }: { initialOrders: Order[] }) {
             {orders.map((o) => (
               <tr key={o.id}>
                 <td>
-                  <strong>{o.number}</strong>
+                  <Link href={`/admin/orders/${o.number}/`} className={ui.rowLink}>
+                    {o.number}
+                  </Link>
                 </td>
                 <td>
                   <span className={`${ui.badge} ${orderTone(o.status)}`}>

@@ -1,0 +1,40 @@
+.back {
+  display: inline-block;
+  margin-bottom: var(--ptr-space-4);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-primary);
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+.customer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--ptr-space-4);
+  margin: var(--ptr-space-5) 0;
+  padding: var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background-color: var(--ptr-white);
+}
+
+.customer > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-1);
+}
+
+.label {
+  font-size: var(--ptr-text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--ptr-tracking-wide);
+  color: var(--ptr-neutral-400);
+}
+
+.value {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-ink);
+}

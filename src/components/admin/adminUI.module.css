@@ -55,6 +55,15 @@
   color: var(--ptr-neutral-600);
 }
 
+.rowLink {
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-primary);
+}
+
+.rowLink:hover {
+  text-decoration: underline;
+}
+
 .badge {
   display: inline-block;
   padding: 2px var(--ptr-space-2);
