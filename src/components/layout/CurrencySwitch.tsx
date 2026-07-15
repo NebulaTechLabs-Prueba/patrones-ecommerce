@@ -13,7 +13,7 @@ export function CurrencySwitch() {
       className={styles.currency}
       role="group"
       aria-label="Moneda"
-      title={rate.is_stale ? 'Tasa referencial (fuente no disponible)' : undefined}
+      title={`Bs ${rate.rate} por USD${rate.is_stale ? ' (referencial)' : ' · BCV oficial'}`}
     >
       {(['USD', 'Bs'] as const).map((c) => (
         <button

@@ -16,16 +16,8 @@
   line-height: var(--ptr-leading-relaxed);
 }
 
-.demoNote {
-  margin: var(--ptr-space-3) 0 var(--ptr-space-6);
-  padding: var(--ptr-space-3) var(--ptr-space-4);
-  border-left: 3px solid var(--ptr-warning);
-  background-color: var(--ptr-neutral-50);
-  font-size: var(--ptr-text-sm);
-  color: var(--ptr-neutral-600);
-}
-
 .layout {
+  margin-top: var(--ptr-space-6);
   display: grid;
   grid-template-columns: 1fr 340px;
   gap: var(--ptr-space-7);

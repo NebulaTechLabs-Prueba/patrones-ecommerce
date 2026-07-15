@@ -134,10 +134,6 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>Checkout</h1>
-      <p className={styles.demoNote}>
-        En esta demo el checkout no requiere iniciar sesión. En producción se pedirá crear
-        una cuenta o iniciar sesión antes de pagar.
-      </p>
 
       <div className={styles.layout}>
         <div className={styles.form}>
@@ -324,8 +320,8 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
               onChange={(e) => setAcceptNoReturns(e.target.checked ? 'yes' : '')}
             />
             <span>
-              Acepto que PATRONES no acepta devoluciones y que la compra se documenta con una
-              nota de entrega (documento comercial, no factura fiscal).
+              He leído y acepto los Términos y Condiciones, incluida la política de no
+              devolución.
             </span>
           </label>
 

@@ -10,6 +10,8 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { ExchangeRate, UsdCents } from '@/lib/data/types';
 import { usdCentsToBs } from '@/lib/domains/currency/money';
+import { resolveRate } from '@/lib/domains/currency/rate-provider';
+import { fetchOfficialRate } from '@/lib/integrations/currency/dolarapi';
 import { formatBs, formatUsd } from '@/lib/format';
 
 export type Currency = 'USD' | 'Bs';
@@ -27,18 +29,30 @@ const CurrencyContext = createContext<CurrencyContextValue | null>(null);
 const STORAGE_KEY = 'ptr-currency';
 
 export function CurrencyProvider({
-  rate,
+  rate: initialRate,
   children,
 }: {
+  /** Tasa mock (seed): valor inicial para el SSR y ultimo fallback. */
   rate: ExchangeRate;
   children: React.ReactNode;
 }) {
   const [currency, setCurrencyState] = useState<Currency>('USD');
+  const [rate, setRate] = useState<ExchangeRate>(initialRate);
 
   // Hidratar la preferencia persistida (evita mismatch: arranca en USD como el SSR).
   useEffect(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
     if (saved === 'USD' || saved === 'Bs') setCurrencyState(saved);
+  }, []);
+
+  // Tasa real de dolarapi en cada carga (sin persistir entre F5, por decision del
+  // proyecto). Si la fuente cae, se conserva la ultima conocida marcada `stale`.
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchOfficialRate(controller.signal).then((fetched) => {
+      setRate((prev) => resolveRate(fetched, prev) ?? prev);
+    });
+    return () => controller.abort();
   }, []);
 
   function setCurrency(next: Currency) {
