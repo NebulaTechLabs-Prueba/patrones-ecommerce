@@ -77,7 +77,7 @@ export default async function OwnLinePage() {
         ) : (
           <EmptyState
             title="Sin piezas disponibles por ahora"
-            description="Estamos reponiendo la confección propia. Volvé pronto."
+            description="Estamos reponiendo la confección propia. Vuelve pronto."
             actionHref="/"
             actionLabel="Volver al inicio"
           />

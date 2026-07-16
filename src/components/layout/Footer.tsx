@@ -43,7 +43,7 @@ export async function Footer() {
           <div className={styles.ctaActions}>
             <a className={styles.ctaPrimary} href={waLink} target="_blank" rel="noopener noreferrer">
               <WhatsappIcon />
-              Escribinos por WhatsApp
+              Escríbenos por WhatsApp
             </a>
             <a className={styles.ctaSocial} href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram de PATRONES">
               <InstagramIcon />

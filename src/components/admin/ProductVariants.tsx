@@ -87,7 +87,7 @@ export function ProductVariants({
             {variants.length === 0 ? (
               <tr>
                 <td colSpan={7} className={ui.empty}>
-                  Sin variantes. Agregá al menos una para que el producto pueda mostrarse.
+                  Sin variantes. Agrega al menos una para que el producto pueda mostrarse.
                 </td>
               </tr>
             ) : (

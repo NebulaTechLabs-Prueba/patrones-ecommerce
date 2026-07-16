@@ -63,7 +63,7 @@ export function CartView() {
         <h1 className={styles.title}>Tu carrito</h1>
         <EmptyState
           title="Tu carrito está vacío"
-          description="Explorá los rubros y sumá lo que necesites."
+          description="Explora los rubros y suma lo que necesites."
           actionHref="/"
           actionLabel="Ver productos"
         />

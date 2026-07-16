@@ -34,7 +34,7 @@ export function SizeChartsCrud({ initial }: { initial: SizeChart[] }) {
 
   function save() {
     if (!draft) return;
-    if (!draft.name.trim()) return setError('Poné un nombre.');
+    if (!draft.name.trim()) return setError('Pon un nombre.');
     if (!draft.garment.trim()) return setError('Indicá la prenda.');
     const clean: SizeChart = {
       ...draft,

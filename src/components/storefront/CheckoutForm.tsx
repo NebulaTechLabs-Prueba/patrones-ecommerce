@@ -260,7 +260,7 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
                     <span className={styles.optionLabel}>{m.label}</span>
                     <span className={styles.optionNote}>
                       {m.is_offline
-                        ? 'Cargás el comprobante y verificamos el pago antes de confirmar.'
+                        ? 'Cargas el comprobante y verificamos el pago antes de confirmar.'
                         : 'Pago con tarjeta.'}
                     </span>
                   </span>
@@ -269,7 +269,7 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
             </div>
             {selectedPayment?.is_offline ? (
               <p className={styles.help}>
-                Al confirmar te mostramos los datos de la cuenta y cargás el comprobante. Tu
+                Al confirmar te mostramos los datos de la cuenta y cargas el comprobante. Tu
                 pago queda en verificación hasta que lo aprobemos.
               </p>
             ) : null}
@@ -331,7 +331,7 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
           </button>
           {attempted && !canConfirm ? (
             <p className={styles.error} aria-live="polite">
-              Revisá los datos, el envío, el pago y la aceptación antes de confirmar.
+              Revisa los datos, el envío, el pago y la aceptación antes de confirmar.
             </p>
           ) : null}
         </aside>

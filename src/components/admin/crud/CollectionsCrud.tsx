@@ -39,7 +39,7 @@ export function CollectionsCrud() {
 
   function save() {
     if (!draft) return;
-    if (!draft.name.trim()) return setError('Poné un nombre.');
+    if (!draft.name.trim()) return setError('Pon un nombre.');
     if (draft.startsAt && draft.endsAt && draft.endsAt < draft.startsAt) {
       return setError('La fecha de fin no puede ser anterior a la de inicio.');
     }

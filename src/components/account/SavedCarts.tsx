@@ -53,9 +53,9 @@ export function SavedCarts({ carts }: { carts: AbandonedCart[] }) {
   if (visible.length === 0) {
     return (
       <div className={styles.empty}>
-        <p className={styles.emptyTitle}>No tenés carritos olvidados</p>
+        <p className={styles.emptyTitle}>No tienes carritos olvidados</p>
         <p className={styles.emptyText}>
-          Si dejás productos sin comprar, los guardamos acá para que los retomes (hasta{' '}
+          Si dejas productos sin comprar, los guardamos acá para que los retomes (hasta{' '}
           {MAX_RECOVERABLE}).
         </p>
       </div>

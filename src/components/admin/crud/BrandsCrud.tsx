@@ -20,7 +20,7 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
 
   function save() {
     if (!draft) return;
-    if (!draft.name.trim()) return setError('Poné un nombre.');
+    if (!draft.name.trim()) return setError('Pon un nombre.');
     const rec: Brand = {
       id: draft.id ?? `b-${Date.now()}`,
       slug: draft.id ? (items.find((b) => b.id === draft.id)?.slug ?? slugify(draft.name)) : slugify(draft.name),

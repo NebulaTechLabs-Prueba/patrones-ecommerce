@@ -18,7 +18,7 @@ export default function TermsPage() {
         <p className={styles.eyebrow}>Legal</p>
         <h1 className={styles.title}>Términos y Condiciones</h1>
         <p className={styles.lead}>
-          Al realizar una compra en PATRONES aceptás las condiciones que se detallan a
+          Al realizar una compra en PATRONES aceptas las condiciones que se detallan a
           continuación.
         </p>
       </header>
@@ -74,7 +74,7 @@ export default function TermsPage() {
         <h2 className={styles.h2}>Disponibilidad</h2>
         <p className={styles.p}>
           Solo mostramos prendas con existencia disponible. Un producto sin stock no aparece en el
-          catálogo; podés guardarlo en tu lista de deseados y te avisamos cuando vuelva.
+          catálogo; puedes guardarlo en tu lista de deseados y te avisamos cuando vuelva.
         </p>
       </section>
     </main>

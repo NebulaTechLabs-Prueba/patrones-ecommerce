@@ -55,7 +55,7 @@ export function AdminSettings({
 
   function saveMethod() {
     if (!methodDraft) return;
-    if (!methodDraft.label.trim()) return setMethodError('Poné un nombre.');
+    if (!methodDraft.label.trim()) return setMethodError('Pon un nombre.');
     const rec: PaymentMethod = {
       id: methodDraft.id ?? `pm-${Date.now()}`,
       kind: methodDraft.kind,

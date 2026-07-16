@@ -20,7 +20,7 @@ export function CategoriesCrud({ items, onChange }: { items: Category[]; onChang
 
   function save() {
     if (!draft) return;
-    if (!draft.name.trim()) return setError('Poné un nombre.');
+    if (!draft.name.trim()) return setError('Pon un nombre.');
     const rec: Category = {
       id: draft.id ?? `cat-${Date.now()}`,
       slug: draft.id ? (items.find((c) => c.id === draft.id)?.slug ?? slugify(draft.name)) : slugify(draft.name),

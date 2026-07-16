@@ -43,7 +43,7 @@ export default function NotFound() {
     >
       <EmptyState
         title="Página no encontrada"
-        description="La dirección no existe o el contenido se retiró. Volvé al inicio para seguir explorando."
+        description="La dirección no existe o el contenido se retiró. Vuelve al inicio para seguir explorando."
         actionHref="/"
         actionLabel="Volver al inicio"
       />

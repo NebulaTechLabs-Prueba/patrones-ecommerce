@@ -106,11 +106,11 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
 
   function save() {
     if (!draft) return;
-    if (!draft.name.trim()) return setError('Poné un nombre.');
+    if (!draft.name.trim()) return setError('Pon un nombre.');
     const price = Number(draft.price);
     if (!Number.isFinite(price) || price <= 0) return setError('El precio debe ser mayor a 0.');
-    if (!draft.brandId) return setError('Elegí una marca.');
-    if (draft.verticalIds.length === 0) return setError('Elegí al menos un rubro.');
+    if (!draft.brandId) return setError('Elige una marca.');
+    if (draft.verticalIds.length === 0) return setError('Elige al menos un rubro.');
 
     const existing = draft.id ? products.find((r) => r.id === draft.id) : null;
     const row: ProductRow = {

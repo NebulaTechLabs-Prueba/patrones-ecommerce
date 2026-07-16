@@ -106,7 +106,7 @@ export default function AboutPage() {
         </div>
 
         <Reveal variant="fade" className={styles.cta}>
-          <p className={styles.ctaText}>¿Necesitás dotar a tu equipo o institución?</p>
+          <p className={styles.ctaText}>¿Necesitas dotar a tu equipo o institución?</p>
           <Link href="/contact/" className={styles.ctaBtn} data-sound="add">
             Solicitar una cotización
           </Link>

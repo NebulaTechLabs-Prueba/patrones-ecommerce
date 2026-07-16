@@ -31,7 +31,7 @@ export function LoginForm() {
     e.preventDefault();
     const res = login(email, password);
     if (!res.ok || !res.role) {
-      setError('Credenciales inválidas. Probá con un acceso rápido.');
+      setError('Credenciales inválidas. Prueba con un acceso rápido.');
       play('error');
       return;
     }
@@ -61,8 +61,8 @@ export function LoginForm() {
             <Isologo />
           </Link>
           <p className={styles.eyebrow}>Tu cuenta</p>
-          <h1 className={styles.title}>Ingresá a tu cuenta</h1>
-          <p className={styles.lead}>Usá un acceso rápido o ingresá tus credenciales.</p>
+          <h1 className={styles.title}>Ingresa a tu cuenta</h1>
+          <p className={styles.lead}>Usá un acceso rápido o ingresa tus credenciales.</p>
 
           <div className={styles.quick}>
             <button type="button" className={styles.quickBtn} onClick={() => quickLogin('customer')}>

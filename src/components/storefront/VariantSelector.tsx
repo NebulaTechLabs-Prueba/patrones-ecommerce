@@ -278,7 +278,7 @@ export function VariantSelector({
 
         <span className={styles.feedback} aria-live="polite">
           {!ready
-            ? 'Elegí color y talla para agregar.'
+            ? 'Elige color y talla para agregar.'
             : justAdded
               ? 'Agregado al carrito.'
               : ' '}

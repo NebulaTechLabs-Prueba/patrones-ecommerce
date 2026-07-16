@@ -72,7 +72,7 @@ function validateRif(kind: IdentityDocKind, digits: string): DocValidation {
  */
 export function validateDocument(kind: IdentityDocKind, raw: string): DocValidation {
   const digits = digitsOnly(raw);
-  if (digits.length === 0) return { valid: false, reason: 'Ingresá el número del documento.' };
+  if (digits.length === 0) return { valid: false, reason: 'Ingresa el número del documento.' };
 
   if (CEDULA_KINDS.has(kind)) return validateCedula(kind, digits);
   if (RIF_KINDS.has(kind)) return validateRif(kind, digits);

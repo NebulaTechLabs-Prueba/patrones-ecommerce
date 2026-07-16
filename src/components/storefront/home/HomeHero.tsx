@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import styles from './HomeHero.module.css';
 
-const TITLE_LINES = ['Vestí tu oficio con carácter.', 'Tu jornada, a todo color.'];
+const TITLE_LINES = ['Viste tu oficio con carácter.', 'Tu jornada, a todo color.'];
 const RULER_TICKS = Array.from({ length: 13 });
 
 export function HomeHero() {
@@ -101,10 +101,10 @@ export function HomeHero() {
 
         <div className={styles.actions}>
           <Link href="/uniformes/salud/" className={styles.primaryCta}>
-            Explorá los rubros
+            Explora los rubros
           </Link>
           <Link href="/linea-patrones/" className={styles.secondaryCta}>
-            Conocé la Línea PATRONES
+            Conoce la Línea PATRONES
           </Link>
         </div>
       </div>

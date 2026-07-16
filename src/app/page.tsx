@@ -86,7 +86,7 @@ export default async function HomePage() {
             <h2 className={styles.headingLight}>Tu día, a todo color</h2>
             <p className={styles.subheadLight}>
               Del quirófano a la cocina y la oficina: profesionales que no paran, vestidos
-              por PATRONES. Tocá cada punto para descubrir la colección.
+              por PATRONES. Toca cada punto para descubrir la colección.
             </p>
           </Reveal>
         </div>

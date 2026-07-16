@@ -50,7 +50,7 @@ export default async function CollectionPage({ params }: PageProps) {
         ) : (
           <EmptyState
             title="Sin productos disponibles por ahora"
-            description="Estamos reponiendo esta colección. Volvé pronto."
+            description="Estamos reponiendo esta colección. Vuelve pronto."
             actionHref="/"
             actionLabel="Volver al inicio"
           />

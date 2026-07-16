@@ -21,9 +21,9 @@ export function Quotes() {
   if (quotes.length === 0) {
     return (
       <div className={styles.empty}>
-        <p className={styles.emptyTitle}>No tenés cotizaciones</p>
+        <p className={styles.emptyTitle}>No tienes cotizaciones</p>
         <p className={styles.emptyText}>
-          Armá tu carrito y pedí una cotización: congela precios, promociones y tasa por 72 horas.
+          Arma tu carrito y pide una cotización: congela precios, promociones y tasa por 72 horas.
         </p>
         <Link href="/cart/" className={styles.action}>
           Ir al carrito

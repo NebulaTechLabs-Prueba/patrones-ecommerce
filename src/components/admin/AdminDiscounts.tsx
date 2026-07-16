@@ -149,10 +149,10 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
 
   function save() {
     if (!draft) return;
-    if (!draft.name.trim()) return setError('Poné un nombre.');
+    if (!draft.name.trim()) return setError('Pon un nombre.');
     const num = Number(draft.value);
     if (!Number.isFinite(num) || num <= 0) return setError('El valor debe ser mayor a 0.');
-    if (needsTarget(draft.scope) && !draft.targetId) return setError('Elegí a qué aplica.');
+    if (needsTarget(draft.scope) && !draft.targetId) return setError('Elige a qué aplica.');
 
     const promo: Promotion = {
       id: draft.id ?? `promo-${Date.now()}`,

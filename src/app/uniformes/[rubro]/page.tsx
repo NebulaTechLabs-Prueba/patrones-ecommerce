@@ -83,13 +83,13 @@ export default async function VerticalPage({ params }: PageProps) {
             categories={categories}
             brands={brands}
             colors={colors}
-            heading="Elegí tu uniforme"
-            subheading="Buscá por nombre o filtrá por categoría, marca y color para encontrar lo tuyo."
+            heading="Elige tu uniforme"
+            subheading="Busca por nombre o filtrá por categoría, marca y color para encontrar lo tuyo."
           />
         ) : (
           <EmptyState
             title="Sin productos disponibles por ahora"
-            description="Estamos reponiendo existencias de este rubro. Mientras tanto, podés explorar los demás."
+            description="Estamos reponiendo existencias de este rubro. Mientras tanto, puedes explorar los demás."
             actionHref="/"
             actionLabel="Volver al inicio"
           />

@@ -29,7 +29,7 @@ export function VerticalsCrud({
 
   function save() {
     if (!draft) return;
-    if (!draft.name.trim()) return setError('Poné un nombre.');
+    if (!draft.name.trim()) return setError('Pon un nombre.');
     const rec: Vertical = {
       id: draft.id ?? `v-${Date.now()}`,
       slug: draft.id ? (items.find((v) => v.id === draft.id)?.slug ?? slugify(draft.name)) : slugify(draft.name),

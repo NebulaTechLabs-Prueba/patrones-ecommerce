@@ -68,7 +68,7 @@ export function SuggestedSet({ items }: { items: SuggestedProductData[] }) {
         // No se ofrece agregar hasta que el cliente elija talla y color (§9.3): así
         // se busca la coincidencia antes de ofrecer una alternativa.
         const shown = match?.variant ?? null;
-        let note = 'Elegí talla y color arriba para coordinar la combinación.';
+        let note = 'Elige talla y color arriba para coordinar la combinación.';
         if (match) {
           if (match.level === 'exact') note = 'Coordina con tu selección.';
           else if (match.level === 'size') note = `Misma talla. Color disponible: ${shown?.colorName}.`;

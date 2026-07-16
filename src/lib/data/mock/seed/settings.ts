@@ -51,13 +51,13 @@ export const faqs: Faq[] = [
   {
     question: '¿Cómo pago?',
     answer:
-      'Aceptamos pago móvil, transferencia y tarjeta. En los métodos que requieren comprobante, cargás el soporte al finalizar y nuestro equipo lo verifica antes de confirmar el pedido.',
+      'Aceptamos pago móvil, transferencia y tarjeta. En los métodos que requieren comprobante, cargas el soporte al finalizar y nuestro equipo lo verifica antes de confirmar el pedido.',
     sort_order: 1,
   },
   {
     question: '¿Cómo hago un pedido?',
     answer:
-      'Armás tu carrito libremente. Al iniciar el proceso de compra te pedimos iniciar sesión o crear tu cuenta, y desde ahí elegís método de pago y de entrega.',
+      'Armás tu carrito libremente. Al iniciar el proceso de compra te pedimos iniciar sesión o crear tu cuenta, y desde ahí eliges método de pago y de entrega.',
     sort_order: 2,
   },
   {
@@ -69,7 +69,7 @@ export const faqs: Faq[] = [
   {
     question: '¿Cómo elijo mi talla?',
     answer:
-      'Cada producto incluye su tabla de medidas. Si tenés dudas, podés consultarnos por WhatsApp desde la misma ficha del producto.',
+      'Cada producto incluye su tabla de medidas. Si tienes dudas, puedes consultarnos por WhatsApp desde la misma ficha del producto.',
     sort_order: 4,
   },
   {

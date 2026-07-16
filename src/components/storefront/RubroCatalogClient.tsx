@@ -28,7 +28,7 @@ export function RubroCatalogClient({ slug }: { slug: string }) {
       <main>
         <EmptyState
           title="Rubro no encontrado"
-          description="Puede que se haya retirado o cambiado de nombre. Explorá el resto del catálogo."
+          description="Puede que se haya retirado o cambiado de nombre. Explora el resto del catálogo."
           actionHref="/"
           actionLabel="Volver al inicio"
         />
@@ -79,7 +79,7 @@ export function RubroCatalogClient({ slug }: { slug: string }) {
         ) : (
           <EmptyState
             title="Sin productos disponibles por ahora"
-            description="Estamos reponiendo existencias de este rubro. Mientras tanto, podés explorar los demás."
+            description="Estamos reponiendo existencias de este rubro. Mientras tanto, puedes explorar los demás."
             actionHref="/"
             actionLabel="Volver al inicio"
           />
