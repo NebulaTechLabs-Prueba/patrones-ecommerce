@@ -1,9 +1,10 @@
-/* Estilos compartidos de las secciones admin: titulos, tablas, badges, acciones. */
+/* Estilos compartidos de las secciones admin: titulos, tablas, badges, acciones.
+   Cascada a todo el panel. Solo tokens de marca. */
 
 .pageTitle {
-  font-size: var(--ptr-text-2xl);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
   font-weight: var(--ptr-weight-bold);
-  letter-spacing: var(--ptr-tracking-tight);
+  letter-spacing: -0.02em;
   color: var(--ptr-ink);
 }
 
@@ -16,9 +17,11 @@
 
 .tableWrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--ptr-neutral-200);
   border-radius: var(--ptr-radius-lg);
   background-color: var(--ptr-white);
+  box-shadow: var(--ptr-shadow-1);
 }
 
 .table {
@@ -29,7 +32,7 @@
 .table th,
 .table td {
   text-align: left;
-  padding: var(--ptr-space-3) var(--ptr-space-4);
+  padding: var(--ptr-space-4) var(--ptr-space-4);
   font-size: var(--ptr-text-sm);
   border-bottom: 1px solid var(--ptr-neutral-200);
   vertical-align: middle;
@@ -45,6 +48,12 @@
   white-space: nowrap;
 }
 
+.table tbody tr {
+  transition: background-color var(--ptr-duration-fast) var(--ptr-ease);
+}
+.table tbody tr:hover td {
+  background-color: color-mix(in srgb, var(--ptr-primary) 5%, transparent);
+}
 .table tbody tr:last-child td {
   border-bottom: 0;
 }
@@ -59,35 +68,30 @@
   font-weight: var(--ptr-weight-bold);
   color: var(--ptr-primary);
 }
-
 .rowLink:hover {
   text-decoration: underline;
 }
 
 .badge {
   display: inline-block;
-  padding: 2px var(--ptr-space-2);
+  padding: 3px var(--ptr-space-3);
   border-radius: var(--ptr-radius-full);
   font-size: var(--ptr-text-xs);
   font-weight: var(--ptr-weight-semibold);
   white-space: nowrap;
 }
-
 .success {
-  background-color: rgba(46, 125, 91, 0.14);
+  background-color: color-mix(in srgb, var(--ptr-success) 14%, transparent);
   color: var(--ptr-success);
 }
-
 .warning {
-  background-color: rgba(181, 138, 46, 0.16);
+  background-color: color-mix(in srgb, var(--ptr-warning) 16%, transparent);
   color: var(--ptr-warning);
 }
-
 .danger {
-  background-color: rgba(179, 69, 60, 0.14);
+  background-color: color-mix(in srgb, var(--ptr-danger) 14%, transparent);
   color: var(--ptr-danger);
 }
-
 .neutral {
   background-color: var(--ptr-neutral-200);
   color: var(--ptr-neutral-600);
@@ -100,33 +104,38 @@
 }
 
 .actionBtn {
-  padding: var(--ptr-space-2) var(--ptr-space-3);
-  border-radius: var(--ptr-radius-sm);
-  border: 1px solid var(--ptr-primary);
+  padding: var(--ptr-space-2) var(--ptr-space-4);
+  border-radius: var(--ptr-radius-full);
+  border: 1px solid color-mix(in srgb, var(--ptr-primary) 40%, transparent);
   background-color: var(--ptr-white);
   color: var(--ptr-primary);
   font-size: var(--ptr-text-xs);
   font-weight: var(--ptr-weight-semibold);
   white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--ptr-duration-fast) var(--ptr-ease), color var(--ptr-duration-fast) var(--ptr-ease), border-color var(--ptr-duration-fast) var(--ptr-ease);
 }
-
 .actionBtn:hover {
-  background-color: var(--ptr-mint);
+  background-color: color-mix(in srgb, var(--ptr-primary) 10%, transparent);
+  border-color: var(--ptr-primary);
 }
-
 .actionPrimary {
   background-color: var(--ptr-primary);
+  border-color: var(--ptr-primary);
   color: var(--ptr-white);
 }
-
+.actionPrimary:hover {
+  background-color: var(--ptr-primary-soft);
+  color: var(--ptr-white);
+}
 .actionDanger {
-  border-color: var(--ptr-danger);
+  border-color: color-mix(in srgb, var(--ptr-danger) 50%, transparent);
   color: var(--ptr-danger);
   background-color: var(--ptr-white);
 }
-
 .actionDanger:hover {
-  background-color: rgba(179, 69, 60, 0.1);
+  background-color: color-mix(in srgb, var(--ptr-danger) 10%, transparent);
+  border-color: var(--ptr-danger);
 }
 
 .terminal {
@@ -146,32 +155,32 @@
   line-height: var(--ptr-leading-relaxed);
 }
 
-/* --- Pills para alternar tablas --- */
+/* --- Pills para alternar tablas (alineado al storefront) --- */
 .pills {
   display: flex;
   flex-wrap: wrap;
   gap: var(--ptr-space-2);
-  margin: var(--ptr-space-4) 0 var(--ptr-space-5);
+  margin: var(--ptr-space-4) 0 var(--ptr-space-6);
   border-bottom: 1px solid var(--ptr-neutral-200);
-  padding-bottom: var(--ptr-space-3);
+  padding-bottom: var(--ptr-space-4);
 }
-
 .pill {
   padding: var(--ptr-space-2) var(--ptr-space-4);
-  border: 1px solid var(--ptr-neutral-200);
+  border: 1px solid transparent;
   border-radius: var(--ptr-radius-full);
-  background-color: var(--ptr-white);
+  background-color: var(--ptr-neutral-50);
   font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-medium);
   color: var(--ptr-neutral-600);
+  cursor: pointer;
+  transition: background-color var(--ptr-duration-fast) var(--ptr-ease), color var(--ptr-duration-fast) var(--ptr-ease);
 }
-
 .pill:hover {
-  border-color: var(--ptr-primary);
+  background-color: color-mix(in srgb, var(--ptr-primary) 10%, transparent);
   color: var(--ptr-primary);
 }
-
-.pillActive {
+.pillActive,
+.pillActive:hover {
   background-color: var(--ptr-primary);
   border-color: var(--ptr-primary);
   color: var(--ptr-white);
@@ -184,19 +193,26 @@
   justify-content: space-between;
   gap: var(--ptr-space-4);
   flex-wrap: wrap;
+  margin-bottom: var(--ptr-space-5);
 }
 
-.newBtn {
-  padding: var(--ptr-space-3) var(--ptr-space-5);
+.newBtn,
+.saveBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-6);
   border: 0;
-  border-radius: var(--ptr-radius-md);
+  border-radius: var(--ptr-radius-full);
   background-color: var(--ptr-primary);
   color: var(--ptr-white);
   font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-semibold);
-  letter-spacing: var(--ptr-tracking-wide);
-  text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
+  transition: transform var(--ptr-duration-base) var(--ptr-ease), box-shadow var(--ptr-duration-base) var(--ptr-ease);
+}
+.newBtn:hover,
+.saveBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ptr-shadow-2);
 }
 
 /* --- Formularios --- */
@@ -205,35 +221,38 @@
   flex-direction: column;
   gap: var(--ptr-space-4);
 }
-
 .field {
   display: flex;
   flex-direction: column;
   gap: var(--ptr-space-2);
 }
-
 .fieldRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--ptr-space-4);
 }
-
 .field > span {
   font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-medium);
   color: var(--ptr-neutral-600);
 }
-
 .input,
 .select {
-  padding: var(--ptr-space-3);
-  border: 1px solid var(--ptr-neutral-400);
+  padding: var(--ptr-space-3) var(--ptr-space-4);
+  border: 1px solid var(--ptr-neutral-200);
   border-radius: var(--ptr-radius-md);
   font: inherit;
   color: var(--ptr-ink);
-  background-color: var(--ptr-white);
+  background-color: var(--ptr-neutral-50);
+  transition: border-color var(--ptr-duration-fast) var(--ptr-ease), box-shadow var(--ptr-duration-fast) var(--ptr-ease), background-color var(--ptr-duration-fast) var(--ptr-ease);
 }
-
+.input:focus,
+.select:focus {
+  outline: none;
+  background-color: var(--ptr-white);
+  border-color: var(--ptr-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ptr-primary) 16%, transparent);
+}
 .check {
   display: flex;
   align-items: center;
@@ -241,44 +260,43 @@
   font-size: var(--ptr-text-sm);
   color: var(--ptr-ink);
 }
-
 .formActions {
   display: flex;
   justify-content: flex-end;
   gap: var(--ptr-space-3);
   margin-top: var(--ptr-space-2);
 }
-
-.saveBtn {
-  padding: var(--ptr-space-3) var(--ptr-space-5);
-  border: 0;
-  border-radius: var(--ptr-radius-md);
-  background-color: var(--ptr-primary);
-  color: var(--ptr-white);
-  font-size: var(--ptr-text-sm);
-  font-weight: var(--ptr-weight-semibold);
-}
-
 .cancelBtn {
   padding: var(--ptr-space-3) var(--ptr-space-5);
-  border: 1px solid var(--ptr-neutral-400);
-  border-radius: var(--ptr-radius-md);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-full);
   background-color: var(--ptr-white);
   color: var(--ptr-neutral-600);
   font-size: var(--ptr-text-sm);
+  cursor: pointer;
 }
-
+.cancelBtn:hover {
+  border-color: var(--ptr-neutral-400);
+}
 .formError {
   font-size: var(--ptr-text-sm);
   color: var(--ptr-danger);
 }
-
 .inlineAdd {
   display: flex;
   gap: var(--ptr-space-2);
   margin-top: var(--ptr-space-2);
 }
-
 .inlineAdd .input {
   flex: 1;
+}
+
+@media (max-width: 640px) {
+  .table th,
+  .table td {
+    padding: var(--ptr-space-3);
+  }
+  .fieldRow {
+    grid-template-columns: 1fr;
+  }
 }
