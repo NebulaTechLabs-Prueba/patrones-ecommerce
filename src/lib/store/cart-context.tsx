@@ -91,13 +91,16 @@ export function CartProvider({
       items,
       count: cartCount(cart),
       hydrated,
-      add: (item) => setItems(asClientItems(addItem({ items }, item, item.maxQty))),
+      // Functional updates: al agregar el conjunto completo se llaman varios add()
+      // seguidos; con el estado previo se acumulan todos sin pisarse (§9.3).
+      add: (item) => setItems((prev) => asClientItems(addItem({ items: prev }, item, item.maxQty))),
       setQty: (sku, quantity) => {
-        const target = items.find((i) => i.variantSku === sku);
-        const max = target?.maxQty ?? quantity;
-        setItems(asClientItems(setItemQuantity({ items }, sku, quantity, max)));
+        setItems((prev) => {
+          const max = prev.find((i) => i.variantSku === sku)?.maxQty ?? quantity;
+          return asClientItems(setItemQuantity({ items: prev }, sku, quantity, max));
+        });
       },
-      remove: (sku) => setItems(asClientItems(removeItem({ items }, sku))),
+      remove: (sku) => setItems((prev) => asClientItems(removeItem({ items: prev }, sku))),
       clear: () => setItems([]),
       summary: summarizeCart(cart, promotions, pricingSettings, new Date()),
     };

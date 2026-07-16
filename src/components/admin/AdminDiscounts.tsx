@@ -223,20 +223,20 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
           <tbody>
             {sorted.map((p) => (
               <tr key={p.id}>
-                <td>{p.name}</td>
-                <td>{TYPE_LABELS[p.type]}</td>
-                <td>{PROMOTION_SCOPE_LABELS[p.scope]}</td>
-                <td>{targetLabel(p)}</td>
-                <td>{formatValue(p)}</td>
-                <td className={ui.mono}>{couponLabel(p)}</td>
-                <td>{p.stackable ? 'Sí' : 'No'}</td>
-                <td>{p.priority}</td>
-                <td>
+                <td data-label="Promoción">{p.name}</td>
+                <td data-label="Tipo">{TYPE_LABELS[p.type]}</td>
+                <td data-label="Alcance">{PROMOTION_SCOPE_LABELS[p.scope]}</td>
+                <td data-label="Aplica a">{targetLabel(p)}</td>
+                <td data-label="Valor">{formatValue(p)}</td>
+                <td data-label="Cupón" className={ui.mono}>{couponLabel(p)}</td>
+                <td data-label="Apilable">{p.stackable ? 'Sí' : 'No'}</td>
+                <td data-label="Prioridad">{p.priority}</td>
+                <td data-label="Estado">
                   <span className={`${ui.badge} ${p.is_active ? ui.success : ui.neutral}`}>
                     {p.is_active ? 'Activa' : 'Inactiva'}
                   </span>
                 </td>
-                <td>
+                <td data-label="Acciones">
                   <div className={ui.actions}>
                     <button type="button" className={ui.actionBtn} onClick={() => setDraft(toDraft(p))}>
                       Editar

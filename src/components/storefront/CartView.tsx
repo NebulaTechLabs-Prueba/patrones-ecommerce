@@ -89,7 +89,7 @@ export function CartView() {
                   <PlaceholderImage
                     image={
                       item.imageUrl
-                        ? { url: item.imageUrl, alt: item.productName, is_placeholder: true, sort_order: 0 }
+                        ? { url: item.imageUrl, alt: item.productName, is_placeholder: false, sort_order: 0 }
                         : null
                     }
                     label={item.productName}
