@@ -58,10 +58,23 @@ export function AdminInventory({ initial }: { initial: InventoryRow[] }) {
     return a.productName.localeCompare(b.productName);
   });
 
+  const outCount = rows.filter((r) => r.stock - r.reserved <= 0).length;
+  const lowCount = rows.filter((r) => {
+    const a = r.stock - r.reserved;
+    return a > 0 && a <= r.threshold;
+  }).length;
+  const okCount = rows.length - outCount - lowCount;
+
   return (
     <div>
       <h1 className={ui.pageTitle}>Inventario</h1>
       <p className={ui.pageSubtitle}>Disponible = stock − reservado. Las agotadas no se muestran al público.</p>
+
+      <div className={ui.actions} style={{ marginBottom: 'var(--ptr-space-5)' }}>
+        <span className={`${ui.badge} ${ui.danger}`}>{outCount} agotadas</span>
+        <span className={`${ui.badge} ${ui.warning}`}>{lowCount} bajo stock</span>
+        <span className={`${ui.badge} ${ui.success}`}>{okCount} OK</span>
+      </div>
 
       <div className={ui.tableWrap}>
         <table className={ui.table}>
@@ -84,21 +97,23 @@ export function AdminInventory({ initial }: { initial: InventoryRow[] }) {
               const level = levelOf(available, r.threshold);
               return (
                 <tr key={r.sku}>
-                  <td>{r.productName}</td>
-                  <td className={ui.mono}>{r.sku}</td>
-                  <td>
+                  <td data-label="Producto">{r.productName}</td>
+                  <td data-label="SKU" className={ui.mono}>{r.sku}</td>
+                  <td data-label="Variante">
                     {r.size} · {r.color}
                   </td>
-                  <td>{r.stock}</td>
-                  <td>{r.reserved}</td>
-                  <td>{available}</td>
-                  <td>{r.threshold}</td>
-                  <td>
+                  <td data-label="Stock">{r.stock}</td>
+                  <td data-label="Reservado">{r.reserved}</td>
+                  <td data-label="Disponible">
+                    <strong>{available}</strong>
+                  </td>
+                  <td data-label="Umbral">{r.threshold}</td>
+                  <td data-label="Estado">
                     <span className={`${ui.badge} ${level === 'out' ? ui.danger : level === 'low' ? ui.warning : ui.success}`}>
                       {LEVEL_LABEL[level]}
                     </span>
                   </td>
-                  <td>
+                  <td data-label="Acciones">
                     <button
                       type="button"
                       className={ui.actionBtn}
