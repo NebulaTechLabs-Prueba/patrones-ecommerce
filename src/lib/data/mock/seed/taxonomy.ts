@@ -18,6 +18,11 @@ function placeholder(url: string, alt: string, sort_order = 0): ProductImage {
   return { url, alt, is_placeholder: true, sort_order };
 }
 
+/** Foto de stock real (Unsplash) para los rubros, hasta tener fotografía propia. */
+function stock(id: string, alt: string, sort_order = 0): ProductImage {
+  return { url: `https://images.unsplash.com/photo-${id}?q=80&w=1200&h=800&fit=crop`, alt, is_placeholder: false, sort_order };
+}
+
 export const verticals: Vertical[] = [
   {
     id: 'v-salud',
@@ -26,7 +31,7 @@ export const verticals: Vertical[] = [
     tagline: 'Uniformes que acompañan cada guardia.',
     description:
       'Scrubs, casacas y calzado profesional para el personal de salud. Telas que resisten la jornada y sostienen la compostura.',
-    hero_image: placeholder('/img/rubros/salud.jpg', 'Profesional de salud con uniforme PATRONES'),
+    hero_image: stock('1576091160399-112ba8d25d1d', 'Profesional de salud con uniforme PATRONES'),
     sort_order: 1,
     is_active: true,
   },
@@ -37,7 +42,7 @@ export const verticals: Vertical[] = [
     tagline: 'La cocina también es una cuestión de figura.',
     description:
       'Filipinas, delantales y pantalones para chefs y salón. Prendas pensadas para el calor de la cocina y la exigencia del servicio.',
-    hero_image: placeholder('/img/rubros/gastronomia.jpg', 'Chef con filipina PATRONES'),
+    hero_image: stock('1577219491135-ce391730fb2c', 'Chef con filipina PATRONES'),
     sort_order: 2,
     is_active: true,
   },
@@ -48,7 +53,7 @@ export const verticals: Vertical[] = [
     tagline: 'La primera impresión, uniformada.',
     description:
       'Camisas, chaquetas y prendas de imagen para equipos de atención, recepción y oficina. Presencia consistente para toda la organización.',
-    hero_image: placeholder('/img/rubros/corporativo.jpg', 'Equipo corporativo con uniforme PATRONES'),
+    hero_image: stock('1559839734-2b71ea197ec2', 'Equipo corporativo con uniforme PATRONES'),
     sort_order: 3,
     is_active: true,
   },

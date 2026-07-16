@@ -11,12 +11,20 @@
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--ptr-shadow-2);
+  transform: translateY(-6px);
+  box-shadow: var(--ptr-shadow-3);
 }
 
 .media {
   overflow: hidden;
+}
+.media img,
+.media > div {
+  transition: transform var(--ptr-duration-slow) var(--ptr-ease);
+}
+.card:hover .media img,
+.card:hover .media > div {
+  transform: scale(1.07);
 }
 
 .body {
@@ -46,4 +54,12 @@
   font-weight: var(--ptr-weight-semibold);
   letter-spacing: var(--ptr-tracking-wide);
   color: var(--ptr-primary);
+}
+.cta::after {
+  content: ' →';
+  display: inline-block;
+  transition: transform var(--ptr-duration-base) var(--ptr-ease);
+}
+.card:hover .cta::after {
+  transform: translateX(5px);
 }

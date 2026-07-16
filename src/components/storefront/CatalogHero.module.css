@@ -1,51 +1,88 @@
+/* Encabezado de catálogo — editorial cinematográfico. Fondo full-bleed con papel
+   de patrón; contenido centrado al contenedor vía padding. Solo tokens de marca. */
 .hero {
-  max-width: var(--ptr-container);
-  margin: 0 auto;
-  padding: var(--ptr-space-8) var(--ptr-space-5) var(--ptr-space-6);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
-  gap: var(--ptr-space-7);
+  gap: var(--ptr-space-8);
+  padding-block: clamp(var(--ptr-space-8), 7vw, var(--ptr-space-10));
+  padding-inline: max(var(--ptr-space-6), calc((100% - var(--ptr-container)) / 2));
+  background-color: var(--ptr-cream);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ptr-primary) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ptr-primary) 7%, transparent) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
 
 .text {
-  max-width: 46ch;
+  max-width: 22ch;
 }
 
 .eyebrow {
+  display: flex;
+  align-items: center;
   font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-semibold);
   letter-spacing: var(--ptr-tracking-wider);
   text-transform: uppercase;
-  color: var(--ptr-primary-soft);
-  margin-bottom: var(--ptr-space-3);
+  color: var(--ptr-primary);
+  margin-bottom: var(--ptr-space-4);
+}
+.eyebrow::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: currentColor;
+  margin-right: var(--ptr-space-3);
 }
 
 .title {
-  font-size: var(--ptr-text-3xl);
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
   font-weight: var(--ptr-weight-bold);
-  letter-spacing: var(--ptr-tracking-tight);
-  line-height: var(--ptr-leading-tight);
+  letter-spacing: -0.022em;
+  line-height: 1.04;
   color: var(--ptr-ink);
 }
 
 .description {
-  margin-top: var(--ptr-space-4);
+  margin-top: var(--ptr-space-5);
   font-size: var(--ptr-text-lg);
   line-height: var(--ptr-leading-relaxed);
   color: var(--ptr-neutral-600);
+  max-width: 46ch;
 }
 
+/* Marco de la imagen con esquina de patrón. */
 .media {
+  position: relative;
   width: 100%;
+}
+.media::after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--ptr-space-4));
+  right: calc(-1 * var(--ptr-space-4));
+  width: 72px;
+  height: 72px;
+  border-top: 1px solid color-mix(in srgb, var(--ptr-primary) 45%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--ptr-primary) 45%, transparent);
+  pointer-events: none;
+}
+.media :global(img),
+.media > div {
+  border-radius: var(--ptr-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--ptr-shadow-3);
 }
 
 @media (max-width: 860px) {
   .hero {
     grid-template-columns: 1fr;
-    gap: var(--ptr-space-5);
+    gap: var(--ptr-space-6);
   }
-
+  .text {
+    max-width: 30ch;
+  }
   .media {
     order: -1;
   }

@@ -17,6 +17,17 @@
 
 .media {
   position: relative;
+  overflow: hidden;
+}
+
+/* Hover cinematográfico: la imagen hace zoom dentro del recorte de la card. */
+.media img,
+.media > div {
+  transition: transform var(--ptr-duration-slow) var(--ptr-ease);
+}
+.card:hover .media img,
+.card:hover .media > div {
+  transform: scale(1.06);
 }
 
 .ownLine,
