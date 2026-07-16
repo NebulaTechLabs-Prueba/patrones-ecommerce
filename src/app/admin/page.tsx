@@ -45,8 +45,12 @@ export default async function AdminDashboardPage() {
 
       <div className={styles.cards}>
         {cards.map((c) => (
-          <div key={c.label} className={styles.card}>
-            <span className={`${styles.value} ${c.tone ? (styles[c.tone] ?? '') : ''}`}>{c.value}</span>
+          <div key={c.label} className={styles.card} data-tone={c.tone ?? ''}>
+            <span
+              className={`${styles.value} ${c.tone === 'warning' ? styles.valWarn : c.tone === 'danger' ? styles.valDanger : ''}`}
+            >
+              {c.value}
+            </span>
             <span className={styles.cardLabel}>{c.label}</span>
           </div>
         ))}
