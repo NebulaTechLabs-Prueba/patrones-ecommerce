@@ -14,6 +14,7 @@ import { CatalogProvider, type CatalogData } from '@/lib/store/catalog-context';
 import { CurrencyProvider } from '@/lib/store/currency-context';
 import { QuotesProvider } from '@/lib/store/quotes-context';
 import { SoundProvider } from '@/lib/store/sound-context';
+import { ToastProvider } from '@/lib/store/toast-context';
 import { WishlistProvider } from '@/lib/store/wishlist-context';
 
 interface StoreProvidersProps {
@@ -27,17 +28,19 @@ interface StoreProvidersProps {
 export function StoreProviders({ rate, promotions, pricingSettings, catalog, children }: StoreProvidersProps) {
   return (
     <SoundProvider>
-      <AuthProvider>
-        <CatalogProvider initial={catalog}>
-          <CurrencyProvider rate={rate}>
-            <CartProvider promotions={promotions} pricingSettings={pricingSettings}>
-              <WishlistProvider>
-                <QuotesProvider>{children}</QuotesProvider>
-              </WishlistProvider>
-            </CartProvider>
-          </CurrencyProvider>
-        </CatalogProvider>
-      </AuthProvider>
+      <ToastProvider>
+        <AuthProvider>
+          <CatalogProvider initial={catalog}>
+            <CurrencyProvider rate={rate}>
+              <CartProvider promotions={promotions} pricingSettings={pricingSettings}>
+                <WishlistProvider>
+                  <QuotesProvider>{children}</QuotesProvider>
+                </WishlistProvider>
+              </CartProvider>
+            </CurrencyProvider>
+          </CatalogProvider>
+        </AuthProvider>
+      </ToastProvider>
     </SoundProvider>
   );
 }

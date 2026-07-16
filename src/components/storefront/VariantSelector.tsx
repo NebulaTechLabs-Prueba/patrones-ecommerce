@@ -18,6 +18,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCart } from '@/lib/store/cart-context';
 import { useCurrency } from '@/lib/store/currency-context';
 import { useSelectedVariant } from '@/lib/store/selected-variant-context';
+import { useToast } from '@/lib/store/toast-context';
 import styles from './VariantSelector.module.css';
 
 export interface SelectableVariant {
@@ -73,6 +74,7 @@ export function VariantSelector({
   const { formatCents } = useCurrency();
   const { add } = useCart();
   const { setSelected, setMainItem } = useSelectedVariant();
+  const { success } = useToast();
   const colors = useMemo(() => uniqueColors(variants), [variants]);
 
   const [color, setColor] = useState<string | null>(colors.length === 1 ? colors[0]!.name : null);
@@ -178,6 +180,7 @@ export function VariantSelector({
       imageUrl: classification.imageUrl,
     });
     setJustAdded(true);
+    success(`${productName} — agregado al carrito`);
   }
 
   const whatsappHref = useMemo(() => {
@@ -269,7 +272,6 @@ export function VariantSelector({
           disabled={!ready}
           aria-disabled={!ready}
           onClick={addToCart}
-          data-sound="add"
         >
           Agregar al carrito
         </button>
