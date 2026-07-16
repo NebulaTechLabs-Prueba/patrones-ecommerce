@@ -5,6 +5,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { SoundToggle } from '@/components/layout/SoundToggle';
 import styles from './account.module.css';
 
 export const metadata: Metadata = {
@@ -21,13 +22,23 @@ const LINKS = [
 
 export default function AccountHomePage() {
   return (
-    <div className={styles.grid}>
-      {LINKS.map((l) => (
-        <Link key={l.href} href={l.href} className={styles.card}>
-          <span className={styles.cardTitle}>{l.title}</span>
-          <span className={styles.cardDesc}>{l.description}</span>
-        </Link>
-      ))}
+    <div>
+      <div className={styles.grid}>
+        {LINKS.map((l) => (
+          <Link key={l.href} href={l.href} className={styles.card}>
+            <span className={styles.cardTitle}>{l.title}</span>
+            <span className={styles.cardDesc}>{l.description}</span>
+          </Link>
+        ))}
+      </div>
+
+      <section className={styles.prefs}>
+        <div>
+          <span className={styles.cardTitle}>Sonido de la interfaz</span>
+          <span className={styles.cardDesc}>Activá o silenciá el sonido de botones e interacciones.</span>
+        </div>
+        <SoundToggle />
+      </section>
     </div>
   );
 }

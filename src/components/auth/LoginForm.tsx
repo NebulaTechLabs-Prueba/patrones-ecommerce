@@ -12,10 +12,12 @@ import { useRouter } from 'next/navigation';
 import { Isologo } from '@/components/brand/Isologo';
 import { assetPath } from '@/lib/asset';
 import { DEMO_ACCOUNTS, useAuth, type Role } from '@/lib/store/auth-context';
+import { useSound } from '@/lib/store/sound-context';
 import styles from './LoginForm.module.css';
 
 export function LoginForm() {
   const { login } = useAuth();
+  const { play } = useSound();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +32,7 @@ export function LoginForm() {
     const res = login(email, password);
     if (!res.ok || !res.role) {
       setError('Credenciales inválidas. Probá con un acceso rápido.');
+      play('error');
       return;
     }
     go(res.role);

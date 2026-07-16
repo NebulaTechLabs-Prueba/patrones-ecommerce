@@ -8,7 +8,7 @@ import styles from './legal.module.css';
 
 export const metadata: Metadata = {
   title: 'Términos y Condiciones — PATRONES',
-  description: 'Condiciones de compra en PATRONES: pagos, envíos, nota de entrega y devoluciones.',
+  description: 'Condiciones de compra en PATRONES: cuenta, precios, pagos, envíos y devoluciones.',
 };
 
 export default function TermsPage() {
@@ -49,14 +49,6 @@ export default function TermsPage() {
           otros). En los métodos con comprobante, el cliente carga el soporte y la referencia, y
           el pedido queda en verificación hasta que confirmemos el pago. El estado del pago está
           siempre visible en tu cuenta.
-        </p>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.h2}>Nota de entrega</h2>
-        <p className={styles.p}>
-          Las compras se documentan con una nota de entrega, que es un documento comercial —no una
-          factura fiscal— emitido bajo conformidad y acuerdo de ambas partes.
         </p>
       </section>
 

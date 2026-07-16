@@ -6,13 +6,13 @@ import { useSound } from '@/lib/store/sound-context';
 import styles from './SoundToggle.module.css';
 
 export function SoundToggle() {
-  const { muted, toggle } = useSound();
+  const { muted, setMuted } = useSound();
 
   return (
     <button
       type="button"
       className={styles.btn}
-      onClick={toggle}
+      onClick={() => setMuted(!muted)}
       aria-pressed={!muted}
       aria-label={muted ? 'Activar sonido' : 'Silenciar sonido'}
       title={muted ? 'Activar sonido' : 'Silenciar sonido'}

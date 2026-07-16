@@ -4,6 +4,28 @@
   gap: var(--ptr-space-4);
 }
 
+.prefs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+  margin-top: var(--ptr-space-5);
+  padding: var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background-color: var(--ptr-white);
+}
+.prefs .cardTitle {
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+}
+.prefs .cardDesc {
+  display: block;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+  margin-top: var(--ptr-space-1);
+}
+
 .card {
   display: flex;
   flex-direction: column;

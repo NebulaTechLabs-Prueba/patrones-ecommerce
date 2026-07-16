@@ -269,6 +269,7 @@ export function VariantSelector({
           disabled={!ready}
           aria-disabled={!ready}
           onClick={addToCart}
+          data-sound="add"
         >
           Agregar al carrito
         </button>

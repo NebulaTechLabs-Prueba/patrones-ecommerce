@@ -96,7 +96,7 @@ export async function Footer() {
 
         <div className={styles.bottom}>
           <p>© {year} PATRONES · Puerto Ordaz, Venezuela</p>
-          <p className={styles.note}>Emitimos nota de entrega (documento comercial), no factura fiscal.</p>
+          <p className={styles.note}>Uniformes profesionales · Puerto Ordaz</p>
         </div>
       </div>
     </footer>
