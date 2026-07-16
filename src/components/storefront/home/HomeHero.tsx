@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import styles from './HomeHero.module.css';
 
-const TITLE_LINES = ['El uniforme de cada oficio,', 'con la misma exigencia.'];
+const TITLE_LINES = ['Vestí tu oficio con carácter.', 'Tu jornada, a todo color.'];
 const RULER_TICKS = Array.from({ length: 13 });
 
 export function HomeHero() {
@@ -94,16 +94,17 @@ export function HomeHero() {
         </h1>
 
         <p className={styles.lead}>
-          Salud, gastronomía y corporativo. Línea propia PATRONES y marcas
-          seleccionadas, trazadas con la misma exigencia.
+          Scrubs, filipinas y uniformes corporativos que aguantan el ritmo de tu
+          día. Línea propia PATRONES y las mejores marcas, con la asesoría de quienes
+          visten a los profesionales de Puerto Ordaz.
         </p>
 
         <div className={styles.actions}>
           <Link href="/uniformes/salud/" className={styles.primaryCta}>
-            Explorar rubros
+            Explorá los rubros
           </Link>
           <Link href="/linea-patrones/" className={styles.secondaryCta}>
-            Conocer la Línea PATRONES
+            Conocé la Línea PATRONES
           </Link>
         </div>
       </div>

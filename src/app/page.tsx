@@ -18,6 +18,7 @@ import { HomeHero } from '@/components/storefront/home/HomeHero';
 import { Reveal } from '@/components/motion/Reveal';
 import { VerticalCard } from '@/components/storefront/VerticalCard';
 import { ProductGrid } from '@/components/storefront/ProductGrid';
+import { ImageGallery } from '@/components/ui/carousel-circular-image-gallery';
 import { productRepo } from '@/lib/data';
 import type { Brand } from '@/lib/data/types';
 import { getFeatured, getFeaturedCollection, getVerticalDoors } from '@/lib/storefront/catalog';
@@ -76,6 +77,21 @@ export default async function HomePage() {
           </div>
         </section>
       ) : null}
+
+      {/* A todo color — showcase cinematográfico (componente 21st.dev) */}
+      <section className={`${styles.section} ${styles.gallery}`}>
+        <div className={styles.wrap}>
+          <Reveal className={styles.headLight}>
+            <p className={styles.eyebrowLight}>Nueva colección</p>
+            <h2 className={styles.headingLight}>Tu día, a todo color</h2>
+            <p className={styles.subheadLight}>
+              Del quirófano a la cocina y la oficina: profesionales que no paran, vestidos
+              por PATRONES. Tocá cada punto para descubrir la colección.
+            </p>
+          </Reveal>
+        </div>
+        <ImageGallery />
+      </section>
 
       {/* Colección destacada */}
       {collection ? (

@@ -215,6 +215,41 @@
   box-shadow: var(--ptr-shadow-3);
 }
 
+/* --- A todo color: showcase con galería (21st.dev), fondo de marca --- */
+.gallery {
+  background: var(--ptr-primary);
+}
+.gallery .wrap {
+  padding-bottom: var(--ptr-space-4);
+}
+.headLight {
+  max-width: 60ch;
+  margin: 0 auto;
+  text-align: center;
+}
+.eyebrowLight {
+  display: inline-block;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-mint);
+  margin-bottom: var(--ptr-space-4);
+}
+.headingLight {
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-white);
+}
+.subheadLight {
+  margin-top: var(--ptr-space-4);
+  font-size: var(--ptr-text-lg);
+  line-height: var(--ptr-leading-relaxed);
+  color: color-mix(in srgb, var(--ptr-white) 82%, transparent);
+}
+
 @media (max-width: 720px) {
   .wrap {
     padding: var(--ptr-space-9) var(--ptr-space-5);
