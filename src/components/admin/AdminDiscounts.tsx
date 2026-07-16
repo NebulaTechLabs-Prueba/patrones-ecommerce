@@ -7,10 +7,12 @@
 
 import { useState } from 'react';
 import { AdminModal } from './AdminModal';
-import type { Promotion, PromotionScope, PromotionType } from '@/lib/data/types';
+import type { PaymentMethodKind, Promotion, PromotionScope, PromotionType } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
-import { PROMOTION_SCOPE_LABELS } from '@/lib/labels';
+import { PAYMENT_METHOD_LABELS, PROMOTION_SCOPE_LABELS } from '@/lib/labels';
 import ui from './adminUI.module.css';
+
+const PAYMENT_KINDS = Object.keys(PAYMENT_METHOD_LABELS) as PaymentMethodKind[];
 
 interface Facet {
   id: string;
@@ -54,6 +56,10 @@ interface Draft {
   isActive: boolean;
   startsAt: string;
   endsAt: string;
+  paymentMethod: string;
+  minAmount: string;
+  code: string;
+  maxUses: string;
 }
 
 function emptyDraft(): Draft {
@@ -70,6 +76,10 @@ function emptyDraft(): Draft {
     isActive: true,
     startsAt: '',
     endsAt: '',
+    paymentMethod: '',
+    minAmount: '',
+    code: '',
+    maxUses: '',
   };
 }
 
@@ -87,6 +97,10 @@ function toDraft(p: Promotion): Draft {
     isActive: p.is_active,
     startsAt: p.starts_at ? p.starts_at.slice(0, 10) : '',
     endsAt: p.ends_at ? p.ends_at.slice(0, 10) : '',
+    paymentMethod: p.payment_method ?? '',
+    minAmount: p.min_amount != null ? String(p.min_amount / 100) : '',
+    code: p.code ?? '',
+    maxUses: p.max_uses != null ? String(p.max_uses) : '',
   };
 }
 
@@ -117,9 +131,20 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
   }
 
   function formatValue(p: Promotion): string {
-    if (p.type === 'percentage') return `${p.value}%`;
-    if (p.type === 'quantity') return `${p.value}% · ≥${p.min_quantity ?? '?'} u.`;
-    return formatUsd(p.value);
+    let base: string;
+    if (p.type === 'percentage') base = `${p.value}%`;
+    else if (p.type === 'quantity') base = `${p.value}% · ≥${p.min_quantity ?? '?'} u.`;
+    else base = formatUsd(p.value);
+    const extra: string[] = [];
+    if (p.payment_method) extra.push(PAYMENT_METHOD_LABELS[p.payment_method]);
+    if (p.min_amount) extra.push(`≥ ${formatUsd(p.min_amount)}`);
+    return extra.length ? `${base} · ${extra.join(' · ')}` : base;
+  }
+
+  function couponLabel(p: Promotion): string {
+    if (!p.code) return '—';
+    const limit = p.max_uses != null ? `${p.uses ?? 0}/${p.max_uses}` : `${p.uses ?? 0}/∞`;
+    return `${p.code} · ${limit}`;
   }
 
   function save() {
@@ -142,6 +167,11 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
       is_active: draft.isActive,
       starts_at: draft.startsAt ? `${draft.startsAt}T00:00:00-04:00` : null,
       ends_at: draft.endsAt ? `${draft.endsAt}T23:59:59-04:00` : null,
+      payment_method: draft.paymentMethod ? (draft.paymentMethod as PaymentMethodKind) : null,
+      min_amount: draft.minAmount ? Math.round(Number(draft.minAmount) * 100) : null,
+      code: draft.code.trim() ? draft.code.trim().toUpperCase() : null,
+      max_uses: draft.maxUses ? Number(draft.maxUses) : null,
+      uses: draft.id ? (promos.find((x) => x.id === draft.id)?.uses ?? 0) : 0,
     };
 
     setPromos((prev) =>
@@ -183,6 +213,7 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
               <th>Alcance</th>
               <th>Aplica a</th>
               <th>Valor</th>
+              <th>Cupón</th>
               <th>Apilable</th>
               <th>Prioridad</th>
               <th>Estado</th>
@@ -197,6 +228,7 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
                 <td>{PROMOTION_SCOPE_LABELS[p.scope]}</td>
                 <td>{targetLabel(p)}</td>
                 <td>{formatValue(p)}</td>
+                <td className={ui.mono}>{couponLabel(p)}</td>
                 <td>{p.stackable ? 'Sí' : 'No'}</td>
                 <td>{p.priority}</td>
                 <td>
@@ -363,6 +395,60 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
                 />
               </label>
             </div>
+
+            <div className={ui.fieldRow}>
+              <label className={ui.field}>
+                <span>Solo con método de pago (opcional)</span>
+                <select
+                  className={ui.select}
+                  value={draft.paymentMethod}
+                  onChange={(e) => setDraft({ ...draft, paymentMethod: e.target.value })}
+                >
+                  <option value="">Cualquiera</option>
+                  {PAYMENT_KINDS.map((k) => (
+                    <option key={k} value={k}>
+                      {PAYMENT_METHOD_LABELS[k]}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className={ui.field}>
+                <span>Monto mínimo del carrito (USD, opcional)</span>
+                <input
+                  className={ui.input}
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={draft.minAmount}
+                  onChange={(e) => setDraft({ ...draft, minAmount: e.target.value })}
+                />
+              </label>
+            </div>
+
+            <div className={ui.fieldRow}>
+              <label className={ui.field}>
+                <span>Código de cupón (opcional)</span>
+                <input
+                  className={ui.input}
+                  value={draft.code}
+                  onChange={(e) => setDraft({ ...draft, code: e.target.value })}
+                  placeholder="Ej. BIENVENIDA10"
+                />
+              </label>
+              <label className={ui.field}>
+                <span>Límite de usos (vacío = sin límite)</span>
+                <input
+                  className={ui.input}
+                  type="number"
+                  min="1"
+                  value={draft.maxUses}
+                  onChange={(e) => setDraft({ ...draft, maxUses: e.target.value })}
+                />
+              </label>
+            </div>
+            <p className={ui.note}>
+              El cupón se activa al ingresar el código; la vigencia se controla con las fechas Desde/Hasta.
+            </p>
 
             <label className={ui.check}>
               <input

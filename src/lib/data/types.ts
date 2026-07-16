@@ -251,6 +251,18 @@ export interface Promotion {
   stackable: boolean;
   priority: number;
 
+  /** Condicion opcional: la promo solo aplica pagando con este metodo (§13.2). */
+  payment_method?: PaymentMethodKind | null;
+  /** Condicion opcional: monto minimo del carrito (USD centavos) para aplicar. */
+  min_amount?: UsdCents | null;
+
+  /** Cupon opcional: si tiene codigo, la promo se activa al ingresarlo. */
+  code?: string | null;
+  /** Limite de usos del cupon (null = sin limite). Vigencia por starts_at/ends_at. */
+  max_uses?: number | null;
+  /** Usos consumidos del cupon. */
+  uses?: number;
+
   is_active: boolean;
   starts_at: ISODate | null;
   ends_at: ISODate | null;
@@ -286,6 +298,9 @@ export interface Customer {
 
   customer_type: CustomerType;
   created_at: ISODate;
+
+  /** Nota interna del admin sobre este cliente. Solo la ve el admin (§8). */
+  admin_note?: string | null;
 }
 
 // ---------------------------------------------------------------------------

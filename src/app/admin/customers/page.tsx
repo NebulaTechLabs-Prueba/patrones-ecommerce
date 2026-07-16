@@ -7,6 +7,7 @@ import { customerRepo, orderRepo } from '@/lib/data';
 import type { OrderStatus, PaymentStatus } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
 import { ORDER_STATUS_LABELS, PAYMENT_STATUS_LABELS } from '@/lib/labels';
+import { CustomerNote } from '@/components/admin/CustomerNote';
 import ui from '@/components/admin/adminUI.module.css';
 import styles from './customers.module.css';
 
@@ -94,6 +95,8 @@ export default async function AdminCustomersPage() {
                       </tbody>
                     </table>
                   )}
+
+                  <CustomerNote customerId={c.id} initial={c.admin_note} />
                 </div>
               </details>
             </li>

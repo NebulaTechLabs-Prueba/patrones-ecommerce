@@ -41,11 +41,39 @@ export default async function OwnLinePage() {
         style={{
           maxWidth: 'var(--ptr-container)',
           margin: '0 auto',
-          padding: '0 var(--ptr-space-5) var(--ptr-space-8)',
+          padding: 'var(--ptr-space-9) var(--ptr-space-6) var(--ptr-space-10)',
         }}
       >
         {products.length > 0 ? (
-          <ProductGrid items={products} brandsById={brandsById} />
+          <>
+            <div style={{ marginBottom: 'var(--ptr-space-7)' }}>
+              <p
+                style={{
+                  fontSize: 'var(--ptr-text-sm)',
+                  fontWeight: 'var(--ptr-weight-semibold)',
+                  letterSpacing: 'var(--ptr-tracking-wider)',
+                  textTransform: 'uppercase',
+                  color: 'var(--ptr-primary)',
+                  marginBottom: 'var(--ptr-space-3)',
+                }}
+              >
+                La confección de la casa
+              </p>
+              <h2
+                style={{
+                  fontSize: 'clamp(1.6rem, 3.2vw, 2.4rem)',
+                  fontWeight: 'var(--ptr-weight-bold)',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.08,
+                  color: 'var(--ptr-ink)',
+                  maxWidth: '22ch',
+                }}
+              >
+                Todas las piezas de la Línea PATRONES
+              </h2>
+            </div>
+            <ProductGrid items={products} brandsById={brandsById} />
+          </>
         ) : (
           <EmptyState
             title="Sin piezas disponibles por ahora"
