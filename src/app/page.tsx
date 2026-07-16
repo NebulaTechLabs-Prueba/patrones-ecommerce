@@ -1,19 +1,21 @@
 /**
- * Home de PATRONES (§2, §4, §9.4).
+ * Home de PATRONES (§2, §4, §9.4) — rediseño editorial cinematográfico.
  *
- * Instrumento del reposicionamiento: NUNCA muestra solo salud. Estructura:
- *  1. Hero: la marca es multi-rubro, dicho en copy elegante (nunca por color).
- *  2. Puertas de rubro: los 3 rubros como entrada de primer nivel.
- *  3. Selección featured: multi-rubro, filtrada por disponibilidad (§7) — lo
- *     agotado no aparece. Se verifica que abarque mas de un rubro (§9.4).
- *  4. Teaser Línea PATRONES (§9.5).
+ * Instrumento del reposicionamiento: NUNCA muestra solo salud. Firma visual: el
+ * "trazado" de patrón (la marca = patrones de costura). Estructura por escenas:
+ *  1. Hero cinematográfico (firma).
+ *  2. Rubros como puertas.
+ *  3. Selección destacada multi-rubro (§9.4), filtrada por disponibilidad (§7).
+ *  4. Colección destacada.
+ *  5. Línea PATRONES — beat oscuro.
  *
- * Server component async: compatible con export estatico. Sin datos crudos en el
- * JSX; todo entra por la capa de storefront y los repos.
+ * Server component: sin datos crudos en el JSX; todo entra por la capa de storefront.
+ * La interacción/movimiento vive en componentes client (HomeHero, Reveal).
  */
 
 import Link from 'next/link';
-import { SectionHeading } from '@/components/storefront/SectionHeading';
+import { HomeHero } from '@/components/storefront/home/HomeHero';
+import { Reveal } from '@/components/motion/Reveal';
 import { VerticalCard } from '@/components/storefront/VerticalCard';
 import { ProductGrid } from '@/components/storefront/ProductGrid';
 import { productRepo } from '@/lib/data';
@@ -33,83 +35,87 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* 1. Hero */}
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <p className={styles.heroEyebrow}>Uniformes profesionales · Puerto Ordaz</p>
-          <h1 className={styles.heroTitle}>
-            El uniforme de cada oficio, con la misma exigencia.
-          </h1>
-          <p className={styles.heroLead}>
-            Salud, gastronomía y corporativo. Línea propia PATRONES y marcas
-            seleccionadas, en un mismo lugar.
-          </p>
-          <div className={styles.heroActions}>
-            <Link href="/uniformes/salud/" className={styles.primaryCta}>
-              Explorar rubros
-            </Link>
-            <Link href="/linea-patrones/" className={styles.secondaryCta}>
-              Conocer la Línea PATRONES
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HomeHero />
 
-      {/* 2. Puertas de rubro */}
-      <section className={styles.section}>
-        <SectionHeading
-          eyebrow="Rubros"
-          title="Un mundo profesional por cada puerta"
-          description="Cada rubro tiene su propia selección, sus telas y sus tallas. Entrá por el tuyo — o descubrí los demás."
-        />
-        <div className={styles.doors}>
-          {doors.map(({ vertical }) => (
-            <VerticalCard key={vertical.id} vertical={vertical} />
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Featured multi-rubro (§9.4) */}
-      {featured.products.length > 0 ? (
-        <section className={styles.section}>
-          <SectionHeading
-            eyebrow="Selección PATRONES"
-            title="Piezas destacadas de toda la casa"
-            description="Una muestra que atraviesa los rubros. Lo que ves está disponible."
-          />
-          <ProductGrid items={featured.products} brandsById={brandsById} />
-        </section>
-      ) : null}
-
-      {/* 4. Colección destacada */}
-      {collection ? (
-        <section className={styles.section}>
-          <Link href={`/collections/${collection.slug}/`} className={styles.collection}>
-            <div>
-              <p className={styles.collectionEyebrow}>Colección</p>
-              <h2 className={styles.collectionTitle}>{collection.name}</h2>
-              <p className={styles.collectionLead}>{collection.description}</p>
-            </div>
-            <span className={styles.collectionCta} aria-hidden="true">
-              Ver colección →
-            </span>
-          </Link>
-        </section>
-      ) : null}
-
-      {/* 5. Teaser Línea PATRONES */}
-      <section className={styles.section}>
-        <div className={styles.ownLineBanner}>
-          <div>
-            <p className={styles.ownLineEyebrow}>Línea PATRONES</p>
-            <h2 className={styles.ownLineTitle}>Nuestra propia confección</h2>
-            <p className={styles.ownLineLead}>
-              Diseñada y producida por PATRONES, con el estándar que define a la casa.
+      {/* Rubros */}
+      <section className={`${styles.section} ${styles.rubros}`}>
+        <div className={styles.wrap}>
+          <Reveal className={styles.head}>
+            <p className={styles.eyebrow}>Rubros</p>
+            <h2 className={styles.heading}>Un mundo profesional por cada puerta</h2>
+            <p className={styles.subhead}>
+              Cada rubro tiene su selección, sus telas y sus tallas. Entrá por el tuyo
+              — o descubrí los demás.
             </p>
+          </Reveal>
+
+          <div className={styles.doors}>
+            {doors.map(({ vertical }, i) => (
+              <Reveal key={vertical.id} delay={i * 90} className={styles.door}>
+                <VerticalCard vertical={vertical} />
+              </Reveal>
+            ))}
           </div>
-          <Link href="/linea-patrones/" className={styles.ownLineCta}>
-            Ver la línea →
-          </Link>
+        </div>
+      </section>
+
+      {/* Selección destacada (§9.4) */}
+      {featured.products.length > 0 ? (
+        <section className={`${styles.section} ${styles.featured}`}>
+          <div className={styles.wrap}>
+            <Reveal className={styles.head}>
+              <p className={styles.eyebrow}>Selección PATRONES</p>
+              <h2 className={styles.heading}>Piezas destacadas de toda la casa</h2>
+              <p className={styles.subhead}>
+                Una muestra que atraviesa los rubros. Lo que ves está disponible.
+              </p>
+            </Reveal>
+            <Reveal delay={80} variant="fade">
+              <ProductGrid items={featured.products} brandsById={brandsById} />
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
+
+      {/* Colección destacada */}
+      {collection ? (
+        <section className={`${styles.section} ${styles.collectionSection}`}>
+          <div className={styles.wrap}>
+            <Reveal variant="fade">
+              <Link href={`/collections/${collection.slug}/`} className={styles.collection}>
+                <span className={styles.collectionCorner} aria-hidden="true" />
+                <div className={styles.collectionBody}>
+                  <p className={styles.collectionEyebrow}>Colección</p>
+                  <h2 className={styles.collectionTitle}>{collection.name}</h2>
+                  <p className={styles.collectionLead}>{collection.description}</p>
+                </div>
+                <span className={styles.collectionCta}>
+                  Ver colección
+                  <span className={styles.arrow} aria-hidden="true">→</span>
+                </span>
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
+
+      {/* Línea PATRONES — beat oscuro */}
+      <section className={`${styles.section} ${styles.ownLine}`}>
+        <div className={styles.ownLineGrid} aria-hidden="true" />
+        <div className={styles.wrap}>
+          <Reveal className={styles.ownLineInner}>
+            <div>
+              <p className={styles.ownLineEyebrow}>Línea PATRONES</p>
+              <h2 className={styles.ownLineTitle}>Nuestra propia confección</h2>
+              <p className={styles.ownLineLead}>
+                Diseñada y producida por PATRONES, con el estándar que define a la casa.
+              </p>
+            </div>
+            <Link href="/linea-patrones/" className={styles.ownLineCta}>
+              Ver la línea
+              <span className={styles.arrow} aria-hidden="true">→</span>
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>
