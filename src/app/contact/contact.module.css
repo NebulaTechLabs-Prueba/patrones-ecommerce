@@ -1,65 +1,102 @@
-.main {
-  max-width: var(--ptr-container);
-  margin: 0 auto;
-  padding: var(--ptr-space-8) var(--ptr-space-5);
-}
-
+/* Contacto — editorial cinematográfico. Solo tokens de marca. */
 .header {
-  max-width: 640px;
-  margin-bottom: var(--ptr-space-7);
+  padding-block: clamp(var(--ptr-space-8), 7vw, var(--ptr-space-10));
+  padding-inline: max(var(--ptr-space-6), calc((100% - 60ch) / 2));
+  background-color: var(--ptr-cream);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ptr-primary) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ptr-primary) 7%, transparent) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
-
 .eyebrow {
+  display: flex;
+  align-items: center;
   font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-semibold);
   letter-spacing: var(--ptr-tracking-wider);
   text-transform: uppercase;
-  color: var(--ptr-primary-soft);
-  margin-bottom: var(--ptr-space-2);
+  color: var(--ptr-primary);
+  margin-bottom: var(--ptr-space-4);
 }
-
+.eyebrow::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: currentColor;
+  margin-right: var(--ptr-space-3);
+}
 .title {
-  font-size: var(--ptr-text-3xl);
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
   font-weight: var(--ptr-weight-bold);
-  letter-spacing: var(--ptr-tracking-tight);
+  letter-spacing: -0.022em;
+  line-height: 1.04;
   color: var(--ptr-ink);
 }
-
 .lead {
-  margin-top: var(--ptr-space-3);
+  margin-top: var(--ptr-space-5);
   font-size: var(--ptr-text-lg);
   line-height: var(--ptr-leading-relaxed);
   color: var(--ptr-neutral-600);
+  max-width: 52ch;
 }
 
 .grid {
+  max-width: var(--ptr-container);
+  margin: 0 auto;
+  padding: var(--ptr-space-9) var(--ptr-space-6);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--ptr-space-5);
+  gap: var(--ptr-space-6);
 }
 
 .card {
-  padding: var(--ptr-space-6);
+  position: relative;
+  overflow: hidden;
+  padding: var(--ptr-space-7) var(--ptr-space-6);
   border: 1px solid var(--ptr-neutral-200);
   border-radius: var(--ptr-radius-lg);
   background-color: var(--ptr-white);
+  transition: transform var(--ptr-duration-slow) var(--ptr-ease), box-shadow var(--ptr-duration-slow) var(--ptr-ease);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ptr-shadow-3);
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: var(--ptr-space-4);
+  right: var(--ptr-space-4);
+  width: 44px;
+  height: 44px;
+  border-top: 1px solid color-mix(in srgb, var(--ptr-primary) 40%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--ptr-primary) 40%, transparent);
 }
 
 .cardTitle {
-  font-size: var(--ptr-text-lg);
+  display: flex;
+  align-items: center;
+  font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-semibold);
-  color: var(--ptr-ink);
-  margin-bottom: var(--ptr-space-3);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-primary);
+  margin-bottom: var(--ptr-space-4);
 }
-
+.cardTitle::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  margin-right: var(--ptr-space-3);
+}
 .cardText {
-  font-size: var(--ptr-text-base);
+  font-size: var(--ptr-text-lg);
   color: var(--ptr-ink);
-  line-height: var(--ptr-leading-relaxed);
+  line-height: var(--ptr-leading-normal);
 }
-
 .cardMuted {
-  margin-top: var(--ptr-space-2);
+  margin-top: var(--ptr-space-3);
   font-size: var(--ptr-text-sm);
   color: var(--ptr-neutral-600);
   line-height: var(--ptr-leading-relaxed);
@@ -67,25 +104,28 @@
 
 .cta {
   display: inline-flex;
-  margin-top: var(--ptr-space-4);
-  padding: var(--ptr-space-3) var(--ptr-space-5);
-  border-radius: var(--ptr-radius-md);
+  align-items: center;
+  margin-top: var(--ptr-space-5);
+  padding: var(--ptr-space-4) var(--ptr-space-6);
+  border-radius: var(--ptr-radius-full);
   background-color: var(--ptr-primary);
   color: var(--ptr-white);
-  font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-semibold);
-  letter-spacing: var(--ptr-tracking-wide);
-  text-transform: uppercase;
+  transition: transform var(--ptr-duration-base) var(--ptr-ease), box-shadow var(--ptr-duration-base) var(--ptr-ease);
+}
+.cta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ptr-shadow-2);
 }
 
 .link {
   display: inline-block;
-  margin-top: var(--ptr-space-3);
+  margin-top: var(--ptr-space-4);
   font-size: var(--ptr-text-sm);
   font-weight: var(--ptr-weight-semibold);
   color: var(--ptr-primary);
 }
-
 .link:hover {
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
