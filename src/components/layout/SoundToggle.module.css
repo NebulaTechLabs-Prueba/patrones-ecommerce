@@ -1,0 +1,21 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--ptr-neutral-600);
+  border-radius: var(--ptr-radius-full);
+  transition: color var(--ptr-duration-fast) var(--ptr-ease), background-color var(--ptr-duration-fast) var(--ptr-ease);
+}
+
+.btn:hover {
+  color: var(--ptr-primary);
+  background: color-mix(in srgb, var(--ptr-primary) 8%, transparent);
+}
+
+.btn[aria-pressed='true'] {
+  color: var(--ptr-primary);
+}

@@ -9,6 +9,7 @@ import { AccountMenu } from './AccountMenu';
 import { CartIndicator } from './CartIndicator';
 import { CurrencySwitch } from './CurrencySwitch';
 import { RubrosNav } from './RubrosNav';
+import { SoundToggle } from './SoundToggle';
 import styles from './Header.module.css';
 
 export function Header() {
@@ -24,6 +25,9 @@ export function Header() {
           <Link href="/linea-patrones/" className={`${styles.link} ${styles.ownLine}`}>
             Línea PATRONES
           </Link>
+          <Link href="/manifiesto/" className={styles.link}>
+            Manifiesto
+          </Link>
           <Link href="/about/" className={styles.link}>
             Nosotros
           </Link>
@@ -33,6 +37,7 @@ export function Header() {
         </nav>
 
         <div className={styles.controls}>
+          <SoundToggle />
           <CurrencySwitch />
           <AccountMenu />
           <CartIndicator />

@@ -5,17 +5,12 @@
  * como la manga son VARIANTES (viven en variants.ts). El precio vive aca (final,
  * USD centavos). Un producto puede pertenecer a mas de un rubro (vertical_ids, N:N).
  *
- * La demo se ve real a proposito:
- *  - p-scrub-aura: featured (salud), con colores en distinto estado de stock.
- *  - p-filipina-bordeaux: featured (gastronomia), variantes por MANGA (atributo).
- *  - p-camisa-oxford: featured (corporativo) -> el featured abarca 3 rubros (§9.4).
- *  - p-conjunto-quirurgico: type 'set' (conjunto CERRADO) con set_pieces y SKU propio.
- *  - p-zueco-terra: N:N, pertenece a salud Y gastronomia.
- *  - p-delantal-bistro: se quedara ENTERO en 0 (variants.ts) -> desaparece del publico.
+ * Imagenes: fotografia de stock (Unsplash) asignada por prenda, por orden del PM,
+ * hasta contar con fotografia propia de PATRONES. Se marcan is_placeholder=false
+ * para mostrarse como imagen del producto; al llegar la foto real, se sustituye la url.
  */
 
-import type { CustomizationConfig, Product } from '../../types';
-import { placeholder } from './taxonomy';
+import type { CustomizationConfig, Product, ProductImage } from '../../types';
 
 /** Personalizacion contemplada desde el dia 1 pero apagada en el MVP (§9.6). */
 const customizationOff: CustomizationConfig = {
@@ -24,6 +19,16 @@ const customizationOff: CustomizationConfig = {
   extra_price_cents: 0,
   extra_days: 0,
 };
+
+/** Foto de stock real (Unsplash), retrato ~4/5. Placeholder de contenido, no de UI. */
+function stock(id: string, alt: string, sort = 0): ProductImage {
+  return {
+    url: `https://images.unsplash.com/photo-${id}?q=80&w=900&h=1100&fit=crop`,
+    alt,
+    is_placeholder: false,
+    sort_order: sort,
+  };
+}
 
 export const products: Product[] = [
   {
@@ -43,8 +48,8 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/scrub-aura-1.jpg', 'Scrub Top Aura verde quirófano, vista frontal', 0),
-      placeholder('/img/productos/scrub-aura-2.jpg', 'Scrub Top Aura, detalle del cuello en V', 1),
+      stock('1576091160399-112ba8d25d1d', 'Profesional de salud con casaca Aura, vista frontal', 0),
+      stock('1559839734-2b71ea197ec2', 'Casaca Aura, detalle del cuello en V', 1),
     ],
     set_pieces: [],
     created_at: '2026-05-02T10:00:00-04:00',
@@ -66,7 +71,7 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/jogger-aura-1.jpg', 'Pantalón Jogger Aura azul marino, vista frontal', 0),
+      stock('1594824476967-48c8b964273f', 'Pantalón Jogger Aura, vista frontal', 0),
     ],
     set_pieces: [],
     created_at: '2026-05-02T10:00:00-04:00',
@@ -88,7 +93,7 @@ export const products: Product[] = [
     low_stock_threshold: 3,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/conjunto-quirurgico-1.jpg', 'Conjunto Quirúrgico Estéril verde, set completo', 0),
+      stock('1612349317150-e413f6a5b16d', 'Conjunto quirúrgico completo, set casaca y pantalón', 0),
     ],
     // set_pieces es DESCRIPTIVO: ficha, busqueda, nota de entrega. Nunca inventario (§9.3).
     set_pieces: [
@@ -114,7 +119,7 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/filipina-bordeaux-1.jpg', 'Filipina Chef Bordeaux blanca, vista frontal', 0),
+      stock('1577219491135-ce391730fb2c', 'Chef con filipina de doble botonadura, vista frontal', 0),
     ],
     set_pieces: [],
     created_at: '2026-05-20T10:00:00-04:00',
@@ -136,7 +141,7 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/delantal-bistro-1.jpg', 'Delantal Bistró marrón, vista frontal', 0),
+      stock('1607083206968-13611e3d76db', 'Delantal de peto en lona, vista frontal', 0),
     ],
     set_pieces: [],
     created_at: '2026-03-10T10:00:00-04:00',
@@ -158,7 +163,7 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/camisa-oxford-1.jpg', 'Camisa Corporativa Oxford celeste, vista frontal', 0),
+      stock('1602810318383-e386cc2a3ccf', 'Camisa corporativa oxford, vista frontal', 0),
     ],
     set_pieces: [],
     created_at: '2026-06-01T10:00:00-04:00',
@@ -180,7 +185,7 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/chaqueta-ejecutiva-1.jpg', 'Chaqueta Corporativa Ejecutiva gris, vista frontal', 0),
+      stock('1594938298603-c8148c4dae35', 'Blazer corporativo estructurado, vista frontal', 0),
     ],
     set_pieces: [],
     created_at: '2026-06-12T10:00:00-04:00',
@@ -202,7 +207,7 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/figs-casma-1.jpg', 'Scrub Top FIGS Casma azul, vista frontal', 0),
+      stock('1584515933487-779824d29309', 'Casaca FIGS Casma en tejido técnico, vista frontal', 0),
     ],
     set_pieces: [],
     size_chart_id: 'sc-figs-womens-tops',
@@ -225,7 +230,7 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/figs-livingston-1.jpg', 'Pantalón FIGS Livingston azul, vista frontal', 0),
+      stock('1631217868264-e5b90bb7e133', 'Pantalón FIGS Livingston, vista frontal', 0),
     ],
     set_pieces: [],
     size_chart_id: 'sc-figs-womens-pants',
@@ -249,7 +254,7 @@ export const products: Product[] = [
     low_stock_threshold: null,
     customization: customizationOff,
     images: [
-      placeholder('/img/productos/zueco-terra-1.jpg', 'Zueco Profesional Terra blanco, vista lateral', 0),
+      stock('1600185365483-26d7a4cc7519', 'Zueco profesional antideslizante, vista lateral', 0),
     ],
     set_pieces: [],
     created_at: '2026-02-25T10:00:00-04:00',

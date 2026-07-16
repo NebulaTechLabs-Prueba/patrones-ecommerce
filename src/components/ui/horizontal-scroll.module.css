@@ -1,0 +1,117 @@
+.main {
+  overflow-x: clip;
+}
+
+/* --- Intro --- */
+.intro {
+  position: relative;
+  height: 80vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--ptr-ink);
+  color: var(--ptr-white);
+}
+.introGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ptr-white) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ptr-white) 8%, transparent) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 40%, black 60%, transparent 100%);
+}
+.introEyebrow {
+  position: relative;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-mint);
+  margin-bottom: var(--ptr-space-4);
+}
+.introTitle {
+  position: relative;
+  font-size: clamp(2.6rem, 6.5vw, 5.5rem);
+  font-weight: var(--ptr-weight-bold);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+/* --- Riel horizontal --- */
+.track {
+  position: relative;
+  height: 500vh;
+  overflow-x: clip;
+}
+.rail {
+  position: sticky;
+  top: 0;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+.panel {
+  position: relative;
+  flex: 0 0 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.word {
+  position: relative;
+  z-index: 1;
+  font-size: 20vw;
+  font-weight: var(--ptr-weight-bold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  bottom: 0.1em;
+  white-space: nowrap;
+}
+.photo {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: clamp(280px, 38vw, 520px);
+  height: auto;
+  border-radius: var(--ptr-radius-lg) var(--ptr-radius-lg) 0 0;
+  box-shadow: var(--ptr-shadow-3);
+}
+
+/* --- Outro --- */
+.outro {
+  height: 80vh;
+  display: grid;
+  place-content: center;
+  gap: var(--ptr-space-5);
+  text-align: center;
+  background: var(--ptr-primary);
+  color: var(--ptr-white);
+}
+.outroText {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: -0.01em;
+}
+.outroCta {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ptr-space-4) var(--ptr-space-7);
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-white);
+  color: var(--ptr-ink);
+  font-weight: var(--ptr-weight-semibold);
+  transition: transform var(--ptr-duration-base) var(--ptr-ease), box-shadow var(--ptr-duration-base) var(--ptr-ease);
+}
+.outroCta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ptr-shadow-3);
+}
