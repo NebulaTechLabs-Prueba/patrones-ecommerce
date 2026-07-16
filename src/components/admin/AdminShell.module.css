@@ -79,9 +79,10 @@
 }
 
 .active {
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: color-mix(in srgb, var(--ptr-white) 16%, transparent);
   opacity: 1;
   font-weight: var(--ptr-weight-semibold);
+  box-shadow: inset 3px 0 0 var(--ptr-mint);
 }
 
 .body {

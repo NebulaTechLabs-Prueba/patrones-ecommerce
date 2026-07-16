@@ -66,23 +66,23 @@ export function AdminOrders({ initialOrders }: { initialOrders: Order[] }) {
           <tbody>
             {orders.map((o) => (
               <tr key={o.id}>
-                <td>
+                <td data-label="Orden">
                   <Link href={`/admin/orders/${o.number}/`} className={ui.rowLink}>
                     {o.number}
                   </Link>
                 </td>
-                <td>
+                <td data-label="Cumplimiento">
                   <span className={`${ui.badge} ${orderTone(o.status)}`}>
                     {ORDER_STATUS_LABELS[o.status]}
                   </span>
                 </td>
-                <td>
+                <td data-label="Pago">
                   <span className={`${ui.badge} ${paymentTone(o.payment_status)}`}>
                     {PAYMENT_STATUS_LABELS[o.payment_status]}
                   </span>
                 </td>
-                <td>{SHIPPING_METHOD_LABELS[o.shipping_method]}</td>
-                <td>
+                <td data-label="Entrega">{SHIPPING_METHOD_LABELS[o.shipping_method]}</td>
+                <td data-label="Avanzar">
                   {isTerminalOrderStatus(o.status) ? (
                     <span className={ui.terminal}>Estado final</span>
                   ) : (

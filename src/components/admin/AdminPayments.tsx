@@ -95,19 +95,19 @@ export function AdminPayments({ initialOrders }: { initialOrders: Order[] }) {
               const actions = ADMIN_ACTIONS[o.payment_status] ?? [];
               return (
                 <tr key={o.id}>
-                  <td>
+                  <td data-label="Orden">
                     <Link href={`/admin/orders/${o.number}/`} className={ui.rowLink}>
                       {o.number}
                     </Link>
                   </td>
-                  <td>{PAYMENT_METHOD_LABELS[o.payment_method]}</td>
-                  <td>{formatUsd(o.total_cents)}</td>
-                  <td>
+                  <td data-label="Método">{PAYMENT_METHOD_LABELS[o.payment_method]}</td>
+                  <td data-label="Monto">{formatUsd(o.total_cents)}</td>
+                  <td data-label="Estado de cobro">
                     <span className={`${ui.badge} ${tone(o.payment_status)}`}>
                       {PAYMENT_STATUS_LABELS[o.payment_status]}
                     </span>
                   </td>
-                  <td>
+                  <td data-label="Acciones">
                     {actions.length === 0 ? (
                       <span className={ui.terminal}>—</span>
                     ) : (

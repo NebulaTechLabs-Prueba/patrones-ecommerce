@@ -200,14 +200,14 @@ export function AdminSettings({
           <tbody>
             {methods.map((m) => (
               <tr key={m.id}>
-                <td>{m.label}</td>
-                <td>{m.is_offline ? 'Con comprobante' : 'En línea'}</td>
-                <td>
+                <td data-label="Método">{m.label}</td>
+                <td data-label="Modo">{m.is_offline ? 'Con comprobante' : 'En línea'}</td>
+                <td data-label="Estado">
                   <span className={`${ui.badge} ${m.is_enabled ? ui.success : ui.neutral}`}>
                     {m.is_enabled ? 'Habilitado' : 'Deshabilitado'}
                   </span>
                 </td>
-                <td>
+                <td data-label="Acciones">
                   <div className={ui.actions}>
                     <button
                       type="button"
