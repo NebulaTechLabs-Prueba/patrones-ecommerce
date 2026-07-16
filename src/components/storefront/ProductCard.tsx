@@ -9,7 +9,7 @@
  *  - Sello de Línea PATRONES cuando corresponde (§9.5).
  */
 
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { PlaceholderImage } from '@/components/brand/PlaceholderImage';
 import { Money } from '@/components/ui/Money';
 import { WishlistButton } from './WishlistButton';
@@ -30,7 +30,7 @@ export function ProductCard({ product, availableColors, brandName, isOwnLine }: 
 
   return (
     <Link href={`/products/${product.slug}/`} className={styles.card}>
-      <div className={styles.media}>
+      <div className={styles.media} style={{ viewTransitionName: `product-${product.id}` }}>
         <PlaceholderImage image={cover} label={product.name} ratio="4 / 5" />
         {isOwnLine ? <span className={styles.ownLine}>Línea PATRONES</span> : null}
         {product.type === 'set' ? <span className={styles.setTag}>Conjunto</span> : null}

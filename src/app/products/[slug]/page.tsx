@@ -121,7 +121,7 @@ export default async function ProductPage({ params }: PageProps) {
 
       <div className={styles.layout}>
         <div className={styles.galleryCol}>
-          <ProductGallery images={product.images} productName={product.name} />
+          <ProductGallery images={product.images} productName={product.name} viewTransitionName={`product-${product.id}`} />
         </div>
 
         <SelectedVariantProvider>

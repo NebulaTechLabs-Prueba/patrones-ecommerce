@@ -16,6 +16,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  background-color: var(--ptr-white);
 }
 
 body {
@@ -23,7 +24,7 @@ body {
   font-size: var(--ptr-text-base);
   line-height: var(--ptr-leading-normal);
   color: var(--ptr-ink);
-  background-color: var(--ptr-white);
+  background-color: transparent;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -51,4 +52,18 @@ button {
   outline: none;
   box-shadow: var(--ptr-focus-ring);
   border-radius: var(--ptr-radius-sm);
+}
+
+/* Transición inmersiva tarjeta -> ficha (View Transitions): ease-in suave. */
+::view-transition-group(*) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }

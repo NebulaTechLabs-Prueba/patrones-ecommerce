@@ -13,16 +13,18 @@ import styles from './ProductGallery.module.css';
 interface ProductGalleryProps {
   images: ProductImage[];
   productName: string;
+  /** Nombre de la transición compartida (morph desde la tarjeta). */
+  viewTransitionName?: string;
 }
 
-export function ProductGallery({ images, productName }: ProductGalleryProps) {
+export function ProductGallery({ images, productName, viewTransitionName }: ProductGalleryProps) {
   const sorted = [...images].sort((a, b) => a.sort_order - b.sort_order);
   const cover = sorted[0] ?? null;
   const rest = sorted.slice(1);
 
   return (
     <div className={styles.gallery}>
-      <div className={styles.cover}>
+      <div className={styles.cover} style={viewTransitionName ? { viewTransitionName } : undefined}>
         <PlaceholderImage image={cover} label={productName} ratio="4 / 5" priority />
       </div>
       {rest.length > 0 ? (

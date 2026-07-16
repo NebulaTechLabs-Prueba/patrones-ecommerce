@@ -5,6 +5,8 @@ import { Footer } from '@/components/layout/Footer';
 import { ChromeGate } from '@/components/layout/ChromeGate';
 import { WhatsappFab } from '@/components/layout/WhatsappFab';
 import { StoreProviders } from '@/components/providers/StoreProviders';
+import { ParticleField } from '@/components/brand/ParticleField';
+import { ViewTransitions } from 'next-view-transitions';
 import { productRepo, settingsRepo } from '@/lib/data';
 import '@/styles/globals.css';
 
@@ -45,6 +47,8 @@ export default async function RootLayout({
   return (
     <html lang="es" className={nunitoSans.variable}>
       <body>
+        <ViewTransitions>
+        <ParticleField />
         <StoreProviders
           rate={rate}
           promotions={promotions}
@@ -64,6 +68,7 @@ export default async function RootLayout({
             <WhatsappFab phone={settings.whatsapp_number} />
           </ChromeGate>
         </StoreProviders>
+        </ViewTransitions>
       </body>
     </html>
   );
