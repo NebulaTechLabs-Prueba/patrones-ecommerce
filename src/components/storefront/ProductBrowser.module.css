@@ -1,3 +1,38 @@
+.head {
+  margin-bottom: var(--ptr-space-6);
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-primary);
+  margin-bottom: var(--ptr-space-3);
+}
+.eyebrow::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: currentColor;
+  margin-right: var(--ptr-space-3);
+}
+.heading {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: var(--ptr-ink);
+}
+.sub {
+  margin-top: var(--ptr-space-2);
+  font-size: var(--ptr-text-base);
+  line-height: var(--ptr-leading-relaxed);
+  color: var(--ptr-neutral-600);
+  max-width: 52ch;
+}
+
 .controls {
   display: flex;
   flex-direction: column;

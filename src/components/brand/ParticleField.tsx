@@ -41,13 +41,13 @@ export function ParticleField() {
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.min(64, Math.max(18, Math.floor((w * h) / 28000)));
+      const n = Math.min(96, Math.max(28, Math.floor((w * h) / 19000)));
       particles = Array.from({ length: n }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: (Math.random() - 0.5) * 0.22,
-        r: Math.random() * 1.6 + 0.5,
+        vx: (Math.random() - 0.5) * 0.26,
+        vy: (Math.random() - 0.5) * 0.26,
+        r: Math.random() * 2 + 0.9,
       }));
     };
 
@@ -58,7 +58,7 @@ export function ParticleField() {
         p.y += p.vy;
         if (p.x < 0 || p.x > w) p.vx *= -1;
         if (p.y < 0 || p.y > h) p.vy *= -1;
-        ctx.globalAlpha = 0.22;
+        ctx.globalAlpha = 0.42;
         ctx.fillStyle = color;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -72,8 +72,8 @@ export function ParticleField() {
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const d2 = dx * dx + dy * dy;
-          if (d2 < 13000) {
-            ctx.globalAlpha = (1 - d2 / 13000) * 0.1;
+          if (d2 < 17000) {
+            ctx.globalAlpha = (1 - d2 / 17000) * 0.18;
             ctx.strokeStyle = color;
             ctx.lineWidth = 1;
             ctx.beginPath();

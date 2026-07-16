@@ -29,6 +29,8 @@ interface ProductBrowserProps {
   categories: Facet[];
   brands: Facet[];
   colors: string[];
+  heading?: string;
+  subheading?: string;
 }
 
 function toggle(set: Set<string>, value: string): Set<string> {
@@ -38,7 +40,7 @@ function toggle(set: Set<string>, value: string): Set<string> {
   return next;
 }
 
-export function ProductBrowser({ items, categories, brands, colors }: ProductBrowserProps) {
+export function ProductBrowser({ items, categories, brands, colors, heading, subheading }: ProductBrowserProps) {
   const [search, setSearch] = useState('');
   const [cats, setCats] = useState<Set<string>>(new Set());
   const [brandSel, setBrandSel] = useState<Set<string>>(new Set());
@@ -66,6 +68,14 @@ export function ProductBrowser({ items, categories, brands, colors }: ProductBro
 
   return (
     <div>
+      {heading ? (
+        <div className={styles.head}>
+          <p className={styles.eyebrow}>La selección</p>
+          <h2 className={styles.heading}>{heading}</h2>
+          {subheading ? <p className={styles.sub}>{subheading}</p> : null}
+        </div>
+      ) : null}
+
       <div className={styles.controls}>
         <input
           type="search"

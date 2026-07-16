@@ -2,9 +2,9 @@
    de patrón; contenido centrado al contenedor vía padding. Solo tokens de marca. */
 .hero {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 1fr 1.1fr;
   align-items: center;
-  gap: var(--ptr-space-8);
+  gap: var(--ptr-space-7);
   padding-block: clamp(var(--ptr-space-8), 7vw, var(--ptr-space-10));
   padding-inline: max(var(--ptr-space-6), calc((100% - var(--ptr-container)) / 2));
   background-color: var(--ptr-cream);
@@ -15,7 +15,7 @@
 }
 
 .text {
-  max-width: 22ch;
+  max-width: 42ch;
 }
 
 .eyebrow {

@@ -78,7 +78,14 @@ export default async function VerticalPage({ params }: PageProps) {
         }}
       >
         {items.length > 0 ? (
-          <ProductBrowser items={items} categories={categories} brands={brands} colors={colors} />
+          <ProductBrowser
+            items={items}
+            categories={categories}
+            brands={brands}
+            colors={colors}
+            heading="Elegí tu uniforme"
+            subheading="Buscá por nombre o filtrá por categoría, marca y color para encontrar lo tuyo."
+          />
         ) : (
           <EmptyState
             title="Sin productos disponibles por ahora"

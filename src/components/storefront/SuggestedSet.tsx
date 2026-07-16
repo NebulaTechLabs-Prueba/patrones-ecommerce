@@ -109,7 +109,7 @@ export function SuggestedSet({ items }: { items: SuggestedProductData[] }) {
               <PlaceholderImage
                 image={
                   item.imageUrl
-                    ? { url: item.imageUrl, alt: item.name, is_placeholder: true, sort_order: 0 }
+                    ? { url: item.imageUrl, alt: item.name, is_placeholder: false, sort_order: 0 }
                     : null
                 }
                 label={item.name}
