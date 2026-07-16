@@ -60,7 +60,7 @@ export default function HorizontalScroll() {
         <article>
           <header className={styles.intro}>
             <div className={styles.introGrid} aria-hidden="true" />
-            <p className={styles.introEyebrow}>Manifiesto PATRONES</p>
+            <p className={styles.introEyebrow}>Nuestra esencia</p>
             <h1 className={styles.introTitle}>
               Vestimos cada oficio.
               <br />

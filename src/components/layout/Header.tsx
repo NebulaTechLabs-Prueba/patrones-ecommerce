@@ -24,8 +24,8 @@ export function Header() {
           <Link href="/linea-patrones/" className={`${styles.link} ${styles.ownLine}`}>
             Línea PATRONES
           </Link>
-          <Link href="/manifiesto/" className={styles.link}>
-            Manifiesto
+          <Link href="/esencia/" className={styles.link}>
+            Esencia
           </Link>
           <Link href="/about/" className={styles.link}>
             Nosotros
