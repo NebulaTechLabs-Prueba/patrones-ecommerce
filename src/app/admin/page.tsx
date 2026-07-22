@@ -84,7 +84,7 @@ export default async function AdminDashboardPage() {
             </ul>
             {alerts.length > 5 ? (
               <p className={styles.sectionNote}>
-                y {alerts.length - 5} más. Gestioná todo en Inventario.
+                y {alerts.length - 5} más. Gestiona todo en Inventario.
               </p>
             ) : null}
           </>

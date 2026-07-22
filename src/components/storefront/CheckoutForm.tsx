@@ -26,8 +26,8 @@ const DOC_KINDS: IdentityDocKind[] = ['V', 'E', 'J', 'G', 'P'];
 
 const SHIPPING_OPTIONS: Array<{ method: ShippingMethod; label: string; note: string }> = [
   { method: 'pickup', label: 'Retiro en tienda', note: 'C.C. Costa Granada, Puerto Ordaz. Sin costo.' },
-  { method: 'zoom', label: 'Zoom', note: 'Flete pagado en destino al retirar. Informá la oficina.' },
-  { method: 'mrw', label: 'MRW', note: 'Flete pagado en destino al retirar. Informá la oficina.' },
+  { method: 'zoom', label: 'Zoom', note: 'Flete pagado en destino al retirar. Informa la oficina.' },
+  { method: 'mrw', label: 'MRW', note: 'Flete pagado en destino al retirar. Informa la oficina.' },
   { method: 'delivery_local', label: 'Delivery local', note: 'Tarifa a acordar. Simulado en la demo.' },
 ];
 
@@ -101,7 +101,7 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
         <div className={styles.confirmation}>
           <h1 className={styles.title}>Recibimos tu pedido</h1>
           <p className={styles.muted}>
-            Te contactaremos para coordinar el pago y la entrega. Podés seguir el estado desde
+            Te contactaremos para coordinar el pago y la entrega. Puedes seguir el estado desde
             tu cuenta.
           </p>
           <p className={styles.summaryLine}>
@@ -238,7 +238,7 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
                   <input value={officeName} onChange={(e) => setOfficeName(e.target.value)} />
                 </label>
                 <p className={`${styles.help} ${styles.full}`}>
-                  El flete lo pagás al retirar en destino; el checkout no lo cobra.
+                  El flete lo pagas al retirar en destino; el checkout no lo cobra.
                 </p>
               </div>
             ) : null}

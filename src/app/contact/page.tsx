@@ -9,7 +9,7 @@ import styles from './contact.module.css';
 
 export const metadata: Metadata = {
   title: 'Contacto — PATRONES',
-  description: 'Escríbenos por WhatsApp, visitanos en Puerto Ordaz o consultá nuestro horario.',
+  description: 'Escríbenos por WhatsApp, visítanos en Puerto Ordaz o consulta nuestro horario.',
 };
 
 const MAPS_URL = 'https://maps.app.goo.gl/Z4DzPoUoodymjQwJ7';

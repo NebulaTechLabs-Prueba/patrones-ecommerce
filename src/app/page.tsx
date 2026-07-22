@@ -45,8 +45,8 @@ export default async function HomePage() {
             <p className={styles.eyebrow}>Rubros</p>
             <h2 className={styles.heading}>Un mundo profesional por cada puerta</h2>
             <p className={styles.subhead}>
-              Cada rubro tiene su selección, sus telas y sus tallas. Entrá por el tuyo
-              — o descubrí los demás.
+              Cada rubro tiene su selección y su carácter. Entra por el tuyo — o
+              descubre los demás.
             </p>
           </Reveal>
 
@@ -85,8 +85,8 @@ export default async function HomePage() {
             <p className={styles.eyebrowLight}>Nueva colección</p>
             <h2 className={styles.headingLight}>Tu día, a todo color</h2>
             <p className={styles.subheadLight}>
-              Del quirófano a la cocina y la oficina: profesionales que no paran, vestidos
-              por PATRONES. Toca cada punto para descubrir la colección.
+              Del quirófano a la cocina, de la oficina a la calle: profesionales que no
+              paran, equipados por PATRONES. Toca cada punto para descubrir la colección.
             </p>
           </Reveal>
         </div>

@@ -21,8 +21,8 @@ export default async function TallasPage() {
         <p className={styles.eyebrow}>Ayuda</p>
         <h1 className={styles.title}>Guía de tallas</h1>
         <p className={styles.lead}>
-          Medidas por prenda. Cada tipo tiene sus propias referencias; tomá tus medidas y
-          compará con la tabla.
+          Medidas por prenda. Cada tipo tiene sus propias referencias; toma tus medidas y
+          compara con la tabla.
         </p>
       </header>
 

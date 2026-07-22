@@ -37,8 +37,8 @@ export async function Footer() {
         {/* Llamado a la acción */}
         <div className={styles.cta}>
           <div>
-            <p className={styles.ctaEyebrow}>Vestimos a tu equipo</p>
-            <h2 className={styles.ctaTitle}>Armemos el uniforme de tu profesión.</h2>
+            <p className={styles.ctaEyebrow}>Equipamos a tu equipo</p>
+            <h2 className={styles.ctaTitle}>Armemos el look de tu profesión, de pies a cabeza.</h2>
           </div>
           <div className={styles.ctaActions}>
             <a className={styles.ctaPrimary} href={waLink} target="_blank" rel="noopener noreferrer">
@@ -56,7 +56,7 @@ export async function Footer() {
           <div className={styles.brandCol}>
             <p className={styles.brand}>PATRONES</p>
             <p className={styles.muted}>
-              Uniformes profesionales multi-rubro. Línea propia y marcas seleccionadas,
+              Todo para el profesional, de pies a cabeza. Línea propia y marcas seleccionadas,
               con la asesoría de quienes visten Puerto Ordaz.
             </p>
           </div>
@@ -96,7 +96,7 @@ export async function Footer() {
 
         <div className={styles.bottom}>
           <p>© {year} PATRONES · Puerto Ordaz, Venezuela</p>
-          <p className={styles.note}>Uniformes profesionales · Puerto Ordaz</p>
+          <p className={styles.note}>De pies a cabeza · Puerto Ordaz</p>
         </div>
       </div>
     </footer>

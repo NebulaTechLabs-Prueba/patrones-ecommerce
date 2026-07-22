@@ -14,7 +14,7 @@ import styles from './about.module.css';
 export const metadata: Metadata = {
   title: 'Nosotros — PATRONES',
   description:
-    'Casa de uniformes profesionales multi-rubro en Puerto Ordaz: salud, gastronomía y corporativo. Línea propia y dotación institucional.',
+    'La casa que equipa al profesional de pies a cabeza en Puerto Ordaz: uniformes de alto rendimiento, calzado, perfumería y complementos. Línea propia, marcas seleccionadas y dotación institucional.',
 };
 
 const shot = (id: string, alt: string): ProductImage => ({
@@ -51,11 +51,12 @@ export default function AboutPage() {
       <section className={styles.hero}>
         <Reveal className={styles.heroInner}>
           <p className={styles.eyebrow}>Nosotros</p>
-          <h1 className={styles.title}>Uniformes profesionales, para cada oficio</h1>
+          <h1 className={styles.title}>Todo para el profesional, de pies a cabeza</h1>
           <p className={styles.lead}>
-            Nacimos en Puerto Ordaz vistiendo al personal de salud y hoy somos una casa de
-            uniformes multi-rubro: salud, gastronomía y corporativo. Combinamos nuestra línea
-            propia con marcas seleccionadas para resolver la dotación completa de cada equipo.
+            Nacimos en Puerto Ordaz vistiendo al personal de salud y hoy equipamos al
+            profesional entero: uniformes de alto rendimiento para cada rubro —salud,
+            gastronomía, corporativo y más—, sumados a calzado, perfumería y complementos.
+            Una sola casa que combina su línea propia con marcas seleccionadas, de pies a cabeza.
           </p>
         </Reveal>
       </section>
@@ -64,16 +65,20 @@ export default function AboutPage() {
         <div className={styles.values}>
           {[
             {
+              t: 'Versatilidad integral',
+              d: 'Una misma casa resuelve el uniforme, el calzado, la fragancia y el complemento. Todo lo que un profesional necesita, de pies a cabeza.',
+            },
+            {
+              t: 'Vanguardia y estilo',
+              d: 'Rompemos el molde: prendas y piezas pensadas para verse tan bien como rinden. Para que cada quien sea patrón de su propio camino.',
+            },
+            {
+              t: 'Alto rendimiento y detalle',
+              d: 'Telas, marcas y terminaciones elegidas con exigencia. Cuidamos cada detalle para que acompañen la jornada sin ceder.',
+            },
+            {
               t: 'Línea propia + marcas',
-              d: 'Diseñamos y producimos la Línea PATRONES, y sumamos marcas de terceros para ampliar opciones sin resignar calidad.',
-            },
-            {
-              t: 'Multi-rubro',
-              d: 'Una misma casa resuelve el scrub de la clínica, la filipina del chef y la camisa de recepción.',
-            },
-            {
-              t: 'Atención cercana',
-              d: 'Asesoría por talles y disponibilidad, y atención directa por WhatsApp antes y después de la compra.',
+              d: 'Diseñamos y producimos la Línea PATRONES, y sumamos marcas seleccionadas para ampliar opciones sin resignar calidad.',
             },
           ].map((v, i) => (
             <Reveal key={v.t} delay={i * 90} className={styles.value}>

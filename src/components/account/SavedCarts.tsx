@@ -55,7 +55,7 @@ export function SavedCarts({ carts }: { carts: AbandonedCart[] }) {
       <div className={styles.empty}>
         <p className={styles.emptyTitle}>No tienes carritos olvidados</p>
         <p className={styles.emptyText}>
-          Si dejas productos sin comprar, los guardamos acá para que los retomes (hasta{' '}
+          Si dejas productos sin comprar, los guardamos aquí para que los retomes (hasta{' '}
           {MAX_RECOVERABLE}).
         </p>
       </div>
@@ -65,7 +65,7 @@ export function SavedCarts({ carts }: { carts: AbandonedCart[] }) {
   return (
     <div>
       <p className={styles.intro}>
-        Retomá donde lo dejaste. Guardamos tus últimos {MAX_RECOVERABLE} carritos sin cerrar.
+        Retoma donde lo dejaste. Guardamos tus últimos {MAX_RECOVERABLE} carritos sin cerrar.
       </p>
 
       <ul className={styles.list}>

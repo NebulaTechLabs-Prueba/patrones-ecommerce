@@ -83,8 +83,8 @@ export default async function VerticalPage({ params }: PageProps) {
             categories={categories}
             brands={brands}
             colors={colors}
-            heading="Elige tu uniforme"
-            subheading="Busca por nombre o filtrá por categoría, marca y color para encontrar lo tuyo."
+            heading="Explora el rubro"
+            subheading="Busca por nombre o filtra por categoría, marca y color para encontrar lo tuyo."
           />
         ) : (
           <EmptyState

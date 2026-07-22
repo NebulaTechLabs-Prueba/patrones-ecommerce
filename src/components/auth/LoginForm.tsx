@@ -62,7 +62,7 @@ export function LoginForm() {
           </Link>
           <p className={styles.eyebrow}>Tu cuenta</p>
           <h1 className={styles.title}>Ingresa a tu cuenta</h1>
-          <p className={styles.lead}>Usá un acceso rápido o ingresa tus credenciales.</p>
+          <p className={styles.lead}>Usa un acceso rápido o ingresa tus credenciales.</p>
 
           <div className={styles.quick}>
             <button type="button" className={styles.quickBtn} onClick={() => quickLogin('customer')}>

@@ -23,7 +23,7 @@ export function Wishlist() {
       <div className={styles.empty}>
         <p className={styles.emptyTitle}>Tu lista está vacía</p>
         <p className={styles.emptyText}>
-          Marcá el corazón en las prendas que te interesan; si se agotan, las retenemos acá y te
+          Marca el corazón en las prendas que te interesan; si se agotan, las retenemos aquí y te
           avisamos cuando vuelven.
         </p>
         <Link href="/" className={styles.action}>

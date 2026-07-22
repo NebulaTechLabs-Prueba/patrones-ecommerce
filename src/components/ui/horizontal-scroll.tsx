@@ -62,9 +62,9 @@ export default function HorizontalScroll() {
             <div className={styles.introGrid} aria-hidden="true" />
             <p className={styles.introEyebrow}>Nuestra esencia</p>
             <h1 className={styles.introTitle}>
-              Vestimos cada oficio.
+              Te equipamos entero.
               <br />
-              Deslizá.
+              Desliza.
             </h1>
           </header>
 
@@ -83,9 +83,9 @@ export default function HorizontalScroll() {
           </section>
 
           <footer className={styles.outro}>
-            <p className={styles.outroText}>Del quirófano a la cocina y la oficina.</p>
-            <a href="/uniformes/salud/" className={styles.outroCta} data-sound="primary">
-              Ver los uniformes
+            <p className={styles.outroText}>Del quirófano a la cocina, y de la oficina a la calle.</p>
+            <a href="/uniformes/salud/" className={styles.outroCta} data-sound="add">
+              Explora los rubros
             </a>
           </footer>
         </article>

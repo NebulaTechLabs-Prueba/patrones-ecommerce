@@ -57,13 +57,13 @@ export const faqs: Faq[] = [
   {
     question: '¿Cómo hago un pedido?',
     answer:
-      'Armás tu carrito libremente. Al iniciar el proceso de compra te pedimos iniciar sesión o crear tu cuenta, y desde ahí eliges método de pago y de entrega.',
+      'Armas tu carrito libremente. Al iniciar el proceso de compra te pedimos iniciar sesión o crear tu cuenta, y desde ahí eliges método de pago y de entrega.',
     sort_order: 2,
   },
   {
     question: '¿Qué pasa si no está el producto que necesito?',
     answer:
-      'Si una prenda no aparece, no tiene existencia disponible en este momento. Podés agregarla a tu lista de deseados: cuando vuelva, te avisamos.',
+      'Si una prenda no aparece, no tiene existencia disponible en este momento. Puedes agregarla a tu lista de deseados: cuando vuelva, te avisamos.',
     sort_order: 3,
   },
   {

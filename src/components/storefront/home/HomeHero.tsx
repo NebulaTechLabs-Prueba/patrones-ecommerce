@@ -80,7 +80,7 @@ export function HomeHero() {
       <div className={styles.inner}>
         <p className={styles.eyebrow}>
           <span className={styles.eyebrowTick} aria-hidden="true" />
-          Uniformes profesionales · Puerto Ordaz
+          Para el profesional, de pies a cabeza · Puerto Ordaz
         </p>
 
         <h1 className={styles.title}>
@@ -94,9 +94,9 @@ export function HomeHero() {
         </h1>
 
         <p className={styles.lead}>
-          Scrubs, filipinas y uniformes corporativos que aguantan el ritmo de tu
-          día. Línea propia PATRONES y las mejores marcas, con la asesoría de quienes
-          visten a los profesionales de Puerto Ordaz.
+          Uniformes de alto rendimiento, calzado, perfumería y complementos: todo lo
+          que un profesional necesita para verse y sentirse a la altura. Línea propia
+          PATRONES y las mejores marcas, con la asesoría de quienes visten a Puerto Ordaz.
         </p>
 
         <div className={styles.actions}>
@@ -110,7 +110,7 @@ export function HomeHero() {
       </div>
 
       <div className={styles.scrollHint} aria-hidden="true">
-        <span>Desplazá</span>
+        <span>Desplaza</span>
         <span className={styles.scrollLine} />
       </div>
     </section>

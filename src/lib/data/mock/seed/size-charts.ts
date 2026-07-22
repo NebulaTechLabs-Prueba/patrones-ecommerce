@@ -10,14 +10,14 @@
 import type { SizeChart } from '../../types';
 
 const MEASURE_TOP = [
-  { label: 'Busto/Pecho', text: 'Rodeá la parte más ancha del busto o pecho.' },
-  { label: 'Cintura', text: 'Rodeá la parte más angosta de la cintura.' },
-  { label: 'Cadera', text: 'Rodeá la parte más ancha de la cadera.' },
+  { label: 'Busto/Pecho', text: 'Rodea la parte más ancha del busto o pecho.' },
+  { label: 'Cintura', text: 'Rodea la parte más angosta de la cintura.' },
+  { label: 'Cadera', text: 'Rodea la parte más ancha de la cadera.' },
 ];
 
 const MEASURE_PANTS = [
-  { label: 'Cintura', text: 'Rodeá la parte más angosta de la cintura.' },
-  { label: 'Cadera', text: 'Rodeá la parte más ancha de la cadera.' },
+  { label: 'Cintura', text: 'Rodea la parte más angosta de la cintura.' },
+  { label: 'Cadera', text: 'Rodea la parte más ancha de la cadera.' },
 ];
 
 export const sizeCharts: SizeChart[] = [

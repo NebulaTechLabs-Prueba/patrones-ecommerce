@@ -162,7 +162,7 @@ export function ProductBrowser({ items, categories, brands, colors, heading, sub
       ) : (
         <EmptyState
           title="Sin resultados"
-          description="Prueba con otros filtros o ajustá la búsqueda."
+          description="Prueba con otros filtros o ajusta la búsqueda."
         />
       )}
     </div>

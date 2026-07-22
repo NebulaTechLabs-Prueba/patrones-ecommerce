@@ -20,7 +20,7 @@ const nunitoSans = Nunito_Sans({
 export const metadata: Metadata = {
   title: 'PATRONES',
   description:
-    'Uniformes profesionales multi-rubro: salud, gastronomia, corporativo y mas. Linea propia y marcas seleccionadas.',
+    'Todo para el profesional, de pies a cabeza: uniformes de alto rendimiento, calzado, perfumería y complementos. Línea propia y marcas seleccionadas en Puerto Ordaz.',
 };
 
 export default async function RootLayout({
