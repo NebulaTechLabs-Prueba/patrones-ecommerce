@@ -33,10 +33,10 @@ export const exchangeRate: ExchangeRate = {
 // --- Conjuntos SUGERIDOS (relacion entre productos sueltos, §9.3) -----------
 export const bundles: Bundle[] = [
   {
-    id: 'bnd-aura',
-    name: 'Conjunto Aura',
-    // Sugiere completar la casaca con su jogger. Nunca auto-agrega.
-    product_ids: ['p-scrub-aura', 'p-jogger-aura'],
+    id: 'bnd-guardia',
+    name: 'Combina tu guardia',
+    // Sugiere complementar un uniforme con otro del rubro. Nunca auto-agrega.
+    product_ids: ['p-inv-000', 'p-inv-001'],
     sort_order: 1,
   },
 ];
@@ -48,8 +48,8 @@ export const collections: Collection[] = [
     slug: 'esenciales-de-guardia',
     name: 'Esenciales de guardia',
     description:
-      'Lo que sostiene un turno completo: scrubs, calzado y el conjunto quirúrgico, en una sola selección.',
-    product_ids: ['p-scrub-aura', 'p-jogger-aura', 'p-conjunto-quirurgico', 'p-zueco-terra'],
+      'Una selección para el personal de salud: uniformes y esenciales para sostener el turno completo.',
+    product_ids: ['p-inv-000', 'p-inv-001', 'p-inv-002', 'p-inv-003', 'p-inv-006', 'p-inv-011'],
     hero_image: null,
     starts_at: null,
     ends_at: null,

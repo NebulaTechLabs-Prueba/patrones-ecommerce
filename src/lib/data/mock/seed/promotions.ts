@@ -45,12 +45,12 @@ export const promotions: Promotion[] = [
   },
   {
     id: 'promo-mayoreo-scrub',
-    name: 'Mayoreo Scrub Top Aura',
+    name: 'Mayoreo Uniforme PATRONES',
     type: 'quantity',
     scope: 'product',
     value: 15, // % adicional al superar el umbral
     min_quantity: 6,
-    target_id: 'p-scrub-aura',
+    target_id: 'p-inv-003',
     stackable: true,
     priority: 3,
     is_active: true,
@@ -59,12 +59,12 @@ export const promotions: Promotion[] = [
   },
   {
     id: 'promo-oxford-precio',
-    name: 'Camisa Oxford — precio especial',
+    name: 'Uniforme importado — precio especial',
     type: 'variant_special_price',
     scope: 'product',
-    value: 2700, // precio especial en centavos
+    value: 8500, // precio especial en centavos
     min_quantity: null,
-    target_id: 'p-camisa-oxford',
+    target_id: 'p-inv-002',
     stackable: false, // no se apila: es un precio fijado
     priority: 1,
     is_active: true,
