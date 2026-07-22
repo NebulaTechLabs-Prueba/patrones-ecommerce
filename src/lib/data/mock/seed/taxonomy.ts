@@ -57,6 +57,50 @@ export const verticals: Vertical[] = [
     sort_order: 3,
     is_active: true,
   },
+  {
+    id: 'v-calzado',
+    slug: 'calzado',
+    name: 'Calzado',
+    tagline: 'De la guardia a la calle, sin cambiar de paso.',
+    description:
+      'Zuecos profesionales, Crocs y calzado deportivo de alta comodidad. Suelas que aguantan turnos largos y también los kilómetros de después.',
+    hero_image: stock('1542291026-7eec264c27ff', 'Calzado deportivo y profesional PATRONES'),
+    sort_order: 4,
+    is_active: true,
+  },
+  {
+    id: 'v-perfumeria',
+    slug: 'perfumeria',
+    name: 'Perfumería',
+    tagline: 'La firma que se queda cuando termina la jornada.',
+    description:
+      'Fragancias seleccionadas para acompañar tu presencia. El detalle final de una imagen profesional, cuidada de pies a cabeza.',
+    hero_image: stock('1541643600914-78b084683601', 'Fragancias de la perfumería PATRONES'),
+    sort_order: 5,
+    is_active: true,
+  },
+  {
+    id: 'v-complementos',
+    slug: 'complementos',
+    name: 'Complementos',
+    tagline: 'El detalle que completa el conjunto.',
+    description:
+      'Carteras, bisutería y cosmética para redondear tu estilo. Piezas que acompañan del trabajo a lo cotidiano sin perder la elegancia.',
+    hero_image: stock('1584917865442-de89df76afd3', 'Carteras y complementos PATRONES'),
+    sort_order: 6,
+    is_active: true,
+  },
+  {
+    id: 'v-deportivo',
+    slug: 'deportivo',
+    name: 'Deportivo',
+    tagline: 'Alto rendimiento dentro y fuera del trabajo.',
+    description:
+      'Ropa y accesorios deportivos de alto rendimiento. Comodidad y libertad de movimiento para seguir tu propio ritmo.',
+    hero_image: stock('1517836357463-d25dfeac3438', 'Ropa y accesorios deportivos PATRONES'),
+    sort_order: 7,
+    is_active: true,
+  },
 ];
 
 export const brands: Brand[] = [
@@ -88,6 +132,27 @@ export const brands: Brand[] = [
     is_own_line: false,
     logo_image: null,
   },
+  {
+    id: 'b-nike',
+    slug: 'nike',
+    name: 'Nike',
+    is_own_line: false,
+    logo_image: null,
+  },
+  {
+    id: 'b-crocs',
+    slug: 'crocs',
+    name: 'Crocs',
+    is_own_line: false,
+    logo_image: null,
+  },
+  {
+    id: 'b-essenza',
+    slug: 'essenza',
+    name: 'Essenza',
+    is_own_line: false,
+    logo_image: null,
+  },
 ];
 
 export const categories: Category[] = [
@@ -98,6 +163,13 @@ export const categories: Category[] = [
   { id: 'cat-chaquetas', slug: 'chaquetas', name: 'Chaquetas', parent_id: null, sort_order: 5 },
   { id: 'cat-calzado', slug: 'calzado', name: 'Calzado', parent_id: null, sort_order: 6 },
   { id: 'cat-accesorios', slug: 'accesorios', name: 'Accesorios', parent_id: null, sort_order: 7 },
+  { id: 'cat-batas', slug: 'batas', name: 'Batas médicas', parent_id: null, sort_order: 8 },
+  { id: 'cat-pijamas', slug: 'pijamas', name: 'Pijamas', parent_id: null, sort_order: 9 },
+  { id: 'cat-perfumeria', slug: 'perfumeria', name: 'Perfumería', parent_id: null, sort_order: 10 },
+  { id: 'cat-carteras', slug: 'carteras', name: 'Carteras', parent_id: null, sort_order: 11 },
+  { id: 'cat-bisuteria', slug: 'bisuteria', name: 'Bisutería', parent_id: null, sort_order: 12 },
+  { id: 'cat-cosmetica', slug: 'cosmetica', name: 'Cosmética', parent_id: null, sort_order: 13 },
+  { id: 'cat-deportiva', slug: 'ropa-deportiva', name: 'Ropa deportiva', parent_id: null, sort_order: 14 },
 ];
 
 /** Modelo = el diseño; agrupa productos dentro de un rubro. */
@@ -111,6 +183,11 @@ export const models: Model[] = [
   { id: 'm-terra', slug: 'terra', name: 'Terra', vertical_id: 'v-salud' },
   { id: 'm-figs-casma', slug: 'casma', name: 'Casma', vertical_id: 'v-salud' },
   { id: 'm-figs-livingston', slug: 'livingston', name: 'Livingston', vertical_id: 'v-salud' },
+  { id: 'm-crocs-classic', slug: 'crocs-classic', name: 'Classic', vertical_id: 'v-calzado' },
+  { id: 'm-nike-run', slug: 'nike-run', name: 'Revolution', vertical_id: 'v-calzado' },
+  { id: 'm-essenza', slug: 'essenza', name: 'Essenza', vertical_id: 'v-perfumeria' },
+  { id: 'm-atelier', slug: 'atelier', name: 'Atelier', vertical_id: 'v-complementos' },
+  { id: 'm-active', slug: 'active', name: 'Active', vertical_id: 'v-deportivo' },
 ];
 
 export { placeholder };

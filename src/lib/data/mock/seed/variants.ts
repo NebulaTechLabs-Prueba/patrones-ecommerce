@@ -22,6 +22,12 @@ const negro: VariantColor = { name: 'Negro', hex: '#1d1d1b' };
 const celeste: VariantColor = { name: 'Celeste', hex: '#cfe0ec' };
 const marron: VariantColor = { name: 'Marrón', hex: '#5b4636' };
 const gris: VariantColor = { name: 'Gris grafito', hex: '#4a4d52' };
+const arena: VariantColor = { name: 'Arena', hex: '#d8c3a5' };
+const ambar: VariantColor = { name: 'Ámbar', hex: '#b5793a' };
+const cristal: VariantColor = { name: 'Cristal', hex: '#dfe6e9' };
+const dorado: VariantColor = { name: 'Dorado', hex: '#c9a24b' };
+const plateado: VariantColor = { name: 'Plateado', hex: '#bfc3c7' };
+const azulRey: VariantColor = { name: 'Azul rey', hex: '#2a4bd7' };
 
 interface VariantSpec {
   sku: string;
@@ -146,5 +152,70 @@ export const variants: ProductVariant[] = [
     { sku: 'CHL-TRR-ZUE-BL-41', size: '41', color: blanco, stock: 12 },
     { sku: 'CHL-TRR-ZUE-NG-40', size: '40', color: negro, stock: 8 },
     { sku: 'CHL-TRR-ZUE-NG-41', size: '41', color: negro, stock: 0 }, // variante oculta
+  ]),
+
+  // --- Crocs Classic Clog: numeracion, negro y azul rey. -------------------
+  ...variantsFor('p-crocs-classic', [
+    { sku: 'CRC-CLS-CLG-NG-37', size: '37', color: negro, stock: 12 },
+    { sku: 'CRC-CLS-CLG-NG-38', size: '38', color: negro, stock: 9 },
+    { sku: 'CRC-CLS-CLG-NG-39', size: '39', color: negro, stock: 4 }, // bajo
+    { sku: 'CRC-CLS-CLG-NG-40', size: '40', color: negro, stock: 15 },
+    { sku: 'CRC-CLS-CLG-AR-38', size: '38', color: azulRey, stock: 7 },
+    { sku: 'CRC-CLS-CLG-AR-39', size: '39', color: azulRey, stock: 11 },
+    { sku: 'CRC-CLS-CLG-AR-40', size: '40', color: azulRey, stock: 0 }, // variante oculta
+  ]),
+
+  // --- Nike Revolution Running: numeracion, negro y gris. ------------------
+  ...variantsFor('p-nike-revolution', [
+    { sku: 'NIK-REV-RUN-NG-39', size: '39', color: negro, stock: 8 },
+    { sku: 'NIK-REV-RUN-NG-40', size: '40', color: negro, stock: 10 },
+    { sku: 'NIK-REV-RUN-NG-41', size: '41', color: negro, stock: 5 }, // bajo
+    { sku: 'NIK-REV-RUN-NG-42', size: '42', color: negro, stock: 6 },
+    { sku: 'NIK-REV-RUN-GR-41', size: '41', color: gris, stock: 9 },
+    { sku: 'NIK-REV-RUN-GR-42', size: '42', color: gris, stock: 3 }, // bajo
+  ]),
+
+  // --- Eau de Parfum Noir: volumen como talla, frasco ambar. --------------
+  ...variantsFor('p-perfume-noir', [
+    { sku: 'ESZ-NOIR-EDP-50', size: '50 ml', color: ambar, stock: 14 },
+    { sku: 'ESZ-NOIR-EDP-100', size: '100 ml', color: ambar, stock: 6, price_override: 4200 },
+  ]),
+
+  // --- Eau de Toilette Blanc: volumen como talla, frasco cristal. ----------
+  ...variantsFor('p-perfume-blanc', [
+    { sku: 'ESZ-BLANC-EDT-50', size: '50 ml', color: cristal, stock: 10 },
+    { sku: 'ESZ-BLANC-EDT-100', size: '100 ml', color: cristal, stock: 4, price_override: 3400 }, // bajo
+  ]),
+
+  // --- Cartera Tote Metropolitana: talla unica, tres colores. --------------
+  ...variantsFor('p-cartera-tote', [
+    { sku: 'PTR-ATL-TOTE-NG-U', size: 'Única', color: negro, stock: 11 },
+    { sku: 'PTR-ATL-TOTE-MR-U', size: 'Única', color: marron, stock: 7 },
+    { sku: 'PTR-ATL-TOTE-AR-U', size: 'Única', color: arena, stock: 3 }, // bajo
+  ]),
+
+  // --- Set de Bisuteria Esencial: talla unica, dorado y plateado. ----------
+  ...variantsFor('p-set-bisuteria', [
+    { sku: 'PTR-ATL-SET-DO-U', size: 'Única', color: dorado, stock: 18 },
+    { sku: 'PTR-ATL-SET-PL-U', size: 'Única', color: plateado, stock: 9 },
+  ]),
+
+  // --- Legging Active High: tallas alfa, negro/gris/vino. ------------------
+  ...variantsFor('p-legging-active', [
+    { sku: 'PTR-ACT-LEG-NG-S', size: 'S', color: negro, stock: 13 },
+    { sku: 'PTR-ACT-LEG-NG-M', size: 'M', color: negro, stock: 16 },
+    { sku: 'PTR-ACT-LEG-NG-L', size: 'L', color: negro, stock: 5 }, // bajo
+    { sku: 'PTR-ACT-LEG-GR-M', size: 'M', color: gris, stock: 8 },
+    { sku: 'PTR-ACT-LEG-GR-L', size: 'L', color: gris, stock: 10 },
+    { sku: 'PTR-ACT-LEG-VN-M', size: 'M', color: vino, stock: 2 }, // bajo
+  ]),
+
+  // --- Nike Dri-FIT Tee: tallas alfa, tres colores. -----------------------
+  ...variantsFor('p-nike-tee', [
+    { sku: 'NIK-ACT-TEE-NG-S', size: 'S', color: negro, stock: 12 },
+    { sku: 'NIK-ACT-TEE-NG-M', size: 'M', color: negro, stock: 14 },
+    { sku: 'NIK-ACT-TEE-NG-L', size: 'L', color: negro, stock: 9 },
+    { sku: 'NIK-ACT-TEE-BL-M', size: 'M', color: blanco, stock: 6 },
+    { sku: 'NIK-ACT-TEE-CL-M', size: 'M', color: celeste, stock: 4 }, // bajo
   ]),
 ];
