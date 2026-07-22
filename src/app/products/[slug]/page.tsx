@@ -21,6 +21,7 @@ import { SuggestedSet, type SuggestedProductData } from '@/components/storefront
 import { VariantSelector, type SelectableVariant } from '@/components/storefront/VariantSelector';
 import { WishlistButton } from '@/components/storefront/WishlistButton';
 import { productRepo, settingsRepo } from '@/lib/data';
+import type { ProductImage } from '@/lib/data/types';
 import { filterAvailableVariants, getAvailableStock } from '@/lib/domains/availability';
 import { getBrandsById, getProductDetail, getVisibleProductSlugs } from '@/lib/storefront/catalog';
 import { SelectedVariantProvider } from '@/lib/store/selected-variant-context';
@@ -93,6 +94,16 @@ export default async function ProductPage({ params }: PageProps) {
     availableQty: getAvailableStock(v),
   }));
 
+  // Imagen por variante (§9): cada color puede traer su propia foto. Se agrupa por
+  // nombre de color; al elegirlo, la galería muestra la suya. Solo variantes
+  // disponibles, para no ofrecer la foto de un color agotado (§7).
+  const variantImages: Record<string, ProductImage[]> = {};
+  for (const v of filterAvailableVariants(variants)) {
+    if (v.images && v.images.length > 0 && !variantImages[v.color.name]) {
+      variantImages[v.color.name] = v.images;
+    }
+  }
+
   const classification = {
     productId: product.id,
     productSlug: product.slug,
@@ -119,12 +130,17 @@ export default async function ProductPage({ params }: PageProps) {
         <span className={styles.current}>{product.name}</span>
       </nav>
 
+      <SelectedVariantProvider>
       <div className={styles.layout}>
         <div className={styles.galleryCol}>
-          <ProductGallery images={product.images} productName={product.name} viewTransitionName={`product-${product.id}`} />
+          <ProductGallery
+            productImages={product.images}
+            variantImages={variantImages}
+            productName={product.name}
+            viewTransitionName={`product-${product.id}`}
+          />
         </div>
 
-        <SelectedVariantProvider>
         <div className={styles.infoCol}>
           <div className={styles.headings}>
             {brand ? (
@@ -181,8 +197,8 @@ export default async function ProductPage({ params }: PageProps) {
 
           <SuggestedSet items={suggestedData} />
         </div>
-        </SelectedVariantProvider>
       </div>
+      </SelectedVariantProvider>
     </main>
   );
 }

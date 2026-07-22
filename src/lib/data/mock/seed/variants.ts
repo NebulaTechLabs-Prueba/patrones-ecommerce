@@ -243,8 +243,39 @@ export const variants: ProductVariant[] = [
   },
   {
     id: "p-inv-047-v1", product_id: "p-inv-047", sku: "196265881987",
-    size: "4/6", color: { name: "Pitaya Talla", hex: "#d94f7a" },
+    size: "4/6", color: { name: "Pitaya", hex: "#d94f7a" },
     attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
+    images: [{ url: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=900&h=1100&fit=crop", alt: "Crocs Classic Unisex color Pitaya", is_placeholder: false, sort_order: 0 }],
+  },
+  {
+    id: "p-inv-047-v2", product_id: "p-inv-047", sku: "X004QPGYZ1",
+    size: "5/7", color: { name: "Amarillo", hex: "#e3c04a" },
+    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
+    images: [{ url: "https://images.unsplash.com/photo-1603487742131-4160ec999306?q=80&w=900&h=1100&fit=crop", alt: "Crocs Classic Unisex color Amarillo", is_placeholder: false, sort_order: 0 }],
+  },
+  {
+    id: "p-inv-047-v3", product_id: "p-inv-047", sku: "196265822911",
+    size: "4/6", color: { name: "Rosa", hex: "#e8a5bf" },
+    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
+    images: [{ url: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=900&h=1100&fit=crop", alt: "Crocs Classic Unisex color Rosa", is_placeholder: false, sort_order: 0 }],
+  },
+  {
+    id: "p-inv-047-v4", product_id: "p-inv-047", sku: "196265882007",
+    size: "8", color: { name: "Fucsia", hex: "#c8438f" },
+    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
+    images: [{ url: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=900&h=1100&fit=crop", alt: "Crocs Classic Unisex color Fucsia", is_placeholder: false, sort_order: 0 }],
+  },
+  {
+    id: "p-inv-047-v5", product_id: "p-inv-047", sku: "196265881635",
+    size: "5/7", color: { name: "Verde", hex: "#3f7d6e" },
+    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
+    images: [{ url: "https://images.unsplash.com/photo-1512374382149-233c42b6a83b?q=80&w=900&h=1100&fit=crop", alt: "Crocs Classic Unisex color Verde", is_placeholder: false, sort_order: 0 }],
+  },
+  {
+    id: "p-inv-047-v6", product_id: "p-inv-047", sku: "883503185609",
+    size: "4/6", color: { name: "Blanco", hex: "#f4f4f1" },
+    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
+    images: [{ url: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=900&h=1100&fit=crop", alt: "Crocs Classic Unisex color Blanco", is_placeholder: false, sort_order: 0 }],
   },
   {
     id: "p-inv-048-v1", product_id: "p-inv-048", sku: "CAR002ROSA",
@@ -802,11 +833,6 @@ export const variants: ProductVariant[] = [
     attributes: {}, stock_qty: 4, reserved_qty: 0, price_override: null,
   },
   {
-    id: "p-inv-159-v1", product_id: "p-inv-159", sku: "X004QPGYZ1",
-    size: "5/7", color: { name: "Amarillo Talla", hex: "#e3c04a" },
-    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
-  },
-  {
     id: "p-inv-160-v1", product_id: "p-inv-160", sku: "194661044142",
     size: "XL", color: { name: "Wht Blanco", hex: "#f4f4f1" },
     attributes: {}, stock_qty: 2, reserved_qty: 0, price_override: null,
@@ -934,11 +960,6 @@ export const variants: ProductVariant[] = [
   {
     id: "p-inv-185-v1", product_id: "p-inv-185", sku: "11022702081011",
     size: "Unica", color: { name: "Blanco Talla", hex: "#f4f4f1" },
-    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
-  },
-  {
-    id: "p-inv-186-v1", product_id: "p-inv-186", sku: "196265822911",
-    size: "4/6", color: { name: "Rosa", hex: "#e8a5bf" },
     attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
   },
   {
@@ -1097,11 +1118,6 @@ export const variants: ProductVariant[] = [
     attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
   },
   {
-    id: "p-inv-218-v1", product_id: "p-inv-218", sku: "196265882007",
-    size: "8", color: { name: "Unico", hex: "#9aa0a6" },
-    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
-  },
-  {
     id: "p-inv-219-v1", product_id: "p-inv-219", sku: "5568955432",
     size: "Unica", color: { name: "Unico", hex: "#9aa0a6" },
     attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
@@ -1134,11 +1150,6 @@ export const variants: ProductVariant[] = [
   {
     id: "p-inv-225-v1", product_id: "p-inv-225", sku: "716605949469",
     size: "L", color: { name: "Azul Galax", hex: "#26344d" },
-    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
-  },
-  {
-    id: "p-inv-226-v1", product_id: "p-inv-226", sku: "196265881635",
-    size: "5/7", color: { name: "Kiwi Talla", hex: "#9aa0a6" },
     attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
   },
   {
@@ -1209,11 +1220,6 @@ export const variants: ProductVariant[] = [
   {
     id: "p-inv-240-v1", product_id: "p-inv-240", sku: "6291107459356",
     size: "Unica", color: { name: "Unico", hex: "#9aa0a6" },
-    attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
-  },
-  {
-    id: "p-inv-241-v1", product_id: "p-inv-241", sku: "883503185609",
-    size: "4/6", color: { name: "Blanco Talla", hex: "#f4f4f1" },
     attributes: {}, stock_qty: 1, reserved_qty: 0, price_override: null,
   },
   {

@@ -182,6 +182,13 @@ export interface ProductVariant {
 
   /** Override opcional de precio a nivel variante (nullable). */
   price_override: UsdCents | null;
+
+  /**
+   * Imágenes propias de la variante: cada variante (p. ej. cada color) puede tener
+   * su fotografía distintiva. Si está ausente o vacío, la variante hereda las
+   * imágenes del producto. En Postgres: tabla variant_images (o columna jsonb).
+   */
+  images?: ProductImage[];
 }
 
 // ---------------------------------------------------------------------------

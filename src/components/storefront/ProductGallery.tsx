@@ -1,24 +1,47 @@
+'use client';
+
 /**
  * ProductGallery - imagenes de la PDP.
  *
- * Server component: en la demo todas son placeholders (tiles). Cuando lleguen las
- * fotos, PlaceholderImage renderiza la imagen sin cambiar esta estructura. El zoom
- * y el cambio de foto con interaccion (§16.2) se suman en su iteracion.
+ * Cada variante puede tener su propia foto distintiva (por color): al elegir un
+ * color en el selector, la galeria muestra las imagenes de esa variante si las
+ * tiene; si no, hereda las del producto. La seleccion llega por el contexto de
+ * variante (misma PDP). Cuando lleguen fotos reales, cada color trae la suya sin
+ * tocar esta estructura.
  */
 
+import { useMemo } from 'react';
 import { PlaceholderImage } from '@/components/brand/PlaceholderImage';
 import type { ProductImage } from '@/lib/data/types';
+import { useSelectedVariant } from '@/lib/store/selected-variant-context';
 import styles from './ProductGallery.module.css';
 
 interface ProductGalleryProps {
-  images: ProductImage[];
+  /** Imagenes base del producto (fallback cuando la variante no trae las suyas). */
+  productImages: ProductImage[];
+  /** Imagenes por color de variante: al elegir ese color, se muestran estas. */
+  variantImages?: Record<string, ProductImage[]>;
   productName: string;
   /** Nombre de la transición compartida (morph desde la tarjeta). */
   viewTransitionName?: string;
 }
 
-export function ProductGallery({ images, productName, viewTransitionName }: ProductGalleryProps) {
-  const sorted = [...images].sort((a, b) => a.sort_order - b.sort_order);
+export function ProductGallery({
+  productImages,
+  variantImages,
+  productName,
+  viewTransitionName,
+}: ProductGalleryProps) {
+  const { selected } = useSelectedVariant();
+
+  // Imagenes activas: las de la variante elegida (por color) si existen; si no,
+  // las del producto. Ordenadas por sort_order.
+  const sorted = useMemo(() => {
+    const perVariant = selected ? variantImages?.[selected.colorName] : undefined;
+    const active = perVariant && perVariant.length > 0 ? perVariant : productImages;
+    return [...active].sort((a, b) => a.sort_order - b.sort_order);
+  }, [selected, variantImages, productImages]);
+
   const cover = sorted[0] ?? null;
   const rest = sorted.slice(1);
 
