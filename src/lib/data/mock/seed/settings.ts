@@ -30,7 +30,9 @@ export const appSettings: AppSettings = {
     open_time: '10:00',
     close_time: '18:00',
   },
-  whatsapp_number: '+58 414 5551234',
+  // Número de WhatsApp del negocio: fuente única (Footer, PDP y botón flotante lo
+  // leen de acá). FICTICIO — reemplazar por el número real de PATRONES antes de salir.
+  whatsapp_number: '+58 424 7182309',
 };
 
 /**
