@@ -32,7 +32,7 @@ export const appSettings: AppSettings = {
   },
   // Número de WhatsApp del negocio: fuente única (Footer, PDP y botón flotante lo
   // leen de acá). FICTICIO — reemplazar por el número real de PATRONES antes de salir.
-  whatsapp_number: '+58 424 7182309',
+  whatsapp_number: '+58 424 0000000',
 };
 
 /**

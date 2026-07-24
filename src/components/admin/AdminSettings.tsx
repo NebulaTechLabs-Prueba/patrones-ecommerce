@@ -5,7 +5,7 @@
  * deshabilita métodos de pago. En memoria (se resetea al recargar).
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AdminModal } from './AdminModal';
 import type { AppSettings, PaymentMethod, PaymentMethodKind } from '@/lib/data/types';
 import { PAYMENT_METHOD_LABELS } from '@/lib/labels';
@@ -40,6 +40,11 @@ const DAYS = [
   { n: 0, label: 'Dom' },
 ];
 
+// Sin backend en Fase 1: los cambios del admin se guardan en el navegador
+// (localStorage) para que sobrevivan a recargas. En Fase 2 esto escribe en la DB.
+const STORAGE_SETTINGS = 'ptr-admin-settings';
+const STORAGE_METHODS = 'ptr-admin-payment-methods';
+
 export function AdminSettings({
   initial,
   initialMethods,
@@ -52,6 +57,29 @@ export function AdminSettings({
   const [saved, setSaved] = useState(false);
   const [methodDraft, setMethodDraft] = useState<MethodDraft | null>(null);
   const [methodError, setMethodError] = useState('');
+
+  // Hidrata desde localStorage al montar (si el admin guardó antes en este navegador).
+  useEffect(() => {
+    try {
+      const rawS = window.localStorage.getItem(STORAGE_SETTINGS);
+      if (rawS) setS((prev) => ({ ...prev, ...(JSON.parse(rawS) as Partial<AppSettings>) }));
+      const rawM = window.localStorage.getItem(STORAGE_METHODS);
+      if (rawM) setMethods(JSON.parse(rawM) as PaymentMethod[]);
+    } catch {
+      // localStorage no disponible: se queda con el seed.
+    }
+  }, []);
+
+  // Persiste ajustes y métodos, y confirma. Esto es lo que hace el botón Guardar.
+  function saveAll() {
+    try {
+      window.localStorage.setItem(STORAGE_SETTINGS, JSON.stringify(s));
+      window.localStorage.setItem(STORAGE_METHODS, JSON.stringify(methods));
+    } catch {
+      // Sin localStorage el cambio vive solo en memoria (se resetea al recargar).
+    }
+    setSaved(true);
+  }
 
   function saveMethod() {
     if (!methodDraft) return;
@@ -96,7 +124,7 @@ export function AdminSettings({
         <button
           type="button"
           className={ui.newBtn}
-          onClick={() => setSaved(true)}
+          onClick={saveAll}
         >
           Guardar cambios
         </button>
