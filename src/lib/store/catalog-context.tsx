@@ -12,6 +12,7 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import type {
   Brand,
+  Bundle,
   Category,
   Collection,
   Product,
@@ -26,6 +27,8 @@ export interface CatalogData {
   products: Product[];
   variants: ProductVariant[];
   collections: Collection[];
+  /** Conjuntos SUGERIDOS: relación entre productos sueltos (§9.3). */
+  bundles: Bundle[];
 }
 
 interface CatalogContextValue extends CatalogData {
@@ -36,11 +39,12 @@ interface CatalogContextValue extends CatalogData {
   setProducts: (p: Product[]) => void;
   setVariants: (v: ProductVariant[]) => void;
   setCollections: (c: Collection[]) => void;
+  setBundles: (b: Bundle[]) => void;
 }
 
 const CatalogContext = createContext<CatalogContextValue | null>(null);
 // Bump la version para descartar datos locales viejos tras cambios de semilla.
-const STORAGE_KEY = 'ptr-catalog-v1';
+const STORAGE_KEY = 'ptr-catalog-v2';
 
 export function CatalogProvider({ initial, children }: { initial: CatalogData; children: React.ReactNode }) {
   const [data, setData] = useState<CatalogData>(initial);
@@ -75,6 +79,7 @@ export function CatalogProvider({ initial, children }: { initial: CatalogData; c
       setProducts: (products) => setData((d) => ({ ...d, products })),
       setVariants: (variants) => setData((d) => ({ ...d, variants })),
       setCollections: (collections) => setData((d) => ({ ...d, collections })),
+      setBundles: (bundles) => setData((d) => ({ ...d, bundles })),
     }),
     [data, hydrated],
   );

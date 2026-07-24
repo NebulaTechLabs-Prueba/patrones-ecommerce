@@ -28,7 +28,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   // Datos para los contextos client (tasa, promos, pricing, catalogo). En export
   // estatico se resuelven en build; los componentes client los reciben serializados.
-  const [rate, promotions, settings, verticals, brands, categories, products, collections] =
+  const [rate, promotions, settings, verticals, brands, categories, products, collections, bundles] =
     await Promise.all([
       settingsRepo.getExchangeRate(),
       productRepo.listActivePromotions(),
@@ -38,6 +38,7 @@ export default async function RootLayout({
       productRepo.listCategories(),
       productRepo.listProducts(),
       productRepo.listCollections(),
+      productRepo.listBundles(),
     ]);
 
   const variants = (
@@ -57,7 +58,7 @@ export default async function RootLayout({
             quantityPromoThreshold: settings.quantity_promo_threshold,
             quantityPromoEnabled: settings.quantity_promo_enabled,
           }}
-          catalog={{ verticals, brands, categories, products, variants, collections }}
+          catalog={{ verticals, brands, categories, products, variants, collections, bundles }}
         >
           <ChromeGate>
             <Header />

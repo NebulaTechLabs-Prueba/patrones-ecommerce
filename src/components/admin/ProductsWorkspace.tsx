@@ -10,18 +10,20 @@ import { useMemo, useState } from 'react';
 import { AdminProducts, type ProductRow } from './AdminProducts';
 import { BrandsCrud } from './crud/BrandsCrud';
 import { CategoriesCrud } from './crud/CategoriesCrud';
+import { ConjuntosCrud } from './crud/ConjuntosCrud';
 import { VerticalsCrud } from './crud/VerticalsCrud';
 import { applyProductRows, toProductRows } from './productRowMap';
 import { useCatalog } from '@/lib/store/catalog-context';
 import ui from './adminUI.module.css';
 
-type Tab = 'products' | 'brands' | 'verticals' | 'categories';
+type Tab = 'products' | 'brands' | 'verticals' | 'categories' | 'bundles';
 
 const TABS: Array<{ id: Tab; label: string }> = [
   { id: 'products', label: 'Productos' },
   { id: 'brands', label: 'Marcas' },
   { id: 'verticals', label: 'Rubros' },
   { id: 'categories', label: 'Categorías' },
+  { id: 'bundles', label: 'Conjuntos' },
 ];
 
 export function ProductsWorkspace() {
@@ -81,6 +83,7 @@ export function ProductsWorkspace() {
       {tab === 'brands' ? <BrandsCrud items={brands} onChange={setBrands} /> : null}
       {tab === 'verticals' ? <VerticalsCrud items={verticals} onChange={setVerticals} /> : null}
       {tab === 'categories' ? <CategoriesCrud items={categories} onChange={setCategories} /> : null}
+      {tab === 'bundles' ? <ConjuntosCrud /> : null}
     </div>
   );
 }

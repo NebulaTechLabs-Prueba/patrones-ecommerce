@@ -1,12 +1,12 @@
 /**
- * Admin - Contenido. CRUD de rubros/marcas/categorías (comparte store con el lado
- * público), colecciones (con vigencia) y tablas de medidas.
+ * Admin - Contenido. Colecciones (con vigencia) y tablas de medidas. La taxonomía
+ * (rubros, marcas y categorías) se gestiona en Productos, para no duplicarla.
  */
 
-import { AdminContent } from '@/components/admin/AdminContent';
 import { CollectionsCrud } from '@/components/admin/crud/CollectionsCrud';
 import { SizeChartsCrud } from '@/components/admin/crud/SizeChartsCrud';
 import { productRepo } from '@/lib/data';
+import ui from '@/components/admin/adminUI.module.css';
 import styles from './content.module.css';
 
 export default async function AdminContentPage() {
@@ -14,7 +14,10 @@ export default async function AdminContentPage() {
 
   return (
     <div>
-      <AdminContent />
+      <h1 className={ui.pageTitle}>Contenido</h1>
+      <p className={ui.pageSubtitle}>
+        Colecciones y tablas de medidas. Rubros, marcas y categorías se gestionan en Productos.
+      </p>
 
       <div className={styles.cols}>
         <CollectionsCrud />
