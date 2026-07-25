@@ -85,6 +85,9 @@ export type Origin = 'importado' | 'nacional';
  */
 export type ProductType = 'simple' | 'set';
 
+/** Género al que orienta la prenda (para filtros y secciones Hombre/Mujer). */
+export type Gender = 'hombre' | 'mujer' | 'unisex';
+
 /** Imagen de catalogo. Toda imagen ficticia/IA lleva is_placeholder = true (§6). */
 export interface ProductImage {
   url: string;
@@ -135,6 +138,12 @@ export interface Product {
   price: UsdCents;
 
   featured: boolean;
+
+  /** Género al que orienta la prenda (filtros y secciones Hombre/Mujer). Inferido y editable. */
+  gender?: Gender;
+
+  /** En oferta: marca manual del admin. Agrupa en la sección Ofertas y muestra el distintivo. */
+  on_sale?: boolean;
 
   /**
    * Override opcional del umbral de bajo stock para este producto (§9.2).

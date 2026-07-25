@@ -10,6 +10,7 @@
  */
 
 import { Link } from 'next-view-transitions';
+import { Isologo } from '@/components/brand/Isologo';
 import { PlaceholderImage } from '@/components/brand/PlaceholderImage';
 import { Money } from '@/components/ui/Money';
 import { WishlistButton } from './WishlistButton';
@@ -32,7 +33,16 @@ export function ProductCard({ product, availableColors, brandName, isOwnLine }: 
     <Link href={`/products/${product.slug}/`} className={styles.card}>
       <div className={styles.media} style={{ viewTransitionName: `product-${product.id}` }}>
         <PlaceholderImage image={cover} label={product.name} ratio="4 / 5" />
-        {isOwnLine ? <span className={styles.ownLine}>Línea PATRONES</span> : null}
+        {isOwnLine ? (
+          <span
+            className={styles.ownLine}
+            style={{ background: 'var(--ptr-white)', display: 'inline-flex', alignItems: 'center', padding: '3px 6px', borderRadius: 6 }}
+            title="Línea propia PATRONES"
+            aria-label="Línea propia PATRONES"
+          >
+            <Isologo height={14} withWordmark={false} />
+          </span>
+        ) : null}
         {product.type === 'set' ? <span className={styles.setTag}>Conjunto</span> : null}
         <WishlistButton
           item={{
@@ -46,6 +56,13 @@ export function ProductCard({ product, availableColors, brandName, isOwnLine }: 
       </div>
 
       <div className={styles.body}>
+        {product.on_sale ? (
+          <span
+            style={{ alignSelf: 'flex-start', background: 'var(--ptr-primary)', color: '#fff', fontSize: 10.5, fontWeight: 800, letterSpacing: '.05em', padding: '2px 7px', borderRadius: 999, textTransform: 'uppercase', marginBottom: 4 }}
+          >
+            Oferta
+          </span>
+        ) : null}
         <p className={styles.brand}>{brandName}</p>
         <h3 className={styles.name}>{product.name}</h3>
 

@@ -255,6 +255,14 @@ export function AdminHero() {
               <option value="primary">Principal</option>
               <option value="secondary">Secundario</option>
             </select>
+            <label className={ui.check} style={{ gap: 4 }} title="Color de fondo del botón">
+              <span>Fondo</span>
+              <input type="color" value={/^#/.test(b.bg ?? '') ? (b.bg as string) : '#577575'} onChange={(e) => setButton(i, { bg: e.target.value })} />
+            </label>
+            <label className={ui.check} style={{ gap: 4 }} title="Color del texto del botón">
+              <span>Texto</span>
+              <input type="color" value={/^#/.test(b.color ?? '') ? (b.color as string) : '#ffffff'} onChange={(e) => setButton(i, { color: e.target.value })} />
+            </label>
             <label className={ui.check}>
               <input type="checkbox" checked={b.visible} onChange={(e) => setButton(i, { visible: e.target.checked })} />
               <span>Visible</span>

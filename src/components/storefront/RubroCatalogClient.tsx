@@ -10,6 +10,7 @@
  */
 
 import { useCatalog } from '@/lib/store/catalog-context';
+import type { Gender, VariantColor } from '@/lib/data/types';
 import { getAvailableColors, isProductAvailable } from '@/lib/domains/availability';
 import { CatalogHero } from './CatalogHero';
 import { EmptyState } from './EmptyState';
@@ -61,7 +62,11 @@ export function RubroCatalogClient({ slug }: { slug: string }) {
     .filter((b): b is NonNullable<typeof b> => b !== undefined)
     .map((b) => ({ id: b.id, name: b.name }));
 
-  const colors = [...new Set(items.flatMap((it) => it.availableColors.map((c) => c.name)))];
+  const colorMap = new Map<string, VariantColor>();
+  for (const it of items) for (const c of it.availableColors) if (!colorMap.has(c.name)) colorMap.set(c.name, c);
+  const colors = [...colorMap.values()];
+
+  const genders = [...new Set(visible.map((x) => x.product.gender ?? 'unisex'))] as Gender[];
 
   return (
     <main>
@@ -75,7 +80,7 @@ export function RubroCatalogClient({ slug }: { slug: string }) {
         }}
       >
         {items.length > 0 ? (
-          <ProductBrowser items={items} categories={facetCategories} brands={facetBrands} colors={colors} />
+          <ProductBrowser items={items} categories={facetCategories} brands={facetBrands} colors={colors} genders={genders} />
         ) : (
           <EmptyState
             title="Sin productos disponibles por ahora"

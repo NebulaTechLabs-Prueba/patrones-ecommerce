@@ -22,6 +22,10 @@ export interface HeroButton {
   href: string;
   visible: boolean;
   variant: HeroButtonVariant;
+  /** Color de fondo del botón (para que sea visible sobre cualquier foto). */
+  bg?: string;
+  /** Color del texto del botón. */
+  color?: string;
 }
 
 export interface HeroConfig {
@@ -62,8 +66,8 @@ export const DEFAULT_HERO: HeroConfig = {
   layout: 'pattern',
   images: [],
   buttons: [
-    { label: 'Explora los rubros', href: '/uniformes/salud/', visible: true, variant: 'primary' },
-    { label: 'Conoce la Línea PATRONES', href: '/linea-patrones/', visible: true, variant: 'secondary' },
+    { label: 'Explora los rubros', href: '/uniformes/salud/', visible: true, variant: 'primary', bg: 'var(--ptr-primary)', color: '#ffffff' },
+    { label: 'Conoce la Línea PATRONES', href: '/linea-patrones/', visible: true, variant: 'secondary', bg: '#ffffff', color: 'var(--ptr-ink)' },
   ],
 };
 
@@ -75,7 +79,7 @@ interface HeroContextValue {
 
 const HeroContext = createContext<HeroContextValue | null>(null);
 // Bump de versión al cambiar la forma de la config (descarta local viejo).
-const STORAGE_KEY = 'ptr-hero-v2';
+const STORAGE_KEY = 'ptr-hero-v3';
 
 export function HeroProvider({ children }: { children: React.ReactNode }) {
   const [hero, setHeroState] = useState<HeroConfig>(DEFAULT_HERO);

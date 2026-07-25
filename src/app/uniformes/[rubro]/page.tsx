@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import { CatalogHero } from '@/components/storefront/CatalogHero';
 import { EmptyState } from '@/components/storefront/EmptyState';
 import { ProductBrowser, type BrowserItem } from '@/components/storefront/ProductBrowser';
+import type { Gender, VariantColor } from '@/lib/data/types';
 import { productRepo } from '@/lib/data';
 import { getBrandsById, getVerticalCatalog, getVerticalSlugs } from '@/lib/storefront/catalog';
 
@@ -59,7 +60,10 @@ export default async function VerticalPage({ params }: PageProps) {
     .filter((b): b is NonNullable<typeof b> => b !== undefined)
     .map((b) => ({ id: b.id, name: b.name }));
 
-  const colors = [...new Set(products.flatMap((p) => p.availableColors.map((c) => c.name)))];
+  const colorMap = new Map<string, VariantColor>();
+  for (const p of products) for (const c of p.availableColors) if (!colorMap.has(c.name)) colorMap.set(c.name, c);
+  const colors = [...colorMap.values()];
+  const genders = [...new Set(products.map((p) => p.product.gender ?? 'unisex'))] as Gender[];
 
   return (
     <main>
@@ -83,6 +87,7 @@ export default async function VerticalPage({ params }: PageProps) {
             categories={categories}
             brands={brands}
             colors={colors}
+            genders={genders}
             heading="Explora el rubro"
             subheading="Busca por nombre o filtra por categoría, marca y color para encontrar lo tuyo."
           />

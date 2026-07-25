@@ -163,11 +163,20 @@ export function HomeHero() {
 
         {buttons.length > 0 ? (
           <div className={styles.actions} style={{ justifyContent: JUSTIFY[hero.textAlign] }}>
-            {buttons.map((b, i) => (
-              <Link key={`${b.href}-${i}`} href={b.href} className={b.variant === 'primary' ? styles.primaryCta : styles.secondaryCta}>
-                {b.label}
-              </Link>
-            ))}
+            {buttons.map((b, i) => {
+              const bg = b.bg ?? (b.variant === 'primary' ? 'var(--ptr-primary)' : '#ffffff');
+              const color = b.color ?? (b.variant === 'primary' ? '#ffffff' : 'var(--ptr-ink)');
+              return (
+                <Link
+                  key={`${b.href}-${i}`}
+                  href={b.href}
+                  className={b.variant === 'primary' ? styles.primaryCta : styles.secondaryCta}
+                  style={{ background: bg, color, borderColor: 'rgba(0,0,0,0.08)' }}
+                >
+                  {b.label}
+                </Link>
+              );
+            })}
           </div>
         ) : null}
       </div>
