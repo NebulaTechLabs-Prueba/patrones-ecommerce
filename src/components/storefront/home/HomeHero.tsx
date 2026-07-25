@@ -80,7 +80,7 @@ export function HomeHero() {
       <div className={styles.inner}>
         <p className={styles.eyebrow}>
           <span className={styles.eyebrowTick} aria-hidden="true" />
-          Para el profesional, de pies a cabeza · Puerto Ordaz
+          Para el profesional, de pies a cabeza
         </p>
 
         <h1 className={styles.title}>
@@ -96,7 +96,7 @@ export function HomeHero() {
         <p className={styles.lead}>
           Uniformes de alto rendimiento, calzado, perfumería y complementos: todo lo
           que un profesional necesita para verse y sentirse a la altura. Línea propia
-          PATRONES y las mejores marcas, con la asesoría de quienes visten a Puerto Ordaz.
+          PATRONES y las mejores marcas, con la asesoría de quienes visten al profesional.
         </p>
 
         <div className={styles.actions}>

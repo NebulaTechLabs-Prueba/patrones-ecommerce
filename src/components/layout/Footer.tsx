@@ -57,7 +57,7 @@ export async function Footer() {
             <p className={styles.brand}>PATRONES</p>
             <p className={styles.muted}>
               Todo para el profesional, de pies a cabeza. Línea propia y marcas seleccionadas,
-              con la asesoría de quienes visten Puerto Ordaz.
+              con la asesoría de quienes visten al profesional.
             </p>
           </div>
 
@@ -95,8 +95,8 @@ export async function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>© {year} PATRONES · Puerto Ordaz, Venezuela</p>
-          <p className={styles.note}>De pies a cabeza · Puerto Ordaz</p>
+          <p>© {year} PATRONES · Venezuela</p>
+          <p className={styles.note}>De pies a cabeza</p>
         </div>
       </div>
     </footer>

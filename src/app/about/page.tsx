@@ -14,7 +14,7 @@ import styles from './about.module.css';
 export const metadata: Metadata = {
   title: 'Nosotros — PATRONES',
   description:
-    'La casa que equipa al profesional de pies a cabeza en Puerto Ordaz: uniformes de alto rendimiento, calzado, perfumería y complementos. Línea propia, marcas seleccionadas y dotación institucional.',
+    'La casa que equipa al profesional de pies a cabeza: uniformes de alto rendimiento, calzado, perfumería y complementos. Línea propia, marcas seleccionadas y dotación institucional.',
 };
 
 const shot = (id: string, alt: string): ProductImage => ({
@@ -53,7 +53,7 @@ export default function AboutPage() {
           <p className={styles.eyebrow}>Nosotros</p>
           <h1 className={styles.title}>Todo para el profesional, de pies a cabeza</h1>
           <p className={styles.lead}>
-            Nacimos en Puerto Ordaz vistiendo al personal de salud y hoy equipamos al
+            Nacimos vistiendo al personal de salud y hoy equipamos al
             profesional entero: uniformes de alto rendimiento para cada rubro —salud,
             gastronomía, corporativo y más—, sumados a calzado, perfumería y complementos.
             Una sola casa que combina su línea propia con marcas seleccionadas, de pies a cabeza.
