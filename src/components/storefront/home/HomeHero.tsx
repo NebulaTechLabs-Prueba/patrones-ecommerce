@@ -3,21 +3,34 @@
 /**
  * Hero de la Home — editable desde el admin (ver lib/store/hero-context).
  *
- * Renderiza la config: eyebrow, título (multilínea), cuerpo, color de letra, los
- * botones visibles y el fondo según el layout. 'pattern' conserva la firma del
- * rediseño (el trazado de patrón con parallax); 'single'/'split'/'collage' pintan
- * hasta 3 imágenes de fondo con un velo para legibilidad. Respeta reduced-motion.
- *
- * Marca respetada: Nunito Sans + colores de tokens. El color de letra lo elige el
- * admin (por defecto tinta de marca).
+ * Renderiza la config: eyebrow, título (multilínea), cuerpo, color/alineación/
+ * efecto de letra, los botones visibles y el fondo según el layout. 'pattern'
+ * conserva la firma del rediseño (trazado con parallax); los demás pintan las
+ * imágenes en distintas distribuciones con un velo para legibilidad.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import Link from 'next/link';
-import { useHero } from '@/lib/store/hero-context';
+import { IMAGES_FOR, useHero, type HeroLayout } from '@/lib/store/hero-context';
 import styles from './HomeHero.module.css';
 
 const RULER_TICKS = Array.from({ length: 13 });
+
+const GRID: Record<HeroLayout, { cols: string; rows: string }> = {
+  pattern: { cols: '1fr', rows: '1fr' },
+  single: { cols: '1fr', rows: '1fr' },
+  split: { cols: '1fr 1fr', rows: '1fr' },
+  stack: { cols: '1fr', rows: '1fr 1fr' },
+  triptico: { cols: '1fr 1fr 1fr', rows: '1fr' },
+  quad: { cols: '1fr 1fr', rows: '1fr 1fr' },
+  mosaico: { cols: '2fr 1fr', rows: '1fr 1fr' },
+};
+
+const JUSTIFY: Record<string, CSSProperties['justifyContent']> = {
+  left: 'flex-start',
+  center: 'center',
+  right: 'flex-end',
+};
 
 export function HomeHero() {
   const { hero } = useHero();
@@ -29,8 +42,6 @@ export function HomeHero() {
     return () => cancelAnimationFrame(id);
   }, []);
 
-  // Parallax de la capa de patrón (solo aplica al layout 'pattern'; si no hay capa,
-  // el ref es null y no hace nada).
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let raf = 0;
@@ -51,31 +62,52 @@ export function HomeHero() {
   const buttons = hero.buttons.filter((b) => b.visible && b.label.trim().length > 0);
   const validImages = hero.images.filter(Boolean);
   const useImages = hero.layout !== 'pattern' && validImages.length > 0;
-  const cols = hero.layout === 'split' ? '1fr 1fr' : hero.layout === 'collage' ? 'repeat(3, 1fr)' : '1fr';
-  const imgs =
-    hero.layout === 'single'
-      ? validImages.slice(0, 1)
-      : hero.layout === 'split'
-        ? validImages.slice(0, 2)
-        : validImages.slice(0, 3);
+  const grid = GRID[hero.layout];
+  const imgs = validImages.slice(0, IMAGES_FOR[hero.layout]);
+
+  // Efecto de texto (legibilidad sobre foto).
+  const effect: CSSProperties =
+    hero.textEffect === 'shadow'
+      ? { textShadow: '0 2px 16px rgba(0,0,0,0.55)' }
+      : hero.textEffect === 'outline'
+        ? ({ WebkitTextStroke: '1px rgba(0,0,0,0.8)', paintOrder: 'stroke' } as CSSProperties)
+        : {};
+  const textStyle: CSSProperties = { color: hero.textColor, ...effect };
+  const innerStyle: CSSProperties = {
+    position: 'relative',
+    zIndex: 2,
+    textAlign: hero.textAlign,
+    ...(hero.textEffect === 'panel'
+      ? { background: 'rgba(20,20,18,0.42)', backdropFilter: 'blur(2px)', borderRadius: 16, padding: 'var(--ptr-space-6)' }
+      : {}),
+  };
 
   return (
     <section className={`${styles.hero} ${loaded ? styles.loaded : ''}`}>
       {useImages ? (
         <div
           aria-hidden="true"
-          style={{ position: 'absolute', inset: 0, display: 'grid', gridTemplateColumns: cols, zIndex: 0 }}
+          style={{ position: 'absolute', inset: 0, display: 'grid', gridTemplateColumns: grid.cols, gridTemplateRows: grid.rows, zIndex: 0 }}
         >
           {imgs.map((src, i) => (
             // eslint-disable-next-line @next/next/no-img-element
-            <img key={i} src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img
+              key={i}
+              src={src}
+              alt=""
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', ...(hero.layout === 'mosaico' && i === 0 ? { gridRow: '1 / 3' } : {}) }}
+            />
           ))}
           <div
             style={{
               position: 'absolute',
               inset: 0,
               background:
-                'linear-gradient(90deg, rgba(20,20,18,0.62) 0%, rgba(20,20,18,0.28) 48%, rgba(20,20,18,0.05) 100%)',
+                hero.textAlign === 'center'
+                  ? 'linear-gradient(180deg, rgba(20,20,18,0.15) 0%, rgba(20,20,18,0.45) 100%)'
+                  : hero.textAlign === 'right'
+                    ? 'linear-gradient(270deg, rgba(20,20,18,0.62) 0%, rgba(20,20,18,0.05) 100%)'
+                    : 'linear-gradient(90deg, rgba(20,20,18,0.62) 0%, rgba(20,20,18,0.28) 48%, rgba(20,20,18,0.05) 100%)',
             }}
           />
         </div>
@@ -105,14 +137,14 @@ export function HomeHero() {
         </div>
       )}
 
-      <div className={styles.inner} style={{ position: 'relative', zIndex: 2 }}>
-        <p className={styles.eyebrow} style={{ color: hero.textColor }}>
-          <span className={styles.eyebrowTick} aria-hidden="true" />
+      <div className={styles.inner} style={innerStyle}>
+        <p className={styles.eyebrow} style={textStyle}>
+          {hero.textAlign === 'left' ? <span className={styles.eyebrowTick} aria-hidden="true" /> : null}
           {hero.eyebrow}
         </p>
 
         {titleLines.length > 0 ? (
-          <h1 className={styles.title} style={{ color: hero.textColor }}>
+          <h1 className={styles.title} style={textStyle}>
             {titleLines.map((line, i) => (
               <span className={styles.line} key={`${line}-${i}`}>
                 <span className={styles.lineInner} style={{ transitionDelay: `${180 + i * 140}ms` }}>
@@ -124,15 +156,15 @@ export function HomeHero() {
         ) : null}
 
         {hero.body.trim() ? (
-          <p className={styles.lead} style={{ color: hero.textColor }}>
+          <p className={styles.lead} style={textStyle}>
             {hero.body}
           </p>
         ) : null}
 
         {buttons.length > 0 ? (
-          <div className={styles.actions}>
+          <div className={styles.actions} style={{ justifyContent: JUSTIFY[hero.textAlign] }}>
             {buttons.map((b, i) => (
-              <Link key={`${b.href}-${i}`} href={b.href} className={i === 0 ? styles.primaryCta : styles.secondaryCta}>
+              <Link key={`${b.href}-${i}`} href={b.href} className={b.variant === 'primary' ? styles.primaryCta : styles.secondaryCta}>
                 {b.label}
               </Link>
             ))}
