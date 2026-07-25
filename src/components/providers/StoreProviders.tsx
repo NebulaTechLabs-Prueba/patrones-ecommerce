@@ -12,6 +12,7 @@ import { AuthProvider } from '@/lib/store/auth-context';
 import { CartProvider } from '@/lib/store/cart-context';
 import { CatalogProvider, type CatalogData } from '@/lib/store/catalog-context';
 import { CurrencyProvider } from '@/lib/store/currency-context';
+import { HeroProvider } from '@/lib/store/hero-context';
 import { QuotesProvider } from '@/lib/store/quotes-context';
 import { SoundProvider } from '@/lib/store/sound-context';
 import { ToastProvider } from '@/lib/store/toast-context';
@@ -31,13 +32,15 @@ export function StoreProviders({ rate, promotions, pricingSettings, catalog, chi
       <ToastProvider>
         <AuthProvider>
           <CatalogProvider initial={catalog}>
-            <CurrencyProvider rate={rate}>
-              <CartProvider promotions={promotions} pricingSettings={pricingSettings}>
-                <WishlistProvider>
-                  <QuotesProvider>{children}</QuotesProvider>
-                </WishlistProvider>
-              </CartProvider>
-            </CurrencyProvider>
+            <HeroProvider>
+              <CurrencyProvider rate={rate}>
+                <CartProvider promotions={promotions} pricingSettings={pricingSettings}>
+                  <WishlistProvider>
+                    <QuotesProvider>{children}</QuotesProvider>
+                  </WishlistProvider>
+                </CartProvider>
+              </CurrencyProvider>
+            </HeroProvider>
           </CatalogProvider>
         </AuthProvider>
       </ToastProvider>
