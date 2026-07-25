@@ -40,7 +40,7 @@ export function BrandsShowcase() {
           {shown.map((b) => (
             <li key={b.id}>
               <Link
-                href={`/catalogo?marca=${b.id}`}
+                href={b.is_own_line ? '/linea-patrones/' : `/catalogo?marca=${b.id}`}
                 style={{ display: 'grid', placeItems: 'center', gap: 10, padding: '28px 16px', border: '1px solid var(--ptr-neutral-200, #e6e6e3)', borderRadius: 14, textDecoration: 'none', color: 'var(--ptr-ink)', background: 'var(--ptr-white, #fff)', minHeight: 150, textAlign: 'center' }}
               >
                 <span style={{ height: 44, display: 'grid', placeItems: 'center' }}>

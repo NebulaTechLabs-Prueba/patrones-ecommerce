@@ -25,17 +25,11 @@ export function Header() {
           <Link href="/marcas/" className={styles.link}>
             Marcas
           </Link>
-          <Link href="/linea-patrones/" className={`${styles.link} ${styles.ownLine}`}>
-            Línea PATRONES
-          </Link>
           <Link href="/ofertas/" className={styles.link} style={{ color: 'var(--ptr-primary)', fontWeight: 700 }}>
             Ofertas
           </Link>
           <Link href="/esencia/" className={styles.link}>
             Esencia
-          </Link>
-          <Link href="/about/" className={styles.link}>
-            Nosotros
           </Link>
           <Link href="/contact/" className={styles.link}>
             Contacto
