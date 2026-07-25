@@ -68,6 +68,8 @@ export const DEFAULT_HERO: HeroConfig = {
   buttons: [
     { label: 'Explora los rubros', href: '/uniformes/salud/', visible: true, variant: 'primary', bg: 'var(--ptr-primary)', color: '#ffffff' },
     { label: 'Conoce la Línea PATRONES', href: '/linea-patrones/', visible: true, variant: 'secondary', bg: '#ffffff', color: 'var(--ptr-ink)' },
+    { label: 'Hombre', href: '/catalogo?genero=hombre', visible: true, variant: 'secondary', bg: '#ffffff', color: 'var(--ptr-ink)' },
+    { label: 'Mujer', href: '/catalogo?genero=mujer', visible: true, variant: 'secondary', bg: '#ffffff', color: 'var(--ptr-ink)' },
   ],
 };
 
@@ -79,7 +81,7 @@ interface HeroContextValue {
 
 const HeroContext = createContext<HeroContextValue | null>(null);
 // Bump de versión al cambiar la forma de la config (descarta local viejo).
-const STORAGE_KEY = 'ptr-hero-v3';
+const STORAGE_KEY = 'ptr-hero-v4';
 
 export function HeroProvider({ children }: { children: React.ReactNode }) {
   const [hero, setHeroState] = useState<HeroConfig>(DEFAULT_HERO);

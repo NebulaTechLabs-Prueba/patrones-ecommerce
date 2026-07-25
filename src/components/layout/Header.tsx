@@ -9,6 +9,7 @@ import { AccountMenu } from './AccountMenu';
 import { CartIndicator } from './CartIndicator';
 import { CurrencySwitch } from './CurrencySwitch';
 import { RubrosNav } from './RubrosNav';
+import { SearchBar } from './SearchBar';
 import styles from './Header.module.css';
 
 export function Header() {
@@ -21,8 +22,14 @@ export function Header() {
 
         <nav className={styles.nav} aria-label="Navegación">
           <RubrosNav />
+          <Link href="/marcas/" className={styles.link}>
+            Marcas
+          </Link>
           <Link href="/linea-patrones/" className={`${styles.link} ${styles.ownLine}`}>
             Línea PATRONES
+          </Link>
+          <Link href="/ofertas/" className={styles.link} style={{ color: 'var(--ptr-primary)', fontWeight: 700 }}>
+            Ofertas
           </Link>
           <Link href="/esencia/" className={styles.link}>
             Esencia
@@ -36,6 +43,7 @@ export function Header() {
         </nav>
 
         <div className={styles.controls}>
+          <SearchBar />
           <CurrencySwitch />
           <AccountMenu />
           <CartIndicator />

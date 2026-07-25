@@ -1,0 +1,42 @@
+.form {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--ptr-neutral-200, #e3e3e0);
+  border-radius: 999px;
+  background: var(--ptr-white, #fff);
+  color: var(--ptr-neutral-500, #7a7a78);
+  min-width: 180px;
+  transition: border-color 0.15s ease;
+}
+
+.form:focus-within {
+  border-color: var(--ptr-primary);
+}
+
+.icon {
+  flex: 0 0 auto;
+  color: var(--ptr-neutral-500, #7a7a78);
+}
+
+.input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ptr-ink);
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--ptr-neutral-400, #9a9a98);
+}
+
+@media (max-width: 900px) {
+  .form {
+    min-width: 0;
+    width: 100%;
+  }
+}
