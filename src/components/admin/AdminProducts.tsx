@@ -9,6 +9,7 @@
 import { useState } from 'react';
 import { AdminModal } from './AdminModal';
 import { ProductVariants } from './ProductVariants';
+import type { Gender } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
 import ui from './adminUI.module.css';
 
@@ -35,6 +36,8 @@ export interface ProductRow {
   type: 'simple' | 'set';
   priceCents: number;
   featured: boolean;
+  gender: Gender;
+  onSale: boolean;
   lowStockThreshold: number | null;
   variants: VariantRow[];
 }
@@ -48,6 +51,8 @@ interface Draft {
   type: 'simple' | 'set';
   price: string;
   featured: boolean;
+  gender: Gender;
+  onSale: boolean;
   lowStockThreshold: string;
 }
 
@@ -86,6 +91,8 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
       type: 'simple',
       price: '',
       featured: false,
+      gender: 'unisex',
+      onSale: false,
       lowStockThreshold: '',
     };
   }
@@ -100,6 +107,8 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
       type: r.type,
       price: String(r.priceCents / 100),
       featured: r.featured,
+      gender: r.gender ?? 'unisex',
+      onSale: r.onSale ?? false,
       lowStockThreshold: r.lowStockThreshold != null ? String(r.lowStockThreshold) : '',
     };
   }
@@ -122,6 +131,8 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
       type: draft.type,
       priceCents: Math.round(price * 100),
       featured: draft.featured,
+      gender: draft.gender,
+      onSale: draft.onSale,
       lowStockThreshold: draft.lowStockThreshold ? Number(draft.lowStockThreshold) : null,
       variants: existing?.variants ?? [],
     };
@@ -259,6 +270,14 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
                 <span>Umbral bajo stock (opcional)</span>
                 <input className={ui.input} type="number" min="0" value={draft.lowStockThreshold} onChange={(e) => setDraft({ ...draft, lowStockThreshold: e.target.value })} />
               </label>
+              <label className={ui.field}>
+                <span>Género</span>
+                <select className={ui.select} value={draft.gender} onChange={(e) => setDraft({ ...draft, gender: e.target.value as Gender })}>
+                  <option value="unisex">Unisex</option>
+                  <option value="hombre">Hombre</option>
+                  <option value="mujer">Mujer</option>
+                </select>
+              </label>
             </div>
 
             <div className={ui.field}>
@@ -288,6 +307,11 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
             <label className={ui.check}>
               <input type="checkbox" checked={draft.featured} onChange={(e) => setDraft({ ...draft, featured: e.target.checked })} />
               <span>Destacado en la home (featured)</span>
+            </label>
+
+            <label className={ui.check}>
+              <input type="checkbox" checked={draft.onSale} onChange={(e) => setDraft({ ...draft, onSale: e.target.checked })} />
+              <span>En oferta (aparece en Ofertas con distintivo)</span>
             </label>
 
             {error ? <p className={ui.formError}>{error}</p> : null}

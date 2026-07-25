@@ -22,6 +22,8 @@ export function toProductRows(products: Product[], variants: ProductVariant[]): 
     type: p.type === 'set' ? 'set' : 'simple',
     priceCents: p.price,
     featured: p.featured,
+    gender: p.gender ?? 'unisex',
+    onSale: p.on_sale ?? false,
     lowStockThreshold: p.low_stock_threshold,
     variants: variants
       .filter((v) => v.product_id === p.id)
@@ -61,6 +63,8 @@ export function applyProductRows(
         type: r.type,
         price: r.priceCents,
         featured: r.featured,
+        gender: r.gender,
+        on_sale: r.onSale,
         low_stock_threshold: r.lowStockThreshold,
       };
     }
@@ -78,6 +82,8 @@ export function applyProductRows(
       category_ids: r.categoryIds,
       price: r.priceCents,
       featured: r.featured,
+      gender: r.gender,
+      on_sale: r.onSale,
       low_stock_threshold: r.lowStockThreshold,
       customization: { ...customizationOff },
       images: [],
