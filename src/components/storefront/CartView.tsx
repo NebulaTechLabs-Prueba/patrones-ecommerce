@@ -17,7 +17,7 @@ import { useQuotes } from '@/lib/store/quotes-context';
 import styles from './CartView.module.css';
 
 export function CartView() {
-  const { items, hydrated, summary, setQty, remove } = useCart();
+  const { items, hydrated, summary, setQty, remove, couponCode, setCouponCode, couponStatus, couponName } = useCart();
   const { formatCents } = useCurrency();
   const { add: addQuote } = useQuotes();
   const [quoteNumber, setQuoteNumber] = useState<string | null>(null);
@@ -166,6 +166,27 @@ export function CartView() {
               <dd>{formatCents(summary.totalCents)}</dd>
             </div>
           </dl>
+
+          <div style={{ margin: '4px 0 16px' }}>
+            <label htmlFor="cupon" style={{ display: 'block', fontSize: 13, marginBottom: 6, color: 'var(--ptr-neutral-500, #7a7a78)' }}>
+              Cupón de descuento
+            </label>
+            <input
+              id="cupon"
+              value={couponCode}
+              onChange={(e) => setCouponCode(e.target.value)}
+              placeholder="Ingresa tu código"
+              autoComplete="off"
+              style={{ width: '100%', padding: '9px 11px', border: `1px solid ${couponStatus === 'invalid' ? '#c0563f' : 'var(--ptr-neutral-200, #e3e3e0)'}`, borderRadius: 8, font: 'inherit', textTransform: 'uppercase' }}
+            />
+            {couponStatus === 'applied' ? (
+              <p style={{ color: 'var(--ptr-primary)', fontSize: 13, margin: '6px 0 0', fontWeight: 700 }}>✓ {couponName} aplicado</p>
+            ) : null}
+            {couponStatus === 'invalid' ? (
+              <p style={{ color: '#c0563f', fontSize: 13, margin: '6px 0 0' }}>Cupón inválido o vencido.</p>
+            ) : null}
+          </div>
+
           <Link href="/checkout/" className={styles.checkout}>
             Iniciar compra
           </Link>

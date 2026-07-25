@@ -71,4 +71,22 @@ export const promotions: Promotion[] = [
     starts_at: '2026-07-05T00:00:00-04:00',
     ends_at: '2026-07-20T23:59:59-04:00',
   },
+  {
+    // CUPÓN: no se aplica solo; requiere ingresar el código en el carrito (§13.2).
+    id: 'promo-cupon-bienvenida',
+    name: 'Cupón BIENVENIDA',
+    type: 'percentage',
+    scope: 'cart',
+    value: 10, // 10% en todo el carrito
+    min_quantity: null,
+    target_id: null,
+    stackable: true,
+    priority: 5,
+    is_active: true,
+    starts_at: null,
+    ends_at: null,
+    code: 'BIENVENIDA',
+    max_uses: 100,
+    uses: 3,
+  },
 ];

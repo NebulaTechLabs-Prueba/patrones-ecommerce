@@ -173,8 +173,17 @@ export function priceCart(
   promotions: Promotion[],
   settings: PricingSettings,
   now: Date,
+  couponCode: string | null = null,
 ): PricedCart {
-  const live = promotions.filter((p) => isPromotionLive(p, now));
+  const code = couponCode ? couponCode.trim().toLowerCase() : '';
+  // Las promos con `code` (cupones) NO se aplican solas: solo si se ingresa el
+  // código correcto y quedan usos. Las sin código se aplican automáticamente.
+  const live = promotions.filter((p) => isPromotionLive(p, now)).filter((p) => {
+    if (!p.code) return true;
+    if (!code || p.code.toLowerCase() !== code) return false;
+    if (p.max_uses != null && (p.uses ?? 0) >= p.max_uses) return false;
+    return true;
+  });
 
   // Cantidad total por producto (sumando variantes) para el mayoreo (§13.2).
   const qtyByProduct = new Map<string, number>();
