@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description: 'Escríbenos por WhatsApp, visítanos en tienda o consulta nuestro horario.',
 };
 
-const MAPS_URL = 'https://maps.app.goo.gl/Z4DzPoUoodymjQwJ7';
 const DAY_NAMES = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
 export default async function ContactPage() {
@@ -50,11 +49,13 @@ export default async function ContactPage() {
 
         <section className={styles.card}>
           <h2 className={styles.cardTitle}>Tienda</h2>
-          <p className={styles.cardText}>C.C. Costa Granada, Villa Granada</p>
-          <p className={styles.cardText}>Puerto Ordaz, Venezuela</p>
-          <a className={styles.link} href={MAPS_URL} target="_blank" rel="noopener noreferrer">
-            Ver en el mapa
-          </a>
+          <p className={styles.cardText}>{settings.location.line1}</p>
+          <p className={styles.cardText}>{settings.location.line2}</p>
+          {settings.location.maps_url ? (
+            <a className={styles.link} href={settings.location.maps_url} target="_blank" rel="noopener noreferrer">
+              Ver en el mapa
+            </a>
+          ) : null}
         </section>
 
         <section className={styles.card}>

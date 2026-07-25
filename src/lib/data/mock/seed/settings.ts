@@ -33,6 +33,13 @@ export const appSettings: AppSettings = {
   // Número de WhatsApp del negocio: fuente única (Footer, PDP y botón flotante lo
   // leen de acá). FICTICIO — reemplazar por el número real de PATRONES antes de salir.
   whatsapp_number: '+58 424 0000000',
+  // Ubicación de la tienda: editable desde Admin → Ajustes. Sin ciudad, para no
+  // acotar el mercado (orden de la clienta). Dejar maps_url vacío oculta el mapa.
+  location: {
+    line1: 'C.C. Costa Granada',
+    line2: 'Venezuela',
+    maps_url: 'https://maps.app.goo.gl/Z4DzPoUoodymjQwJ7',
+  },
 };
 
 /**

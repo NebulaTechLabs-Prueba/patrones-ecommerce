@@ -81,16 +81,19 @@ export async function Footer() {
             <p className={styles.muted}>
               {formatDays(business_hours.open_days)} · {business_hours.open_time}–{business_hours.close_time}
             </p>
-            <a
-              className={styles.address}
-              href="https://maps.app.goo.gl/Z4DzPoUoodymjQwJ7"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Puerto Ordaz, Venezuela
-              <br />
-              C.C. Costa Granada
-            </a>
+            {settings.location.maps_url ? (
+              <a className={styles.address} href={settings.location.maps_url} target="_blank" rel="noopener noreferrer">
+                {settings.location.line1}
+                <br />
+                {settings.location.line2}
+              </a>
+            ) : (
+              <p className={styles.address}>
+                {settings.location.line1}
+                <br />
+                {settings.location.line2}
+              </p>
+            )}
           </div>
         </div>
 

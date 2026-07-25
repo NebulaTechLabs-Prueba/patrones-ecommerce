@@ -173,6 +173,21 @@ export function AdminSettings({
         </label>
 
         <label className={ui.field}>
+          <span>Ubicación — línea 1 (local)</span>
+          <input className={ui.input} value={s.location.line1} onChange={(e) => update('location', { ...s.location, line1: e.target.value })} />
+        </label>
+
+        <label className={ui.field}>
+          <span>Ubicación — línea 2 (país)</span>
+          <input className={ui.input} value={s.location.line2} onChange={(e) => update('location', { ...s.location, line2: e.target.value })} />
+        </label>
+
+        <label className={ui.field}>
+          <span>Enlace a Google Maps (vacío = sin mapa)</span>
+          <input className={ui.input} value={s.location.maps_url} onChange={(e) => update('location', { ...s.location, maps_url: e.target.value })} />
+        </label>
+
+        <label className={ui.field}>
           <span>Apertura</span>
           <input className={ui.input} type="time" value={s.business_hours.open_time} onChange={(e) => update('business_hours', { ...s.business_hours, open_time: e.target.value })} />
         </label>

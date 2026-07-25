@@ -25,7 +25,7 @@ interface CheckoutFormProps {
 const DOC_KINDS: IdentityDocKind[] = ['V', 'E', 'J', 'G', 'P'];
 
 const SHIPPING_OPTIONS: Array<{ method: ShippingMethod; label: string; note: string }> = [
-  { method: 'pickup', label: 'Retiro en tienda', note: 'C.C. Costa Granada, Puerto Ordaz. Sin costo.' },
+  { method: 'pickup', label: 'Retiro en tienda', note: 'C.C. Costa Granada. Sin costo.' },
   { method: 'zoom', label: 'Zoom', note: 'Flete pagado en destino al retirar. Informa la oficina.' },
   { method: 'mrw', label: 'MRW', note: 'Flete pagado en destino al retirar. Informa la oficina.' },
   { method: 'delivery_local', label: 'Delivery local', note: 'Tarifa a acordar. Simulado en la demo.' },

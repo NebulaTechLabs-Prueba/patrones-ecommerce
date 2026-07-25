@@ -555,6 +555,18 @@ export interface AppSettings {
   offline_verification_business_days: number;
   business_hours: BusinessHours;
   whatsapp_number: string;
+  /** Ubicación de la tienda, editable desde el admin. */
+  location: StoreLocation;
+}
+
+/** Ubicación/dirección de la tienda (editable en admin). */
+export interface StoreLocation {
+  /** Primera línea, p. ej. el local o centro comercial. */
+  line1: string;
+  /** Segunda línea, p. ej. el país (sin acotar a una ciudad si no se desea). */
+  line2: string;
+  /** Enlace a Google Maps (o vacío para no mostrar el botón de mapa). */
+  maps_url: string;
 }
 
 // ---------------------------------------------------------------------------

@@ -15,6 +15,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { Isologo } from '@/components/brand/Isologo';
 import { ProductGallery } from '@/components/storefront/ProductGallery';
 import { SizeChartSection } from '@/components/storefront/SizeChartSection';
 import { SuggestedSet, type SuggestedProductData } from '@/components/storefront/SuggestedSet';
@@ -145,8 +146,13 @@ export default async function ProductPage({ params }: PageProps) {
           <div className={styles.headings}>
             {brand ? (
               <p className={styles.brand}>
-                {brand.name}
-                {brand.is_own_line ? <span className={styles.ownLine}>Línea PATRONES</span> : null}
+                {brand.is_own_line ? (
+                  <span title="Línea propia PATRONES" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <Isologo height={16} withWordmark={false} />
+                  </span>
+                ) : (
+                  brand.name
+                )}
               </p>
             ) : null}
             <h1 className={styles.title}>{product.name}</h1>
