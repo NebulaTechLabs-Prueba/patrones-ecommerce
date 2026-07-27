@@ -9,6 +9,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
+import { BrandLogo } from '@/components/brand/BrandLogo';
 import { useCatalog } from '@/lib/store/catalog-context';
 import { isProductAvailable } from '@/lib/domains/availability';
 import styles from './RubrosNav.module.css';
@@ -61,11 +62,7 @@ export function MarcasNav() {
               role="menuitem"
               className={`${styles.item} ${styles.logoItem}`}
             >
-              {b.logo_image?.url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={b.logo_image.url} alt={b.name} />
-              ) : null}
-              <span>{b.name}</span>
+              <BrandLogo brand={b} height={16} />
             </Link>
           ))}
           <Link href="/marcas/" role="menuitem" className={styles.item} style={{ gridColumn: '1 / -1', fontWeight: 700 }}>

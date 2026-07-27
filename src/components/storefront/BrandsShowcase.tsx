@@ -7,7 +7,7 @@
  */
 
 import Link from 'next/link';
-import { Isologo } from '@/components/brand/Isologo';
+import { BrandLogo } from '@/components/brand/BrandLogo';
 import { useCatalog } from '@/lib/store/catalog-context';
 import { isProductAvailable } from '@/lib/domains/availability';
 import { CatalogHero } from './CatalogHero';
@@ -44,14 +44,7 @@ export function BrandsShowcase() {
                 style={{ display: 'grid', placeItems: 'center', gap: 10, padding: '28px 16px', border: '1px solid var(--ptr-neutral-200, #e6e6e3)', borderRadius: 14, textDecoration: 'none', color: 'var(--ptr-ink)', background: 'var(--ptr-white, #fff)', minHeight: 150, textAlign: 'center' }}
               >
                 <span style={{ height: 44, display: 'grid', placeItems: 'center' }}>
-                  {b.is_own_line ? (
-                    <Isologo height={26} />
-                  ) : b.logo_image?.url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={b.logo_image.url} alt={b.name} style={{ maxHeight: 44, maxWidth: 130, objectFit: 'contain' }} />
-                  ) : (
-                    <span style={{ fontWeight: 800, fontSize: 20, letterSpacing: '0.02em' }}>{b.name}</span>
-                  )}
+                  <BrandLogo brand={b} height={30} />
                 </span>
                 <span style={{ fontWeight: 700 }}>{b.name}</span>
                 <span style={{ fontSize: 13, color: 'var(--ptr-neutral-500, #7a7a78)' }}>

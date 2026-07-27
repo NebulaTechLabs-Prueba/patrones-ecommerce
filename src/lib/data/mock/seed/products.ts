@@ -22,7 +22,7 @@ export const products: Product[] = [
     price: 10000, featured: true, low_stock_threshold: null,
     gender: 'mujer', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Cherokee CK936")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Cherokee CK936")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -34,7 +34,7 @@ export const products: Product[] = [
     price: 14000, featured: true, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1002618 Catarina")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1002618 Catarina")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -46,7 +46,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Skechers SK01120101")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Skechers SK01120101")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -58,7 +58,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594824476967-48c8b964273f", "Pantalones Patrones Modelos Variados Unisex")],
+    images: [stock("1434389677669-e08b4cac3105", "Pantalones Patrones Modelos Variados Unisex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -70,7 +70,7 @@ export const products: Product[] = [
     price: 3000, featured: true, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Traje de Baño 2P Bikini Estampado Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Traje de Baño 2P Bikini Estampado Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -82,7 +82,7 @@ export const products: Product[] = [
     price: 3000, featured: true, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Traje de Baño 2P Bikini Estampado Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Traje de Baño 2P Bikini Estampado Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -94,7 +94,7 @@ export const products: Product[] = [
     price: 699, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Nurse Headbands Estampadas Diademas")],
+    images: [stock("1556905055-8f358a7a47b2", "Nurse Headbands Estampadas Diademas")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -106,7 +106,7 @@ export const products: Product[] = [
     price: 4000, featured: true, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Al Qiam Gold Unisex Lattafa Pride 3.40OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Al Qiam Gold Unisex Lattafa Pride 3.40OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -118,7 +118,7 @@ export const products: Product[] = [
     price: 500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Cola Cabello")],
+    images: [stock("1611085583191-a3b181a88401", "Cola Cabello")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -130,7 +130,7 @@ export const products: Product[] = [
     price: 5000, featured: true, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Intense Man Club de Nuit Extrait de Parfum 2.370Z")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Intense Man Club de Nuit Extrait de Parfum 2.370Z")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -142,7 +142,7 @@ export const products: Product[] = [
     price: 6000, featured: true, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Delantal Chef Importado Industry Line")],
+    images: [stock("1503342217505-b0a15ec3261c", "Delantal Chef Importado Industry Line")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -154,7 +154,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Skechers SK0112MN")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Skechers SK0112MN")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -166,7 +166,7 @@ export const products: Product[] = [
     price: 16000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1003202")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1003202")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -178,7 +178,7 @@ export const products: Product[] = [
     price: 3800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Bolso Premium Mini Small First Aid General Medi 110P")],
+    images: [stock("1556905055-8f358a7a47b2", "Bolso Premium Mini Small First Aid General Medi 110P")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -190,7 +190,7 @@ export const products: Product[] = [
     price: 11500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Medica Importada Dama Infinity IN337A")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Medica Importada Dama Infinity IN337A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -202,7 +202,7 @@ export const products: Product[] = [
     price: 16000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1001693")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1001693")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -214,7 +214,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Club de Nuit Imperiale Woman")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Club de Nuit Imperiale Woman")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -226,7 +226,7 @@ export const products: Product[] = [
     price: 14000, featured: true, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importado Deportivo Caballero Nike Giannis Inmortaly 4")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importado Deportivo Caballero Nike Giannis Inmortaly 4")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -238,7 +238,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS A20001")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS A20001")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -250,7 +250,7 @@ export const products: Product[] = [
     price: 3800, featured: true, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Franela Chef Importada CU")],
+    images: [stock("1503342217505-b0a15ec3261c", "Franela Chef Importada CU")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -262,7 +262,7 @@ export const products: Product[] = [
     price: 1000, featured: true, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1587351021759-3e566b6af7cc", "Pijama Conjunto Capri")],
+    images: [stock("1434389677669-e08b4cac3105", "Pijama Conjunto Capri")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -274,7 +274,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Importada Dama Cherokee WW310")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Importada Dama Cherokee WW310")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -286,7 +286,7 @@ export const products: Product[] = [
     price: 20999, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -298,7 +298,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Filipina Chef Importada CU")],
+    images: [stock("1503342217505-b0a15ec3261c", "Filipina Chef Importada CU")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -310,7 +310,7 @@ export const products: Product[] = [
     price: 1199, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Medias Deportivas BO+TEE")],
+    images: [stock("1523381210434-271e8be1f52b", "Medias Deportivas BO+TEE")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -322,7 +322,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Cherokee CK936")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Cherokee CK936")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -334,7 +334,7 @@ export const products: Product[] = [
     price: 300, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Medias Nurse Doctor Unisex")],
+    images: [stock("1556905055-8f358a7a47b2", "Medias Nurse Doctor Unisex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -346,7 +346,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Yara Rosado")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Yara Rosado")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -358,7 +358,7 @@ export const products: Product[] = [
     price: 1800, featured: true, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Collar Varios")],
+    images: [stock("1611085583191-a3b181a88401", "Collar Varios")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -370,7 +370,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Infinity IN900A")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Infinity IN900A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -382,7 +382,7 @@ export const products: Product[] = [
     price: 5200, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Franela Chef Importada CU")],
+    images: [stock("1503342217505-b0a15ec3261c", "Franela Chef Importada CU")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -394,7 +394,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Dama Cherokee CK353")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Dama Cherokee CK353")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -406,7 +406,7 @@ export const products: Product[] = [
     price: 15500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1002697")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1002697")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -418,7 +418,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Cherokee")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Cherokee")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -430,7 +430,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Pantalon Deportivo Licra Largo Varios")],
+    images: [stock("1523381210434-271e8be1f52b", "Pantalon Deportivo Licra Largo Varios")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -442,7 +442,7 @@ export const products: Product[] = [
     price: 1000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1587351021759-3e566b6af7cc", "Pijama Conjunto Capri")],
+    images: [stock("1434389677669-e08b4cac3105", "Pijama Conjunto Capri")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -454,7 +454,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Marc FIGS 1000199")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Marc FIGS 1000199")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -466,7 +466,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Cherokee Ck 278SA")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Cherokee Ck 278SA")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -478,7 +478,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Cherokee CK936")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Cherokee CK936")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -490,7 +490,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Uniforme Importada Dama FIGS Montex")],
+    images: [stock("1445205170230-053b83016050", "Uniforme Importada Dama FIGS Montex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -502,7 +502,7 @@ export const products: Product[] = [
     price: 2000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Bolso Medico Multiuso Medicapparel Estampado")],
+    images: [stock("1556905055-8f358a7a47b2", "Bolso Medico Multiuso Medicapparel Estampado")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -514,7 +514,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS Orillia")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS Orillia")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -526,7 +526,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Cherokee WW320")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Cherokee WW320")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -538,7 +538,7 @@ export const products: Product[] = [
     price: 10500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Dickies DK730")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Dickies DK730")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -550,7 +550,7 @@ export const products: Product[] = [
     price: 1800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: true,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Cadena Osos")],
+    images: [stock("1611085583191-a3b181a88401", "Cadena Osos")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -562,7 +562,7 @@ export const products: Product[] = [
     price: 15000, featured: true, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importado Deportivo Caballero Nike V5 Rnr")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importado Deportivo Caballero Nike V5 Rnr")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -574,7 +574,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Noble Blush Lataffa For Women 3.40OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Noble Blush Lataffa For Women 3.40OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -586,7 +586,7 @@ export const products: Product[] = [
     price: 7000, featured: true, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1595950653106-6c9ebd614d3a", "Crocs Classic Unisex")],
+    images: [stock("1618354691373-d851c5c3a990", "Crocs Classic Unisex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -598,7 +598,7 @@ export const products: Product[] = [
     price: 16000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Cartera Michael Kors")],
+    images: [stock("1590874103328-eac38a683ce7", "Cartera Michael Kors")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -610,7 +610,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Barco BUT163")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Barco BUT163")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -622,7 +622,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Billetera Mini Bang Parchita")],
+    images: [stock("1590874103328-eac38a683ce7", "Billetera Mini Bang Parchita")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -634,7 +634,7 @@ export const products: Product[] = [
     price: 8001, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Bandolera Nuba Parchita")],
+    images: [stock("1590874103328-eac38a683ce7", "Bandolera Nuba Parchita")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -646,7 +646,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1000211")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1000211")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -658,7 +658,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Nacional Dama Patrones")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Nacional Dama Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -670,7 +670,7 @@ export const products: Product[] = [
     price: 3500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Traje de Bano 2P Top Buso Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Traje de Bano 2P Top Buso Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -682,7 +682,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Asad Bourbon Lattafa For Men 3.4OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Asad Bourbon Lattafa For Men 3.4OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -694,7 +694,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Ansaam Gold Unisex 3.4OZ 100ML")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Ansaam Gold Unisex 3.4OZ 100ML")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -706,7 +706,7 @@ export const products: Product[] = [
     price: 500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Zarcillos Grandes")],
+    images: [stock("1611085583191-a3b181a88401", "Zarcillos Grandes")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -718,7 +718,7 @@ export const products: Product[] = [
     price: 1500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Shine Plumper Berry")],
+    images: [stock("1611085583191-a3b181a88401", "Shine Plumper Berry")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -730,7 +730,7 @@ export const products: Product[] = [
     price: 500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Pulseras Pequenas Hilos Piedras")],
+    images: [stock("1611085583191-a3b181a88401", "Pulseras Pequenas Hilos Piedras")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -742,7 +742,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Cherokee WW901")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Cherokee WW901")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -754,7 +754,7 @@ export const products: Product[] = [
     price: 13500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Healing Hands HHW255")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Healing Hands HHW255")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -766,7 +766,7 @@ export const products: Product[] = [
     price: 11500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Cartera Verde con Corazones Juanita Jo")],
+    images: [stock("1590874103328-eac38a683ce7", "Cartera Verde con Corazones Juanita Jo")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -778,7 +778,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume 9 Pm Afnan For Men 3.4OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume 9 Pm Afnan For Men 3.4OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -790,7 +790,7 @@ export const products: Product[] = [
     price: 16000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1001693")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1001693")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -802,7 +802,7 @@ export const products: Product[] = [
     price: 3500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Traje de Baño 2P Bikini Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Traje de Baño 2P Bikini Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -814,7 +814,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero 1003300")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero 1003300")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -826,7 +826,7 @@ export const products: Product[] = [
     price: 800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Cadena con Dije Piedras")],
+    images: [stock("1611085583191-a3b181a88401", "Cadena con Dije Piedras")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -838,7 +838,7 @@ export const products: Product[] = [
     price: 16500, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1003202 Darien")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1003202 Darien")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -850,7 +850,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Nacional Dama Patrones")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Nacional Dama Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -862,7 +862,7 @@ export const products: Product[] = [
     price: 1500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Thermos Llc 24OZ")],
+    images: [stock("1523381210434-271e8be1f52b", "Thermos Llc 24OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -874,7 +874,7 @@ export const products: Product[] = [
     price: 150, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Bolsas de Regalo Niubeho Nurse Variadas")],
+    images: [stock("1556905055-8f358a7a47b2", "Bolsas de Regalo Niubeho Nurse Variadas")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -886,7 +886,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Un Iforme Importado Dama FIGS Catarina")],
+    images: [stock("1483985988355-763728e1935b", "Un Iforme Importado Dama FIGS Catarina")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -898,7 +898,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS TM3000")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS TM3000")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -910,7 +910,7 @@ export const products: Product[] = [
     price: 1500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Gorros Medicos Ajustables Importados Unisex")],
+    images: [stock("1556905055-8f358a7a47b2", "Gorros Medicos Ajustables Importados Unisex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -922,7 +922,7 @@ export const products: Product[] = [
     price: 9000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Cherokee CK359A")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Cherokee CK359A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -934,7 +934,7 @@ export const products: Product[] = [
     price: 8001, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Infinity IN528TALLA M")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Infinity IN528TALLA M")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -946,7 +946,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: true,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Medica Importada Cherokee CK391A")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Medica Importada Cherokee CK391A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -958,7 +958,7 @@ export const products: Product[] = [
     price: 1800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Gorro Bucket Unicolor Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Gorro Bucket Unicolor Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -970,7 +970,7 @@ export const products: Product[] = [
     price: 1000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1587351021759-3e566b6af7cc", "Pijama Conjunto Short")],
+    images: [stock("1434389677669-e08b4cac3105", "Pijama Conjunto Short")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -982,7 +982,7 @@ export const products: Product[] = [
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Monedero Juanita")],
+    images: [stock("1590874103328-eac38a683ce7", "Monedero Juanita")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -994,7 +994,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importados Deportivos Dama Nike V2K Run")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importados Deportivos Dama Nike V2K Run")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1006,7 +1006,7 @@ export const products: Product[] = [
     price: 6499, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Untold Club de Nuit Unisex 3.6OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Untold Club de Nuit Unisex 3.6OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1018,7 +1018,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Uniforme Importado Caballero FIGS Leon")],
+    images: [stock("1445205170230-053b83016050", "Uniforme Importado Caballero FIGS Leon")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1030,7 +1030,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS Orillia Slim Scoop")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS Orillia Slim Scoop")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1042,7 +1042,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Billetera Bee Rojo Parchita")],
+    images: [stock("1590874103328-eac38a683ce7", "Billetera Bee Rojo Parchita")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1054,7 +1054,7 @@ export const products: Product[] = [
     price: 3500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Conjunto Licra Corto Dama Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Conjunto Licra Corto Dama Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1066,7 +1066,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Teriaq Intense Lattafa Unisex 3.4OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Teriaq Intense Lattafa Unisex 3.4OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1078,7 +1078,7 @@ export const products: Product[] = [
     price: 15500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1002697")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1002697")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1090,7 +1090,7 @@ export const products: Product[] = [
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Nacional Patrones Dama")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Nacional Patrones Dama")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1102,7 +1102,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1114,7 +1114,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1002697 Montex")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1002697 Montex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1126,7 +1126,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Braga Medica Importada Dama Infinity IN523A")],
+    images: [stock("1483985988355-763728e1935b", "Braga Medica Importada Dama Infinity IN523A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1138,7 +1138,7 @@ export const products: Product[] = [
     price: 8001, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Importada Dama Project Lab Cherokee CK434")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Importada Dama Project Lab Cherokee CK434")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1150,7 +1150,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Khamrah Lattafa Unisex 3.4OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Khamrah Lattafa Unisex 3.4OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1162,7 +1162,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Infinity CK900A")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Infinity CK900A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1174,7 +1174,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Zakat Unisex 3.40OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Zakat Unisex 3.40OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1186,7 +1186,7 @@ export const products: Product[] = [
     price: 5500, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Club de Nuit Intense Pure 5.07OZ For Men")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Club de Nuit Intense Pure 5.07OZ For Men")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1198,7 +1198,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Pantalon Chef Importado CU")],
+    images: [stock("1503342217505-b0a15ec3261c", "Pantalon Chef Importado CU")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1210,7 +1210,7 @@ export const products: Product[] = [
     price: 800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: true,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Pulseras Balines y Pandoras Piedras")],
+    images: [stock("1611085583191-a3b181a88401", "Pulseras Balines y Pandoras Piedras")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1222,7 +1222,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS Catarina")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS Catarina")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1234,7 +1234,7 @@ export const products: Product[] = [
     price: 1800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Cadenas Cartier")],
+    images: [stock("1611085583191-a3b181a88401", "Cadenas Cartier")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1246,7 +1246,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importados Deportivos Caballeros Nike Air Zoom Pegasus 41")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importados Deportivos Caballeros Nike Air Zoom Pegasus 41")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1258,7 +1258,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1000201")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1000201")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1270,7 +1270,7 @@ export const products: Product[] = [
     price: 1800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Visera Deportiva Licra")],
+    images: [stock("1523381210434-271e8be1f52b", "Visera Deportiva Licra")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1282,7 +1282,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Barco Greys Anatomy 4153")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Barco Greys Anatomy 4153")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1294,7 +1294,7 @@ export const products: Product[] = [
     price: 8001, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Bandolera Nuba Parchita")],
+    images: [stock("1590874103328-eac38a683ce7", "Bandolera Nuba Parchita")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1306,7 +1306,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS Catarina")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS Catarina")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1318,7 +1318,7 @@ export const products: Product[] = [
     price: 900, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Brasalete Tela Love")],
+    images: [stock("1611085583191-a3b181a88401", "Brasalete Tela Love")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1330,7 +1330,7 @@ export const products: Product[] = [
     price: 16000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1002202")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1002202")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1342,7 +1342,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Sudadera Algodon Importado Dama Healing Hands")],
+    images: [stock("1483985988355-763728e1935b", "Sudadera Algodon Importado Dama Healing Hands")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1354,7 +1354,7 @@ export const products: Product[] = [
     price: 600, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Pulseras Pequenas Piedras")],
+    images: [stock("1611085583191-a3b181a88401", "Pulseras Pequenas Piedras")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1366,7 +1366,7 @@ export const products: Product[] = [
     price: 10500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Dickies DK730")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Dickies DK730")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1378,7 +1378,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Cherokee WW360")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Cherokee WW360")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1390,7 +1390,7 @@ export const products: Product[] = [
     price: 600, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Pulseras Variadas Dijes Balines Piedras")],
+    images: [stock("1611085583191-a3b181a88401", "Pulseras Variadas Dijes Balines Piedras")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1402,7 +1402,7 @@ export const products: Product[] = [
     price: 1199, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Gorra Deportiva Sky Wox")],
+    images: [stock("1523381210434-271e8be1f52b", "Gorra Deportiva Sky Wox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1414,7 +1414,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Cherokee WW360")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Cherokee WW360")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1426,7 +1426,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Cherokee WW690")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Cherokee WW690")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1438,7 +1438,7 @@ export const products: Product[] = [
     price: 2300, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Gorro Chef Importado CU")],
+    images: [stock("1503342217505-b0a15ec3261c", "Gorro Chef Importado CU")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1450,7 +1450,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1002697")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1002697")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1462,7 +1462,7 @@ export const products: Product[] = [
     price: 1000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1587351021759-3e566b6af7cc", "Pijama Conjunto Short")],
+    images: [stock("1434389677669-e08b4cac3105", "Pijama Conjunto Short")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1474,7 +1474,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Barco Greys Anatomy GRST194")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Barco Greys Anatomy GRST194")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1486,7 +1486,7 @@ export const products: Product[] = [
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Conjunto Deportivo Licra Largo 2P Babalu Fit")],
+    images: [stock("1523381210434-271e8be1f52b", "Conjunto Deportivo Licra Largo 2P Babalu Fit")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1498,7 +1498,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Importada Dama Cherokee CKWW310")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Importada Dama Cherokee CKWW310")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1510,7 +1510,7 @@ export const products: Product[] = [
     price: 699, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Anillos Variados Medianos")],
+    images: [stock("1611085583191-a3b181a88401", "Anillos Variados Medianos")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1522,7 +1522,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Cabarello Cherokee WW320")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Cabarello Cherokee WW320")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1534,7 +1534,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Cartera Cesta Juanita Jo")],
+    images: [stock("1590874103328-eac38a683ce7", "Cartera Cesta Juanita Jo")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1546,7 +1546,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS Leon")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS Leon")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1558,7 +1558,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importado Deportivo Caballero Nike Giannis Inmortality 4")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importado Deportivo Caballero Nike Giannis Inmortality 4")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1570,7 +1570,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Infinity IN90A")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Infinity IN90A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1582,7 +1582,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1000199")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1000199")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1594,7 +1594,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Nacional Dama Patrones")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Nacional Dama Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1606,7 +1606,7 @@ export const products: Product[] = [
     price: 100, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Vasos Plasticos con Tapa Doctor Party Supplies 16 OZ")],
+    images: [stock("1556905055-8f358a7a47b2", "Vasos Plasticos con Tapa Doctor Party Supplies 16 OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1618,7 +1618,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Medica Importada Caballero Proect Lab Cherokee CK460")],
+    images: [stock("1490114538077-0a7f8cb49891", "Medica Importada Caballero Proect Lab Cherokee CK460")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1630,7 +1630,7 @@ export const products: Product[] = [
     price: 3500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Traje de Baño 2P Top Buso Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Traje de Baño 2P Top Buso Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1642,7 +1642,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Barco 4153")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Barco 4153")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1654,7 +1654,7 @@ export const products: Product[] = [
     price: 16500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1001686 Sona")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1001686 Sona")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1666,7 +1666,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Camisa Importada Dama Infinity IN620AC")],
+    images: [stock("1483985988355-763728e1935b", "Camisa Importada Dama Infinity IN620AC")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1678,7 +1678,7 @@ export const products: Product[] = [
     price: 13500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Infinity 2624A")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Infinity 2624A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1690,7 +1690,7 @@ export const products: Product[] = [
     price: 16000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Cartera Michael Kors")],
+    images: [stock("1590874103328-eac38a683ce7", "Cartera Michael Kors")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1702,7 +1702,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Skechers SKT277")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Skechers SKT277")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1714,7 +1714,7 @@ export const products: Product[] = [
     price: 1800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Bandolero Essentials")],
+    images: [stock("1523381210434-271e8be1f52b", "Bandolero Essentials")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1726,7 +1726,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Importada Dama Cherokee CK391A")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Importada Dama Cherokee CK391A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1738,7 +1738,7 @@ export const products: Product[] = [
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Asad Lattafa For Men 3.4OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Asad Lattafa For Men 3.4OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1750,7 +1750,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Dama Cherokee CK353")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Dama Cherokee CK353")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1762,7 +1762,7 @@ export const products: Product[] = [
     price: 15000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Healing Hands 2172 Jordan Top")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Healing Hands 2172 Jordan Top")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1774,7 +1774,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Traje de BAÑ0 2P Bikini Estampado Skiwox")],
+    images: [stock("1523381210434-271e8be1f52b", "Traje de BAÑ0 2P Bikini Estampado Skiwox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1786,7 +1786,7 @@ export const products: Product[] = [
     price: 400, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Boligrafos Nurse Pens Funny Bulk")],
+    images: [stock("1556905055-8f358a7a47b2", "Boligrafos Nurse Pens Funny Bulk")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1798,7 +1798,7 @@ export const products: Product[] = [
     price: 3500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Traje de Bano Entero Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Traje de Bano Entero Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1810,7 +1810,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Nacional Dama Patrones")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Nacional Dama Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1822,7 +1822,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1000199")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1000199")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1834,7 +1834,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Licra Corta Negra Dama Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Licra Corta Negra Dama Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1846,7 +1846,7 @@ export const products: Product[] = [
     price: 5500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Eclaire Lattafa For Women 3.40OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Eclaire Lattafa For Women 3.40OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1858,7 +1858,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Skechers SK011240")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Skechers SK011240")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1870,7 +1870,7 @@ export const products: Product[] = [
     price: 1500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: true,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Set de Ligas de Entrenamiento Timberbrother")],
+    images: [stock("1523381210434-271e8be1f52b", "Set de Ligas de Entrenamiento Timberbrother")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1882,7 +1882,7 @@ export const products: Product[] = [
     price: 3500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Fakhar Lattafa Pride of Lattafa Unisex 3.4OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Fakhar Lattafa Pride of Lattafa Unisex 3.4OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1894,7 +1894,7 @@ export const products: Product[] = [
     price: 300, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1595950653106-6c9ebd614d3a", "Pines Crocs Medical Shoes Decoration")],
+    images: [stock("1618354691373-d851c5c3a990", "Pines Crocs Medical Shoes Decoration")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1906,7 +1906,7 @@ export const products: Product[] = [
     price: 6499, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Nacional Patrones Caballero")],
+    images: [stock("1490114538077-0a7f8cb49891", "Bata Medica Nacional Patrones Caballero")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1918,7 +1918,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Cherokee CK936")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Cherokee CK936")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1930,7 +1930,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Importada Caballero Project Lab Cherokee CK460")],
+    images: [stock("1490114538077-0a7f8cb49891", "Bata Medica Importada Caballero Project Lab Cherokee CK460")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1942,7 +1942,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1954,7 +1954,7 @@ export const products: Product[] = [
     price: 8001, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Cartera Redonda Juanita Jo")],
+    images: [stock("1590874103328-eac38a683ce7", "Cartera Redonda Juanita Jo")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1966,7 +1966,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Nacional Caballero Patrones")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Nacional Caballero Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1978,7 +1978,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Licra Corta Caballero Bonlife")],
+    images: [stock("1523381210434-271e8be1f52b", "Licra Corta Caballero Bonlife")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -1990,7 +1990,7 @@ export const products: Product[] = [
     price: 6499, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Nacional Patrones Dama")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Nacional Patrones Dama")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2002,7 +2002,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: true,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Filipina Chef Importada CU")],
+    images: [stock("1503342217505-b0a15ec3261c", "Filipina Chef Importada CU")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2014,7 +2014,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Vaso Stainless Steel 40OZ Sandjest")],
+    images: [stock("1556905055-8f358a7a47b2", "Vaso Stainless Steel 40OZ Sandjest")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2026,7 +2026,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1595950653106-6c9ebd614d3a", "Crocs Estilo Zapatos Unisex")],
+    images: [stock("1618354691373-d851c5c3a990", "Crocs Estilo Zapatos Unisex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2038,7 +2038,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Sublime Lattafa Badee Al Oud Unisex 3.4OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Sublime Lattafa Badee Al Oud Unisex 3.4OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2050,7 +2050,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Barco Cherokee CK248AP")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Barco Cherokee CK248AP")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2062,7 +2062,7 @@ export const products: Product[] = [
     price: 9000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Morral Poly Violeta Parchita")],
+    images: [stock("1590874103328-eac38a683ce7", "Morral Poly Violeta Parchita")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2074,7 +2074,7 @@ export const products: Product[] = [
     price: 3800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Franela Chef Importada CU")],
+    images: [stock("1503342217505-b0a15ec3261c", "Franela Chef Importada CU")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2086,7 +2086,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Camisa Importada Dama Infinity IN620A")],
+    images: [stock("1483985988355-763728e1935b", "Camisa Importada Dama Infinity IN620A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2098,7 +2098,7 @@ export const products: Product[] = [
     price: 1500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Pen Light Diagnostic Medidor de Pupilas Cavn Lapiz")],
+    images: [stock("1556905055-8f358a7a47b2", "Pen Light Diagnostic Medidor de Pupilas Cavn Lapiz")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2110,7 +2110,7 @@ export const products: Product[] = [
     price: 1800, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Short Tiro Alto Running")],
+    images: [stock("1523381210434-271e8be1f52b", "Short Tiro Alto Running")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2122,7 +2122,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Bolso para Estetoscopio y Accesorios Medicos Bovkt Travel")],
+    images: [stock("1556905055-8f358a7a47b2", "Bolso para Estetoscopio y Accesorios Medicos Bovkt Travel")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2134,7 +2134,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS Leon Three")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS Leon Three")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2146,7 +2146,7 @@ export const products: Product[] = [
     price: 9000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Cherokee CK718A")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Cherokee CK718A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2158,7 +2158,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1000199")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1000199")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2170,7 +2170,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Importada Dama Cherokee WW4315")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Importada Dama Cherokee WW4315")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2182,7 +2182,7 @@ export const products: Product[] = [
     price: 699, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Zarcillos Pequenos")],
+    images: [stock("1611085583191-a3b181a88401", "Zarcillos Pequenos")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2194,7 +2194,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Hypothesis")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Hypothesis")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2206,7 +2206,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Zapato Importado Deportivo Caballero Nike Promina")],
+    images: [stock("1490114538077-0a7f8cb49891", "Zapato Importado Deportivo Caballero Nike Promina")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2218,7 +2218,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Filipina Chef Importada Chef Uniforms")],
+    images: [stock("1503342217505-b0a15ec3261c", "Filipina Chef Importada Chef Uniforms")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2230,7 +2230,7 @@ export const products: Product[] = [
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Conjunto Deportivo Licra Largo 2P Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Conjunto Deportivo Licra Largo 2P Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2242,7 +2242,7 @@ export const products: Product[] = [
     price: 500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Medias de Compresion Unisex Sooverki")],
+    images: [stock("1556905055-8f358a7a47b2", "Medias de Compresion Unisex Sooverki")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2254,7 +2254,7 @@ export const products: Product[] = [
     price: 1000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1587351021759-3e566b6af7cc", "Pijama Conjunto Pantalon")],
+    images: [stock("1434389677669-e08b4cac3105", "Pijama Conjunto Pantalon")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2266,7 +2266,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: true,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Dama Cherokee CK4315")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Dama Cherokee CK4315")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2278,7 +2278,7 @@ export const products: Product[] = [
     price: 17000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importado Deportivo Dama Nike V2K Run")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importado Deportivo Dama Nike V2K Run")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2290,7 +2290,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Cherokee WW670")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Cherokee WW670")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2302,7 +2302,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1577219491135-ce391730fb2c", "Filipina Chef Importada CU Manga Larga")],
+    images: [stock("1503342217505-b0a15ec3261c", "Filipina Chef Importada CU Manga Larga")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2314,7 +2314,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS Catarina")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS Catarina")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2326,7 +2326,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Importada Dama Butter Soft TS4419VCRL")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Importada Dama Butter Soft TS4419VCRL")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2338,7 +2338,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importado Deportivo Dama Nike Motiva")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importado Deportivo Dama Nike Motiva")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2350,7 +2350,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Braga Nacional Dama Patrones")],
+    images: [stock("1483985988355-763728e1935b", "Braga Nacional Dama Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2362,7 +2362,7 @@ export const products: Product[] = [
     price: 500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Medias Deportivas Inizio Unisex")],
+    images: [stock("1523381210434-271e8be1f52b", "Medias Deportivas Inizio Unisex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2374,7 +2374,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Cherokee CK834")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Cherokee CK834")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2386,7 +2386,7 @@ export const products: Product[] = [
     price: 6499, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Nacional Patrones Caballero")],
+    images: [stock("1490114538077-0a7f8cb49891", "Bata Medica Nacional Patrones Caballero")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2398,7 +2398,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Nacional Caballero Patrones")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Nacional Caballero Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2410,7 +2410,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Pantalon Importado Dama Healing Hands Codigo 9560")],
+    images: [stock("1483985988355-763728e1935b", "Pantalon Importado Dama Healing Hands Codigo 9560")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2422,7 +2422,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Bolso Impermeable Carlebben Pouch Molle")],
+    images: [stock("1556905055-8f358a7a47b2", "Bolso Impermeable Carlebben Pouch Molle")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2434,7 +2434,7 @@ export const products: Product[] = [
     price: 7501, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Cartera de Mano Juanita Jo")],
+    images: [stock("1590874103328-eac38a683ce7", "Cartera de Mano Juanita Jo")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2446,7 +2446,7 @@ export const products: Product[] = [
     price: 18000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Infinity IN622A")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Infinity IN622A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2458,7 +2458,7 @@ export const products: Product[] = [
     price: 500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Zarcillos a Presion Eaucuff")],
+    images: [stock("1611085583191-a3b181a88401", "Zarcillos a Presion Eaucuff")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2470,7 +2470,7 @@ export const products: Product[] = [
     price: 16000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1002202")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1002202")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2482,7 +2482,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1000201 Three Pocket")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1000201 Three Pocket")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2494,7 +2494,7 @@ export const products: Product[] = [
     price: 16500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1001686 Sona")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1001686 Sona")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2506,7 +2506,7 @@ export const products: Product[] = [
     price: 9000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Infinity IN528")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Infinity IN528")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2518,7 +2518,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Her Confession For Women 3.40OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Her Confession For Women 3.40OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2530,7 +2530,7 @@ export const products: Product[] = [
     price: 699, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: true,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Splash - Perfumes Pink Surtidos")],
+    images: [stock("1595777457583-95e059d581b8", "Splash - Perfumes Pink Surtidos")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2542,7 +2542,7 @@ export const products: Product[] = [
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Toll Box For Men Masculinity Meets Luxury")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Toll Box For Men Masculinity Meets Luxury")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2554,7 +2554,7 @@ export const products: Product[] = [
     price: 16000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1001933")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1001933")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2566,7 +2566,7 @@ export const products: Product[] = [
     price: 8500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Orientica Amber Rouge Luxury Collection 2.7OZ Unisex")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Orientica Amber Rouge Luxury Collection 2.7OZ Unisex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2578,7 +2578,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Importada Dama Butter-soft BSN1182")],
+    images: [stock("1483985988355-763728e1935b", "Bata Medica Importada Dama Butter-soft BSN1182")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2590,7 +2590,7 @@ export const products: Product[] = [
     price: 1000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1587351021759-3e566b6af7cc", "Pijama Coral")],
+    images: [stock("1434389677669-e08b4cac3105", "Pijama Coral")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2602,7 +2602,7 @@ export const products: Product[] = [
     price: 9500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Morral Dost Plata Parchita")],
+    images: [stock("1590874103328-eac38a683ce7", "Morral Dost Plata Parchita")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2614,7 +2614,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Braga Importada Skywox Estampada")],
+    images: [stock("1556905055-8f358a7a47b2", "Braga Importada Skywox Estampada")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2626,7 +2626,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS Three Pocket")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS Three Pocket")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2638,7 +2638,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importado Deportivo Caballero Nike Air Winflo 11")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importado Deportivo Caballero Nike Air Winflo 11")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2650,7 +2650,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Infinity IN702A")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Infinity IN702A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2662,7 +2662,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Cherokee WW603")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Cherokee WW603")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2674,7 +2674,7 @@ export const products: Product[] = [
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Conjunto Deportivo Licra Largo 2P Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Conjunto Deportivo Licra Largo 2P Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2686,7 +2686,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero Cherokee WW670")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero Cherokee WW670")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2698,7 +2698,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Dama Cherokee CK4350")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Dama Cherokee CK4350")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2710,7 +2710,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Camisa Importada Dama Healing Hands HH700")],
+    images: [stock("1483985988355-763728e1935b", "Camisa Importada Dama Healing Hands HH700")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2722,7 +2722,7 @@ export const products: Product[] = [
     price: 13500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Barco 5105")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Barco 5105")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2734,7 +2734,7 @@ export const products: Product[] = [
     price: 1000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1571945153237-4929e783af4a", "Cadenas Variadas Piedra Collares 4XG")],
+    images: [stock("1611085583191-a3b181a88401", "Cadenas Variadas Piedra Collares 4XG")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2746,7 +2746,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Braga Importada Skywox")],
+    images: [stock("1556905055-8f358a7a47b2", "Braga Importada Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2758,7 +2758,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS Leon")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS Leon")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2770,7 +2770,7 @@ export const products: Product[] = [
     price: 7600, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Nacional Dama Patrones")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Nacional Dama Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2782,7 +2782,7 @@ export const products: Product[] = [
     price: 1000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1587351021759-3e566b6af7cc", "Pijama Conjunto Short")],
+    images: [stock("1434389677669-e08b4cac3105", "Pijama Conjunto Short")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2794,7 +2794,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Caballero FIGS 1000199")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Importado Caballero FIGS 1000199")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2806,7 +2806,7 @@ export const products: Product[] = [
     price: 6499, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1576091160399-112ba8d25d1d", "Bata Medica Nacional Patrones Caballero")],
+    images: [stock("1490114538077-0a7f8cb49891", "Bata Medica Nacional Patrones Caballero")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2818,7 +2818,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Cherokee WW320")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Cherokee WW320")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2830,7 +2830,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Bolso Medico Termico Zhmo")],
+    images: [stock("1556905055-8f358a7a47b2", "Bolso Medico Termico Zhmo")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2842,7 +2842,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importado Deportivo Dama Nike Revolution 8")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importado Deportivo Dama Nike Revolution 8")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2854,7 +2854,7 @@ export const products: Product[] = [
     price: 3500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Philos Rosso For Womam 3.4OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Philos Rosso For Womam 3.4OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2866,7 +2866,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importada Caballero Cherokee")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importada Caballero Cherokee")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2878,7 +2878,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama FIGS 1002618")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama FIGS 1002618")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2890,7 +2890,7 @@ export const products: Product[] = [
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Conjunto Deportivo Licra Largo 2P Skywox")],
+    images: [stock("1523381210434-271e8be1f52b", "Conjunto Deportivo Licra Largo 2P Skywox")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2902,7 +2902,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Nacional Caballero Patrones")],
+    images: [stock("1490114538077-0a7f8cb49891", "Uniforme Nacional Caballero Patrones")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2914,7 +2914,7 @@ export const products: Product[] = [
     price: 2000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Sudadera Algodon Importada Caballero Neer")],
+    images: [stock("1490114538077-0a7f8cb49891", "Sudadera Algodon Importada Caballero Neer")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2926,7 +2926,7 @@ export const products: Product[] = [
     price: 8001, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: true,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Medica Importada Caballero Infinity CK305A")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Medica Importada Caballero Infinity CK305A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2938,7 +2938,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Cherokee CK936 Negro")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Cherokee CK936 Negro")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2950,7 +2950,7 @@ export const products: Product[] = [
     price: 3000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594633312681-425c7b97ccd1", "Chaqueta Licra Deportiva Babalu Fit")],
+    images: [stock("1523381210434-271e8be1f52b", "Chaqueta Licra Deportiva Babalu Fit")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2962,7 +2962,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Vaso Acero Inoxidable 40OZ/20OZ Duuv Nurse Gifts Blanco Estampados")],
+    images: [stock("1556905055-8f358a7a47b2", "Vaso Acero Inoxidable 40OZ/20OZ Duuv Nurse Gifts Blanco Estampados")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2974,7 +2974,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1595950653106-6c9ebd614d3a", "Suecos Crocs Unisex")],
+    images: [stock("1618354691373-d851c5c3a990", "Suecos Crocs Unisex")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2986,7 +2986,7 @@ export const products: Product[] = [
     price: 12000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1542291026-7eec264c27ff", "Zapato Importado Deportivo Dama Nike Promina")],
+    images: [stock("1618354691373-d851c5c3a990", "Zapato Importado Deportivo Dama Nike Promina")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -2998,7 +2998,7 @@ export const products: Product[] = [
     price: 8001, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Medica Importada Caballero Infinity CK305A")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Medica Importada Caballero Infinity CK305A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3010,7 +3010,7 @@ export const products: Product[] = [
     price: 13500, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Cherokee CK667")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Cherokee CK667")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3022,7 +3022,7 @@ export const products: Product[] = [
     price: 6000, featured: false, low_stock_threshold: null,
     gender: 'hombre', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Chaqueta Importado Caballero Cherokee CK329A")],
+    images: [stock("1445205170230-053b83016050", "Chaqueta Importado Caballero Cherokee CK329A")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3034,7 +3034,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Importado Dama Cherokee CK936")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Importado Dama Cherokee CK936")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3046,7 +3046,7 @@ export const products: Product[] = [
     price: 10000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Uniforme Medico Importado Dama Cherokee CK936")],
+    images: [stock("1483985988355-763728e1935b", "Uniforme Medico Importado Dama Cherokee CK936")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3058,7 +3058,7 @@ export const products: Product[] = [
     price: 4500, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: true,
     customization: customizationOff,
-    images: [stock("1584917865442-de89df76afd3", "Billetera Victoria Secret")],
+    images: [stock("1590874103328-eac38a683ce7", "Billetera Victoria Secret")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3070,7 +3070,7 @@ export const products: Product[] = [
     price: 14000, featured: false, low_stock_threshold: null,
     gender: 'mujer', on_sale: false,
     customization: customizationOff,
-    images: [stock("1594938298603-c8148c4dae35", "Uniforme Importado Dama FIGS")],
+    images: [stock("1445205170230-053b83016050", "Uniforme Importado Dama FIGS")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3082,7 +3082,7 @@ export const products: Product[] = [
     price: 251, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Antibacterial Aromatherapy")],
+    images: [stock("1595777457583-95e059d581b8", "Antibacterial Aromatherapy")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3094,7 +3094,7 @@ export const products: Product[] = [
     price: 5000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1541643600914-78b084683601", "Perfume Victoria Lattafa Unisex 3.40 OZ")],
+    images: [stock("1595777457583-95e059d581b8", "Perfume Victoria Lattafa Unisex 3.40 OZ")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3106,7 +3106,7 @@ export const products: Product[] = [
     price: 1000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1587351021759-3e566b6af7cc", "Pijama Conjunto Capri")],
+    images: [stock("1434389677669-e08b4cac3105", "Pijama Conjunto Capri")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
   {
@@ -3118,7 +3118,7 @@ export const products: Product[] = [
     price: 400, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
     customization: customizationOff,
-    images: [stock("1584515933487-779824d29309", "Vasos Plasticos con Tapa Zhehao Coffee")],
+    images: [stock("1556905055-8f358a7a47b2", "Vasos Plasticos con Tapa Zhehao Coffee")],
     set_pieces: [], created_at: '2026-07-15T10:00:00-04:00',
   },
 ];
