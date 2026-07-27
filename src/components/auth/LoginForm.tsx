@@ -51,7 +51,7 @@ export function LoginForm() {
     <main className={styles.main}>
       <div
         className={styles.brandPanel}
-        style={{ backgroundImage: `url(${assetPath('/brand/rosegold.jpg')})` }}
+        style={{ backgroundImage: `url(${assetPath('/brand/rosegold.png')})` }}
         aria-hidden="true"
       />
 

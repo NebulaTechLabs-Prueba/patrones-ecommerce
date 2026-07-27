@@ -24,7 +24,7 @@ export default function OwnLinePage() {
         title="Línea PATRONES"
         description="Diseñada y producida por PATRONES. Nuestra confección propia, con el estándar que define a la casa, disponible en todos los rubros."
         image={{
-          url: assetPath('/brand/etiqueta.jpg'),
+          url: assetPath('/brand/etiqueta.png'),
           alt: 'Etiqueta tejida de la Línea PATRONES',
           is_placeholder: false,
           sort_order: 0,
