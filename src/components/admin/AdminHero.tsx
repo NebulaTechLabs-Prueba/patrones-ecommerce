@@ -17,6 +17,7 @@ import {
   type HeroTextAlign,
   type HeroTextEffect,
 } from '@/lib/store/hero-context';
+import { useCatalog } from '@/lib/store/catalog-context';
 import { useToast } from '@/lib/store/toast-context';
 import ui from './adminUI.module.css';
 
@@ -30,11 +31,14 @@ const COLOR_PRESETS: Array<{ label: string; value: string }> = [
 const LAYOUTS: Array<{ value: HeroLayout; label: string }> = [
   { value: 'pattern', label: 'Patrón (sin foto)' },
   { value: 'single', label: 'Una imagen' },
-  { value: 'split', label: 'Dos · 50/50' },
+  { value: 'split', label: 'Dos · 50/50 (lado a lado)' },
   { value: 'stack', label: 'Dos · apiladas' },
   { value: 'triptico', label: 'Tres · en fila' },
+  { value: 'stack3', label: 'Tres · apiladas' },
   { value: 'mosaico', label: 'Mosaico · 1 grande + 2' },
-  { value: 'quad', label: 'Cuatro · cuadrícula' },
+  { value: 'quad', label: 'Cuatro · cuadrícula 2×2' },
+  { value: 'quadRow', label: 'Cuatro · en fila' },
+  { value: 'grid6', label: 'Seis · mosaico 3×2' },
 ];
 
 const ALIGNS: Array<{ value: HeroTextAlign; label: string }> = [
@@ -45,7 +49,8 @@ const ALIGNS: Array<{ value: HeroTextAlign; label: string }> = [
 
 const EFFECTS: Array<{ value: HeroTextEffect; label: string }> = [
   { value: 'none', label: 'Ninguno' },
-  { value: 'shadow', label: 'Sombra' },
+  { value: 'shadow', label: 'Sombra suave' },
+  { value: 'shadowStrong', label: 'Sombra fuerte' },
   { value: 'outline', label: 'Trazado (borde)' },
   { value: 'panel', label: 'Panel detrás' },
 ];
@@ -62,6 +67,22 @@ const card: CSSProperties = {
 export function AdminHero() {
   const { hero, setHero, hydrated } = useHero();
   const { success, error } = useToast();
+  const { verticals } = useCatalog();
+
+  // Destinos frecuentes para el desplegable del botón (evita escribir rutas a mano).
+  const destinos: Array<{ label: string; href: string }> = [
+    { label: 'Catálogo (todo)', href: '/catalogo' },
+    { label: 'Ofertas', href: '/ofertas' },
+    { label: 'Marcas', href: '/marcas' },
+    { label: 'Línea PATRONES', href: '/linea-patrones/' },
+    { label: 'Hombre', href: '/catalogo?genero=hombre' },
+    { label: 'Mujer', href: '/catalogo?genero=mujer' },
+    { label: 'Esencia', href: '/esencia/' },
+    { label: 'Contacto', href: '/contact/' },
+    ...verticals
+      .filter((v) => v.is_active)
+      .map((v) => ({ label: `Rubro: ${v.name}`, href: `/uniformes/${v.slug}/` })),
+  ];
   const [draft, setDraft] = useState<HeroConfig>(hero);
   const [note, setNote] = useState('');
   const fileRefs = useRef<Array<HTMLInputElement | null>>([]);
@@ -247,32 +268,57 @@ export function AdminHero() {
           <span>Botones ({draft.buttons.length})</span>
           <button type="button" className={ui.actionBtn} onClick={addButton}>+ Agregar botón</button>
         </div>
-        {draft.buttons.map((b, i) => (
-          <div key={i} className={ui.fieldRow} style={{ gap: 10, alignItems: 'center', marginBottom: 10, flexWrap: 'wrap' }}>
-            <input className={ui.input} placeholder={`Texto del botón ${i + 1}`} value={b.label} onChange={(e) => setButton(i, { label: e.target.value })} />
-            <input className={ui.input} placeholder="Enlace (p. ej. /uniformes/salud/)" value={b.href} onChange={(e) => setButton(i, { href: e.target.value })} />
-            <select className={ui.select} value={b.variant} onChange={(e) => setButton(i, { variant: e.target.value as 'primary' | 'secondary' })}>
-              <option value="primary">Principal</option>
-              <option value="secondary">Secundario</option>
-            </select>
-            <label className={ui.check} style={{ gap: 4 }} title="Color de fondo del botón">
-              <span>Fondo</span>
-              <input type="color" value={/^#/.test(b.bg ?? '') ? (b.bg as string) : '#577575'} onChange={(e) => setButton(i, { bg: e.target.value })} />
-            </label>
-            <label className={ui.check} style={{ gap: 4 }} title="Color del texto del botón">
-              <span>Texto</span>
-              <input type="color" value={/^#/.test(b.color ?? '') ? (b.color as string) : '#ffffff'} onChange={(e) => setButton(i, { color: e.target.value })} />
-            </label>
-            <label className={ui.check}>
-              <input type="checkbox" checked={b.visible} onChange={(e) => setButton(i, { visible: e.target.checked })} />
-              <span>Visible</span>
-            </label>
-            <button type="button" className={`${ui.actionBtn} ${ui.actionDanger}`} onClick={() => removeButton(i)}>Quitar</button>
-          </div>
-        ))}
-        <p className={ui.pageSubtitle}>
-          Podés agregar los botones que necesités (además de “Conoce la Línea PATRONES”). Para secciones por género,
-          agregá botones “Hombre” y “Mujer” con su enlace.
+        <div style={{ display: 'grid', gap: 10 }}>
+          {draft.buttons.map((b, i) => {
+            const known = destinos.find((d) => d.href === b.href);
+            const isCustom = !known;
+            return (
+              <div key={i} style={{ border: '1px solid var(--ptr-neutral-200, #e6e6e3)', borderRadius: 10, padding: '10px 12px', display: 'grid', gap: 8 }}>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                  <input className={ui.input} style={{ flex: '2 1 150px' }} placeholder={`Texto del botón ${i + 1}`} value={b.label} onChange={(e) => setButton(i, { label: e.target.value })} />
+                  <select
+                    className={ui.select}
+                    style={{ flex: '2 1 170px' }}
+                    value={isCustom ? '__url__' : b.href}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      setButton(i, { href: v === '__url__' ? (isCustom ? b.href : '') : v });
+                    }}
+                  >
+                    {destinos.map((d) => (
+                      <option key={d.href} value={d.href}>{d.label}</option>
+                    ))}
+                    <option value="__url__">URL personalizada…</option>
+                  </select>
+                </div>
+                {isCustom ? (
+                  <input className={ui.input} placeholder="https://… o /ruta/" value={b.href} onChange={(e) => setButton(i, { href: e.target.value })} />
+                ) : null}
+                <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap', fontSize: 13 }}>
+                  <select className={ui.select} style={{ maxWidth: 130 }} value={b.variant} onChange={(e) => setButton(i, { variant: e.target.value as 'primary' | 'secondary' })}>
+                    <option value="primary">Principal</option>
+                    <option value="secondary">Secundario</option>
+                  </select>
+                  <label className={ui.check} style={{ gap: 4 }} title="Fondo del botón">
+                    <span>Fondo</span>
+                    <input type="color" value={/^#/.test(b.bg ?? '') ? (b.bg as string) : '#577575'} onChange={(e) => setButton(i, { bg: e.target.value })} />
+                  </label>
+                  <label className={ui.check} style={{ gap: 4 }} title="Color del texto">
+                    <span>Texto</span>
+                    <input type="color" value={/^#/.test(b.color ?? '') ? (b.color as string) : '#ffffff'} onChange={(e) => setButton(i, { color: e.target.value })} />
+                  </label>
+                  <label className={ui.check}>
+                    <input type="checkbox" checked={b.visible} onChange={(e) => setButton(i, { visible: e.target.checked })} />
+                    <span>Visible</span>
+                  </label>
+                  <button type="button" className={`${ui.actionBtn} ${ui.actionDanger}`} style={{ marginLeft: 'auto' }} onClick={() => removeButton(i)}>Quitar</button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <p className={ui.pageSubtitle} style={{ marginTop: 8 }}>
+          Elegí el destino de la lista, o “URL personalizada…” para otro enlace. Para género, usá los botones “Hombre”/“Mujer”.
         </p>
       </div>
     </div>

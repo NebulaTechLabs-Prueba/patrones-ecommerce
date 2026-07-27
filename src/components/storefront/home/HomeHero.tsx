@@ -24,6 +24,9 @@ const GRID: Record<HeroLayout, { cols: string; rows: string }> = {
   triptico: { cols: '1fr 1fr 1fr', rows: '1fr' },
   quad: { cols: '1fr 1fr', rows: '1fr 1fr' },
   mosaico: { cols: '2fr 1fr', rows: '1fr 1fr' },
+  quadRow: { cols: 'repeat(4, 1fr)', rows: '1fr' },
+  stack3: { cols: '1fr', rows: '1fr 1fr 1fr' },
+  grid6: { cols: 'repeat(3, 1fr)', rows: '1fr 1fr' },
 };
 
 const JUSTIFY: Record<string, CSSProperties['justifyContent']> = {
@@ -65,20 +68,26 @@ export function HomeHero() {
   const grid = GRID[hero.layout];
   const imgs = validImages.slice(0, IMAGES_FOR[hero.layout]);
 
-  // Efecto de texto (legibilidad sobre foto).
-  const effect: CSSProperties =
-    hero.textEffect === 'shadow'
-      ? { textShadow: '0 2px 16px rgba(0,0,0,0.55)' }
-      : hero.textEffect === 'outline'
-        ? ({ WebkitTextStroke: '1px rgba(0,0,0,0.8)', paintOrder: 'stroke' } as CSSProperties)
-        : {};
-  const textStyle: CSSProperties = { color: hero.textColor, ...effect };
+  // Efecto de texto (legibilidad sobre foto). Se aplica con filter en el contenedor
+  // para que NO lo recorte el overflow de la animación del título.
+  const FILTERS: Partial<Record<string, string>> = {
+    shadow: 'drop-shadow(0 2px 10px rgba(0,0,0,0.55))',
+    shadowStrong: 'drop-shadow(0 3px 16px rgba(0,0,0,0.85))',
+    outline:
+      'drop-shadow(1.2px 0 0 rgba(0,0,0,0.9)) drop-shadow(-1.2px 0 0 rgba(0,0,0,0.9)) drop-shadow(0 1.2px 0 rgba(0,0,0,0.9)) drop-shadow(0 -1.2px 0 rgba(0,0,0,0.9))',
+  };
+  const alignItems = hero.textAlign === 'center' ? 'center' : hero.textAlign === 'right' ? 'flex-end' : 'flex-start';
+  const textStyle: CSSProperties = { color: hero.textColor };
   const innerStyle: CSSProperties = {
     position: 'relative',
     zIndex: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems,
     textAlign: hero.textAlign,
+    filter: FILTERS[hero.textEffect],
     ...(hero.textEffect === 'panel'
-      ? { background: 'rgba(20,20,18,0.42)', backdropFilter: 'blur(2px)', borderRadius: 16, padding: 'var(--ptr-space-6)' }
+      ? { background: 'rgba(20,20,18,0.46)', backdropFilter: 'blur(2px)', borderRadius: 16, padding: 'var(--ptr-space-6)' }
       : {}),
   };
 

@@ -12,9 +12,19 @@
 
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-export type HeroLayout = 'pattern' | 'single' | 'split' | 'stack' | 'triptico' | 'quad' | 'mosaico';
+export type HeroLayout =
+  | 'pattern'
+  | 'single'
+  | 'split'
+  | 'stack'
+  | 'triptico'
+  | 'mosaico'
+  | 'quad'
+  | 'quadRow'
+  | 'stack3'
+  | 'grid6';
 export type HeroTextAlign = 'left' | 'center' | 'right';
-export type HeroTextEffect = 'none' | 'shadow' | 'outline' | 'panel';
+export type HeroTextEffect = 'none' | 'shadow' | 'shadowStrong' | 'outline' | 'panel';
 export type HeroButtonVariant = 'primary' | 'secondary';
 
 export interface HeroButton {
@@ -53,6 +63,9 @@ export const IMAGES_FOR: Record<HeroLayout, number> = {
   triptico: 3,
   mosaico: 3,
   quad: 4,
+  quadRow: 4,
+  stack3: 3,
+  grid6: 6,
 };
 
 export const DEFAULT_HERO: HeroConfig = {
@@ -81,7 +94,7 @@ interface HeroContextValue {
 
 const HeroContext = createContext<HeroContextValue | null>(null);
 // Bump de versión al cambiar la forma de la config (descarta local viejo).
-const STORAGE_KEY = 'ptr-hero-v4';
+const STORAGE_KEY = 'ptr-hero-v5';
 
 export function HeroProvider({ children }: { children: React.ReactNode }) {
   const [hero, setHeroState] = useState<HeroConfig>(DEFAULT_HERO);
