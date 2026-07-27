@@ -51,7 +51,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const ensureAC = useCallback((): AudioContext | null => {
+  const ensureAC = useCallback((resume = true): AudioContext | null => {
     if (!acRef.current) {
       const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!Ctor) return null;
@@ -61,7 +61,9 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
         return null;
       }
     }
-    if (acRef.current.state === 'suspended') acRef.current.resume().catch(() => {});
+    // resume() solo dentro de un gesto real; en la pre-creación idle NO, para no
+    // disparar el warning de autoplay del navegador.
+    if (resume && acRef.current.state === 'suspended') acRef.current.resume().catch(() => {});
     return acRef.current;
   }, []);
 
@@ -135,7 +137,7 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
   // Queda 'suspended' hasta el primer gesto real, que solo hace resume() (barato).
   useEffect(() => {
     const id = window.setTimeout(() => {
-      if (!mutedRef.current) ensureAC();
+      if (!mutedRef.current) ensureAC(false);
     }, 1500);
     return () => window.clearTimeout(id);
   }, [ensureAC]);

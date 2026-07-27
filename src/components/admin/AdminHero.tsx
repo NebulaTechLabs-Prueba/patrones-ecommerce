@@ -107,16 +107,43 @@ export function AdminHero() {
   function clearImage(i: number) {
     setDraft((d) => ({ ...d, images: d.images.map((x, idx) => (idx === i ? '' : x)) }));
   }
+  // Redimensiona la imagen en el navegador (máx. 1600px, JPEG) antes de guardarla:
+  // así no llena el almacenamiento ni congela el editor con base64 gigante.
   function onFile(i: number, file: File | undefined) {
     if (!file) return;
-    setNote(
-      file.size > 1_500_000
-        ? 'La imagen pesa más de 1.5 MB; puede no caber en el navegador. Usá una más liviana o una URL.'
-        : '',
-    );
-    const reader = new FileReader();
-    reader.onload = () => setImage(i, String(reader.result));
-    reader.readAsDataURL(file);
+    if (!file.type.startsWith('image/')) {
+      error('Ese archivo no es una imagen.');
+      return;
+    }
+    if (file.size > 12_000_000) {
+      error('La imagen es demasiado pesada (máx. 12 MB). Elegí una más liviana.');
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    const img = new window.Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const maxDim = 1600;
+      const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+      const w = Math.max(1, Math.round(img.width * scale));
+      const h = Math.max(1, Math.round(img.height * scale));
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        error('No se pudo procesar la imagen.');
+        return;
+      }
+      ctx.drawImage(img, 0, 0, w, h);
+      setImage(i, canvas.toDataURL('image/jpeg', 0.82));
+      setNote('');
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      error('No se pudo leer la imagen.');
+    };
+    img.src = url;
   }
 
   function setButton(i: number, patch: Partial<HeroConfig['buttons'][number]>) {
@@ -130,11 +157,23 @@ export function AdminHero() {
   }
 
   function save() {
+    const need = IMAGES_FOR[draft.layout];
+    const have = draft.images.filter(Boolean).length;
+    if (need > 0 && have < need) {
+      error(`Esta distribución necesita ${need} ${need === 1 ? 'imagen' : 'imágenes'} y hay ${have}. Súbelas o elegí otra distribución.`);
+      return;
+    }
+    const clean = { ...draft, images: draft.images.filter(Boolean) };
+    // Aviso previo si el peso supera lo que aguanta el navegador (localStorage ~5 MB).
+    if (JSON.stringify(clean).length > 4_500_000) {
+      error('Las imágenes son muy pesadas para guardarse en el navegador. Usá menos imágenes o más livianas.');
+      return;
+    }
     try {
-      setHero({ ...draft, images: draft.images.filter(Boolean) });
+      setHero(clean);
       success('Portada guardada. Abrí la Home para verla.');
     } catch {
-      error('No se pudo guardar (almacenamiento lleno). Probá imágenes más livianas o por URL.');
+      error('No se pudo guardar (almacenamiento del navegador lleno). Usá imágenes más livianas.');
     }
   }
   function restore() {
