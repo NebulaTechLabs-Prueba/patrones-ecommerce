@@ -50,3 +50,53 @@
   background-color: var(--ptr-neutral-50);
   color: var(--ptr-primary);
 }
+
+/* --- Mega-menú (columnas: rubros / categorías / comprar por) --- */
+.mega {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: var(--ptr-space-5);
+  padding: var(--ptr-space-5);
+  background-color: var(--ptr-white);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-md);
+  box-shadow: var(--ptr-shadow-3);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.colTitle {
+  font-size: var(--ptr-text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--ptr-tracking-wider);
+  color: var(--ptr-neutral-500);
+  font-weight: var(--ptr-weight-semibold);
+  margin-bottom: var(--ptr-space-2);
+}
+
+.logoItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ptr-space-2);
+}
+.logoItem img {
+  height: 16px;
+  max-width: 54px;
+  object-fit: contain;
+}
+
+@media (max-width: 760px) {
+  .mega {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ptr-space-3);
+  }
+}

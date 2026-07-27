@@ -8,6 +8,7 @@ import { Isologo } from '@/components/brand/Isologo';
 import { AccountMenu } from './AccountMenu';
 import { CartIndicator } from './CartIndicator';
 import { CurrencySwitch } from './CurrencySwitch';
+import { MarcasNav } from './MarcasNav';
 import { RubrosNav } from './RubrosNav';
 import { SearchBar } from './SearchBar';
 import styles from './Header.module.css';
@@ -22,9 +23,7 @@ export function Header() {
 
         <nav className={styles.nav} aria-label="Navegación">
           <RubrosNav />
-          <Link href="/marcas/" className={styles.link}>
-            Marcas
-          </Link>
+          <MarcasNav />
           <Link href="/ofertas/" className={styles.link} style={{ color: 'var(--ptr-primary)', fontWeight: 700 }}>
             Ofertas
           </Link>
