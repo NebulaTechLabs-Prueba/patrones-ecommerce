@@ -67,6 +67,8 @@ export function HomeHero() {
   const useImages = hero.layout !== 'pattern' && validImages.length > 0;
   const grid = GRID[hero.layout];
   const imgs = validImages.slice(0, IMAGES_FOR[hero.layout]);
+  // Apiladas: mostrar la foto completa (sin recorte), sobre fondo oscuro.
+  const noCrop = hero.layout === 'stack' || hero.layout === 'stack3';
 
   // Efecto de texto (legibilidad sobre foto). Se aplica con filter en el contenedor
   // para que NO lo recorte el overflow de la animación del título.
@@ -96,7 +98,7 @@ export function HomeHero() {
       {useImages ? (
         <div
           aria-hidden="true"
-          style={{ position: 'absolute', inset: 0, display: 'grid', gridTemplateColumns: grid.cols, gridTemplateRows: grid.rows, zIndex: 0 }}
+          style={{ position: 'absolute', inset: 0, display: 'grid', gridTemplateColumns: grid.cols, gridTemplateRows: grid.rows, zIndex: 0, background: '#141410' }}
         >
           {imgs.map((src, i) => (
             // eslint-disable-next-line @next/next/no-img-element
@@ -104,7 +106,7 @@ export function HomeHero() {
               key={i}
               src={src}
               alt=""
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', ...(hero.layout === 'mosaico' && i === 0 ? { gridRow: '1 / 3' } : {}) }}
+              style={{ width: '100%', height: '100%', objectFit: noCrop ? 'contain' : 'cover', display: 'block', ...(hero.layout === 'mosaico' && i === 0 ? { gridRow: '1 / 3' } : {}) }}
             />
           ))}
           <div
