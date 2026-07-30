@@ -54,7 +54,12 @@ export function MarcasNav() {
       </button>
 
       {open ? (
-        <div className={styles.mega} role="menu" style={{ gridTemplateColumns: 'repeat(3, minmax(140px, 1fr))' }} onClick={() => setOpen(false)}>
+        <div
+          className={styles.mega}
+          role="menu"
+          style={{ gridTemplateColumns: 'repeat(5, minmax(118px, 1fr))', width: 'min(760px, 90vw)', maxHeight: '60vh', overflowY: 'auto' }}
+          onClick={() => setOpen(false)}
+        >
           {shown.map((b) => (
             <Link
               key={b.id}

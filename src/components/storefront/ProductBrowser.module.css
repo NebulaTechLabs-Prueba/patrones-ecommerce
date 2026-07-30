@@ -144,3 +144,186 @@
     gap: var(--ptr-space-4);
   }
 }
+
+/* --- Barra de filtros compacta (facetas en desplegables) --- */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ptr-space-3);
+  margin-bottom: var(--ptr-space-4);
+}
+.bar .search {
+  flex: 1 1 220px;
+  max-width: 420px;
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+}
+.facets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ptr-space-2);
+}
+.facetWrap {
+  position: relative;
+}
+.facetBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--ptr-space-3) var(--ptr-space-4);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-white);
+  font: inherit;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-ink);
+  cursor: pointer;
+  transition: border-color var(--ptr-duration-fast) var(--ptr-ease), color var(--ptr-duration-fast) var(--ptr-ease);
+}
+.facetBtn:hover {
+  border-color: var(--ptr-primary);
+  color: var(--ptr-primary);
+}
+.facetBtnOn {
+  border-color: var(--ptr-primary);
+  color: var(--ptr-primary);
+}
+.facetCount {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-size: 11px;
+  font-weight: var(--ptr-weight-bold);
+}
+.caret {
+  font-size: 0.7em;
+  color: var(--ptr-neutral-400);
+}
+.popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  min-width: 190px;
+  max-height: 320px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: var(--ptr-space-2);
+  background: var(--ptr-white);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-md);
+  box-shadow: var(--ptr-shadow-3);
+}
+.popoverWide {
+  min-width: 340px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+}
+.opt {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-2);
+  padding: var(--ptr-space-2) var(--ptr-space-3);
+  border: 0;
+  border-radius: var(--ptr-radius-sm);
+  background: transparent;
+  font: inherit;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-ink);
+  text-align: left;
+  cursor: pointer;
+}
+.opt:hover:not(:disabled) {
+  background: var(--ptr-neutral-50);
+  color: var(--ptr-primary);
+}
+.opt:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.optOn {
+  color: var(--ptr-primary);
+  font-weight: var(--ptr-weight-semibold);
+}
+.optCheck {
+  width: 14px;
+  color: var(--ptr-primary);
+}
+.swatchGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+}
+.swatchOpt {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-2);
+  padding: var(--ptr-space-2) var(--ptr-space-3);
+  border: 0;
+  border-radius: var(--ptr-radius-sm);
+  background: transparent;
+  font: inherit;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-ink);
+  cursor: pointer;
+}
+.swatchOpt:hover:not(:disabled) {
+  background: var(--ptr-neutral-50);
+}
+.swatchOptOn {
+  color: var(--ptr-primary);
+  font-weight: var(--ptr-weight-semibold);
+}
+.swatchDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  flex: 0 0 auto;
+}
+.clearBtn {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-primary);
+  cursor: pointer;
+}
+.clearBtn:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ptr-space-2);
+  margin-bottom: var(--ptr-space-4);
+}
+.chipRemove {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px var(--ptr-space-3);
+  border: 1px solid var(--ptr-primary);
+  border-radius: var(--ptr-radius-full);
+  background: color-mix(in srgb, var(--ptr-primary) 8%, transparent);
+  font: inherit;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-primary);
+  cursor: pointer;
+}
+.chipRemove:hover {
+  background: var(--ptr-primary);
+  color: var(--ptr-white);
+}
