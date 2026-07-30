@@ -15,6 +15,7 @@
 
 import Link from 'next/link';
 import { HomeHero } from '@/components/storefront/home/HomeHero';
+import { ShopByColor } from '@/components/storefront/home/ShopByColor';
 import { Reveal } from '@/components/motion/Reveal';
 import { VerticalCard } from '@/components/storefront/VerticalCard';
 import { ProductGrid } from '@/components/storefront/ProductGrid';
@@ -59,6 +60,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Comprá por color (color-first, temporada) */}
+      <ShopByColor />
 
       {/* Selección destacada (§9.4) */}
       {featured.products.length > 0 ? (

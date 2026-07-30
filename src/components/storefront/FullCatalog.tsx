@@ -59,11 +59,13 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
   const genero = sp.get('genero');
   const marca = sp.get('marca');
   const categoria = sp.get('categoria');
+  const color = sp.get('color');
   const initial = {
     search: q,
     genders: genero ? [genero] : undefined,
     brands: marca ? [marca] : undefined,
     categories: categoria ? [categoria] : undefined,
+    colorFamilies: color ? color.split(',') : undefined,
   };
 
   return (
