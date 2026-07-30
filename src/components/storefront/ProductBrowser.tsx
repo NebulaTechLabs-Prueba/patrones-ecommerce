@@ -50,6 +50,8 @@ interface ProductBrowserProps {
   subheading?: string;
   searchPlaceholder?: string;
   initial?: BrowserInitial;
+  /** Reporta la selección de marcas hacia arriba (para el hero de faceta). */
+  onBrandsChange?: (brandIds: string[]) => void;
 }
 
 const GENDER_LABEL: Record<string, string> = { hombre: 'Hombre', mujer: 'Mujer', unisex: 'Unisex' };
@@ -72,6 +74,7 @@ export function ProductBrowser({
   subheading,
   searchPlaceholder = 'Buscar producto…',
   initial,
+  onBrandsChange,
 }: ProductBrowserProps) {
   const [search, setSearch] = useState(initial?.search ?? '');
   const [gSel, setGSel] = useState<Set<string>>(new Set(initial?.genders ?? []));
@@ -80,6 +83,14 @@ export function ProductBrowser({
   const [fSel, setFSel] = useState<Set<string>>(new Set(initial?.colorFamilies ?? []));
   const [openFacet, setOpenFacet] = useState<FacetKey | null>(null);
   const barRef = useRef<HTMLDivElement>(null);
+
+  // Reporta la selección de marcas al contenedor (el hero de faceta reacciona a
+  // cuántas hay elegidas). Ref para no re-disparar por identidad del callback.
+  const onBrandsChangeRef = useRef(onBrandsChange);
+  onBrandsChangeRef.current = onBrandsChange;
+  useEffect(() => {
+    onBrandsChangeRef.current?.(Array.from(bSel));
+  }, [bSel]);
 
   const catName = useMemo(() => new Map(categories.map((c) => [c.id, c.name])), [categories]);
   const brandName = useMemo(() => new Map(brands.map((b) => [b.id, b.name])), [brands]);

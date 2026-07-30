@@ -7,6 +7,7 @@
  * iniciales de la URL: ?q= (búsqueda), ?genero= (hombre/mujer), ?marca= (id).
  */
 
+import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useCatalog } from '@/lib/store/catalog-context';
 import { useContent, type HeroBlock } from '@/lib/store/content-context';
@@ -35,6 +36,11 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
   const { hydrated, brands, categories, products, variants } = useCatalog();
   const { content } = useContent();
   const sp = useSearchParams();
+  // Selección de marcas viva (la reporta el ProductBrowser). Semilla: el ?marca= de la URL.
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(() => {
+    const m = sp.get('marca');
+    return m ? [m] : [];
+  });
 
   if (!hydrated) return <main style={{ minHeight: '60vh' }} aria-busy="true" />;
 
@@ -79,9 +85,10 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
     colorFamilies: color ? color.split(',') : undefined,
   };
 
-  // Hero por faceta (todos editables): marca → su fila (CRUD de marcas); ofertas y
-  // género (hombre/mujer) → store de contenido; en otro caso, el hero genérico.
-  const activeBrand = marca ? brandsById.get(marca) : undefined;
+  // Hero por faceta (todos editables): SOLO con UNA marca elegida se usa el hero de
+  // esa marca (su fila, CRUD de marcas). Con 0 o 2+ marcas cae en un predeterminado
+  // general: ofertas / género (store de contenido) o el hero genérico del catálogo.
+  const activeBrand = selectedBrands.length === 1 ? brandsById.get(selectedBrands[0]!) : undefined;
   const generoHero = genero === 'hombre' || genero === 'mujer' ? content.heros[genero] : null;
   const heroProps = activeBrand
     ? {
@@ -109,6 +116,7 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
             genders={genders}
             searchPlaceholder="Buscar producto…"
             initial={initial}
+            onBrandsChange={setSelectedBrands}
           />
         ) : (
           <EmptyState
