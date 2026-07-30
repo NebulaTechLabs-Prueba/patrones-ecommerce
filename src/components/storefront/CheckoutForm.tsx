@@ -9,17 +9,46 @@
  * Al confirmar NO crea orden ni cobra: muestra una confirmacion marcada como demo.
  */
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import type { IdentityDocKind, PaymentMethod, ShippingMethod } from '@/lib/data/types';
-import { isInstitutionDoc, validateDocument } from '@/lib/domains/identity/identity';
+import type {
+  IdentityDocKind,
+  PaymentMethod,
+  SavedPaymentMethod,
+  SavedShippingLocation,
+  ShippingMethod,
+} from '@/lib/data/types';
+import { validateDocument } from '@/lib/domains/identity/identity';
 import { quoteShipping } from '@/lib/domains/shipping/shipping';
+import { useAuth, readStoredProfile, type StoredAccount } from '@/lib/store/auth-context';
 import { useCart } from '@/lib/store/cart-context';
 import { useCurrency } from '@/lib/store/currency-context';
+import { PAYMENT_METHOD_LABELS } from '@/lib/labels';
 import styles from './CheckoutForm.module.css';
+
+export interface CustomerPrefill {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  docKind: IdentityDocKind;
+  docNumber: string;
+  address: string;
+}
 
 interface CheckoutFormProps {
   paymentMethods: PaymentMethod[];
+  customerFallback?: CustomerPrefill | null;
+}
+
+function readByEmail<T>(key: string, email: string): T[] {
+  if (!email) return [];
+  try {
+    const map = JSON.parse(window.localStorage.getItem(key) ?? '{}') as Record<string, T[]>;
+    return map[email] ?? [];
+  } catch {
+    return [];
+  }
 }
 
 const DOC_KINDS: IdentityDocKind[] = ['V', 'E', 'J', 'G', 'P'];
@@ -31,9 +60,10 @@ const SHIPPING_OPTIONS: Array<{ method: ShippingMethod; label: string; note: str
   { method: 'delivery_local', label: 'Delivery local', note: 'Tarifa a acordar. Simulado en la demo.' },
 ];
 
-export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
+export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormProps) {
   const { items, hydrated, summary, clear } = useCart();
   const { formatCents } = useCurrency();
+  const { user } = useAuth();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -50,6 +80,65 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
 
   const [paymentKind, setPaymentKind] = useState('');
   const [acceptNoReturns, setAcceptNoReturns] = useState('');
+
+  // Datos guardados del cliente (agilizan el checkout): casilleros y métodos de pago.
+  const [savedShip, setSavedShip] = useState<SavedShippingLocation[]>([]);
+  const [savedPay, setSavedPay] = useState<SavedPaymentMethod[]>([]);
+  const [prefilled, setPrefilled] = useState(false);
+
+  useEffect(() => {
+    const em = user?.email ?? '';
+    setSavedShip(readByEmail<SavedShippingLocation>('ptr-shipping-locations', em));
+    setSavedPay(readByEmail<SavedPaymentMethod>('ptr-payment-methods', em));
+
+    if (prefilled) return;
+    // Solo se prellena si hay sesión iniciada (dato del propio cliente).
+    if (!em) {
+      setPrefilled(true);
+      return;
+    }
+    // Prellenado de "Tus datos": perfil editado -> cuenta creada -> cliente demo.
+    const prof = readStoredProfile(em);
+    let base: CustomerPrefill | null = null;
+    if (prof) {
+      base = { firstName: prof.firstName, lastName: prof.lastName, email: em, phone: prof.phone, docKind: prof.docKind, docNumber: prof.docNumber, address: '' };
+    } else {
+      try {
+        const accounts = JSON.parse(window.localStorage.getItem('ptr-accounts') ?? '[]') as StoredAccount[];
+        const found = accounts.find((a) => a.email === em);
+        if (found) base = { firstName: found.firstName, lastName: found.lastName, email: em, phone: found.phone, docKind: found.docKind, docNumber: found.docNumber.replace(/\D/g, ''), address: '' };
+      } catch {
+        // sin almacenamiento
+      }
+    }
+    if (!base && customerFallback) base = { ...customerFallback, email: em || customerFallback.email };
+    if (base) {
+      setFirstName(base.firstName);
+      setLastName(base.lastName);
+      setEmail(base.email);
+      setPhone(base.phone);
+      setDocKind(base.docKind);
+      setDocNumber(base.docNumber);
+      if (base.address) setAddress(base.address);
+    }
+    setPrefilled(true);
+  }, [user, customerFallback, prefilled]);
+
+  function applySavedLocation(loc: SavedShippingLocation) {
+    setShippingMethod(loc.carrier);
+    setOfficeState(loc.state);
+    setOfficeCity(loc.city);
+    setOfficeName(loc.office);
+  }
+
+  // Etiqueta honesta de tarifa: gratis, cobro a destino, o a consultar (sin fingir $0).
+  function shippingLabel(method: ShippingMethod): string {
+    const q = quoteShipping(method);
+    if (q.paidAtDestination) return 'Cobro a destino';
+    if (method === 'delivery_local') return 'A consultar';
+    if (q.costCents === 0) return 'Gratis';
+    return formatCents(q.costCents);
+  }
 
   const [attempted, setAttempted] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -127,8 +216,6 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
     );
   }
 
-  const customerType = isInstitutionDoc(docKind) ? 'Institución' : 'Individual';
-
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>Checkout</h1>
@@ -187,10 +274,6 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
                   />
                 </div>
               </label>
-              <div className={styles.field}>
-                <span>Tipo de comprador</span>
-                <p className={styles.derived}>{customerType}</p>
-              </div>
             </div>
             <p id="doc-help" className={styles.help} aria-live="polite">
               {docValidation && !docValidation.valid
@@ -204,6 +287,18 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
           {/* Envio */}
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Envío</h2>
+            {savedShip.length > 0 ? (
+              <div className={styles.saved}>
+                <span className={styles.savedLabel}>Usar una dirección guardada:</span>
+                <div className={styles.savedChips}>
+                  {savedShip.map((l) => (
+                    <button key={l.id} type="button" className={styles.savedChip} onClick={() => applySavedLocation(l)}>
+                      {l.label} · {l.carrier === 'zoom' ? 'Zoom' : 'MRW'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
             <div className={styles.options}>
               {SHIPPING_OPTIONS.map((opt) => (
                 <label key={opt.method} className={styles.option}>
@@ -218,7 +313,7 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
                     <span className={styles.optionNote}>{opt.note}</span>
                   </span>
                   <span className={styles.optionCost}>
-                    {formatCents(quoteShipping(opt.method).costCents)}
+                    {shippingLabel(opt.method)}
                   </span>
                 </label>
               ))}
@@ -247,6 +342,25 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
           {/* Pago */}
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Pago</h2>
+            {savedPay.some((p) => paymentMethods.some((m) => m.kind === p.kind)) ? (
+              <div className={styles.saved}>
+                <span className={styles.savedLabel}>Tus métodos guardados:</span>
+                <div className={styles.savedChips}>
+                  {savedPay
+                    .filter((p) => paymentMethods.some((m) => m.kind === p.kind))
+                    .map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        className={`${styles.savedChip} ${paymentKind === p.kind ? styles.savedChipOn : ''}`}
+                        onClick={() => setPaymentKind(p.kind)}
+                      >
+                        {p.label} · {PAYMENT_METHOD_LABELS[p.kind]}
+                      </button>
+                    ))}
+                </div>
+              </div>
+            ) : null}
             <div className={styles.options}>
               {paymentMethods.map((m) => (
                 <label key={m.id} className={styles.option}>
@@ -301,9 +415,7 @@ export function CheckoutForm({ paymentMethods }: CheckoutFormProps) {
             ) : null}
             <div>
               <dt>Envío</dt>
-              <dd>
-                {shippingQuote?.paidAtDestination ? 'Cobro a destino' : formatCents(shippingCost)}
-              </dd>
+              <dd>{shippingMethod ? shippingLabel(shippingMethod) : '—'}</dd>
             </div>
             <div className={styles.total}>
               <dt>Total</dt>

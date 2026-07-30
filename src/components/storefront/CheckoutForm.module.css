@@ -283,3 +283,42 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Atajos: datos guardados del cliente (casilleros, métodos de pago) */
+.saved {
+  margin-bottom: var(--ptr-space-4);
+}
+.savedLabel {
+  display: block;
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  color: var(--ptr-neutral-400);
+  margin-bottom: var(--ptr-space-2);
+}
+.savedChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ptr-space-2);
+}
+.savedChip {
+  padding: 7px var(--ptr-space-4);
+  border: 1px solid color-mix(in srgb, var(--ptr-primary) 40%, transparent);
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-white);
+  color: var(--ptr-primary);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  cursor: pointer;
+  transition: background-color var(--ptr-duration-fast) var(--ptr-ease), border-color var(--ptr-duration-fast) var(--ptr-ease), color var(--ptr-duration-fast) var(--ptr-ease);
+}
+.savedChip:hover {
+  background: color-mix(in srgb, var(--ptr-primary) 10%, transparent);
+}
+.savedChipOn,
+.savedChipOn:hover {
+  background: var(--ptr-primary);
+  border-color: var(--ptr-primary);
+  color: var(--ptr-white);
+}

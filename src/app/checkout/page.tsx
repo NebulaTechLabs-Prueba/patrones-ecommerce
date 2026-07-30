@@ -7,14 +7,29 @@
  */
 
 import type { Metadata } from 'next';
-import { CheckoutForm } from '@/components/storefront/CheckoutForm';
-import { settingsRepo } from '@/lib/data';
+import { CheckoutForm, type CustomerPrefill } from '@/components/storefront/CheckoutForm';
+import { customerRepo, settingsRepo } from '@/lib/data';
 
 export const metadata: Metadata = {
   title: 'Checkout — PATRONES',
 };
 
+// Cuenta demo de cliente -> clienta Ana del seed (prefill de respaldo).
+const DEMO_CUSTOMER_ID = 'cus-ana';
+
 export default async function CheckoutPage() {
   const methods = (await settingsRepo.listPaymentMethods()).filter((m) => m.is_enabled);
-  return <CheckoutForm paymentMethods={methods} />;
+  const demo = await customerRepo.getCustomerById(DEMO_CUSTOMER_ID);
+  const fallback: CustomerPrefill | null = demo
+    ? {
+        firstName: demo.first_name,
+        lastName: demo.last_name,
+        email: demo.email,
+        phone: demo.phone,
+        docKind: demo.doc_kind,
+        docNumber: demo.doc_number,
+        address: demo.address,
+      }
+    : null;
+  return <CheckoutForm paymentMethods={methods} customerFallback={fallback} />;
 }
