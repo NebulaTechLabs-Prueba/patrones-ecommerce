@@ -50,11 +50,20 @@ export interface PricedLine {
   appliedPromotions: AppliedPromotion[];
 }
 
+/** Regalo con compra otorgado (gift-with-purchase) cuando se cumple su condición. */
+export interface GrantedGift {
+  promotionId: string;
+  name: string;
+  productId: string | null;
+}
+
 export interface PricedCart {
   lines: PricedLine[];
   subtotalCents: UsdCents;
   discountCents: UsdCents;
   totalCents: UsdCents;
+  /** Regalos otorgados por promos de tipo 'gift' cuya condición se cumple. */
+  gifts: GrantedGift[];
 }
 
 /** Vigencia de una promo contra `now` (§13.2). */
@@ -198,10 +207,24 @@ export function priceCart(
   const subtotalCents = priced.reduce((s, l) => s + l.lineSubtotalCents, 0);
   const totalCents = priced.reduce((s, l) => s + l.lineTotalCents, 0);
 
+  // Regalos con compra: no rebajan precio; se otorgan si su condición se cumple
+  // (monto mínimo del carrito y/o cantidad mínima). Los con cupón ya vienen
+  // filtrados en `live` (solo si el código coincide).
+  const totalQty = priced.reduce((s, l) => s + l.quantity, 0);
+  const gifts: GrantedGift[] = live
+    .filter((p) => p.type === 'gift')
+    .filter(
+      (p) =>
+        (p.min_amount == null || subtotalCents >= p.min_amount) &&
+        (p.min_quantity == null || totalQty >= p.min_quantity),
+    )
+    .map((p) => ({ promotionId: p.id, name: p.name, productId: p.gift_product_id ?? null }));
+
   return {
     lines: priced,
     subtotalCents,
     discountCents: subtotalCents - totalCents,
     totalCents,
+    gifts,
   };
 }

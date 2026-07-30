@@ -237,7 +237,9 @@ export type PromotionType =
   | 'percentage'
   | 'fixed_amount'
   | 'variant_special_price'
-  | 'quantity';
+  | 'quantity'
+  /** Regalo con compra (gift-with-purchase): no rebaja el precio, suma un item de regalo. */
+  | 'gift';
 
 export type PromotionScope =
   | 'product'
@@ -278,6 +280,9 @@ export interface Promotion {
   max_uses?: number | null;
   /** Usos consumidos del cupon. */
   uses?: number;
+
+  /** Para type 'gift': producto que se regala al cumplir la condición (min_amount/min_quantity/cupón). */
+  gift_product_id?: ID | null;
 
   is_active: boolean;
   starts_at: ISODate | null;

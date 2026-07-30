@@ -7,6 +7,7 @@
 
 import { useState } from 'react';
 import { AdminModal } from './AdminModal';
+import { TokenPicker } from './TokenPicker';
 import type { PaymentMethodKind, Promotion, PromotionScope, PromotionType } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
 import { PAYMENT_METHOD_LABELS, PROMOTION_SCOPE_LABELS } from '@/lib/labels';
@@ -31,10 +32,11 @@ const TYPE_LABELS: Record<PromotionType, string> = {
   fixed_amount: 'Monto fijo',
   variant_special_price: 'Precio especial',
   quantity: 'Mayoreo',
+  gift: 'Regalo con compra',
 };
 
 const SCOPES: PromotionScope[] = ['product', 'vertical', 'category', 'collection', 'own_line', 'cart'];
-const TYPES: PromotionType[] = ['percentage', 'fixed_amount', 'variant_special_price', 'quantity'];
+const TYPES: PromotionType[] = ['percentage', 'fixed_amount', 'variant_special_price', 'quantity', 'gift'];
 
 function isMoneyType(t: PromotionType): boolean {
   return t === 'fixed_amount' || t === 'variant_special_price';
@@ -60,6 +62,7 @@ interface Draft {
   minAmount: string;
   code: string;
   maxUses: string;
+  giftProductId: string;
 }
 
 function emptyDraft(): Draft {
@@ -80,6 +83,7 @@ function emptyDraft(): Draft {
     minAmount: '',
     code: '',
     maxUses: '',
+    giftProductId: '',
   };
 }
 
@@ -101,6 +105,7 @@ function toDraft(p: Promotion): Draft {
     minAmount: p.min_amount != null ? String(p.min_amount / 100) : '',
     code: p.code ?? '',
     maxUses: p.max_uses != null ? String(p.max_uses) : '',
+    giftProductId: p.gift_product_id ?? '',
   };
 }
 
@@ -108,6 +113,7 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
   const [promos, setPromos] = useState<Promotion[]>(initial);
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState('');
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const names = new Map<string, string>([
     ...options.products.map((f) => [f.id, f.name] as const),
@@ -134,6 +140,7 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
     let base: string;
     if (p.type === 'percentage') base = `${p.value}%`;
     else if (p.type === 'quantity') base = `${p.value}% · ≥${p.min_quantity ?? '?'} u.`;
+    else if (p.type === 'gift') base = '🎁 Regalo';
     else base = formatUsd(p.value);
     const extra: string[] = [];
     if (p.payment_method) extra.push(PAYMENT_METHOD_LABELS[p.payment_method]);
@@ -150,8 +157,10 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
   function save() {
     if (!draft) return;
     if (!draft.name.trim()) return setError('Pon un nombre.');
+    const isGift = draft.type === 'gift';
     const num = Number(draft.value);
-    if (!Number.isFinite(num) || num <= 0) return setError('El valor debe ser mayor a 0.');
+    if (!isGift && (!Number.isFinite(num) || num <= 0)) return setError('El valor debe ser mayor a 0.');
+    if (isGift && !draft.giftProductId) return setError('Elegí el producto de regalo.');
     if (needsTarget(draft.scope) && !draft.targetId) return setError('Elige a qué aplica.');
 
     const promo: Promotion = {
@@ -159,7 +168,7 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
       name: draft.name.trim(),
       type: draft.type,
       scope: draft.scope,
-      value: isMoneyType(draft.type) ? Math.round(num * 100) : num,
+      value: isGift ? 0 : isMoneyType(draft.type) ? Math.round(num * 100) : num,
       min_quantity: draft.type === 'quantity' ? Number(draft.minQuantity) || null : null,
       target_id: needsTarget(draft.scope) ? draft.targetId || null : null,
       stackable: draft.stackable,
@@ -171,6 +180,7 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
       min_amount: draft.minAmount ? Math.round(Number(draft.minAmount) * 100) : null,
       code: draft.code.trim() ? draft.code.trim().toUpperCase() : null,
       max_uses: draft.maxUses ? Number(draft.maxUses) : null,
+      gift_product_id: isGift ? draft.giftProductId || null : null,
       uses: draft.id ? (promos.find((x) => x.id === draft.id)?.uses ?? 0) : 0,
     };
 
@@ -273,209 +283,149 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
           onClose={() => setDraft(null)}
         >
           <div className={ui.form}>
+            {/* --- Esencial (lo mínimo para un cupón o descuento puntual) --- */}
             <label className={ui.field}>
               <span>Nombre</span>
-              <input
-                className={ui.input}
-                value={draft.name}
-                onChange={(e) => setDraft({ ...draft, name: e.target.value })}
-              />
+              <input className={ui.input} value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} placeholder="Ej. Bienvenida -10%" />
             </label>
 
             <div className={ui.fieldRow}>
               <label className={ui.field}>
                 <span>Tipo</span>
-                <select
-                  className={ui.select}
-                  value={draft.type}
-                  onChange={(e) => setDraft({ ...draft, type: e.target.value as PromotionType })}
-                >
+                <select className={ui.select} value={draft.type} onChange={(e) => setDraft({ ...draft, type: e.target.value as PromotionType })}>
                   {TYPES.map((t) => (
-                    <option key={t} value={t}>
-                      {TYPE_LABELS[t]}
-                    </option>
+                    <option key={t} value={t}>{TYPE_LABELS[t]}</option>
                   ))}
                 </select>
               </label>
-              <label className={ui.field}>
-                <span>{isMoneyType(draft.type) ? 'Valor (USD)' : 'Valor (%)'}</span>
-                <input
-                  className={ui.input}
-                  type="number"
-                  min="0"
-                  step={isMoneyType(draft.type) ? '0.01' : '1'}
-                  value={draft.value}
-                  onChange={(e) => setDraft({ ...draft, value: e.target.value })}
-                />
-              </label>
-            </div>
-
-            <div className={ui.fieldRow}>
-              <label className={ui.field}>
-                <span>Alcance</span>
-                <select
-                  className={ui.select}
-                  value={draft.scope}
-                  onChange={(e) =>
-                    setDraft({ ...draft, scope: e.target.value as PromotionScope, targetId: '' })
-                  }
-                >
-                  {SCOPES.map((s) => (
-                    <option key={s} value={s}>
-                      {PROMOTION_SCOPE_LABELS[s]}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              {needsTarget(draft.scope) ? (
+              {draft.type === 'gift' ? (
                 <label className={ui.field}>
-                  <span>Aplica a</span>
-                  <select
-                    className={ui.select}
-                    value={draft.targetId}
-                    onChange={(e) => setDraft({ ...draft, targetId: e.target.value })}
-                  >
-                    <option value="">Elegir…</option>
-                    {targetOptions(draft.scope).map((o) => (
-                      <option key={o.id} value={o.id}>
-                        {o.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              ) : (
-                <div />
-              )}
-            </div>
-
-            <div className={ui.fieldRow}>
-              {draft.type === 'quantity' ? (
-                <label className={ui.field}>
-                  <span>Umbral (unidades)</span>
-                  <input
-                    className={ui.input}
-                    type="number"
-                    min="1"
-                    value={draft.minQuantity}
-                    onChange={(e) => setDraft({ ...draft, minQuantity: e.target.value })}
+                  <span>Producto de regalo</span>
+                  <TokenPicker
+                    single
+                    options={options.products}
+                    selected={draft.giftProductId ? [draft.giftProductId] : []}
+                    onChange={(ids) => setDraft({ ...draft, giftProductId: ids[0] ?? '' })}
+                    placeholder="Buscar producto de regalo…"
                   />
                 </label>
               ) : (
-                <div />
+                <label className={ui.field}>
+                  <span>{isMoneyType(draft.type) ? 'Valor (USD)' : 'Valor (%)'}</span>
+                  <input className={ui.input} type="number" min="0" step={isMoneyType(draft.type) ? '0.01' : '1'} value={draft.value} onChange={(e) => setDraft({ ...draft, value: e.target.value })} />
+                </label>
               )}
-              <label className={ui.field}>
-                <span>Prioridad</span>
-                <input
-                  className={ui.input}
-                  type="number"
-                  min="1"
-                  value={draft.priority}
-                  onChange={(e) => setDraft({ ...draft, priority: e.target.value })}
-                />
-              </label>
             </div>
 
-            <div className={ui.fieldRow}>
-              <label className={ui.field}>
-                <span>Desde</span>
-                <input
-                  className={ui.input}
-                  type="date"
-                  value={draft.startsAt}
-                  onChange={(e) => setDraft({ ...draft, startsAt: e.target.value })}
-                />
-              </label>
-              <label className={ui.field}>
-                <span>Hasta</span>
-                <input
-                  className={ui.input}
-                  type="date"
-                  value={draft.endsAt}
-                  onChange={(e) => setDraft({ ...draft, endsAt: e.target.value })}
-                />
-              </label>
-            </div>
-
-            <div className={ui.fieldRow}>
-              <label className={ui.field}>
-                <span>Solo con método de pago (opcional)</span>
-                <select
-                  className={ui.select}
-                  value={draft.paymentMethod}
-                  onChange={(e) => setDraft({ ...draft, paymentMethod: e.target.value })}
-                >
-                  <option value="">Cualquiera</option>
-                  {PAYMENT_KINDS.map((k) => (
-                    <option key={k} value={k}>
-                      {PAYMENT_METHOD_LABELS[k]}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className={ui.field}>
-                <span>Monto mínimo del carrito (USD, opcional)</span>
-                <input
-                  className={ui.input}
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={draft.minAmount}
-                  onChange={(e) => setDraft({ ...draft, minAmount: e.target.value })}
-                />
-              </label>
-            </div>
-
-            <div className={ui.fieldRow}>
-              <label className={ui.field}>
-                <span>Código de cupón (opcional)</span>
-                <input
-                  className={ui.input}
-                  value={draft.code}
-                  onChange={(e) => setDraft({ ...draft, code: e.target.value })}
-                  placeholder="Ej. BIENVENIDA10"
-                />
-              </label>
-              <label className={ui.field}>
-                <span>Límite de usos (vacío = sin límite)</span>
-                <input
-                  className={ui.input}
-                  type="number"
-                  min="1"
-                  value={draft.maxUses}
-                  onChange={(e) => setDraft({ ...draft, maxUses: e.target.value })}
-                />
-              </label>
-            </div>
-            <p className={ui.note}>
-              El cupón se activa al ingresar el código; la vigencia se controla con las fechas Desde/Hasta.
-            </p>
-
-            <label className={ui.check}>
-              <input
-                type="checkbox"
-                checked={draft.stackable}
-                onChange={(e) => setDraft({ ...draft, stackable: e.target.checked })}
-              />
-              <span>Se puede apilar con otras promociones</span>
+            <label className={ui.field}>
+              <span>Código de cupón (opcional)</span>
+              <input className={ui.input} value={draft.code} onChange={(e) => setDraft({ ...draft, code: e.target.value })} placeholder="Ej. BIENVENIDA10 · vacío = automático" />
             </label>
+
             <label className={ui.check}>
-              <input
-                type="checkbox"
-                checked={draft.isActive}
-                onChange={(e) => setDraft({ ...draft, isActive: e.target.checked })}
-              />
+              <input type="checkbox" checked={draft.isActive} onChange={(e) => setDraft({ ...draft, isActive: e.target.checked })} />
               <span>Activa</span>
             </label>
+
+            {draft.type === 'gift' ? (
+              <p className={ui.note}>El regalo se otorga al cumplir el monto mínimo o la cantidad mínima (opciones avanzadas). Si dejás un código, se otorga al ingresarlo.</p>
+            ) : null}
+
+            {/* --- Opciones avanzadas (colapsadas por defecto) --- */}
+            <button
+              type="button"
+              onClick={() => setShowAdvanced((v) => !v)}
+              style={{ alignSelf: 'flex-start', background: 'transparent', border: 0, color: 'var(--ptr-primary)', fontWeight: 600, cursor: 'pointer', padding: '4px 0' }}
+            >
+              {showAdvanced ? 'Ocultar' : 'Mostrar'} opciones avanzadas {showAdvanced ? '▴' : '▾'}
+            </button>
+
+            {showAdvanced ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--ptr-space-4)', borderTop: '1px solid var(--ptr-neutral-200)', paddingTop: 'var(--ptr-space-4)' }}>
+                <div className={ui.fieldRow}>
+                  <label className={ui.field}>
+                    <span>Alcance</span>
+                    <select className={ui.select} value={draft.scope} onChange={(e) => setDraft({ ...draft, scope: e.target.value as PromotionScope, targetId: '' })}>
+                      {SCOPES.map((s) => (
+                        <option key={s} value={s}>{PROMOTION_SCOPE_LABELS[s]}</option>
+                      ))}
+                    </select>
+                  </label>
+                  {needsTarget(draft.scope) ? (
+                    <label className={ui.field}>
+                      <span>Aplica a</span>
+                      <TokenPicker
+                        single
+                        options={targetOptions(draft.scope)}
+                        selected={draft.targetId ? [draft.targetId] : []}
+                        onChange={(ids) => setDraft({ ...draft, targetId: ids[0] ?? '' })}
+                        placeholder="Buscar…"
+                      />
+                    </label>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+
+                <div className={ui.fieldRow}>
+                  {draft.type === 'quantity' ? (
+                    <label className={ui.field}>
+                      <span>Umbral (unidades)</span>
+                      <input className={ui.input} type="number" min="1" value={draft.minQuantity} onChange={(e) => setDraft({ ...draft, minQuantity: e.target.value })} />
+                    </label>
+                  ) : (
+                    <div />
+                  )}
+                  <label className={ui.field}>
+                    <span>Prioridad</span>
+                    <input className={ui.input} type="number" min="1" value={draft.priority} onChange={(e) => setDraft({ ...draft, priority: e.target.value })} />
+                  </label>
+                </div>
+
+                <div className={ui.fieldRow}>
+                  <label className={ui.field}>
+                    <span>Desde</span>
+                    <input className={ui.input} type="date" value={draft.startsAt} onChange={(e) => setDraft({ ...draft, startsAt: e.target.value })} />
+                  </label>
+                  <label className={ui.field}>
+                    <span>Hasta</span>
+                    <input className={ui.input} type="date" value={draft.endsAt} onChange={(e) => setDraft({ ...draft, endsAt: e.target.value })} />
+                  </label>
+                </div>
+
+                <div className={ui.fieldRow}>
+                  <label className={ui.field}>
+                    <span>Solo con método de pago</span>
+                    <select className={ui.select} value={draft.paymentMethod} onChange={(e) => setDraft({ ...draft, paymentMethod: e.target.value })}>
+                      <option value="">Cualquiera</option>
+                      {PAYMENT_KINDS.map((k) => (
+                        <option key={k} value={k}>{PAYMENT_METHOD_LABELS[k]}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className={ui.field}>
+                    <span>Monto mínimo del carrito (USD)</span>
+                    <input className={ui.input} type="number" min="0" step="0.01" value={draft.minAmount} onChange={(e) => setDraft({ ...draft, minAmount: e.target.value })} />
+                  </label>
+                </div>
+
+                <label className={ui.field}>
+                  <span>Límite de usos del cupón (vacío = sin límite)</span>
+                  <input className={ui.input} type="number" min="1" value={draft.maxUses} onChange={(e) => setDraft({ ...draft, maxUses: e.target.value })} />
+                </label>
+
+                <label className={ui.check}>
+                  <input type="checkbox" checked={draft.stackable} onChange={(e) => setDraft({ ...draft, stackable: e.target.checked })} />
+                  <span>Se puede apilar con otras promociones</span>
+                </label>
+              </div>
+            ) : null}
 
             {error ? <p className={ui.formError}>{error}</p> : null}
 
             <div className={ui.formActions}>
-              <button type="button" className={ui.cancelBtn} onClick={() => setDraft(null)}>
-                Cancelar
-              </button>
-              <button type="button" className={ui.saveBtn} onClick={save}>
-                Guardar
-              </button>
+              <button type="button" className={ui.cancelBtn} onClick={() => setDraft(null)}>Cancelar</button>
+              <button type="button" className={ui.saveBtn} onClick={save}>Guardar</button>
             </div>
           </div>
         </AdminModal>

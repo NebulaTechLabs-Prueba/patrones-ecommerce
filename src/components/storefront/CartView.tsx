@@ -167,6 +167,16 @@ export function CartView() {
             </div>
           </dl>
 
+          {summary.gifts.length > 0 ? (
+            <div style={{ margin: '0 0 16px', padding: '10px 12px', borderRadius: 10, background: 'color-mix(in srgb, var(--ptr-primary) 8%, transparent)', border: '1px solid color-mix(in srgb, var(--ptr-primary) 30%, transparent)' }}>
+              {summary.gifts.map((g) => (
+                <p key={g.promotionId} style={{ margin: 0, fontSize: 14, color: 'var(--ptr-primary)', fontWeight: 700 }}>
+                  🎁 {g.name} · <span style={{ fontWeight: 800 }}>Regalo incluido</span>
+                </p>
+              ))}
+            </div>
+          ) : null}
+
           <div style={{ margin: '4px 0 16px' }}>
             <label htmlFor="cupon" style={{ display: 'block', fontSize: 13, marginBottom: 6, color: 'var(--ptr-neutral-500, #7a7a78)' }}>
               Cupón de descuento
