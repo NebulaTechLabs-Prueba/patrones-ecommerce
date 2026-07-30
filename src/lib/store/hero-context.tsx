@@ -58,7 +58,7 @@ export interface HeroConfig {
 
 /** Cuántas imágenes usa cada distribución. */
 export const IMAGES_FOR: Record<HeroLayout, number> = {
-  pattern: 0,
+  pattern: 1,
   single: 1,
   split: 2,
   stack: 2,

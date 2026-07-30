@@ -5,16 +5,15 @@
  *
  * Renderiza la config: eyebrow, título (multilínea), cuerpo, color/alineación/
  * efecto de letra, los botones visibles y el fondo según el layout. 'pattern'
- * conserva la firma del rediseño (trazado con parallax); los demás pintan las
- * imágenes en distintas distribuciones con un velo para legibilidad.
+ * es el layout editorial de firma: texto + una foto a la derecha (con parallax
+ * y revelado); los demás pintan las imágenes en distintas distribuciones con un
+ * velo para legibilidad.
  */
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import Link from 'next/link';
 import { IMAGES_FOR, useHero, type HeroLayout } from '@/lib/store/hero-context';
 import styles from './HomeHero.module.css';
-
-const RULER_TICKS = Array.from({ length: 13 });
 
 const GRID: Record<HeroLayout, { cols: string; rows: string }> = {
   pattern: { cols: '1fr', rows: '1fr' },
@@ -183,31 +182,13 @@ export function HomeHero() {
             }}
           />
         </div>
-      ) : (
-        <div className={styles.draftLayer} ref={layerRef} aria-hidden="true">
-          <svg className={styles.draft} viewBox="0 0 480 560" fill="none" preserveAspectRatio="xMidYMid meet">
-            <path
-              className={styles.stroke}
-              pathLength={1}
-              d="M104,132 L286,104 Q356,150 360,214 L372,392 Q374,436 344,452 L168,452 Q126,452 122,410 L104,188 Z"
-            />
-            <path className={styles.strokeThin} pathLength={1} d="M120,206 Q244,168 366,214" />
-            <path className={styles.strokeThin} pathLength={1} d="M244,168 L250,430" />
-            <path className={styles.strokeThin} pathLength={1} d="M238,182 L244,166 L250,182" />
-            <path className={styles.strokeThin} pathLength={1} d="M244,416 L250,432 L256,416" />
-            <path className={styles.strokeThin} pathLength={1} d="M188,110 l4,14 M300,120 l-2,14 M150,452 l0,-14 M330,452 l0,-14" />
-            {RULER_TICKS.map((_, i) => (
-              <path
-                key={i}
-                className={styles.tick}
-                pathLength={1}
-                d={`M70,${140 + i * 24} l${i % 3 === 0 ? 22 : 12},0`}
-                style={{ transitionDelay: `${420 + i * 26}ms` }}
-              />
-            ))}
-          </svg>
+      ) : validImages[0] ? (
+        <div className={styles.photoLayer} ref={layerRef} aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={validImages[0]} alt="" className={styles.photo} />
+          <div className={styles.photoVeil} />
         </div>
-      )}
+      ) : null}
 
       <div className={styles.inner} style={{ ...contentBox, position: 'relative', zIndex: 2 }}>
         {heroContent}
