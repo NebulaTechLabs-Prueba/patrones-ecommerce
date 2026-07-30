@@ -153,11 +153,9 @@
   position: absolute;
   inset: 0;
   z-index: -1;
+  /* Sin retícula: un halo tenue en vez del papel técnico literal. */
   background-image:
-    linear-gradient(color-mix(in srgb, var(--ptr-white) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--ptr-white) 6%, transparent) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(120% 100% at 80% 0%, black, transparent 72%);
+    radial-gradient(90% 120% at 82% 0%, color-mix(in srgb, var(--ptr-mint) 12%, transparent) 0%, transparent 62%);
 }
 .ownLineInner {
   display: flex;
