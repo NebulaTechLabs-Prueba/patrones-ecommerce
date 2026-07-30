@@ -22,7 +22,9 @@ export type HeroLayout =
   | 'quad'
   | 'quadRow'
   | 'stack3'
-  | 'grid6';
+  | 'grid6'
+  | 'sideRight'
+  | 'sideLeft';
 export type HeroTextAlign = 'left' | 'center' | 'right';
 export type HeroTextEffect = 'none' | 'shadow' | 'shadowStrong' | 'outline' | 'panel';
 export type HeroButtonVariant = 'primary' | 'secondary';
@@ -66,6 +68,8 @@ export const IMAGES_FOR: Record<HeroLayout, number> = {
   quadRow: 4,
   stack3: 3,
   grid6: 6,
+  sideRight: 1,
+  sideLeft: 1,
 };
 
 export const DEFAULT_HERO: HeroConfig = {

@@ -31,6 +31,8 @@ const COLOR_PRESETS: Array<{ label: string; value: string }> = [
 const LAYOUTS: Array<{ value: HeroLayout; label: string }> = [
   { value: 'pattern', label: 'Patrón (sin foto)' },
   { value: 'single', label: 'Una imagen' },
+  { value: 'sideRight', label: 'Split · texto izq. + foto der.' },
+  { value: 'sideLeft', label: 'Split · foto izq. + texto der.' },
   { value: 'split', label: 'Dos · 50/50 (lado a lado)' },
   { value: 'stack', label: 'Dos · apiladas' },
   { value: 'triptico', label: 'Tres · en fila' },

@@ -27,6 +27,8 @@ const GRID: Record<HeroLayout, { cols: string; rows: string }> = {
   quadRow: { cols: 'repeat(4, 1fr)', rows: '1fr' },
   stack3: { cols: '1fr', rows: '1fr 1fr 1fr' },
   grid6: { cols: 'repeat(3, 1fr)', rows: '1fr 1fr' },
+  sideRight: { cols: '1fr', rows: '1fr' },
+  sideLeft: { cols: '1fr', rows: '1fr' },
 };
 
 const JUSTIFY: Record<string, CSSProperties['justifyContent']> = {
@@ -80,9 +82,7 @@ export function HomeHero() {
   };
   const alignItems = hero.textAlign === 'center' ? 'center' : hero.textAlign === 'right' ? 'flex-end' : 'flex-start';
   const textStyle: CSSProperties = { color: hero.textColor };
-  const innerStyle: CSSProperties = {
-    position: 'relative',
-    zIndex: 2,
+  const contentBox: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems,
@@ -92,6 +92,67 @@ export function HomeHero() {
       ? { background: 'rgba(20,20,18,0.46)', backdropFilter: 'blur(2px)', borderRadius: 16, padding: 'var(--ptr-space-6)' }
       : {}),
   };
+
+  const heroContent = (
+    <>
+      <p className={styles.eyebrow} style={textStyle}>
+        {hero.textAlign === 'left' ? <span className={styles.eyebrowTick} aria-hidden="true" /> : null}
+        {hero.eyebrow}
+      </p>
+      {titleLines.length > 0 ? (
+        <h1 className={styles.title} style={textStyle}>
+          {titleLines.map((line, i) => (
+            <span className={styles.line} key={`${line}-${i}`}>
+              <span className={styles.lineInner} style={{ transitionDelay: `${180 + i * 140}ms` }}>{line}</span>
+            </span>
+          ))}
+        </h1>
+      ) : null}
+      {hero.body.trim() ? (
+        <p className={styles.lead} style={textStyle}>{hero.body}</p>
+      ) : null}
+      {buttons.length > 0 ? (
+        <div className={styles.actions} style={{ justifyContent: JUSTIFY[hero.textAlign] }}>
+          {buttons.map((b, i) => {
+            const bg = b.bg ?? (b.variant === 'primary' ? 'var(--ptr-primary)' : '#ffffff');
+            const color = b.color ?? (b.variant === 'primary' ? '#ffffff' : 'var(--ptr-ink)');
+            return (
+              <Link key={`${b.href}-${i}`} href={b.href} className={b.variant === 'primary' ? styles.primaryCta : styles.secondaryCta} style={{ background: bg, color, borderColor: 'rgba(0,0,0,0.08)' }}>
+                {b.label}
+              </Link>
+            );
+          })}
+        </div>
+      ) : null}
+    </>
+  );
+
+  const scrollHint = (
+    <div className={styles.scrollHint} aria-hidden="true">
+      <span>Desplaza</span>
+      <span className={styles.scrollLine} />
+    </div>
+  );
+
+  // Split editorial: texto al lado de la foto (no encima).
+  if ((hero.layout === 'sideRight' || hero.layout === 'sideLeft') && validImages[0]) {
+    const imgFirst = hero.layout === 'sideLeft';
+    return (
+      <section
+        className={`${styles.hero} ${loaded ? styles.loaded : ''}`}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', padding: 0, alignItems: 'stretch' }}
+      >
+        <div style={{ order: imgFirst ? 2 : 1, display: 'flex', alignItems: 'center', padding: 'clamp(1.75rem, 5vw, 4.5rem)' }}>
+          <div style={{ ...contentBox, width: '100%', maxWidth: 560 }}>{heroContent}</div>
+        </div>
+        <div style={{ order: imgFirst ? 1 : 2, minHeight: '60vh', background: '#141410' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={validImages[0]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+        {scrollHint}
+      </section>
+    );
+  }
 
   return (
     <section className={`${styles.hero} ${loaded ? styles.loaded : ''}`}>
@@ -148,54 +209,11 @@ export function HomeHero() {
         </div>
       )}
 
-      <div className={styles.inner} style={innerStyle}>
-        <p className={styles.eyebrow} style={textStyle}>
-          {hero.textAlign === 'left' ? <span className={styles.eyebrowTick} aria-hidden="true" /> : null}
-          {hero.eyebrow}
-        </p>
-
-        {titleLines.length > 0 ? (
-          <h1 className={styles.title} style={textStyle}>
-            {titleLines.map((line, i) => (
-              <span className={styles.line} key={`${line}-${i}`}>
-                <span className={styles.lineInner} style={{ transitionDelay: `${180 + i * 140}ms` }}>
-                  {line}
-                </span>
-              </span>
-            ))}
-          </h1>
-        ) : null}
-
-        {hero.body.trim() ? (
-          <p className={styles.lead} style={textStyle}>
-            {hero.body}
-          </p>
-        ) : null}
-
-        {buttons.length > 0 ? (
-          <div className={styles.actions} style={{ justifyContent: JUSTIFY[hero.textAlign] }}>
-            {buttons.map((b, i) => {
-              const bg = b.bg ?? (b.variant === 'primary' ? 'var(--ptr-primary)' : '#ffffff');
-              const color = b.color ?? (b.variant === 'primary' ? '#ffffff' : 'var(--ptr-ink)');
-              return (
-                <Link
-                  key={`${b.href}-${i}`}
-                  href={b.href}
-                  className={b.variant === 'primary' ? styles.primaryCta : styles.secondaryCta}
-                  style={{ background: bg, color, borderColor: 'rgba(0,0,0,0.08)' }}
-                >
-                  {b.label}
-                </Link>
-              );
-            })}
-          </div>
-        ) : null}
+      <div className={styles.inner} style={{ ...contentBox, position: 'relative', zIndex: 2 }}>
+        {heroContent}
       </div>
 
-      <div className={styles.scrollHint} aria-hidden="true">
-        <span>Desplaza</span>
-        <span className={styles.scrollLine} />
-      </div>
+      {scrollHint}
     </section>
   );
 }
