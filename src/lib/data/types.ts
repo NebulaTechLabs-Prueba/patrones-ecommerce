@@ -51,6 +51,10 @@ export interface Brand {
   name: string;
   is_own_line: boolean;
   logo_image: ProductImage | null;
+  /** Copy e imagen del hero de la landing de la marca (/catalogo?marca=). Opcional. */
+  tagline?: string;
+  description?: string;
+  hero_image?: ProductImage | null;
 }
 
 /** Categoria: scrubs, filipinas, pantalones, calzado, accesorios... CRUD admin. */
