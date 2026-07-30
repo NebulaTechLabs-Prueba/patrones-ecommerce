@@ -253,12 +253,33 @@
   border-color: var(--ptr-primary);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--ptr-primary) 16%, transparent);
 }
+/* Select con flecha propia (no la nativa del sistema). */
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a7a78' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--ptr-space-3) center;
+  padding-right: calc(var(--ptr-space-5) + 12px);
+  cursor: pointer;
+}
+
 .check {
   display: flex;
   align-items: center;
   gap: var(--ptr-space-3);
   font-size: var(--ptr-text-sm);
   color: var(--ptr-ink);
+  cursor: pointer;
+}
+/* Checkbox/radio: tamaño y cursor consistentes; el color de marca lo da
+   accent-color heredado desde el shell del admin. */
+.check input[type='checkbox'],
+.check input[type='radio'] {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  flex: 0 0 auto;
 }
 .formActions {
   display: flex;

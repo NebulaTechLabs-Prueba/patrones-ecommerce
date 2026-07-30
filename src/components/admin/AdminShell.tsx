@@ -38,13 +38,19 @@ const NAV: NavGroup[] = [
     ],
   },
   {
-    title: 'Relación',
+    title: 'Personalización',
     items: [
-      { label: 'Clientes', href: '/admin/customers/' },
       { label: 'Portada', href: '/admin/hero/' },
       { label: 'Contenido', href: '/admin/content/' },
-      { label: 'Ajustes', href: '/admin/settings/' },
     ],
+  },
+  {
+    title: 'Relación',
+    items: [{ label: 'Clientes', href: '/admin/customers/' }],
+  },
+  {
+    title: 'Configuración',
+    items: [{ label: 'Ajustes', href: '/admin/settings/' }],
   },
 ];
 

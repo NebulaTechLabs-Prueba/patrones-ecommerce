@@ -1,6 +1,9 @@
 .shell {
   display: flex;
   min-height: 100dvh;
+  /* Color de marca para TODOS los controles nativos del panel (checkbox, radio,
+     select, range). accent-color se hereda: una línea, todo el admin. */
+  accent-color: var(--ptr-primary);
 }
 
 .sidebar {
