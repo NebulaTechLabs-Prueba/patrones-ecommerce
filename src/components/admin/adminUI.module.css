@@ -606,3 +606,141 @@
   flex: 1;
   text-align: center;
 }
+
+/* --- Toolbar (búsqueda + selector de vista) --- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-4);
+  margin-bottom: var(--ptr-space-5);
+  flex-wrap: wrap;
+}
+.toolbar .searchBar {
+  flex: 1;
+  min-width: 240px;
+  margin-bottom: 0;
+}
+.viewSwitch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--ptr-white);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-full);
+  flex-shrink: 0;
+}
+.viewBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px var(--ptr-space-4);
+  border: 0;
+  border-radius: var(--ptr-radius-full);
+  background: transparent;
+  color: var(--ptr-neutral-600);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--ptr-duration-fast) var(--ptr-ease), color var(--ptr-duration-fast) var(--ptr-ease);
+}
+.viewBtn:hover {
+  color: var(--ptr-ink);
+}
+.viewBtnActive,
+.viewBtnActive:hover {
+  background: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-weight: var(--ptr-weight-semibold);
+}
+@media (max-width: 560px) {
+  .viewBtnLabel {
+    display: none;
+  }
+}
+
+/* --- Vista LISTA de productos (fila compacta con miniatura) --- */
+.plist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-2);
+}
+.plistRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-4);
+  padding: var(--ptr-space-3) var(--ptr-space-4);
+  background: var(--ptr-white);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  box-shadow: var(--ptr-shadow-1);
+  transition: border-color var(--ptr-duration-fast) var(--ptr-ease), box-shadow var(--ptr-duration-fast) var(--ptr-ease);
+}
+.plistRow:hover {
+  border-color: color-mix(in srgb, var(--ptr-primary) 40%, transparent);
+  box-shadow: var(--ptr-shadow-2);
+}
+.plistThumb {
+  width: 56px;
+  flex-shrink: 0;
+  border-radius: var(--ptr-radius-md);
+  overflow: hidden;
+}
+.plistMain {
+  flex: 1;
+  min-width: 0;
+}
+.plistName {
+  font-size: var(--ptr-text-base);
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-ink);
+  line-height: var(--ptr-leading-tight);
+}
+.plistPrice {
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-ink);
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .plistRow {
+    flex-wrap: wrap;
+  }
+  .plistMain {
+    flex-basis: calc(100% - 56px - var(--ptr-space-4));
+  }
+}
+
+/* --- Sección de formulario (agrupa campos relacionados; evita que elementos
+       sueltos se mezclen sin relación entre sí) --- */
+.formSection {
+  background: var(--ptr-white);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  padding: var(--ptr-space-5) var(--ptr-space-6);
+  margin-bottom: var(--ptr-space-5);
+  box-shadow: var(--ptr-shadow-1);
+}
+.formSectionTitle {
+  font-size: var(--ptr-text-base);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: -0.01em;
+  color: var(--ptr-ink);
+}
+.formSectionHint {
+  margin: 2px 0 var(--ptr-space-4);
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-400);
+}
+/* Grupo de checkboxes con relación clara (encerrados, no sueltos). */
+.checkGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ptr-space-2);
+  padding: var(--ptr-space-3);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-md);
+  background: var(--ptr-neutral-50);
+}
+.checkGroup .check {
+  padding: 4px var(--ptr-space-3);
+  border-radius: var(--ptr-radius-sm);
+}

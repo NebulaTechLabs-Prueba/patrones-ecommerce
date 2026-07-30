@@ -49,12 +49,10 @@ export function ConjuntosCrud() {
   return (
     <div>
       <div className={ui.pageHead}>
-        <div>
-          <h2 className={ui.pageTitle}>Conjuntos ({bundles.length})</h2>
-          <p className={ui.pageSubtitle}>
-            Piezas relacionadas que se sugieren juntas en la ficha. No se auto-agregan.
-          </p>
-        </div>
+        <p className={ui.pageSubtitle}>
+          {bundles.length} conjunto{bundles.length === 1 ? '' : 's'} · Piezas relacionadas que se
+          sugieren juntas en la ficha. No se auto-agregan.
+        </p>
         <button
           type="button"
           className={ui.newBtn}

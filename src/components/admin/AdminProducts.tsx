@@ -6,7 +6,7 @@
  * variantes (SKU/talla/color/stock) se gestionan por producto. En memoria.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AdminModal } from './AdminModal';
 import { ProductVariants } from './ProductVariants';
 import { TokenPicker } from './TokenPicker';
@@ -64,6 +64,14 @@ function isVisible(variants: VariantRow[]): boolean {
   return variants.some((v) => v.stock - v.reserved > 0);
 }
 
+type ProductView = 'cards' | 'list' | 'table';
+const VIEW_KEY = 'ptr-admin-products-view';
+const VIEWS: Array<{ id: ProductView; label: string; icon: string }> = [
+  { id: 'cards', label: 'Tarjetas', icon: '▦' },
+  { id: 'list', label: 'Lista', icon: '≣' },
+  { id: 'table', label: 'Tabla', icon: '☰' },
+];
+
 interface Props {
   products: ProductRow[];
   onChange: (rows: ProductRow[]) => void;
@@ -77,6 +85,24 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
   const [error, setError] = useState('');
   const [variantsFor, setVariantsFor] = useState<ProductRow | null>(null);
   const [query, setQuery] = useState('');
+  // Vista elegida (tarjetas / lista / tabla); se recuerda la última en el navegador.
+  const [view, setView] = useState<ProductView>('cards');
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(VIEW_KEY);
+      if (saved === 'cards' || saved === 'list' || saved === 'table') setView(saved);
+    } catch {
+      // localStorage no disponible: se queda con 'cards'.
+    }
+  }, []);
+  function changeView(v: ProductView) {
+    setView(v);
+    try {
+      window.localStorage.setItem(VIEW_KEY, v);
+    } catch {
+      // sin persistencia: la vista vive solo en memoria.
+    }
+  }
 
   const brandName = new Map(brands.map((b) => [b.id, b.name]));
   const vName = new Map(verticals.map((v) => [v.id, v.name]));
@@ -185,33 +211,51 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
         </button>
       </div>
 
-      <div className={ui.searchBar}>
-        <svg className={ui.searchIcon} viewBox="0 0 20 20" fill="none" aria-hidden="true">
-          <circle cx="9" cy="9" r="6" stroke="currentColor" strokeWidth="1.6" />
-          <path d="M14 14l3.5 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        </svg>
-        <input
-          className={ui.searchInput}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Buscar por nombre, marca, categoría, rubro o SKU…"
-          autoComplete="off"
-        />
-        {query ? (
-          <button type="button" className={ui.searchClear} onClick={() => setQuery('')} aria-label="Limpiar búsqueda">
-            ✕
-          </button>
-        ) : null}
-        <span className={ui.searchCount}>
-          {filtered.length} de {products.length}
-        </span>
+      <div className={ui.toolbar}>
+        <div className={ui.searchBar}>
+          <svg className={ui.searchIcon} viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="9" cy="9" r="6" stroke="currentColor" strokeWidth="1.6" />
+            <path d="M14 14l3.5 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          </svg>
+          <input
+            className={ui.searchInput}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Buscar por nombre, marca, categoría, rubro o SKU…"
+            autoComplete="off"
+          />
+          {query ? (
+            <button type="button" className={ui.searchClear} onClick={() => setQuery('')} aria-label="Limpiar búsqueda">
+              ✕
+            </button>
+          ) : null}
+          <span className={ui.searchCount}>
+            {filtered.length} de {products.length}
+          </span>
+        </div>
+
+        <div className={ui.viewSwitch} role="group" aria-label="Cambiar vista">
+          {VIEWS.map((v) => (
+            <button
+              key={v.id}
+              type="button"
+              className={`${ui.viewBtn} ${view === v.id ? ui.viewBtnActive : ''}`}
+              aria-pressed={view === v.id}
+              title={v.label}
+              onClick={() => changeView(v.id)}
+            >
+              <span aria-hidden="true">{v.icon}</span>
+              <span className={ui.viewBtnLabel}>{v.label}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       {filtered.length === 0 ? (
         <p className={ui.galleryEmpty}>
           {query ? `Sin resultados para “${query}”.` : 'Aún no hay productos. Creá el primero.'}
         </p>
-      ) : (
+      ) : view === 'cards' ? (
         <div className={ui.gallery}>
           {filtered.map((r) => {
             const visible = isVisible(r.variants);
@@ -273,6 +317,134 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
               </article>
             );
           })}
+        </div>
+      ) : view === 'list' ? (
+        <ul className={ui.plist}>
+          {filtered.map((r) => {
+            const visible = isVisible(r.variants);
+            const tags = [...r.verticalIds.map((id) => vName.get(id) ?? id), ...r.categoryIds.map((id) => cName.get(id) ?? id)];
+            return (
+              <li key={r.id} className={ui.plistRow}>
+                <div className={ui.plistThumb}>
+                  <PlaceholderImage
+                    image={r.imageUrl ? { url: r.imageUrl, alt: r.name, is_placeholder: false, sort_order: 0 } : null}
+                    label={r.name}
+                    ratio="1 / 1"
+                    compact
+                  />
+                </div>
+                <div className={ui.plistMain}>
+                  <p className={ui.cardBrand}>
+                    {brandName.get(r.brandId) ?? '—'}
+                    {r.type === 'set' ? ' · Conjunto' : ''}
+                  </p>
+                  <p className={ui.plistName}>{r.name}</p>
+                  <p className={ui.cardTags}>{tags.join(' · ') || 'Sin clasificar'}</p>
+                </div>
+                <span className={`${ui.badge} ${visible ? ui.success : ui.danger}`}>
+                  {visible ? 'Visible' : 'Oculto'}
+                </span>
+                <span className={ui.plistPrice}>{formatUsd(r.priceCents)}</span>
+                <button
+                  type="button"
+                  className={r.variants.length > 0 ? ui.variantsBtn : `${ui.variantsBtn} ${ui.variantsEmpty}`}
+                  onClick={() => setVariantsFor(r)}
+                >
+                  {r.variants.length > 0 ? `${r.variants.length} variante${r.variants.length > 1 ? 's' : ''}` : '＋ Agregar'}
+                </button>
+                <div className={ui.actions}>
+                  <button type="button" className={ui.actionBtn} onClick={() => setDraft(toDraft(r))}>
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    className={ui.actionBtn}
+                    title={r.featured ? 'Quitar de destacados' : 'Marcar como destacado'}
+                    onClick={() => onChange(products.map((x) => (x.id === r.id ? { ...x, featured: !x.featured } : x)))}
+                  >
+                    {r.featured ? '★' : '☆'}
+                  </button>
+                  <button
+                    type="button"
+                    className={`${ui.actionBtn} ${ui.actionDanger}`}
+                    onClick={() => onChange(products.filter((x) => x.id !== r.id))}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div className={ui.tableWrap}>
+          <table className={ui.table}>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Marca</th>
+                <th>Rubros</th>
+                <th>Categoría</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Variantes</th>
+                <th>Featured</th>
+                <th>Visible</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((r) => {
+                const visible = isVisible(r.variants);
+                return (
+                  <tr key={r.id}>
+                    <td data-label="Producto">{r.name}</td>
+                    <td data-label="Marca">{brandName.get(r.brandId) ?? '—'}</td>
+                    <td data-label="Rubros">{r.verticalIds.map((id) => vName.get(id) ?? id).join(', ') || '—'}</td>
+                    <td data-label="Categoría">{r.categoryIds.map((id) => cName.get(id) ?? id).join(', ') || '—'}</td>
+                    <td data-label="Tipo">{r.type === 'set' ? 'Conjunto' : 'Simple'}</td>
+                    <td data-label="Precio">{formatUsd(r.priceCents)}</td>
+                    <td data-label="Variantes">
+                      <button
+                        type="button"
+                        className={r.variants.length > 0 ? ui.variantsBtn : `${ui.variantsBtn} ${ui.variantsEmpty}`}
+                        onClick={() => setVariantsFor(r)}
+                      >
+                        {r.variants.length > 0 ? `${r.variants.length} variante${r.variants.length > 1 ? 's' : ''}` : '＋ Agregar'}
+                      </button>
+                    </td>
+                    <td data-label="Featured">{r.featured ? 'Sí' : '—'}</td>
+                    <td data-label="Visible">
+                      <span className={`${ui.badge} ${visible ? ui.success : ui.danger}`}>
+                        {visible ? 'Visible' : 'Oculto'}
+                      </span>
+                    </td>
+                    <td data-label="Acciones">
+                      <div className={ui.actions}>
+                        <button type="button" className={ui.actionBtn} onClick={() => setDraft(toDraft(r))}>
+                          Editar
+                        </button>
+                        <button
+                          type="button"
+                          className={ui.actionBtn}
+                          onClick={() => onChange(products.map((x) => (x.id === r.id ? { ...x, featured: !x.featured } : x)))}
+                        >
+                          {r.featured ? 'Quitar featured' : 'Featured'}
+                        </button>
+                        <button
+                          type="button"
+                          className={`${ui.actionBtn} ${ui.actionDanger}`}
+                          onClick={() => onChange(products.filter((x) => x.id !== r.id))}
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       )}
 

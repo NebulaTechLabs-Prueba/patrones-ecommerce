@@ -3,6 +3,7 @@
  * pedidos y cotizaciones para dar seguimiento.
  */
 
+import Link from 'next/link';
 import { customerRepo, orderRepo } from '@/lib/data';
 import type { OrderStatus, PaymentStatus } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
@@ -61,6 +62,20 @@ export default async function AdminCustomersPage() {
                 <div className={styles.detail}>
                   <p className={styles.detailLine}>{c.address}</p>
 
+                  <div className={ui.actions} style={{ marginBottom: 'var(--ptr-space-4)' }}>
+                    <a
+                      className={ui.actionBtn}
+                      href={`https://wa.me/${c.phone.replace(/\D/g, '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      WhatsApp
+                    </a>
+                    <a className={ui.actionBtn} href={`mailto:${c.email}`}>
+                      Enviar correo
+                    </a>
+                  </div>
+
                   <h3 className={styles.subhead}>Pedidos</h3>
                   {cOrders.length === 0 ? (
                     <p className={styles.muted}>Sin pedidos.</p>
@@ -69,7 +84,11 @@ export default async function AdminCustomersPage() {
                       <tbody>
                         {cOrders.map((o) => (
                           <tr key={o.id}>
-                            <td className={ui.mono}>{o.number}</td>
+                            <td className={ui.mono}>
+                              <Link href={`/admin/orders/${o.number}/`} className={ui.rowLink}>
+                                {o.number}
+                              </Link>
+                            </td>
                             <td>{ORDER_STATUS_LABELS[o.status as OrderStatus]}</td>
                             <td>{PAYMENT_STATUS_LABELS[o.payment_status as PaymentStatus]}</td>
                             <td className={styles.amount}>{formatUsd(o.total_cents)}</td>

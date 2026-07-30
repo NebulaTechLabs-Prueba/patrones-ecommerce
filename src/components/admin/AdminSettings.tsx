@@ -131,89 +131,100 @@ export function AdminSettings({
       </div>
       {saved ? <p className={styles.savedFlash}>Cambios guardados.</p> : null}
 
-      <div className={styles.formGrid}>
-        <label className={ui.field}>
-          <span>Umbral global de bajo stock (u.)</span>
-          <input className={ui.input} type="number" min="0" value={s.low_stock_threshold_global} onChange={(e) => update('low_stock_threshold_global', Number(e.target.value))} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Umbral de mayoreo (u.)</span>
-          <input className={ui.input} type="number" min="1" value={s.quantity_promo_threshold} onChange={(e) => update('quantity_promo_threshold', Number(e.target.value))} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Piso de precio (% del original)</span>
-          <input className={ui.input} type="number" min="0" max="100" value={Math.round(s.price_floor_ratio * 100)} onChange={(e) => update('price_floor_ratio', Number(e.target.value) / 100)} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Validez de tasa (min)</span>
-          <input className={ui.input} type="number" min="1" value={s.rate_validity_minutes} onChange={(e) => update('rate_validity_minutes', Number(e.target.value))} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Vigencia de cotización (h)</span>
-          <input className={ui.input} type="number" min="1" value={s.quote_validity_hours} onChange={(e) => update('quote_validity_hours', Number(e.target.value))} />
-        </label>
-
-        <label className={ui.field}>
-          <span>TTL de carrito (h)</span>
-          <input className={ui.input} type="number" min="1" value={s.cart_ttl_hours} onChange={(e) => update('cart_ttl_hours', Number(e.target.value))} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Verificación de pago (días hábiles)</span>
-          <input className={ui.input} type="number" min="1" value={s.offline_verification_business_days} onChange={(e) => update('offline_verification_business_days', Number(e.target.value))} />
-        </label>
-
-        <label className={ui.field}>
-          <span>WhatsApp</span>
-          <input className={ui.input} value={s.whatsapp_number} onChange={(e) => update('whatsapp_number', e.target.value)} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Ubicación — línea 1 (local)</span>
-          <input className={ui.input} value={s.location.line1} onChange={(e) => update('location', { ...s.location, line1: e.target.value })} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Ubicación — línea 2 (país)</span>
-          <input className={ui.input} value={s.location.line2} onChange={(e) => update('location', { ...s.location, line2: e.target.value })} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Enlace a Google Maps (vacío = sin mapa)</span>
-          <input className={ui.input} value={s.location.maps_url} onChange={(e) => update('location', { ...s.location, maps_url: e.target.value })} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Apertura</span>
-          <input className={ui.input} type="time" value={s.business_hours.open_time} onChange={(e) => update('business_hours', { ...s.business_hours, open_time: e.target.value })} />
-        </label>
-
-        <label className={ui.field}>
-          <span>Cierre</span>
-          <input className={ui.input} type="time" value={s.business_hours.close_time} onChange={(e) => update('business_hours', { ...s.business_hours, close_time: e.target.value })} />
-        </label>
-      </div>
-
-      <div className={ui.field} style={{ marginTop: 'var(--ptr-space-5)' }}>
-        <span>Días de atención</span>
-        <div className={ui.actions}>
-          {DAYS.map((d) => (
-            <label key={d.n} className={ui.check}>
-              <input type="checkbox" checked={s.business_hours.open_days.includes(d.n)} onChange={() => toggleDay(d.n)} />
-              <span>{d.label}</span>
-            </label>
-          ))}
+      <section className={ui.formSection}>
+        <h2 className={ui.formSectionTitle}>Inventario y mayoreo</h2>
+        <p className={ui.formSectionHint}>Umbrales de existencia y la venta por cantidad.</p>
+        <div className={styles.formGrid}>
+          <label className={ui.field}>
+            <span>Umbral global de bajo stock (u.)</span>
+            <input className={ui.input} type="number" min="0" value={s.low_stock_threshold_global} onChange={(e) => update('low_stock_threshold_global', Number(e.target.value))} />
+          </label>
+          <label className={ui.field}>
+            <span>Umbral de mayoreo (u.)</span>
+            <input className={ui.input} type="number" min="1" value={s.quantity_promo_threshold} onChange={(e) => update('quantity_promo_threshold', Number(e.target.value))} />
+          </label>
+          <label className={ui.field}>
+            <span>Piso de precio (% del original)</span>
+            <input className={ui.input} type="number" min="0" max="100" value={Math.round(s.price_floor_ratio * 100)} onChange={(e) => update('price_floor_ratio', Number(e.target.value) / 100)} />
+          </label>
         </div>
-      </div>
+        <label className={ui.check} style={{ marginTop: 'var(--ptr-space-4)' }}>
+          <input type="checkbox" checked={s.quantity_promo_enabled} onChange={(e) => update('quantity_promo_enabled', e.target.checked)} />
+          <span>Mayoreo activo (aplica el umbral de arriba)</span>
+        </label>
+      </section>
 
-      <label className={ui.check} style={{ marginTop: 'var(--ptr-space-4)' }}>
-        <input type="checkbox" checked={s.quantity_promo_enabled} onChange={(e) => update('quantity_promo_enabled', e.target.checked)} />
-        <span>Mayoreo activo</span>
-      </label>
+      <section className={ui.formSection}>
+        <h2 className={ui.formSectionTitle}>Tiempos y vigencias</h2>
+        <p className={ui.formSectionHint}>Validez de la tasa, cotizaciones, carrito y verificación de pago.</p>
+        <div className={styles.formGrid}>
+          <label className={ui.field}>
+            <span>Validez de tasa (min)</span>
+            <input className={ui.input} type="number" min="1" value={s.rate_validity_minutes} onChange={(e) => update('rate_validity_minutes', Number(e.target.value))} />
+          </label>
+          <label className={ui.field}>
+            <span>Vigencia de cotización (h)</span>
+            <input className={ui.input} type="number" min="1" value={s.quote_validity_hours} onChange={(e) => update('quote_validity_hours', Number(e.target.value))} />
+          </label>
+          <label className={ui.field}>
+            <span>TTL de carrito (h)</span>
+            <input className={ui.input} type="number" min="1" value={s.cart_ttl_hours} onChange={(e) => update('cart_ttl_hours', Number(e.target.value))} />
+          </label>
+          <label className={ui.field}>
+            <span>Verificación de pago (días hábiles)</span>
+            <input className={ui.input} type="number" min="1" value={s.offline_verification_business_days} onChange={(e) => update('offline_verification_business_days', Number(e.target.value))} />
+          </label>
+        </div>
+      </section>
+
+      <section className={ui.formSection}>
+        <h2 className={ui.formSectionTitle}>Contacto y ubicación</h2>
+        <p className={ui.formSectionHint}>Cómo y dónde te encuentra el cliente.</p>
+        <div className={styles.formGrid}>
+          <label className={ui.field}>
+            <span>WhatsApp</span>
+            <input className={ui.input} value={s.whatsapp_number} onChange={(e) => update('whatsapp_number', e.target.value)} />
+          </label>
+          <label className={ui.field}>
+            <span>Ubicación — línea 1 (local)</span>
+            <input className={ui.input} value={s.location.line1} onChange={(e) => update('location', { ...s.location, line1: e.target.value })} />
+          </label>
+          <label className={ui.field}>
+            <span>Ubicación — línea 2 (país)</span>
+            <input className={ui.input} value={s.location.line2} onChange={(e) => update('location', { ...s.location, line2: e.target.value })} />
+          </label>
+          <label className={ui.field}>
+            <span>Enlace a Google Maps (vacío = sin mapa)</span>
+            <input className={ui.input} value={s.location.maps_url} onChange={(e) => update('location', { ...s.location, maps_url: e.target.value })} />
+          </label>
+        </div>
+      </section>
+
+      <section className={ui.formSection}>
+        <h2 className={ui.formSectionTitle}>Horario de atención</h2>
+        <p className={ui.formSectionHint}>Apertura, cierre y los días en que atendés.</p>
+        <div className={styles.formGrid}>
+          <label className={ui.field}>
+            <span>Apertura</span>
+            <input className={ui.input} type="time" value={s.business_hours.open_time} onChange={(e) => update('business_hours', { ...s.business_hours, open_time: e.target.value })} />
+          </label>
+          <label className={ui.field}>
+            <span>Cierre</span>
+            <input className={ui.input} type="time" value={s.business_hours.close_time} onChange={(e) => update('business_hours', { ...s.business_hours, close_time: e.target.value })} />
+          </label>
+        </div>
+        <div className={ui.field} style={{ marginTop: 'var(--ptr-space-4)' }}>
+          <span>Días de atención</span>
+          <div className={ui.checkGroup}>
+            {DAYS.map((d) => (
+              <label key={d.n} className={ui.check}>
+                <input type="checkbox" checked={s.business_hours.open_days.includes(d.n)} onChange={() => toggleDay(d.n)} />
+                <span>{d.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <div className={ui.pageHead} style={{ marginTop: 'var(--ptr-space-7)' }}>
         <h2 className={styles.subtitle} style={{ marginBottom: 0 }}>

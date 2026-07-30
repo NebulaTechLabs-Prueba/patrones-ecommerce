@@ -41,6 +41,7 @@ const NAV: NavGroup[] = [
     title: 'Personalización',
     items: [
       { label: 'Portada', href: '/admin/hero/' },
+      { label: 'Anuncios', href: '/admin/marketing/' },
       { label: 'Contenido', href: '/admin/content/' },
     ],
   },
