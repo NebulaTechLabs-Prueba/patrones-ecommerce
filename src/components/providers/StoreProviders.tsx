@@ -11,6 +11,7 @@ import type { PricingSettings } from '@/lib/domains/pricing/pricing';
 import { AuthProvider } from '@/lib/store/auth-context';
 import { CartProvider } from '@/lib/store/cart-context';
 import { CatalogProvider, type CatalogData } from '@/lib/store/catalog-context';
+import { ContentProvider } from '@/lib/store/content-context';
 import { CurrencyProvider } from '@/lib/store/currency-context';
 import { HeroProvider } from '@/lib/store/hero-context';
 import { PromoProvider } from '@/lib/store/promo-context';
@@ -34,6 +35,7 @@ export function StoreProviders({ rate, promotions, pricingSettings, catalog, chi
         <AuthProvider>
           <CatalogProvider initial={catalog}>
             <PromoProvider>
+            <ContentProvider>
             <HeroProvider>
               <CurrencyProvider rate={rate}>
                 <CartProvider promotions={promotions} pricingSettings={pricingSettings}>
@@ -43,6 +45,7 @@ export function StoreProviders({ rate, promotions, pricingSettings, catalog, chi
                 </CartProvider>
               </CurrencyProvider>
             </HeroProvider>
+            </ContentProvider>
             </PromoProvider>
           </CatalogProvider>
         </AuthProvider>

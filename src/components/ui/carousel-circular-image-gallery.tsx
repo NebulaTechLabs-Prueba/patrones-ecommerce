@@ -24,7 +24,7 @@ interface ImageData {
 
 const img = (id: string) => `https://images.unsplash.com/photo-${id}?q=80&w=800&h=800&fit=crop`;
 
-const images: ImageData[] = [
+const DEFAULT_GALLERY: ImageData[] = [
   { title: 'Salud', url: img('1576091160399-112ba8d25d1d') },
   { title: 'Gastronomía', url: img('1612349317150-e413f6a5b16d') },
   { title: 'Corporativo', url: img('1559839734-2b71ea197ec2') },
@@ -33,8 +33,10 @@ const images: ImageData[] = [
   { title: 'A todo color', url: img('1622253692010-333f2da6031d') },
 ];
 
-// Main component for the Image Gallery
-export function ImageGallery() {
+// Main component for the Image Gallery. Las imágenes son editables (content-context);
+// si no se pasan, usa las de demostración por defecto.
+export function ImageGallery({ items = DEFAULT_GALLERY }: { items?: ImageData[] } = {}) {
+  const images = items.length > 0 ? items : DEFAULT_GALLERY;
   const [opened, setOpened] = useState(0);
   const [inPlace, setInPlace] = useState(0);
   const [disabled, setDisabled] = useState(false);
@@ -80,7 +82,7 @@ export function ImageGallery() {
       if (nextIndex >= images.length) nextIndex = 0;
       return nextIndex;
     });
-  }, []);
+  }, [images.length]);
 
   const prev = useCallback(() => {
     setOpened((currentOpened) => {
@@ -88,7 +90,7 @@ export function ImageGallery() {
       if (prevIndex < 0) prevIndex = images.length - 1;
       return prevIndex;
     });
-  }, []);
+  }, [images.length]);
 
   useEffect(() => setDisabled(true), [opened]);
   useEffect(() => setDisabled(false), [inPlace]);

@@ -5,7 +5,7 @@
 
 import type { Metadata } from 'next';
 import { settingsRepo } from '@/lib/data';
-import { StatementHero } from '@/components/storefront/StatementHero';
+import { ContactHero } from '@/components/storefront/ContactHero';
 
 export const metadata: Metadata = {
   title: 'Contacto — PATRONES',
@@ -23,16 +23,8 @@ export default async function ContactPage() {
 
   return (
     <main>
-      <StatementHero
-        slogan="De pies a cabeza"
-        title={
-          <>
-            Estamos para <em>ayudarte</em>
-          </>
-        }
-        subtitle="Consúltanos por tallas, disponibilidad o pedidos institucionales. Te respondemos en horario de atención."
-        cta={{ text: 'Escríbenos por WhatsApp', href: `https://wa.me/${waDigits}` }}
-        backgroundImage="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?q=80&w=1100&h=1500&fit=crop"
+      <ContactHero
+        waHref={`https://wa.me/${waDigits}`}
         contact={{
           website: '@PATRONES.VZLA',
           phone: settings.whatsapp_number,

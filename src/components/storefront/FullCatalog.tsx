@@ -9,6 +9,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useCatalog } from '@/lib/store/catalog-context';
+import { useContent, type HeroBlock } from '@/lib/store/content-context';
 import type { Gender, VariantColor } from '@/lib/data/types';
 import { getAvailableColors, isProductAvailable } from '@/lib/domains/availability';
 import { CatalogHero } from './CatalogHero';
@@ -21,8 +22,18 @@ interface FullCatalogProps {
   description: string;
 }
 
+function blockToHero(b: HeroBlock) {
+  return {
+    eyebrow: b.eyebrow,
+    title: b.title,
+    description: b.description,
+    image: b.image ? { url: b.image, alt: b.title, is_placeholder: false, sort_order: 0 } : undefined,
+  };
+}
+
 export function FullCatalog({ mode = 'all', title, description }: FullCatalogProps) {
   const { hydrated, brands, categories, products, variants } = useCatalog();
+  const { content } = useContent();
   const sp = useSearchParams();
 
   if (!hydrated) return <main style={{ minHeight: '60vh' }} aria-busy="true" />;
@@ -68,9 +79,10 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
     colorFamilies: color ? color.split(',') : undefined,
   };
 
-  // Hero por faceta: si se entró por una marca, la landing muestra SU hero editable
-  // (tagline/descripción/imagen desde el CRUD de marcas). Si no, el hero genérico.
+  // Hero por faceta (todos editables): marca → su fila (CRUD de marcas); ofertas y
+  // género (hombre/mujer) → store de contenido; en otro caso, el hero genérico.
   const activeBrand = marca ? brandsById.get(marca) : undefined;
+  const generoHero = genero === 'hombre' || genero === 'mujer' ? content.heros[genero] : null;
   const heroProps = activeBrand
     ? {
         eyebrow: activeBrand.name,
@@ -78,7 +90,11 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
         description: activeBrand.description?.trim() || `Toda la selección de ${activeBrand.name}, disponible en PATRONES.`,
         image: activeBrand.hero_image ?? undefined,
       }
-    : { eyebrow: mode === 'ofertas' ? 'Ofertas' : 'Catálogo', title, description };
+    : mode === 'ofertas'
+      ? blockToHero(content.heros.ofertas)
+      : generoHero
+        ? blockToHero(generoHero)
+        : { eyebrow: 'Catálogo', title, description };
 
   return (
     <main>

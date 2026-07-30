@@ -15,12 +15,12 @@
 
 import Link from 'next/link';
 import { HomeHero } from '@/components/storefront/home/HomeHero';
+import { AColorGallery } from '@/components/storefront/home/AColorGallery';
 import { ShopByCategory } from '@/components/storefront/home/ShopByCategory';
 import { ShopByColor } from '@/components/storefront/home/ShopByColor';
 import { Reveal } from '@/components/motion/Reveal';
 import { VerticalCard } from '@/components/storefront/VerticalCard';
 import { ProductGrid } from '@/components/storefront/ProductGrid';
-import { ImageGallery } from '@/components/ui/carousel-circular-image-gallery';
 import { productRepo } from '@/lib/data';
 import type { Brand } from '@/lib/data/types';
 import { getFeatured, getFeaturedCollection, getVerticalDoors } from '@/lib/storefront/catalog';
@@ -86,20 +86,8 @@ export default async function HomePage() {
         </section>
       ) : null}
 
-      {/* A todo color — showcase cinematográfico (componente 21st.dev) */}
-      <section className={`${styles.section} ${styles.gallery}`}>
-        <div className={styles.wrap}>
-          <Reveal className={styles.headLight}>
-            <p className={styles.eyebrowLight}>Nueva colección</p>
-            <h2 className={styles.headingLight}>Tu día, a todo color</h2>
-            <p className={styles.subheadLight}>
-              Del quirófano a la cocina, de la oficina a la calle: profesionales que no
-              paran, equipados por PATRONES. Toca cada punto para descubrir la colección.
-            </p>
-          </Reveal>
-        </div>
-        <ImageGallery />
-      </section>
+      {/* A todo color — showcase cinematográfico (copy e imágenes editables) */}
+      <AColorGallery />
 
       {/* Colección destacada */}
       {collection ? (

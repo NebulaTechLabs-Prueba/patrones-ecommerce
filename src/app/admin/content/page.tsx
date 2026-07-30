@@ -3,6 +3,7 @@
  * (rubros, marcas y categorías) se gestiona en Productos, para no duplicarla.
  */
 
+import { AdminContent } from '@/components/admin/AdminContent';
 import { CollectionsCrud } from '@/components/admin/crud/CollectionsCrud';
 import { SizeChartsCrud } from '@/components/admin/crud/SizeChartsCrud';
 import { productRepo } from '@/lib/data';
@@ -23,6 +24,8 @@ export default async function AdminContentPage() {
         <CollectionsCrud />
         <SizeChartsCrud initial={sizeCharts} />
       </div>
+
+      <AdminContent />
     </div>
   );
 }
