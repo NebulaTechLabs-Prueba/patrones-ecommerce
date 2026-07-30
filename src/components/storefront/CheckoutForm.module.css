@@ -361,3 +361,35 @@
   font-size: var(--ptr-text-lg);
   color: var(--ptr-ink);
 }
+
+/* Checkout exprés: encabezado de sección con "Editar" + resumen compacto */
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+}
+.editLink {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-primary);
+  cursor: pointer;
+}
+.editLink:hover {
+  text-decoration: underline;
+}
+.compact {
+  margin-top: var(--ptr-space-3);
+}
+.compactName {
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-ink);
+}
+.compactLine {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+  margin-top: 2px;
+}

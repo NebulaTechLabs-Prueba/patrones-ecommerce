@@ -85,6 +85,9 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
   const [savedShip, setSavedShip] = useState<SavedShippingLocation[]>([]);
   const [savedPay, setSavedPay] = useState<SavedPaymentMethod[]>([]);
   const [prefilled, setPrefilled] = useState(false);
+  // Checkout exprés: si los datos vienen prellenados, se colapsan (con "Editar").
+  const [dataCollapsed, setDataCollapsed] = useState(false);
+  const [editData, setEditData] = useState(false);
 
   useEffect(() => {
     const em = user?.email ?? '';
@@ -120,6 +123,8 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
       setDocKind(base.docKind);
       setDocNumber(base.docNumber);
       if (base.address) setAddress(base.address);
+      // Con datos completos (incluida dirección), se colapsa para un checkout exprés.
+      if (base.firstName && base.lastName && base.phone && base.docNumber && base.address) setDataCollapsed(true);
     }
     setPrefilled(true);
   }, [user, customerFallback, prefilled]);
@@ -277,7 +282,23 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
         <div className={styles.form}>
           {/* Datos del cliente */}
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Tus datos</h2>
+            <div className={styles.sectionHead}>
+              <h2 className={styles.sectionTitle}>Tus datos</h2>
+              {dataCollapsed ? (
+                <button type="button" className={styles.editLink} onClick={() => setEditData((v) => !v)}>
+                  {editData ? 'Listo' : 'Editar'}
+                </button>
+              ) : null}
+            </div>
+
+            {dataCollapsed && !editData ? (
+              <div className={styles.compact}>
+                <p className={styles.compactName}>{firstName} {lastName}</p>
+                <p className={styles.compactLine}>{email} · {phone}</p>
+                <p className={styles.compactLine}>{docKind}-{docNumber} · {address}</p>
+              </div>
+            ) : (
+            <>
             <div className={styles.grid2}>
               <label className={styles.field}>
                 <span>Nombre</span>
@@ -335,6 +356,8 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
                   ? 'Documento válido.'
                   : 'Cédula (V/E) o RIF (J/G/P).'}
             </p>
+            </>
+            )}
           </section>
 
           {/* Envio */}
