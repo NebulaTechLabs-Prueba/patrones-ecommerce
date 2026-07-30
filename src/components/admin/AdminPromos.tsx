@@ -61,7 +61,7 @@ export function AdminPromos() {
   }
 
   return (
-    <div style={{ marginTop: 'var(--ptr-space-9)' }}>
+    <div>
       <div className={ui.pageHead}>
         <div>
           <h2 className={ui.pageTitle}>Anuncio y captación de cuentas</h2>
