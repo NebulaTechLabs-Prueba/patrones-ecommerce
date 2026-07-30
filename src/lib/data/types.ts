@@ -324,6 +324,9 @@ export interface Customer {
   customer_type: CustomerType;
   created_at: ISODate;
 
+  /** Direcciones de encomienda guardadas (casillero u oficina de Zoom/MRW). Opcional. */
+  shipping_locations?: SavedShippingLocation[];
+
   /** Nota interna del admin sobre este cliente. Solo la ve el admin (§8). */
   admin_note?: string | null;
 }
@@ -372,6 +375,28 @@ export interface ShippingOffice {
   state: string;
   city: string;
   office: string;
+}
+
+/** Empresa de encomiendas soportada para retiro en oficina/casillero. */
+export type ShippingCarrier = 'zoom' | 'mrw';
+
+/**
+ * Dirección de encomienda que el cliente guarda en su perfil (opcional): su
+ * casillero o la oficina más cercana de Zoom/MRW, con los datos para retirar.
+ */
+export interface SavedShippingLocation {
+  id: ID;
+  /** Alias del cliente: "Casa", "Trabajo". */
+  label: string;
+  carrier: ShippingCarrier;
+  state: string;
+  city: string;
+  /** Oficina o número de casillero. */
+  office: string;
+  /** Quién retira y con qué documento (a veces distinto del titular). */
+  recipient: string;
+  doc: string;
+  notes: string;
 }
 
 // ---------------------------------------------------------------------------

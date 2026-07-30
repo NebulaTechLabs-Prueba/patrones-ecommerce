@@ -1,0 +1,174 @@
+.wrap {
+  margin-top: var(--ptr-space-6);
+}
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--ptr-space-4);
+}
+.title {
+  font-size: var(--ptr-text-lg);
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-ink);
+}
+.hint {
+  margin-top: 2px;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+  max-width: 60ch;
+  line-height: var(--ptr-leading-relaxed);
+}
+.addBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+  border: 0;
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.empty {
+  padding: var(--ptr-space-6);
+  border: 1px dashed var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  color: var(--ptr-neutral-600);
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--ptr-space-4);
+}
+.card {
+  padding: var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background: var(--ptr-white);
+  box-shadow: var(--ptr-shadow-1);
+}
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-3);
+  margin-bottom: var(--ptr-space-2);
+}
+.cardLabel {
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-ink);
+}
+.carrier {
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-wide);
+  text-transform: uppercase;
+  color: var(--ptr-primary);
+  background: color-mix(in srgb, var(--ptr-primary) 10%, transparent);
+  padding: 2px 10px;
+  border-radius: var(--ptr-radius-full);
+}
+.cardLine {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+  line-height: var(--ptr-leading-normal);
+}
+.cardActions {
+  display: flex;
+  gap: var(--ptr-space-2);
+  margin-top: var(--ptr-space-3);
+}
+.link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-primary);
+  cursor: pointer;
+}
+.linkDanger {
+  color: var(--ptr-danger);
+}
+
+/* Formulario */
+.form {
+  padding: var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background: var(--ptr-white);
+  box-shadow: var(--ptr-shadow-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-4);
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ptr-space-4);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-2);
+}
+.field > span {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-neutral-600);
+}
+.input,
+.select {
+  padding: var(--ptr-space-3);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-md);
+  font: inherit;
+  color: var(--ptr-ink);
+  background: var(--ptr-white);
+}
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--ptr-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ptr-primary) 16%, transparent);
+}
+.error {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-danger);
+}
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ptr-space-3);
+}
+.cancelBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-white);
+  color: var(--ptr-neutral-600);
+  font-size: var(--ptr-text-sm);
+  cursor: pointer;
+}
+.saveBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-6);
+  border: 0;
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
