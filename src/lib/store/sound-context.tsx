@@ -132,14 +132,22 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
     [ensureAC],
   );
 
-  // Pre-crea el AudioContext en tiempo idle (~1.5s tras cargar), para no pagar su
-  // costo (~200ms) dentro del primer clic y no bloquear la interacción (mejora INP).
-  // Queda 'suspended' hasta el primer gesto real, que solo hace resume() (barato).
+  // Pre-crea el AudioContext en el PRIMER gesto real del usuario (pointerdown/keydown),
+  // no en idle: crear un AudioContext fuera de un gesto dispara el warning de autoplay
+  // del navegador. Dentro del gesto se crea + resume sin warning, y como pointerdown
+  // precede al click, queda listo antes del primer sonido (sin costo en el clic → INP).
   useEffect(() => {
-    const id = window.setTimeout(() => {
-      if (!mutedRef.current) ensureAC(false);
-    }, 1500);
-    return () => window.clearTimeout(id);
+    const warm = () => {
+      if (!mutedRef.current) ensureAC(true);
+      window.removeEventListener('pointerdown', warm);
+      window.removeEventListener('keydown', warm);
+    };
+    window.addEventListener('pointerdown', warm);
+    window.addEventListener('keydown', warm);
+    return () => {
+      window.removeEventListener('pointerdown', warm);
+      window.removeEventListener('keydown', warm);
+    };
   }, [ensureAC]);
 
   // Click global: clasifica por data-sound, luego por tipo de elemento.
