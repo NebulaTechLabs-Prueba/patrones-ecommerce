@@ -15,6 +15,16 @@
 
 import type { AppSettings, Faq, PaymentMethod } from '../../types';
 
+/** Plantillas del mensaje de seguimiento de carritos (§8). Placeholders: {nombre},
+ *  {items}, {total}, {productos}. La clienta elige un preset o edita el suyo. */
+export const CART_MESSAGE_PRESETS: string[] = [
+  '¡Hola {nombre}! ¿Cómo estás? Noté que estabas armando tu carrito en PATRONES con {items} ({total}) y quería saber si te quedó alguna duda con las tallas, los envíos o el pago. Si necesitas que te ayude a finalizar, avísame y lo vemos juntas. ¡Que tengas un lindo día!',
+  '¡Hola {nombre}! Por aquí el equipo de PATRONES. Pasaba a avisarte que dejamos guardados los productos que seleccionaste ({productos} - {total}) por si querías retomarlos más tarde. Como el stock vuela, preferimos asegurártelos un ratito más. ¿Te ayudo a coordinar el envío?',
+  '¡Hola {nombre}! ¿Todo bien? Vi que seleccionaste {productos} en PATRONES ({total}). Si tuviste algún inconveniente al momento de pagar o necesitas que te reservemos el pedido, avísame y te doy una mano. ¡Saludos!',
+];
+
+export const DEFAULT_CART_MESSAGE = CART_MESSAGE_PRESETS[0]!;
+
 export const appSettings: AppSettings = {
   low_stock_threshold_global: 5,
   quantity_promo_threshold: 6,
@@ -40,6 +50,7 @@ export const appSettings: AppSettings = {
     line2: 'Venezuela',
     maps_url: 'https://maps.app.goo.gl/Z4DzPoUoodymjQwJ7',
   },
+  abandoned_cart_message: DEFAULT_CART_MESSAGE,
 };
 
 /**

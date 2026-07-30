@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react';
 import { AdminModal } from './AdminModal';
 import type { AppSettings, PaymentMethod, PaymentMethodKind } from '@/lib/data/types';
+import { CART_MESSAGE_PRESETS, DEFAULT_CART_MESSAGE } from '@/lib/data/mock/seed/settings';
 import { PAYMENT_METHOD_LABELS } from '@/lib/labels';
 import ui from './adminUI.module.css';
 import styles from '@/app/admin/settings/settings.module.css';
@@ -199,6 +200,31 @@ export function AdminSettings({
             <span>Enlace a Google Maps (vacío = sin mapa)</span>
             <input className={ui.input} value={s.location.maps_url} onChange={(e) => update('location', { ...s.location, maps_url: e.target.value })} />
           </label>
+        </div>
+
+        <label className={ui.field} style={{ marginTop: 'var(--ptr-space-4)' }}>
+          <span>Mensaje de seguimiento de carritos (WhatsApp/correo)</span>
+          <textarea
+            className={ui.input}
+            rows={3}
+            value={s.abandoned_cart_message ?? DEFAULT_CART_MESSAGE}
+            onChange={(e) => update('abandoned_cart_message', e.target.value)}
+          />
+          <span className={ui.formSectionHint} style={{ margin: 0 }}>
+            Placeholders: {'{nombre}'}, {'{items}'}, {'{total}'}, {'{productos}'}.
+          </span>
+        </label>
+        <div className={ui.actions} style={{ marginTop: 'var(--ptr-space-2)' }}>
+          {CART_MESSAGE_PRESETS.map((preset, i) => (
+            <button
+              key={i}
+              type="button"
+              className={ui.actionBtn}
+              onClick={() => update('abandoned_cart_message', preset)}
+            >
+              Plantilla {i + 1}
+            </button>
+          ))}
         </div>
       </section>
 

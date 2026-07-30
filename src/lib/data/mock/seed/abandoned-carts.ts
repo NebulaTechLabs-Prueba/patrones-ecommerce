@@ -106,8 +106,8 @@ const cart4Lines: AbandonedCartLine[] = [
 ];
 
 export const abandonedCarts: AbandonedCart[] = [
-  { id: 'ac-1', customer_id: 'cus-ana', lines: cart1Lines, subtotal_cents: subtotal(cart1Lines), updated_at: '2026-07-12T18:30:00-04:00' },
-  { id: 'ac-2', customer_id: 'cus-ana', lines: cart2Lines, subtotal_cents: subtotal(cart2Lines), updated_at: '2026-07-09T11:05:00-04:00' },
-  { id: 'ac-3', customer_id: 'cus-ana', lines: cart3Lines, subtotal_cents: subtotal(cart3Lines), updated_at: '2026-07-05T20:15:00-04:00' },
-  { id: 'ac-4', customer_id: 'cus-clinica', lines: cart4Lines, subtotal_cents: subtotal(cart4Lines), updated_at: '2026-07-11T09:40:00-04:00' },
+  { id: 'ac-1', customer_id: 'cus-ana', lines: cart1Lines, subtotal_cents: subtotal(cart1Lines), stage: 'payment', updated_at: '2026-07-12T18:30:00-04:00' },
+  { id: 'ac-2', customer_id: 'cus-ana', lines: cart2Lines, subtotal_cents: subtotal(cart2Lines), stage: 'checkout', updated_at: '2026-07-09T11:05:00-04:00' },
+  { id: 'ac-3', customer_id: 'cus-ana', lines: cart3Lines, subtotal_cents: subtotal(cart3Lines), stage: 'cart', updated_at: '2026-07-05T20:15:00-04:00' },
+  { id: 'ac-4', customer_id: 'cus-clinica', lines: cart4Lines, subtotal_cents: subtotal(cart4Lines), stage: 'checkout', updated_at: '2026-07-11T09:40:00-04:00' },
 ];

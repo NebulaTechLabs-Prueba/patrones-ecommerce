@@ -119,3 +119,29 @@
   font-weight: var(--ptr-weight-semibold);
   color: var(--ptr-ink);
 }
+
+/* Seguimiento del carrito (mensaje + acciones WhatsApp/correo) */
+.followup {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+  flex-wrap: wrap;
+  margin-top: var(--ptr-space-4);
+  padding-top: var(--ptr-space-4);
+  border-top: 1px solid var(--ptr-neutral-200);
+}
+.followLabel {
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-neutral-400);
+  margin-bottom: var(--ptr-space-2);
+}
+.followPreview {
+  max-width: 60ch;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-neutral-600);
+  line-height: var(--ptr-leading-relaxed);
+}

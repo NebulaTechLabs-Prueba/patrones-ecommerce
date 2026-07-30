@@ -566,12 +566,17 @@ export interface AbandonedCartLine {
  * un invitado no deja rastro recuperable. El cliente recupera hasta 5; el admin los
  * ve con su dueño porque son intencion de compra (seguimiento). TTL en app_settings.
  */
+/** Hasta dónde llegó el cliente antes de abandonar (para el seguimiento del admin). */
+export type CartStage = 'cart' | 'checkout' | 'payment';
+
 export interface AbandonedCart {
   id: ID;
   customer_id: ID;
   lines: AbandonedCartLine[];
   /** Subtotal referencial (sin promos; el total real se recalcula al recuperar). */
   subtotal_cents: UsdCents;
+  /** Etapa alcanzada: solo llenó el carrito, llegó al checkout, o inició el pago. */
+  stage: CartStage;
   /** Ultima actividad; base para el TTL de "olvidado". */
   updated_at: ISODate;
 }
@@ -622,6 +627,11 @@ export interface AppSettings {
   whatsapp_number: string;
   /** Ubicación de la tienda, editable desde el admin. */
   location: StoreLocation;
+  /**
+   * Plantilla del mensaje de seguimiento de carritos olvidados (WhatsApp/correo).
+   * Placeholders: {nombre}, {items}, {total}, {productos}. Editable desde el admin.
+   */
+  abandoned_cart_message?: string;
 }
 
 /** Ubicación/dirección de la tienda (editable en admin). */
