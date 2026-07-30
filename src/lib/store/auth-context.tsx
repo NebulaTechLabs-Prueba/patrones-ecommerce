@@ -63,6 +63,35 @@ export interface RegisterInput {
   phone: string;
 }
 
+/** Datos editables del propio cliente (sin correo ni contraseña). */
+export interface ProfileInput {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  docKind: IdentityDocKind;
+  docNumber: string;
+}
+
+/** Perfil editable persistido por usuario (localStorage), fuente de "Mis datos". */
+export interface StoredProfile {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  docKind: IdentityDocKind;
+  /** Solo dígitos. */
+  docNumber: string;
+}
+
+/** Lee el perfil editado del usuario (si guardó cambios en este navegador). */
+export function readStoredProfile(email: string): StoredProfile | null {
+  try {
+    const map = JSON.parse(window.localStorage.getItem('ptr-profile') ?? '{}') as Record<string, StoredProfile>;
+    return map[email] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 interface Session {
   email: string;
   name: string;
@@ -74,12 +103,15 @@ interface AuthContextValue {
   hydrated: boolean;
   login: (email: string, password: string) => { ok: boolean; role?: Role };
   register: (input: RegisterInput) => { ok: boolean; error?: string };
+  /** El propio cliente edita sus datos (no el admin). */
+  updateProfile: (input: ProfileInput) => { ok: boolean; error?: string };
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 const STORAGE_KEY = 'ptr-session';
 const ACCOUNTS_KEY = 'ptr-accounts';
+const PROFILE_KEY = 'ptr-profile';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<Session | null>(null);
@@ -154,6 +186,53 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const session: Session = { email: account.email, name: account.name, role: 'customer' };
         setUser(session);
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+        return { ok: true };
+      },
+      updateProfile: (input) => {
+        if (!user) return { ok: false, error: 'Debes iniciar sesión.' };
+        const firstName = input.firstName.trim();
+        const lastName = input.lastName.trim();
+        const phone = input.phone.trim();
+        if (!firstName || !lastName) return { ok: false, error: 'Ingresa nombre y apellido.' };
+        if (!phone) return { ok: false, error: 'Ingresa un teléfono de contacto.' };
+        const doc = validateDocument(input.docKind, input.docNumber);
+        if (!doc.valid || !doc.normalized) return { ok: false, error: doc.reason ?? 'Documento inválido.' };
+
+        const email = user.email;
+        const name = `${firstName} ${lastName}`;
+        const digits = doc.normalized.split('-')[1] ?? input.docNumber.replace(/\D/g, '');
+        const profile: StoredProfile = { firstName, lastName, phone, docKind: input.docKind, docNumber: digits };
+
+        // Perfil editable (fuente de "Mis datos").
+        try {
+          const map = JSON.parse(window.localStorage.getItem(PROFILE_KEY) ?? '{}') as Record<string, StoredProfile>;
+          map[email] = profile;
+          window.localStorage.setItem(PROFILE_KEY, JSON.stringify(map));
+        } catch {
+          // sin almacenamiento
+        }
+
+        // Si es una cuenta creada, sincroniza su ficha (nombre para el login, etc.).
+        const idx = accounts.findIndex((a) => a.email === email);
+        if (idx >= 0) {
+          const next = [...accounts];
+          next[idx] = { ...next[idx]!, name, firstName, lastName, phone, docKind: input.docKind, docNumber: doc.normalized };
+          setAccounts(next);
+          try {
+            window.localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(next));
+          } catch {
+            // sin almacenamiento
+          }
+        }
+
+        // Refleja el nombre en la sesión (lo muestra el encabezado de la cuenta).
+        const session: Session = { email, name, role: user.role };
+        setUser(session);
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+        } catch {
+          // sin almacenamiento
+        }
         return { ok: true };
       },
       logout: () => {

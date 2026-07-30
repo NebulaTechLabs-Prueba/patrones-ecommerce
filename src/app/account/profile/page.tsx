@@ -14,13 +14,14 @@ export default async function AccountProfilePage() {
   const demo = await customerRepo.getCustomerById(DEMO_CUSTOMER_ID);
   const fallback: DetailsData = demo
     ? {
-        name: `${demo.first_name} ${demo.last_name}`,
+        firstName: demo.first_name,
+        lastName: demo.last_name,
         email: demo.email,
         phone: demo.phone,
-        doc: `${demo.doc_kind}-${demo.doc_number}`,
-        institution: demo.customer_type === 'institucion',
+        docKind: demo.doc_kind,
+        docNumber: demo.doc_number,
       }
-    : { name: '', email: '', phone: '', doc: '', institution: false };
+    : { firstName: '', lastName: '', email: '', phone: '', docKind: 'V', docNumber: '' };
 
   return (
     <div>

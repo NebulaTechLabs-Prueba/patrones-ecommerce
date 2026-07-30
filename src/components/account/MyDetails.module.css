@@ -5,12 +5,108 @@
   background: var(--ptr-white);
   box-shadow: var(--ptr-shadow-1);
 }
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-4);
+  margin-bottom: var(--ptr-space-4);
+}
 .title {
   font-size: var(--ptr-text-lg);
   font-weight: var(--ptr-weight-bold);
   letter-spacing: -0.01em;
   color: var(--ptr-ink);
-  margin-bottom: var(--ptr-space-4);
+}
+.editBtn {
+  padding: 6px var(--ptr-space-4);
+  border: 1px solid color-mix(in srgb, var(--ptr-primary) 40%, transparent);
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-white);
+  color: var(--ptr-primary);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.editBtn:hover {
+  background: color-mix(in srgb, var(--ptr-primary) 10%, transparent);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-4);
+}
+.formRow {
+  display: flex;
+  gap: var(--ptr-space-4);
+}
+.formRow .field {
+  flex: 1;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-2);
+}
+.field > span {
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-medium);
+  color: var(--ptr-neutral-600);
+}
+.input,
+.select {
+  padding: var(--ptr-space-3);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-md);
+  font: inherit;
+  color: var(--ptr-ink);
+  background: var(--ptr-white);
+}
+.input:disabled {
+  background: var(--ptr-neutral-50);
+  color: var(--ptr-neutral-400);
+}
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--ptr-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ptr-primary) 16%, transparent);
+}
+.error {
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-danger);
+}
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ptr-space-3);
+}
+.cancelBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-white);
+  color: var(--ptr-neutral-600);
+  font-size: var(--ptr-text-sm);
+  cursor: pointer;
+}
+.saveBtn {
+  padding: var(--ptr-space-3) var(--ptr-space-6);
+  border: 0;
+  border-radius: var(--ptr-radius-full);
+  background: var(--ptr-primary);
+  color: var(--ptr-white);
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  cursor: pointer;
+}
+
+@media (max-width: 520px) {
+  .formRow {
+    flex-direction: column;
+  }
 }
 .list {
   margin: 0;
