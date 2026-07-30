@@ -105,12 +105,54 @@
   color: var(--ptr-neutral-600);
 }
 
-.field input {
+.field input,
+.field select,
+.select {
   padding: var(--ptr-space-3);
   border: 1px solid var(--ptr-neutral-400);
   border-radius: var(--ptr-radius-md);
   font: inherit;
   color: var(--ptr-ink);
+  background-color: var(--ptr-white);
+}
+
+/* Pestañas Ingresar / Crear cuenta */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: var(--ptr-space-5) 0 var(--ptr-space-2);
+  padding: 4px;
+  background: var(--ptr-neutral-50);
+  border-radius: var(--ptr-radius-full);
+}
+.tab {
+  flex: 1;
+  padding: var(--ptr-space-3);
+  border: 0;
+  border-radius: var(--ptr-radius-full);
+  background: transparent;
+  font-size: var(--ptr-text-sm);
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-neutral-600);
+  cursor: pointer;
+  transition: background-color var(--ptr-duration-fast) var(--ptr-ease), color var(--ptr-duration-fast) var(--ptr-ease);
+}
+.tab:hover {
+  color: var(--ptr-primary);
+}
+.tabActive,
+.tabActive:hover {
+  background: var(--ptr-primary);
+  color: var(--ptr-white);
+}
+
+/* Fila de dos campos (nombre/apellido, documento/número) */
+.row {
+  display: flex;
+  gap: var(--ptr-space-3);
+}
+.row .field {
+  flex: 1;
 }
 
 .error {
