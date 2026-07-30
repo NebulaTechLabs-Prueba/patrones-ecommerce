@@ -375,3 +375,85 @@
     justify-content: flex-end;
   }
 }
+
+/* --- Búsqueda de la tabla --- */
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-2);
+  margin-bottom: var(--ptr-space-4);
+  padding: 0 var(--ptr-space-3);
+  background: var(--ptr-white);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-full);
+  box-shadow: var(--ptr-shadow-1);
+  transition: border-color var(--ptr-duration-fast) var(--ptr-ease), box-shadow var(--ptr-duration-fast) var(--ptr-ease);
+}
+.searchBar:focus-within {
+  border-color: var(--ptr-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ptr-primary) 15%, transparent);
+}
+.searchIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--ptr-neutral-400);
+}
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 11px 0;
+  font: inherit;
+  color: var(--ptr-ink);
+  outline: none;
+}
+.searchInput::placeholder {
+  color: var(--ptr-neutral-400);
+}
+.searchClear {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ptr-neutral-200);
+  color: var(--ptr-neutral-600);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+.searchClear:hover {
+  background: var(--ptr-neutral-400);
+  color: var(--ptr-white);
+}
+.searchCount {
+  flex-shrink: 0;
+  font-size: var(--ptr-text-xs);
+  color: var(--ptr-neutral-400);
+  font-variant-numeric: tabular-nums;
+  padding-right: var(--ptr-space-2);
+}
+
+/* --- Botón de variantes en la tabla --- */
+.variantsBtn {
+  border: 1px solid var(--ptr-neutral-200);
+  background: var(--ptr-white);
+  border-radius: var(--ptr-radius-full);
+  padding: 4px 12px;
+  font-size: var(--ptr-text-sm);
+  color: var(--ptr-ink);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--ptr-duration-fast) var(--ptr-ease), background var(--ptr-duration-fast) var(--ptr-ease);
+}
+.variantsBtn:hover {
+  border-color: var(--ptr-primary);
+}
+.variantsEmpty {
+  border-style: dashed;
+  border-color: var(--ptr-warning);
+  color: var(--ptr-warning);
+  font-weight: var(--ptr-weight-semibold);
+}

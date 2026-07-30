@@ -73,6 +73,7 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
   const [draft, setDraft] = useState<Draft | null>(null);
   const [error, setError] = useState('');
   const [variantsFor, setVariantsFor] = useState<ProductRow | null>(null);
+  const [query, setQuery] = useState('');
 
   const brandName = new Map(brands.map((b) => [b.id, b.name]));
   const vName = new Map(verticals.map((v) => [v.id, v.name]));
@@ -134,9 +135,13 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
       variants: existing?.variants ?? [],
     };
 
-    onChange(draft.id ? products.map((r) => (r.id === draft.id ? row : r)) : [...products, row]);
+    const isNew = !draft.id;
+    onChange(isNew ? [...products, row] : products.map((r) => (r.id === draft.id ? row : r)));
     setDraft(null);
     setError('');
+    // Flujo guiado: un producto nuevo nace sin variantes (y por eso oculto).
+    // Lo llevamos directo a cargarlas en vez de dejarlo perdido en la tabla.
+    if (isNew) setVariantsFor(row);
   }
 
   function updateVariants(vars: VariantRow[]) {
@@ -146,6 +151,17 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
   }
 
   const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
+  const q = query.trim().toLowerCase();
+  const filtered = q
+    ? sorted.filter(
+        (r) =>
+          r.name.toLowerCase().includes(q) ||
+          (brandName.get(r.brandId) ?? '').toLowerCase().includes(q) ||
+          r.categoryIds.some((id) => (cName.get(id) ?? '').toLowerCase().includes(q)) ||
+          r.verticalIds.some((id) => (vName.get(id) ?? '').toLowerCase().includes(q)) ||
+          r.variants.some((v) => v.sku.toLowerCase().includes(q)),
+      )
+    : sorted;
 
   return (
     <div>
@@ -165,6 +181,28 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
         </button>
       </div>
 
+      <div className={ui.searchBar}>
+        <svg className={ui.searchIcon} viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="6" stroke="currentColor" strokeWidth="1.6" />
+          <path d="M14 14l3.5 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+        <input
+          className={ui.searchInput}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Buscar por nombre, marca, categoría, rubro o SKU…"
+          autoComplete="off"
+        />
+        {query ? (
+          <button type="button" className={ui.searchClear} onClick={() => setQuery('')} aria-label="Limpiar búsqueda">
+            ✕
+          </button>
+        ) : null}
+        <span className={ui.searchCount}>
+          {filtered.length} de {products.length}
+        </span>
+      </div>
+
       <div className={ui.tableWrap}>
         <table className={ui.table}>
           <thead>
@@ -182,7 +220,14 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
             </tr>
           </thead>
           <tbody>
-            {sorted.map((r) => {
+            {filtered.length === 0 ? (
+              <tr>
+                <td colSpan={10} className={ui.empty}>
+                  {query ? `Sin resultados para “${query}”.` : 'Aún no hay productos. Creá el primero.'}
+                </td>
+              </tr>
+            ) : null}
+            {filtered.map((r) => {
               const visible = isVisible(r.variants);
               return (
                 <tr key={r.id}>
@@ -192,7 +237,15 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
                   <td>{r.categoryIds.map((id) => cName.get(id) ?? id).join(', ') || '—'}</td>
                   <td>{r.type === 'set' ? 'Conjunto' : 'Simple'}</td>
                   <td>{formatUsd(r.priceCents)}</td>
-                  <td>{r.variants.length}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className={r.variants.length > 0 ? ui.variantsBtn : `${ui.variantsBtn} ${ui.variantsEmpty}`}
+                      onClick={() => setVariantsFor(r)}
+                    >
+                      {r.variants.length > 0 ? `${r.variants.length} variante${r.variants.length > 1 ? 's' : ''}` : '＋ Agregar'}
+                    </button>
+                  </td>
                   <td>{r.featured ? 'Sí' : '—'}</td>
                   <td>
                     <span className={`${ui.badge} ${visible ? ui.success : ui.danger}`}>
@@ -203,9 +256,6 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
                     <div className={ui.actions}>
                       <button type="button" className={ui.actionBtn} onClick={() => setDraft(toDraft(r))}>
                         Editar
-                      </button>
-                      <button type="button" className={ui.actionBtn} onClick={() => setVariantsFor(r)}>
-                        Variantes
                       </button>
                       <button
                         type="button"
