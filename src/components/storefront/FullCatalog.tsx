@@ -36,10 +36,14 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
   const { hydrated, brands, categories, products, variants } = useCatalog();
   const { content } = useContent();
   const sp = useSearchParams();
-  // Selección de marcas viva (la reporta el ProductBrowser). Semilla: el ?marca= de la URL.
+  // Selecciones vivas (las reporta el ProductBrowser). Semilla: los params de la URL.
   const [selectedBrands, setSelectedBrands] = useState<string[]>(() => {
     const m = sp.get('marca');
     return m ? [m] : [];
+  });
+  const [selectedGenders, setSelectedGenders] = useState<string[]>(() => {
+    const g = sp.get('genero');
+    return g ? [g] : [];
   });
 
   if (!hydrated) return <main style={{ minHeight: '60vh' }} aria-busy="true" />;
@@ -89,7 +93,8 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
   // esa marca (su fila, CRUD de marcas). Con 0 o 2+ marcas cae en un predeterminado
   // general: ofertas / género (store de contenido) o el hero genérico del catálogo.
   const activeBrand = selectedBrands.length === 1 ? brandsById.get(selectedBrands[0]!) : undefined;
-  const generoHero = genero === 'hombre' || genero === 'mujer' ? content.heros[genero] : null;
+  const soleGender = selectedGenders.length === 1 ? selectedGenders[0] : null;
+  const generoHero = soleGender === 'hombre' || soleGender === 'mujer' ? content.heros[soleGender] : null;
   const heroProps = activeBrand
     ? {
         eyebrow: activeBrand.name,
@@ -117,6 +122,7 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
             searchPlaceholder="Buscar producto…"
             initial={initial}
             onBrandsChange={setSelectedBrands}
+            onGendersChange={setSelectedGenders}
           />
         ) : (
           <EmptyState
