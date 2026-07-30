@@ -1,11 +1,11 @@
 /**
- * Contacto. Datos de atención desde la configuración (horario, WhatsApp) y la
- * ubicación con enlace a Maps.
+ * Contacto. Hero editorial (StatementHero) con los datos de atención desde la
+ * configuración (WhatsApp y ubicación), más el horario debajo.
  */
 
 import type { Metadata } from 'next';
 import { settingsRepo } from '@/lib/data';
-import styles from './contact.module.css';
+import { StatementHero } from '@/components/storefront/StatementHero';
 
 export const metadata: Metadata = {
   title: 'Contacto — PATRONES',
@@ -16,56 +16,41 @@ const DAY_NAMES = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
 
 export default async function ContactPage() {
   const settings = await settingsRepo.getSettings();
-  const { business_hours } = settings;
+  const { business_hours, location } = settings;
   const days = [...business_hours.open_days].sort((a, b) => a - b);
-  const dayLabel =
-    days.length > 0 ? `${DAY_NAMES[days[0]!]} a ${DAY_NAMES[days[days.length - 1]!]}` : '';
+  const dayLabel = days.length > 0 ? `${DAY_NAMES[days[0]!]} a ${DAY_NAMES[days[days.length - 1]!]}` : '';
   const waDigits = settings.whatsapp_number.replace(/\D/g, '');
 
   return (
-    <main className={styles.main}>
-      <header className={styles.header}>
-        <p className={styles.eyebrow}>Contacto</p>
-        <h1 className={styles.title}>Estamos para ayudarte</h1>
-        <p className={styles.lead}>
-          Consultanos por talles, disponibilidad o pedidos institucionales. Te respondemos en
-          horario de atención.
+    <main>
+      <StatementHero
+        slogan="De pies a cabeza"
+        title={
+          <>
+            Estamos para <em>ayudarte</em>
+          </>
+        }
+        subtitle="Consúltanos por tallas, disponibilidad o pedidos institucionales. Te respondemos en horario de atención."
+        cta={{ text: 'Escríbenos por WhatsApp', href: `https://wa.me/${waDigits}` }}
+        backgroundImage="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?q=80&w=1100&h=1500&fit=crop"
+        contact={{
+          website: '@PATRONES.VZLA',
+          phone: settings.whatsapp_number,
+          address: `${location.line1} · ${location.line2}`,
+        }}
+      />
+
+      <section style={{ maxWidth: 'var(--ptr-container)', margin: '0 auto', padding: 'var(--ptr-space-9) var(--ptr-space-6)', textAlign: 'center' }}>
+        <p style={{ fontSize: 'var(--ptr-text-sm)', fontWeight: 'var(--ptr-weight-semibold)', letterSpacing: 'var(--ptr-tracking-wider)', textTransform: 'uppercase', color: 'var(--ptr-primary)', marginBottom: 'var(--ptr-space-2)' }}>
+          Horario de atención
         </p>
-      </header>
-
-      <div className={styles.grid}>
-        <section className={styles.card}>
-          <h2 className={styles.cardTitle}>WhatsApp</h2>
-          <p className={styles.cardText}>{settings.whatsapp_number}</p>
-          <a
-            className={styles.cta}
-            href={`https://wa.me/${waDigits}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Escribir por WhatsApp
-          </a>
-        </section>
-
-        <section className={styles.card}>
-          <h2 className={styles.cardTitle}>Tienda</h2>
-          <p className={styles.cardText}>{settings.location.line1}</p>
-          <p className={styles.cardText}>{settings.location.line2}</p>
-          {settings.location.maps_url ? (
-            <a className={styles.link} href={settings.location.maps_url} target="_blank" rel="noopener noreferrer">
-              Ver en el mapa
-            </a>
-          ) : null}
-        </section>
-
-        <section className={styles.card}>
-          <h2 className={styles.cardTitle}>Horario</h2>
-          <p className={styles.cardText}>
-            {dayLabel} · {business_hours.open_time}–{business_hours.close_time}
-          </p>
-          <p className={styles.cardMuted}>Quien compra fuera de horario compra igual; se procesa al reabrir.</p>
-        </section>
-      </div>
+        <p style={{ fontSize: 'var(--ptr-text-lg)', color: 'var(--ptr-ink)', margin: 0 }}>
+          {dayLabel} · {business_hours.open_time}–{business_hours.close_time}
+        </p>
+        <p style={{ color: 'var(--ptr-neutral-500)', marginTop: 'var(--ptr-space-2)' }}>
+          Quien compra fuera de horario compra igual; se procesa al reabrir.
+        </p>
+      </section>
     </main>
   );
 }

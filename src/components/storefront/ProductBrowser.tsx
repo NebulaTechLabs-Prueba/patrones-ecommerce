@@ -162,7 +162,9 @@ export function ProductBrowser({
         </div>
       ) : null}
 
-      <div className={styles.bar} ref={barRef}>
+      <div className={styles.filterPanel} ref={barRef}>
+        <p className={styles.filterHead}>Filtrá tu selección</p>
+        <div className={styles.bar}>
         <input
           type="search"
           className={styles.search}
@@ -238,6 +240,7 @@ export function ProductBrowser({
               Limpiar
             </button>
           ) : null}
+        </div>
         </div>
       </div>
 

@@ -145,13 +145,40 @@
   }
 }
 
+/* --- Panel de filtros (con identidad, no elementos sueltos) --- */
+.filterPanel {
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg, 18px);
+  background: var(--ptr-white);
+  padding: var(--ptr-space-4) var(--ptr-space-5);
+  margin-bottom: var(--ptr-space-4);
+  box-shadow: var(--ptr-shadow-1);
+}
+.filterHead {
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-2);
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-semibold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-neutral-500);
+  margin: 0 0 var(--ptr-space-3);
+}
+.filterHead::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--ptr-primary);
+}
+
 /* --- Barra de filtros compacta (facetas en desplegables) --- */
 .bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--ptr-space-3);
-  margin-bottom: var(--ptr-space-4);
+  margin-bottom: 0;
 }
 .bar .search {
   flex: 1 1 220px;
