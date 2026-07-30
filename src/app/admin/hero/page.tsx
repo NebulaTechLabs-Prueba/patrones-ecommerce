@@ -4,7 +4,13 @@
  */
 
 import { AdminHero } from '@/components/admin/AdminHero';
+import { AdminPromos } from '@/components/admin/AdminPromos';
 
 export default function AdminHeroPage() {
-  return <AdminHero />;
+  return (
+    <div>
+      <AdminHero />
+      <AdminPromos />
+    </div>
+  );
 }

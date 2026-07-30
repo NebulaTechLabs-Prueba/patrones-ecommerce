@@ -3,6 +3,8 @@ import { Nunito_Sans } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ChromeGate } from '@/components/layout/ChromeGate';
+import { AnnouncementBar } from '@/components/layout/AnnouncementBar';
+import { SignupIncentive } from '@/components/layout/SignupIncentive';
 import { WhatsappFab } from '@/components/layout/WhatsappFab';
 import { StoreProviders } from '@/components/providers/StoreProviders';
 import { ParticleField } from '@/components/brand/ParticleField';
@@ -61,12 +63,14 @@ export default async function RootLayout({
           catalog={{ verticals, brands, categories, products, variants, collections, bundles }}
         >
           <ChromeGate>
+            <AnnouncementBar />
             <Header />
           </ChromeGate>
           {children}
           <ChromeGate>
             <Footer />
             <WhatsappFab phone={settings.whatsapp_number} />
+            <SignupIncentive />
           </ChromeGate>
         </StoreProviders>
         </ViewTransitions>
