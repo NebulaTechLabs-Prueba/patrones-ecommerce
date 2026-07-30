@@ -6,20 +6,47 @@
  * Guarda en el store de promos (localStorage en Fase 1).
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePromo, type PromoConfig } from '@/lib/store/promo-context';
 import { useToast } from '@/lib/store/toast-context';
 import ui from './adminUI.module.css';
 
 export function AdminPromos() {
   const { promo, setPromo, hydrated } = usePromo();
-  const { success } = useToast();
+  const { success, error } = useToast();
   const [draft, setDraft] = useState<PromoConfig>(promo);
+  const fileRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     setDraft(promo);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hydrated]);
+
+  function onImage(file: File | undefined) {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) return error('Ese archivo no es una imagen.');
+    if (file.size > 12_000_000) return error('La imagen es demasiado pesada (máx. 12 MB).');
+    const url = URL.createObjectURL(file);
+    const img = new window.Image();
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const scale = Math.min(1, 1200 / Math.max(img.width, img.height));
+      const w = Math.max(1, Math.round(img.width * scale));
+      const h = Math.max(1, Math.round(img.height * scale));
+      const c = document.createElement('canvas');
+      c.width = w;
+      c.height = h;
+      const ctx = c.getContext('2d');
+      if (!ctx) return error('No se pudo procesar la imagen.');
+      ctx.drawImage(img, 0, 0, w, h);
+      setS('image', c.toDataURL('image/jpeg', 0.82));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      error('No se pudo leer la imagen.');
+    };
+    img.src = url;
+  }
 
   function setA<K extends keyof PromoConfig['announcement']>(key: K, value: PromoConfig['announcement'][K]) {
     setDraft((d) => ({ ...d, announcement: { ...d.announcement, [key]: value } }));
@@ -64,6 +91,21 @@ export function AdminPromos() {
         <input type="checkbox" checked={draft.signup.enabled} onChange={(e) => setS('enabled', e.target.checked)} />
         <span>Mostrar popup para crear cuenta (a quien no inició sesión)</span>
       </label>
+
+      <div className={ui.field}>
+        <span>Imagen del popup</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+          <div
+            style={{ width: 120, height: 68, borderRadius: 8, border: '1px solid rgba(0,0,0,.12)', background: '#f4f4f1', backgroundImage: draft.signup.image ? `url(${draft.signup.image})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            aria-hidden="true"
+          />
+          <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={(e) => onImage(e.target.files?.[0])} />
+          <button type="button" className={ui.actionBtn} onClick={() => fileRef.current?.click()}>Subir</button>
+          {draft.signup.image ? <button type="button" className={`${ui.actionBtn} ${ui.actionDanger}`} onClick={() => setS('image', '')}>Quitar</button> : null}
+        </div>
+        <input className={ui.input} placeholder="o pegá una URL…" value={draft.signup.image.startsWith('data:') ? '' : draft.signup.image} onChange={(e) => setS('image', e.target.value)} />
+      </div>
+
       <label className={ui.field}>
         <span>Título</span>
         <input className={ui.input} value={draft.signup.title} onChange={(e) => setS('title', e.target.value)} />

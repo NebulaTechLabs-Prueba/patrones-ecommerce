@@ -1,15 +1,17 @@
 'use client';
 
 /**
- * Incentivo para crear cuenta (popup), editable desde el admin. Aparece tras unos
- * segundos, una sola vez (se recuerda el descarte) y NUNCA a quien ya inició sesión.
- * Copy propio de PATRONES.
+ * Incentivo para crear cuenta (popup), editable desde el admin. Estética tipo
+ * "welcome screen": foto superior con borde curvo, título, mensaje, botón y enlace,
+ * con entrada animada (CSS). Aparece tras unos segundos, una sola vez (se recuerda el
+ * descarte) y NUNCA a quien ya inició sesión. Copy propio de PATRONES.
  */
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePromo } from '@/lib/store/promo-context';
 import { useAuth } from '@/lib/store/auth-context';
+import styles from './SignupIncentive.module.css';
 
 const KEY = 'ptr-signup-dismissed';
 
@@ -45,41 +47,26 @@ export function SignupIncentive() {
   if (!show || user) return null;
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={s.title}
-      onClick={close}
-      style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(20,20,18,0.55)', display: 'grid', placeItems: 'center', padding: 'var(--ptr-space-5)' }}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{ position: 'relative', width: 'min(440px, 100%)', background: 'var(--ptr-white)', borderRadius: 16, padding: 'var(--ptr-space-8) var(--ptr-space-7)', boxShadow: 'var(--ptr-shadow-3)', textAlign: 'center' }}
-      >
-        <button
-          type="button"
-          aria-label="Cerrar"
-          onClick={close}
-          style={{ position: 'absolute', top: 12, right: 14, background: 'transparent', border: 0, fontSize: '1.3rem', lineHeight: 1, color: 'var(--ptr-neutral-500)', cursor: 'pointer' }}
-        >
+    <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={s.title} onClick={close}>
+      <div className={styles.card} onClick={(e) => e.stopPropagation()}>
+        <button type="button" className={styles.close} aria-label="Cerrar" onClick={close}>
           ×
         </button>
-        <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.9rem)', fontWeight: 'var(--ptr-weight-bold)', letterSpacing: '-0.02em', color: 'var(--ptr-ink)', margin: '0 0 var(--ptr-space-3)' }}>
-          {s.title}
-        </h2>
-        <p style={{ color: 'var(--ptr-neutral-600)', lineHeight: 'var(--ptr-leading-relaxed)', margin: '0 0 var(--ptr-space-6)' }}>{s.body}</p>
-        <Link
-          href={s.ctaHref}
-          onClick={close}
-          data-sound="add"
-          style={{ display: 'inline-block', background: 'var(--ptr-primary)', color: 'var(--ptr-white)', padding: '12px 26px', borderRadius: 'var(--ptr-radius-full)', fontWeight: 'var(--ptr-weight-semibold)', textDecoration: 'none' }}
-        >
-          {s.ctaLabel}
-        </Link>
-        <div>
-          <button type="button" onClick={close} style={{ marginTop: 'var(--ptr-space-4)', background: 'transparent', border: 0, color: 'var(--ptr-neutral-500)', fontSize: '0.85rem', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
-            Ahora no
-          </button>
+        {s.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className={styles.media} src={s.image} alt="" />
+        ) : null}
+        <div className={styles.body}>
+          <h2 className={styles.title}>{s.title}</h2>
+          <p className={styles.text}>{s.body}</p>
+          <Link href={s.ctaHref} onClick={close} data-sound="add" className={styles.primary}>
+            {s.ctaLabel}
+          </Link>
+          <div>
+            <button type="button" className={styles.secondary} onClick={close}>
+              Ahora no
+            </button>
+          </div>
         </div>
       </div>
     </div>

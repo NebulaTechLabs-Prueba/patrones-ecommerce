@@ -33,9 +33,8 @@ export function BrandsShowcase() {
         eyebrow="Marcas"
         title="Nuestras marcas"
         description="Línea propia PATRONES y las mejores marcas seleccionadas. Entra por la que buscas."
-        image={null}
       />
-      <section style={{ maxWidth: 'var(--ptr-container)', margin: '0 auto', padding: '0 var(--ptr-space-5) var(--ptr-space-9)' }}>
+      <section style={{ maxWidth: 'var(--ptr-container)', margin: '0 auto', padding: 'var(--ptr-space-9) var(--ptr-space-6) var(--ptr-space-10)' }}>
         <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))' }}>
           {shown.map((b) => (
             <li key={b.id}>

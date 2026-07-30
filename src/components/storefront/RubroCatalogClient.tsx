@@ -76,7 +76,7 @@ export function RubroCatalogClient({ slug }: { slug: string }) {
         style={{
           maxWidth: 'var(--ptr-container)',
           margin: '0 auto',
-          padding: '0 var(--ptr-space-5) var(--ptr-space-8)',
+          padding: 'var(--ptr-space-9) var(--ptr-space-6) var(--ptr-space-10)',
         }}
       >
         {items.length > 0 ? (

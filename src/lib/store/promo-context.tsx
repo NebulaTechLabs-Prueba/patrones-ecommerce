@@ -16,6 +16,8 @@ export interface AnnouncementConfig {
 
 export interface SignupConfig {
   enabled: boolean;
+  /** Imagen superior del popup (URL o data-URL). */
+  image: string;
   title: string;
   body: string;
   ctaLabel: string;
@@ -37,6 +39,7 @@ export const DEFAULT_PROMO: PromoConfig = {
   },
   signup: {
     enabled: true,
+    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=900&h=640&fit=crop',
     title: 'Sumate a PATRONES',
     body: 'Crea tu cuenta para comprar más rápido, guardar tus favoritos y enterarte primero de cada nueva temporada.',
     ctaLabel: 'Crear cuenta',
