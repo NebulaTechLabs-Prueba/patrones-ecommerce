@@ -1,5 +1,6 @@
-/* Encabezado de catálogo — editorial cinematográfico. Fondo full-bleed con papel
-   de patrón; contenido centrado al contenedor vía padding. Solo tokens de marca. */
+/* Encabezado de catálogo — editorial cinematográfico. Fondo full-bleed con un
+   lavado cálido (sin retícula: la cuadrícula leía "Patrones" demasiado literal).
+   Contenido centrado al contenedor vía padding. Solo tokens de marca. */
 .hero {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
@@ -7,11 +8,9 @@
   gap: var(--ptr-space-7);
   padding-block: clamp(var(--ptr-space-8), 7vw, var(--ptr-space-10));
   padding-inline: max(var(--ptr-space-6), calc((100% - var(--ptr-container)) / 2));
-  background-color: var(--ptr-cream);
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--ptr-primary) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--ptr-primary) 7%, transparent) 1px, transparent 1px);
-  background-size: 34px 34px;
+  background:
+    radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, var(--ptr-mint) 20%, transparent) 0%, transparent 58%),
+    linear-gradient(165deg, var(--ptr-cream) 0%, color-mix(in srgb, var(--ptr-cream) 45%, #ffffff) 70%, var(--ptr-white) 100%);
 }
 
 .text {

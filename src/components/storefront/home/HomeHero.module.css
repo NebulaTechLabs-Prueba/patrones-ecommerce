@@ -5,13 +5,10 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-color: var(--ptr-cream);
-  /* Papel de patrón: retícula técnica muy tenue. */
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--ptr-primary) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--ptr-primary) 7%, transparent) 1px, transparent 1px);
-  background-size: 34px 34px;
-  background-position: center;
+  /* Lavado cálido editorial (se retiró la retícula: leía "Patrones" literal). */
+  background:
+    radial-gradient(80% 100% at 85% 0%, color-mix(in srgb, var(--ptr-mint) 18%, transparent) 0%, transparent 60%),
+    linear-gradient(165deg, var(--ptr-cream) 0%, color-mix(in srgb, var(--ptr-cream) 45%, #ffffff) 72%, var(--ptr-white) 100%);
 }
 
 /* --- Capa de patrón técnico (derecha), con parallax --- */
