@@ -25,6 +25,10 @@ export function toProductRows(products: Product[], variants: ProductVariant[]): 
     gender: p.gender ?? 'unisex',
     onSale: p.on_sale ?? false,
     lowStockThreshold: p.low_stock_threshold,
+    imageUrl:
+      [...p.images].sort((a, b) => a.sort_order - b.sort_order).find((i) => !i.is_placeholder)?.url ??
+      p.images[0]?.url ??
+      null,
     variants: variants
       .filter((v) => v.product_id === p.id)
       .map((v) => ({

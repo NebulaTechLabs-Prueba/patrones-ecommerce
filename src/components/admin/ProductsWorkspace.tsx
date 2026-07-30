@@ -54,6 +54,7 @@ export function ProductsWorkspace() {
 
   return (
     <div>
+      <span className={ui.kicker}>Catálogo</span>
       <h1 className={ui.pageTitle}>Productos</h1>
 
       <div className={ui.pills} role="tablist">

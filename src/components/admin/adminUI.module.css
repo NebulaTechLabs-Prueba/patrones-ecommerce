@@ -1,11 +1,38 @@
 /* Estilos compartidos de las secciones admin: titulos, tablas, badges, acciones.
    Cascada a todo el panel. Solo tokens de marca. */
 
+/* Masthead editorial: título grande de revista con filete de acento. Cascada a
+   todas las páginas del panel (todas usan .pageTitle). */
 .pageTitle {
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  position: relative;
+  margin: 0 0 var(--ptr-space-6);
+  padding-bottom: var(--ptr-space-4);
+  font-size: clamp(2rem, 4.2vw, 3.1rem);
   font-weight: var(--ptr-weight-bold);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
   color: var(--ptr-ink);
+}
+.pageTitle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--ptr-primary);
+}
+
+/* Antetítulo opcional (kicker) para páginas que lo pasen. */
+.kicker {
+  display: block;
+  margin-bottom: var(--ptr-space-3);
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-primary);
 }
 
 .pageSubtitle {
@@ -32,20 +59,22 @@
 .table th,
 .table td {
   text-align: left;
-  padding: var(--ptr-space-4) var(--ptr-space-4);
+  padding: var(--ptr-space-4) var(--ptr-space-5);
   font-size: var(--ptr-text-sm);
-  border-bottom: 1px solid var(--ptr-neutral-200);
+  border-bottom: 1px solid color-mix(in srgb, var(--ptr-neutral-200) 75%, transparent);
   vertical-align: middle;
 }
 
+/* Encabezado editorial: sin relleno gris, solo antetítulo fino sobre un filete. */
 .table th {
-  background-color: var(--ptr-neutral-50);
-  font-weight: var(--ptr-weight-semibold);
-  color: var(--ptr-neutral-600);
+  background-color: transparent;
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-neutral-400);
   text-transform: uppercase;
-  letter-spacing: var(--ptr-tracking-wide);
+  letter-spacing: var(--ptr-tracking-wider);
   font-size: var(--ptr-text-xs);
   white-space: nowrap;
+  border-bottom-color: var(--ptr-neutral-200);
 }
 
 .table tbody tr {
@@ -155,35 +184,47 @@
   line-height: var(--ptr-leading-relaxed);
 }
 
-/* --- Pills para alternar tablas (alineado al storefront) --- */
+/* --- Pestañas editoriales con subrayado (reemplazan a las pills rellenas) --- */
 .pills {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--ptr-space-2);
-  margin: var(--ptr-space-4) 0 var(--ptr-space-6);
+  gap: var(--ptr-space-5);
+  margin: 0 0 var(--ptr-space-6);
   border-bottom: 1px solid var(--ptr-neutral-200);
-  padding-bottom: var(--ptr-space-4);
 }
 .pill {
-  padding: var(--ptr-space-2) var(--ptr-space-4);
-  border: 1px solid transparent;
-  border-radius: var(--ptr-radius-full);
-  background-color: var(--ptr-neutral-50);
-  font-size: var(--ptr-text-sm);
+  position: relative;
+  padding: var(--ptr-space-3) 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--ptr-text-base);
   font-weight: var(--ptr-weight-medium);
   color: var(--ptr-neutral-600);
   cursor: pointer;
-  transition: background-color var(--ptr-duration-fast) var(--ptr-ease), color var(--ptr-duration-fast) var(--ptr-ease);
+  transition: color var(--ptr-duration-fast) var(--ptr-ease);
+}
+.pill::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--ptr-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ptr-duration-base) var(--ptr-ease);
 }
 .pill:hover {
-  background-color: color-mix(in srgb, var(--ptr-primary) 10%, transparent);
-  color: var(--ptr-primary);
+  color: var(--ptr-ink);
 }
 .pillActive,
 .pillActive:hover {
-  background-color: var(--ptr-primary);
-  border-color: var(--ptr-primary);
-  color: var(--ptr-white);
+  color: var(--ptr-ink);
+  font-weight: var(--ptr-weight-bold);
+}
+.pillActive::after {
+  transform: scaleX(1);
 }
 
 /* --- Encabezado de sección con acción --- */
@@ -456,4 +497,112 @@
   border-color: var(--ptr-warning);
   color: var(--ptr-warning);
   font-weight: var(--ptr-weight-semibold);
+}
+
+/* --- Galería de productos (boutique editorial: la foto manda) --- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--ptr-space-5);
+}
+.galleryEmpty {
+  padding: var(--ptr-space-8) var(--ptr-space-4);
+  text-align: center;
+  color: var(--ptr-neutral-600);
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--ptr-white);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--ptr-shadow-1);
+  transition: transform var(--ptr-duration-base) var(--ptr-ease), box-shadow var(--ptr-duration-base) var(--ptr-ease);
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ptr-shadow-3);
+}
+.cardMedia {
+  position: relative;
+  background: var(--ptr-neutral-50);
+}
+.cardFlag {
+  position: absolute;
+  top: var(--ptr-space-3);
+  left: var(--ptr-space-3);
+  padding: 2px 10px;
+  border-radius: var(--ptr-radius-full);
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-semibold);
+  backdrop-filter: blur(4px);
+}
+.cardFlagOk {
+  background: color-mix(in srgb, var(--ptr-success) 88%, transparent);
+  color: var(--ptr-white);
+}
+.cardFlagHidden {
+  background: color-mix(in srgb, var(--ptr-danger) 88%, transparent);
+  color: var(--ptr-white);
+}
+.cardStar {
+  position: absolute;
+  top: var(--ptr-space-3);
+  right: var(--ptr-space-3);
+  padding: 2px 10px;
+  border-radius: var(--ptr-radius-full);
+  background: color-mix(in srgb, var(--ptr-ink) 78%, transparent);
+  color: var(--ptr-mint);
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-semibold);
+  backdrop-filter: blur(4px);
+}
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--ptr-space-4);
+}
+.cardBrand {
+  font-size: var(--ptr-text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--ptr-tracking-wide);
+  color: var(--ptr-neutral-400);
+  font-weight: var(--ptr-weight-semibold);
+}
+.cardName {
+  font-size: var(--ptr-text-base);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: -0.01em;
+  color: var(--ptr-ink);
+  line-height: var(--ptr-leading-tight);
+}
+.cardTags {
+  margin-top: 2px;
+  font-size: var(--ptr-text-xs);
+  color: var(--ptr-neutral-600);
+  line-height: var(--ptr-leading-normal);
+}
+.cardFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ptr-space-3);
+  margin: var(--ptr-space-3) 0;
+  padding-top: var(--ptr-space-3);
+  border-top: 1px solid color-mix(in srgb, var(--ptr-neutral-200) 70%, transparent);
+}
+.cardPrice {
+  font-size: var(--ptr-text-lg);
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-ink);
+}
+.cardActions {
+  display: flex;
+  gap: var(--ptr-space-2);
+}
+.cardActions .actionBtn:first-child {
+  flex: 1;
+  text-align: center;
 }

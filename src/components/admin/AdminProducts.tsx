@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { AdminModal } from './AdminModal';
 import { ProductVariants } from './ProductVariants';
 import { TokenPicker } from './TokenPicker';
+import { PlaceholderImage } from '@/components/brand/PlaceholderImage';
 import type { Gender } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
 import ui from './adminUI.module.css';
@@ -40,6 +41,8 @@ export interface ProductRow {
   gender: Gender;
   onSale: boolean;
   lowStockThreshold: number | null;
+  /** Foto principal (solo lectura en el panel; viene del dominio). */
+  imageUrl: string | null;
   variants: VariantRow[];
 }
 
@@ -132,6 +135,7 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
       gender: draft.gender,
       onSale: draft.onSale,
       lowStockThreshold: draft.lowStockThreshold ? Number(draft.lowStockThreshold) : null,
+      imageUrl: existing?.imageUrl ?? null,
       variants: existing?.variants ?? [],
     };
 
@@ -203,41 +207,39 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
         </span>
       </div>
 
-      <div className={ui.tableWrap}>
-        <table className={ui.table}>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Marca</th>
-              <th>Rubros</th>
-              <th>Categoría</th>
-              <th>Tipo</th>
-              <th>Precio</th>
-              <th>Variantes</th>
-              <th>Featured</th>
-              <th>Visible</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.length === 0 ? (
-              <tr>
-                <td colSpan={10} className={ui.empty}>
-                  {query ? `Sin resultados para “${query}”.` : 'Aún no hay productos. Creá el primero.'}
-                </td>
-              </tr>
-            ) : null}
-            {filtered.map((r) => {
-              const visible = isVisible(r.variants);
-              return (
-                <tr key={r.id}>
-                  <td>{r.name}</td>
-                  <td>{brandName.get(r.brandId) ?? '—'}</td>
-                  <td>{r.verticalIds.map((id) => vName.get(id) ?? id).join(', ') || '—'}</td>
-                  <td>{r.categoryIds.map((id) => cName.get(id) ?? id).join(', ') || '—'}</td>
-                  <td>{r.type === 'set' ? 'Conjunto' : 'Simple'}</td>
-                  <td>{formatUsd(r.priceCents)}</td>
-                  <td>
+      {filtered.length === 0 ? (
+        <p className={ui.galleryEmpty}>
+          {query ? `Sin resultados para “${query}”.` : 'Aún no hay productos. Creá el primero.'}
+        </p>
+      ) : (
+        <div className={ui.gallery}>
+          {filtered.map((r) => {
+            const visible = isVisible(r.variants);
+            const tags = [...r.verticalIds.map((id) => vName.get(id) ?? id), ...r.categoryIds.map((id) => cName.get(id) ?? id)];
+            return (
+              <article key={r.id} className={ui.card}>
+                <div className={ui.cardMedia}>
+                  <PlaceholderImage
+                    image={r.imageUrl ? { url: r.imageUrl, alt: r.name, is_placeholder: false, sort_order: 0 } : null}
+                    label={r.name}
+                    ratio="4 / 5"
+                  />
+                  <span className={`${ui.cardFlag} ${visible ? ui.cardFlagOk : ui.cardFlagHidden}`}>
+                    {visible ? 'Visible' : 'Oculto'}
+                  </span>
+                  {r.featured ? <span className={ui.cardStar}>★ Destacado</span> : null}
+                </div>
+
+                <div className={ui.cardBody}>
+                  <p className={ui.cardBrand}>
+                    {brandName.get(r.brandId) ?? '—'}
+                    {r.type === 'set' ? ' · Conjunto' : ''}
+                  </p>
+                  <h3 className={ui.cardName}>{r.name}</h3>
+                  <p className={ui.cardTags}>{tags.join(' · ') || 'Sin clasificar'}</p>
+
+                  <div className={ui.cardFoot}>
+                    <span className={ui.cardPrice}>{formatUsd(r.priceCents)}</span>
                     <button
                       type="button"
                       className={r.variants.length > 0 ? ui.variantsBtn : `${ui.variantsBtn} ${ui.variantsEmpty}`}
@@ -245,40 +247,34 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
                     >
                       {r.variants.length > 0 ? `${r.variants.length} variante${r.variants.length > 1 ? 's' : ''}` : '＋ Agregar'}
                     </button>
-                  </td>
-                  <td>{r.featured ? 'Sí' : '—'}</td>
-                  <td>
-                    <span className={`${ui.badge} ${visible ? ui.success : ui.danger}`}>
-                      {visible ? 'Visible' : 'Oculto'}
-                    </span>
-                  </td>
-                  <td>
-                    <div className={ui.actions}>
-                      <button type="button" className={ui.actionBtn} onClick={() => setDraft(toDraft(r))}>
-                        Editar
-                      </button>
-                      <button
-                        type="button"
-                        className={ui.actionBtn}
-                        onClick={() => onChange(products.map((x) => (x.id === r.id ? { ...x, featured: !x.featured } : x)))}
-                      >
-                        {r.featured ? 'Quitar featured' : 'Featured'}
-                      </button>
-                      <button
-                        type="button"
-                        className={`${ui.actionBtn} ${ui.actionDanger}`}
-                        onClick={() => onChange(products.filter((x) => x.id !== r.id))}
-                      >
-                        Eliminar
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+                  </div>
+
+                  <div className={ui.cardActions}>
+                    <button type="button" className={ui.actionBtn} onClick={() => setDraft(toDraft(r))}>
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      className={ui.actionBtn}
+                      title={r.featured ? 'Quitar de destacados' : 'Marcar como destacado'}
+                      onClick={() => onChange(products.map((x) => (x.id === r.id ? { ...x, featured: !x.featured } : x)))}
+                    >
+                      {r.featured ? '★' : '☆'}
+                    </button>
+                    <button
+                      type="button"
+                      className={`${ui.actionBtn} ${ui.actionDanger}`}
+                      onClick={() => onChange(products.filter((x) => x.id !== r.id))}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
 
       {draft ? (
         <AdminModal title={draft.id ? 'Editar producto' : 'Nuevo producto'} onClose={() => setDraft(null)}>
