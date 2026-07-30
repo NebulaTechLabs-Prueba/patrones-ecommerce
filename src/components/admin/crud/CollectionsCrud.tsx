@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import { AdminModal } from '../AdminModal';
+import { TokenPicker } from '../TokenPicker';
 import { useCatalog } from '@/lib/store/catalog-context';
 import type { Collection } from '@/lib/data/types';
 import { slugify } from '@/lib/slug';
@@ -57,16 +58,6 @@ export function CollectionsCrud() {
     setCollections(draft.id ? collections.map((c) => (c.id === draft.id ? rec : c)) : [...collections, rec]);
     setDraft(null);
     setError('');
-  }
-
-  function toggleProduct(id: string) {
-    if (!draft) return;
-    setDraft({
-      ...draft,
-      productIds: draft.productIds.includes(id)
-        ? draft.productIds.filter((x) => x !== id)
-        : [...draft.productIds, id],
-    });
   }
 
   return (
@@ -174,14 +165,12 @@ export function CollectionsCrud() {
 
             <div className={ui.field}>
               <span>Productos ({draft.productIds.length})</span>
-              <div className={styles.checkList}>
-                {products.map((p) => (
-                  <label key={p.id} className={ui.check}>
-                    <input type="checkbox" checked={draft.productIds.includes(p.id)} onChange={() => toggleProduct(p.id)} />
-                    <span>{p.name}</span>
-                  </label>
-                ))}
-              </div>
+              <TokenPicker
+                options={products.map((p) => ({ id: p.id, name: p.name }))}
+                selected={draft.productIds}
+                onChange={(ids) => setDraft({ ...draft, productIds: ids })}
+                placeholder="Buscar y agregar producto…"
+              />
             </div>
 
             {error ? <p className={ui.formError}>{error}</p> : null}

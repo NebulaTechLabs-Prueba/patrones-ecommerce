@@ -9,6 +9,7 @@
 import { useState } from 'react';
 import { AdminModal } from './AdminModal';
 import { ProductVariants } from './ProductVariants';
+import { TokenPicker } from './TokenPicker';
 import type { Gender } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
 import ui from './adminUI.module.css';
@@ -54,10 +55,6 @@ interface Draft {
   gender: Gender;
   onSale: boolean;
   lowStockThreshold: string;
-}
-
-function toggleId(list: string[], id: string): string[] {
-  return list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
 }
 
 function isVisible(variants: VariantRow[]): boolean {
@@ -282,26 +279,12 @@ export function AdminProducts({ products, onChange, brands, verticals, categorie
 
             <div className={ui.field}>
               <span>Rubros</span>
-              <div className={ui.actions}>
-                {verticals.map((v) => (
-                  <label key={v.id} className={ui.check}>
-                    <input type="checkbox" checked={draft.verticalIds.includes(v.id)} onChange={() => setDraft({ ...draft, verticalIds: toggleId(draft.verticalIds, v.id) })} />
-                    <span>{v.name}</span>
-                  </label>
-                ))}
-              </div>
+              <TokenPicker options={verticals} selected={draft.verticalIds} onChange={(ids) => setDraft({ ...draft, verticalIds: ids })} placeholder="Buscar y agregar rubro…" />
             </div>
 
             <div className={ui.field}>
               <span>Categorías</span>
-              <div className={ui.actions}>
-                {categories.map((c) => (
-                  <label key={c.id} className={ui.check}>
-                    <input type="checkbox" checked={draft.categoryIds.includes(c.id)} onChange={() => setDraft({ ...draft, categoryIds: toggleId(draft.categoryIds, c.id) })} />
-                    <span>{c.name}</span>
-                  </label>
-                ))}
-              </div>
+              <TokenPicker options={categories} selected={draft.categoryIds} onChange={(ids) => setDraft({ ...draft, categoryIds: ids })} placeholder="Buscar y agregar categoría…" />
             </div>
 
             <label className={ui.check}>
