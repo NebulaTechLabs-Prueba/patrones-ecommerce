@@ -28,6 +28,7 @@ interface MethodDraft {
   kind: PaymentMethodKind;
   isOffline: boolean;
   isEnabled: boolean;
+  instructions: string;
 }
 
 const DAYS = [
@@ -90,6 +91,7 @@ export function AdminSettings({
       label: methodDraft.label.trim(),
       is_enabled: methodDraft.isEnabled,
       is_offline: methodDraft.isOffline,
+      instructions: methodDraft.isOffline ? methodDraft.instructions.trim() : '',
       sort_order: methodDraft.id
         ? (methods.find((m) => m.id === methodDraft.id)?.sort_order ?? methods.length + 1)
         : methods.length + 1,
@@ -235,7 +237,7 @@ export function AdminSettings({
           className={ui.newBtn}
           onClick={() => {
             setMethodError('');
-            setMethodDraft({ id: null, label: '', kind: 'pago_movil', isOffline: true, isEnabled: true });
+            setMethodDraft({ id: null, label: '', kind: 'pago_movil', isOffline: true, isEnabled: true, instructions: '' });
           }}
         >
           Nuevo método
@@ -268,7 +270,7 @@ export function AdminSettings({
                       className={ui.actionBtn}
                       onClick={() => {
                         setMethodError('');
-                        setMethodDraft({ id: m.id, label: m.label, kind: m.kind, isOffline: m.is_offline, isEnabled: m.is_enabled });
+                        setMethodDraft({ id: m.id, label: m.label, kind: m.kind, isOffline: m.is_offline, isEnabled: m.is_enabled, instructions: m.instructions ?? '' });
                       }}
                     >
                       Editar
@@ -331,8 +333,20 @@ export function AdminSettings({
                 checked={methodDraft.isOffline}
                 onChange={(e) => setMethodDraft({ ...methodDraft, isOffline: e.target.checked })}
               />
-              <span>Requiere comprobante de pago</span>
+              <span>Requiere comprobante de pago (offline)</span>
             </label>
+            {methodDraft.isOffline ? (
+              <label className={ui.field}>
+                <span>Datos de pago que ve el cliente</span>
+                <textarea
+                  className={ui.input}
+                  rows={4}
+                  value={methodDraft.instructions}
+                  placeholder={'Banco, teléfono/cuenta, RIF y titular…'}
+                  onChange={(e) => setMethodDraft({ ...methodDraft, instructions: e.target.value })}
+                />
+              </label>
+            ) : null}
             <label className={ui.check}>
               <input
                 type="checkbox"

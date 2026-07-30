@@ -141,7 +141,10 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
   }
 
   const [attempted, setAttempted] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
+  // Fases: 'form' (datos) -> 'pay' (offline: datos de la empresa + comprobante) -> 'done'.
+  const [phase, setPhase] = useState<'form' | 'pay' | 'done'>('form');
+  const [reference, setReference] = useState('');
+  const [proofName, setProofName] = useState('');
 
   const docValidation = useMemo(
     () => (docNumber.trim() ? validateDocument(docKind, docNumber) : null),
@@ -169,9 +172,14 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
     paymentKind !== '' &&
     acceptNoReturns === 'yes';
 
+  const isOnlinePay = selectedPayment !== null && !selectedPayment.is_offline;
+  const proofReady = reference.trim() !== '' || proofName !== '';
+
   function handleConfirm() {
     setAttempted(true);
-    if (canConfirm) setConfirmed(true);
+    if (!canConfirm) return;
+    // Online (tarjeta): se aprueba en segundos. Offline: pasa a cargar el comprobante.
+    setPhase(isOnlinePay ? 'done' : 'pay');
   }
 
   if (!hydrated) {
@@ -184,14 +192,59 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
     );
   }
 
-  if (confirmed) {
+  // Fase de pago offline: datos de la empresa + referencia + comprobante, sin esperas.
+  if (phase === 'pay') {
+    return (
+      <main className={styles.main}>
+        <div className={styles.payWrap}>
+          <h1 className={styles.title}>Completá tu pago</h1>
+          <p className={styles.muted}>
+            Paga con <strong>{selectedPayment?.label}</strong> a los datos de abajo y carga tu
+            comprobante. Tu pago queda en verificación hasta que lo aprobemos.
+          </p>
+
+          <div className={styles.payBox}>
+            <p className={styles.payBoxTitle}>Datos para el pago</p>
+            <pre className={styles.payData}>
+              {selectedPayment?.instructions?.trim()
+                ? selectedPayment.instructions
+                : 'Te enviaremos los datos de pago por WhatsApp para completar tu pedido.'}
+            </pre>
+            <p className={styles.payAmount}>
+              Monto a pagar: <strong>{formatCents(totalWithShipping)}</strong>
+            </p>
+          </div>
+
+          <label className={styles.field}>
+            <span>Referencia / número de la operación</span>
+            <input value={reference} onChange={(e) => setReference(e.target.value)} placeholder="Ej. 000123456789" />
+          </label>
+          <label className={styles.field}>
+            <span>Comprobante (imagen o PDF)</span>
+            <input type="file" accept="image/*,application/pdf" onChange={(e) => setProofName(e.target.files?.[0]?.name ?? '')} />
+            {proofName ? <span className={styles.help}>Cargado: {proofName}</span> : null}
+          </label>
+
+          <button type="button" className={styles.primary} disabled={!proofReady} onClick={() => setPhase('done')}>
+            Enviar comprobante
+          </button>
+          {!proofReady ? (
+            <p className={styles.help}>Ingresa la referencia o carga el comprobante para enviar.</p>
+          ) : null}
+        </div>
+      </main>
+    );
+  }
+
+  if (phase === 'done') {
     return (
       <main className={styles.main}>
         <div className={styles.confirmation}>
-          <h1 className={styles.title}>Recibimos tu pedido</h1>
+          <h1 className={styles.title}>{isOnlinePay ? 'Pago aprobado' : 'Comprobante recibido'}</h1>
           <p className={styles.muted}>
-            Te contactaremos para coordinar el pago y la entrega. Puedes seguir el estado desde
-            tu cuenta.
+            {isOnlinePay
+              ? 'Tu pago se aprobó y tu pedido quedó confirmado. Puedes seguir el estado desde tu cuenta.'
+              : 'Recibimos tu comprobante. Tu pago queda en verificación y te avisamos al aprobarlo. Puedes seguir el estado desde tu cuenta.'}
           </p>
           <p className={styles.summaryLine}>
             Total del pedido: <strong>{formatCents(totalWithShipping)}</strong>
@@ -439,7 +492,7 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
           </label>
 
           <button type="button" className={styles.primary} onClick={handleConfirm}>
-            Confirmar pedido
+            {isOnlinePay ? 'Pagar ahora' : 'Continuar al pago'}
           </button>
           {attempted && !canConfirm ? (
             <p className={styles.error} aria-live="polite">

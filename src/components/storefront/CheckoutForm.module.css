@@ -322,3 +322,42 @@
   border-color: var(--ptr-primary);
   color: var(--ptr-white);
 }
+
+/* Fase de pago (offline): datos de la empresa + comprobante */
+.payWrap {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ptr-space-4);
+}
+.payBox {
+  padding: var(--ptr-space-5);
+  border: 1px solid var(--ptr-neutral-200);
+  border-radius: var(--ptr-radius-lg);
+  background: var(--ptr-white);
+  box-shadow: var(--ptr-shadow-1);
+}
+.payBoxTitle {
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-primary);
+  margin-bottom: var(--ptr-space-3);
+}
+.payData {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--ptr-ink);
+  line-height: var(--ptr-leading-relaxed);
+}
+.payAmount {
+  margin: var(--ptr-space-4) 0 0;
+  padding-top: var(--ptr-space-3);
+  border-top: 1px solid var(--ptr-neutral-200);
+  font-size: var(--ptr-text-lg);
+  color: var(--ptr-ink);
+}

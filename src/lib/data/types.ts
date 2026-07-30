@@ -364,6 +364,9 @@ export interface PaymentMethod {
   is_enabled: boolean;
   /** true = requiere comprobante + verificacion manual (offline). */
   is_offline: boolean;
+  /** Datos de pago de la empresa que se le muestran al cliente al pagar (offline):
+   *  banco, teléfono/cuenta, cédula/RIF y titular. En online no aplica. */
+  instructions?: string;
   sort_order: number;
 }
 
