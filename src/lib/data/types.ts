@@ -448,6 +448,8 @@ export interface Order {
 
   shipping_method: ShippingMethod;
   shipping_office: ShippingOffice | null;
+  /** Número/código de guía del courier (Zoom/MRW) cuando el pedido se despacha. */
+  tracking_code?: string | null;
 
   /** Snapshot de la tasa usada. Jamas se recalcula una orden historica (§11). */
   rate_used: number;

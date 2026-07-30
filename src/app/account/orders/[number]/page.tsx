@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { OrderDetail } from '@/components/orders/OrderDetail';
+import { OrderTracking } from '@/components/orders/OrderTracking';
 import { orderRepo } from '@/lib/data';
 import styles from './page.module.css';
 
@@ -35,6 +36,7 @@ export default async function AccountOrderDetailPage({ params }: PageProps) {
         ← Volver a mis pedidos
       </Link>
       <OrderDetail order={order} />
+      <OrderTracking number={order.number} method={order.shipping_method} />
     </div>
   );
 }

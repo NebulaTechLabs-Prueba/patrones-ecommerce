@@ -152,6 +152,13 @@
   letter-spacing: var(--ptr-tracking-wide);
 }
 
+.tracking {
+  font-family: ui-monospace, monospace;
+  font-weight: var(--ptr-weight-semibold);
+  color: var(--ptr-ink);
+  letter-spacing: 0.02em;
+}
+
 .totals {
   min-width: 220px;
   margin: 0;

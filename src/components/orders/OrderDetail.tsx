@@ -107,6 +107,12 @@ export function OrderDetail({ order }: { order: Order }) {
               {paidAtDestination ? ' · flete a pagar en destino' : ''}
             </span>
           </div>
+          {order.tracking_code ? (
+            <div className={styles.metaRow}>
+              <span className={styles.metaLabel}>Guía</span>
+              <span className={styles.tracking}>{order.tracking_code}</span>
+            </div>
+          ) : null}
           <div className={styles.metaRow}>
             <span className={styles.metaLabel}>Pago</span>
             <span>{PAYMENT_METHOD_LABELS[order.payment_method]}</span>
