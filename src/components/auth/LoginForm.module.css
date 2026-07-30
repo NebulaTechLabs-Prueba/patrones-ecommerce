@@ -8,6 +8,12 @@
   background-color: var(--ptr-primary);
   background-size: cover;
   background-position: center;
+  /* Alto fijo de viewport y sticky: la imagen NO se re-escala aunque el formulario
+     (Crear cuenta) sea más alto que la pantalla. Antes "hacía zoom" al cambiar de modo. */
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100dvh;
 }
 
 .formPanel {
@@ -185,6 +191,8 @@
   }
 
   .brandPanel {
+    position: static;
+    height: auto;
     min-height: 160px;
   }
 }

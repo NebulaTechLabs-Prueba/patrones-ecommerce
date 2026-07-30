@@ -1,15 +1,3 @@
-.title {
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
-  font-weight: var(--ptr-weight-bold);
-  letter-spacing: -0.02em;
-  color: var(--ptr-ink);
-}
-
-.subtitle {
-  margin-top: var(--ptr-space-2);
-  color: var(--ptr-neutral-600);
-}
-
 .warning {
   margin-top: var(--ptr-space-5);
   padding: var(--ptr-space-4) var(--ptr-space-5);
@@ -33,8 +21,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--ptr-space-2);
-  padding: var(--ptr-space-6) var(--ptr-space-5);
+  gap: var(--ptr-space-3);
+  padding: var(--ptr-space-6);
   background-color: var(--ptr-white);
   border: 1px solid var(--ptr-neutral-200);
   border-radius: var(--ptr-radius-lg);
@@ -62,12 +50,20 @@
   box-shadow: var(--ptr-shadow-2);
 }
 
+.cardLabel {
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: var(--ptr-tracking-wider);
+  text-transform: uppercase;
+  color: var(--ptr-neutral-400);
+}
+
 .value {
-  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
   font-weight: var(--ptr-weight-bold);
   color: var(--ptr-ink);
-  line-height: 1;
-  letter-spacing: -0.02em;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
 }
 
 .valWarn {
@@ -75,11 +71,6 @@
 }
 .valDanger {
   color: var(--ptr-danger);
-}
-
-.cardLabel {
-  font-size: var(--ptr-text-sm);
-  color: var(--ptr-neutral-600);
 }
 
 .section {
@@ -95,8 +86,9 @@
 }
 
 .sectionTitle {
-  font-size: var(--ptr-text-lg);
-  font-weight: var(--ptr-weight-semibold);
+  font-size: var(--ptr-text-xl);
+  font-weight: var(--ptr-weight-bold);
+  letter-spacing: -0.015em;
   color: var(--ptr-ink);
 }
 

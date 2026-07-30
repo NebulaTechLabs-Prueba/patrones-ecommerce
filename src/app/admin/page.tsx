@@ -5,6 +5,7 @@
 
 import Link from 'next/link';
 import { getAdminDashboard } from '@/lib/admin/dashboard';
+import ui from '@/components/admin/adminUI.module.css';
 import styles from './dashboard.module.css';
 
 export default async function AdminDashboardPage() {
@@ -33,8 +34,9 @@ export default async function AdminDashboardPage() {
 
   return (
     <div>
-      <h1 className={styles.title}>Dashboard</h1>
-      <p className={styles.subtitle}>Resumen operativo. El bajo stock es visible solo acá.</p>
+      <span className={ui.kicker}>General</span>
+      <h1 className={ui.pageTitle}>Dashboard</h1>
+      <p className={ui.pageSubtitle}>Resumen operativo. El bajo stock es visible solo acá.</p>
 
       {featuredConcentrated ? (
         <div className={styles.warning} role="alert">
@@ -46,12 +48,12 @@ export default async function AdminDashboardPage() {
       <div className={styles.cards}>
         {cards.map((c) => (
           <div key={c.label} className={styles.card} data-tone={c.tone ?? ''}>
+            <span className={styles.cardLabel}>{c.label}</span>
             <span
               className={`${styles.value} ${c.tone === 'warning' ? styles.valWarn : c.tone === 'danger' ? styles.valDanger : ''}`}
             >
               {c.value}
             </span>
-            <span className={styles.cardLabel}>{c.label}</span>
           </div>
         ))}
       </div>
