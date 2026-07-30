@@ -7,11 +7,11 @@
 }
 
 .sidebar {
-  width: 240px;
+  width: 244px;
   flex-shrink: 0;
-  background-color: var(--ptr-primary);
+  background: linear-gradient(185deg, var(--ptr-primary) 0%, color-mix(in srgb, var(--ptr-primary) 80%, #08201c) 100%);
   color: var(--ptr-white);
-  padding: var(--ptr-space-5) var(--ptr-space-4);
+  padding: var(--ptr-space-6) var(--ptr-space-4);
   transition: margin-left var(--ptr-duration-base) var(--ptr-ease);
 }
 
@@ -21,11 +21,24 @@
 }
 
 .brand {
-  font-size: var(--ptr-text-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--ptr-space-2);
+  font-size: var(--ptr-text-base);
   font-weight: var(--ptr-weight-bold);
   letter-spacing: var(--ptr-tracking-wide);
   text-transform: uppercase;
+  padding-bottom: var(--ptr-space-5);
   margin-bottom: var(--ptr-space-6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.brand::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ptr-mint);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
 }
 
 .nav {
@@ -53,12 +66,13 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--ptr-space-2);
-  padding: var(--ptr-space-2) var(--ptr-space-3);
-  border-radius: var(--ptr-radius-sm);
+  padding: 9px var(--ptr-space-3);
+  border-radius: var(--ptr-radius-md);
   color: var(--ptr-white);
   font-size: var(--ptr-text-sm);
-  opacity: 0.85;
+  opacity: 0.82;
   white-space: nowrap;
+  transition: background-color var(--ptr-duration-fast) var(--ptr-ease), opacity var(--ptr-duration-fast) var(--ptr-ease);
 }
 
 .navBadge {
@@ -82,7 +96,7 @@
 }
 
 .active {
-  background-color: color-mix(in srgb, var(--ptr-white) 16%, transparent);
+  background-color: rgba(255, 255, 255, 0.18);
   opacity: 1;
   font-weight: var(--ptr-weight-semibold);
   box-shadow: inset 3px 0 0 var(--ptr-mint);
@@ -93,7 +107,8 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  background-color: var(--ptr-neutral-50);
+  /* Fondo cálido (crema tenue) en vez del gris clínico. */
+  background-color: color-mix(in srgb, var(--ptr-cream) 55%, #ffffff);
 }
 
 .topbar {
@@ -102,8 +117,12 @@
   justify-content: space-between;
   gap: var(--ptr-space-4);
   padding: var(--ptr-space-4) var(--ptr-space-6);
-  background-color: var(--ptr-white);
+  background-color: color-mix(in srgb, var(--ptr-cream) 22%, #ffffff);
   border-bottom: 1px solid var(--ptr-neutral-200);
+  box-shadow: 0 2px 10px rgba(20, 20, 18, 0.03);
+  position: sticky;
+  top: 0;
+  z-index: 30;
 }
 
 .topLeft {
