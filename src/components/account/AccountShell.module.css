@@ -12,19 +12,33 @@
 }
 
 .eyebrow {
-  font-size: var(--ptr-text-sm);
-  font-weight: var(--ptr-weight-semibold);
+  font-size: var(--ptr-text-xs);
+  font-weight: var(--ptr-weight-bold);
   letter-spacing: var(--ptr-tracking-wider);
   text-transform: uppercase;
-  color: var(--ptr-primary-soft);
-  margin-bottom: var(--ptr-space-2);
+  color: var(--ptr-primary);
+  margin-bottom: var(--ptr-space-3);
 }
 
+/* Masthead editorial: nombre grande de revista con filete de acento. */
 .name {
-  font-size: var(--ptr-text-2xl);
+  position: relative;
+  padding-bottom: var(--ptr-space-4);
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
   font-weight: var(--ptr-weight-bold);
-  letter-spacing: var(--ptr-tracking-tight);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
   color: var(--ptr-ink);
+}
+.name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--ptr-primary);
 }
 
 .logout {
@@ -38,27 +52,29 @@
 
 .tabs {
   display: flex;
-  gap: var(--ptr-space-2);
+  gap: var(--ptr-space-5);
   flex-wrap: wrap;
-  margin: var(--ptr-space-5) 0 var(--ptr-space-6);
+  margin: var(--ptr-space-6) 0;
   border-bottom: 1px solid var(--ptr-neutral-200);
 }
 
 .tab {
-  padding: var(--ptr-space-3) var(--ptr-space-4);
-  font-size: var(--ptr-text-sm);
+  padding: var(--ptr-space-3) 0;
+  font-size: var(--ptr-text-base);
   font-weight: var(--ptr-weight-medium);
   color: var(--ptr-neutral-600);
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
+  transition: color var(--ptr-duration-fast) var(--ptr-ease), border-color var(--ptr-duration-fast) var(--ptr-ease);
 }
 
 .tab:hover {
-  color: var(--ptr-primary);
+  color: var(--ptr-ink);
 }
 
-.active {
-  color: var(--ptr-primary);
+.active,
+.active:hover {
+  color: var(--ptr-ink);
   border-bottom-color: var(--ptr-primary);
-  font-weight: var(--ptr-weight-semibold);
+  font-weight: var(--ptr-weight-bold);
 }
