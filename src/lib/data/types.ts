@@ -327,6 +327,9 @@ export interface Customer {
   /** Direcciones de encomienda guardadas (casillero u oficina de Zoom/MRW). Opcional. */
   shipping_locations?: SavedShippingLocation[];
 
+  /** Instrumentos de pago guardados por el cliente para reusar. Opcional. */
+  payment_methods?: SavedPaymentMethod[];
+
   /** Nota interna del admin sobre este cliente. Solo la ve el admin (§8). */
   admin_note?: string | null;
 }
@@ -396,6 +399,29 @@ export interface SavedShippingLocation {
   /** Quién retira y con qué documento (a veces distinto del titular). */
   recipient: string;
   doc: string;
+  notes: string;
+}
+
+/**
+ * Instrumento de pago que el cliente guarda para reusar (opcional). Son SUS datos
+ * para pagar (Pago Móvil, transferencia, Zelle, USDT…). NUNCA se guardan datos de
+ * tarjeta (número/CVV): la tarjeta se procesa por pasarela. `kind` no incluye 'stripe'.
+ */
+export interface SavedPaymentMethod {
+  id: ID;
+  /** Alias del cliente: "Mi Pago Móvil". */
+  label: string;
+  kind: PaymentMethodKind;
+  /** Titular de la cuenta/instrumento. */
+  holder: string;
+  /** Documento del titular (cédula/RIF). */
+  doc: string;
+  /** Banco (Pago Móvil, transferencia, Banesco Panamá). */
+  bank: string;
+  /** Teléfono (Pago Móvil). */
+  phone: string;
+  /** Número de cuenta / correo Zelle / wallet USDT, según el método. */
+  account: string;
   notes: string;
 }
 

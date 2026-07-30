@@ -53,6 +53,18 @@ export default function TermsPage() {
       </section>
 
       <section className={styles.section}>
+        <h2 className={styles.h2}>Datos de pago guardados</h2>
+        <p className={styles.p}>
+          Puedes guardar en tu cuenta tus datos de pago (Pago Móvil, transferencia, Zelle y
+          similares) para reutilizarlos al comprar. Es opcional y a tu criterio: los guardas solo si
+          lo prefieres. Esos datos se usan únicamente para agilizar tu pago y no se comparten con
+          terceros. No almacenamos datos de tarjeta (número ni código de seguridad): los pagos con
+          tarjeta se procesan a través de una pasarela segura. Puedes editarlos o eliminarlos cuando
+          quieras desde tu cuenta.
+        </p>
+      </section>
+
+      <section className={styles.section}>
         <h2 className={styles.h2}>Envíos y seguimiento</h2>
         <p className={styles.p}>
           Ofrecemos retiro en tienda, envío por Zoom y MRW, y delivery local. En Zoom y MRW el

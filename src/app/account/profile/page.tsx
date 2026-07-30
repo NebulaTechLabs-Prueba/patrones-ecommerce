@@ -5,6 +5,7 @@
  */
 
 import { MyDetails, type DetailsData } from '@/components/account/MyDetails';
+import { PaymentMethods } from '@/components/account/PaymentMethods';
 import { ShippingLocations } from '@/components/account/ShippingLocations';
 import { customerRepo } from '@/lib/data';
 
@@ -27,6 +28,7 @@ export default async function AccountProfilePage() {
     <div>
       <MyDetails fallback={fallback} />
       <ShippingLocations />
+      <PaymentMethods />
     </div>
   );
 }
