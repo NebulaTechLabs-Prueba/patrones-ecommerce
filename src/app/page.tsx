@@ -15,6 +15,7 @@
 
 import Link from 'next/link';
 import { HomeHero } from '@/components/storefront/home/HomeHero';
+import { ShopByCategory } from '@/components/storefront/home/ShopByCategory';
 import { ShopByColor } from '@/components/storefront/home/ShopByColor';
 import { Reveal } from '@/components/motion/Reveal';
 import { VerticalCard } from '@/components/storefront/VerticalCard';
@@ -63,6 +64,9 @@ export default async function HomePage() {
 
       {/* Comprá por color (color-first, temporada) */}
       <ShopByColor />
+
+      {/* Comprá por categoría, con toggle Mujer/Hombre */}
+      <ShopByCategory />
 
       {/* Selección destacada (§9.4) */}
       {featured.products.length > 0 ? (
