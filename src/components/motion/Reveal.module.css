@@ -1,18 +1,27 @@
 .reveal {
   transition:
-    opacity 0.7s var(--ptr-ease),
-    transform 0.7s var(--ptr-ease),
-    clip-path 0.9s var(--ptr-ease);
+    opacity 0.95s var(--ptr-ease),
+    transform 0.95s var(--ptr-ease),
+    filter 0.95s var(--ptr-ease),
+    clip-path 1.05s var(--ptr-ease);
   will-change: opacity, transform;
 }
 
 /* Estados iniciales por variante (contenido ya en el DOM, solo entra animando). */
 .rise {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(44px) scale(0.985);
+  filter: blur(6px);
 }
 .fade {
   opacity: 0;
+  filter: blur(4px);
+}
+/* "zoom": empuje cinematográfico (la escena se asienta hacia el frente). */
+.zoom {
+  opacity: 0;
+  transform: scale(1.05);
+  filter: blur(4px);
 }
 /* "draft": se revela como si el patrón se trazara de abajo hacia arriba. */
 .draft {
@@ -24,6 +33,7 @@
 .shown {
   opacity: 1;
   transform: none;
+  filter: none;
   clip-path: inset(0 0 0 0);
 }
 

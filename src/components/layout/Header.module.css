@@ -29,6 +29,7 @@
 }
 
 .link {
+  position: relative;
   /* Reducidas 35% respecto al tamaño base (pedido del cliente). */
   font-size: calc(var(--ptr-text-sm) * 0.65);
   font-weight: var(--ptr-weight-medium);
@@ -38,8 +39,29 @@
   transition: color var(--ptr-duration-fast) var(--ptr-ease);
 }
 
+/* Subrayado que crece desde la izquierda al pasar el mouse. */
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ptr-duration-base) var(--ptr-ease);
+}
 .link:hover {
   color: var(--ptr-primary);
+}
+.link:hover::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .link::after {
+    transition: none;
+  }
 }
 
 .ownLine {

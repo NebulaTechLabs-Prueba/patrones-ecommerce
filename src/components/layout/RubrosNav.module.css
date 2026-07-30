@@ -22,6 +22,10 @@
 
 .caret {
   font-size: 0.7em;
+  transition: transform var(--ptr-duration-base) var(--ptr-ease);
+}
+.trigger[aria-expanded='true'] .caret {
+  transform: rotate(180deg);
 }
 
 .menu {
@@ -37,6 +41,20 @@
   border: 1px solid var(--ptr-neutral-200);
   border-radius: var(--ptr-radius-md);
   box-shadow: var(--ptr-shadow-2);
+  transform-origin: top left;
+  animation: megaIn var(--ptr-duration-base) var(--ptr-ease);
+}
+
+/* Entrada del mega-menú al abrir (cinematográfica, sutil). */
+@keyframes megaIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .item {
@@ -44,11 +62,13 @@
   border-radius: var(--ptr-radius-sm);
   font-size: var(--ptr-text-sm);
   color: var(--ptr-ink);
+  transition: background-color var(--ptr-duration-fast) var(--ptr-ease), color var(--ptr-duration-fast) var(--ptr-ease), transform var(--ptr-duration-fast) var(--ptr-ease);
 }
 
 .item:hover {
   background-color: var(--ptr-neutral-50);
   color: var(--ptr-primary);
+  transform: translateX(3px);
 }
 
 /* --- Mega-menú (columnas: rubros / categorías / comprar por) --- */
@@ -65,6 +85,19 @@
   border: 1px solid var(--ptr-neutral-200);
   border-radius: var(--ptr-radius-md);
   box-shadow: var(--ptr-shadow-3);
+  transform-origin: top left;
+  animation: megaIn var(--ptr-duration-base) var(--ptr-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mega,
+  .menu {
+    animation: none;
+  }
+  .caret,
+  .item {
+    transition: none;
+  }
 }
 
 .col {

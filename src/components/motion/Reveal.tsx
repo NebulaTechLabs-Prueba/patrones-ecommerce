@@ -18,7 +18,7 @@ interface RevealProps {
   as?: ElementType;
   className?: string;
   /** Variante de entrada. */
-  variant?: 'rise' | 'fade' | 'draft';
+  variant?: 'rise' | 'fade' | 'draft' | 'zoom';
 }
 
 export function Reveal({ children, delay = 0, as: Tag = 'div', className, variant = 'rise' }: RevealProps) {
