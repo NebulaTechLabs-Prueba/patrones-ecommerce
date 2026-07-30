@@ -53,11 +53,14 @@ export default function TermsPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.h2}>Envíos</h2>
+        <h2 className={styles.h2}>Envíos y seguimiento</h2>
         <p className={styles.p}>
           Ofrecemos retiro en tienda, envío por Zoom y MRW, y delivery local. En Zoom y MRW el
           flete se paga en destino al retirar; el checkout lo informa y no lo cobra. El costo y las
-          condiciones de cada método se muestran antes de confirmar.
+          condiciones de cada método se muestran antes de confirmar. Puedes guardar en tu cuenta tu
+          casillero o la oficina de Zoom/MRW más cercana para elegirla al comprar. Cuando despachamos
+          por Zoom o MRW, cargamos el número de guía en tu pedido para que sigas el envío; queda
+          visible en el detalle de la orden, en tu cuenta.
         </p>
       </section>
 
@@ -75,6 +78,25 @@ export default function TermsPage() {
         <p className={styles.p}>
           Solo mostramos prendas con existencia disponible. Un producto sin stock no aparece en el
           catálogo; puedes guardarlo en tu lista de deseados y te avisamos cuando vuelva.
+        </p>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.h2}>Datos personales</h2>
+        <p className={styles.p}>
+          Los datos que registras (nombre, contacto, documento y direcciones de encomienda) se usan
+          únicamente para procesar y dar seguimiento a tus pedidos y para emitir la nota de entrega.
+          No los compartimos con terceros salvo lo necesario para el envío (la empresa de
+          encomiendas). Puedes consultarlos y actualizarlos desde tu cuenta.
+        </p>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.h2}>Cambios en estas condiciones</h2>
+        <p className={styles.p}>
+          Podemos actualizar estas condiciones para reflejar cambios en nuestros métodos de pago,
+          envío u operación. La versión vigente es la publicada en esta página al momento de tu
+          compra.
         </p>
       </section>
     </main>

@@ -58,45 +58,63 @@ export const paymentMethods: PaymentMethod[] = [
 
 export const faqs: Faq[] = [
   {
-    question: '¿Cómo pago?',
+    question: '¿Necesito una cuenta para comprar?',
     answer:
-      'Aceptamos pago móvil, transferencia y tarjeta. En los métodos que requieren comprobante, cargas el soporte al finalizar y nuestro equipo lo verifica antes de confirmar el pedido.',
+      'Puedes navegar y armar tu carrito sin registrarte. La cuenta se solicita al iniciar la compra: crearla es gratis y toma un minuto (nombre, correo, contraseña y tu cédula o RIF). Toda cuenta creada es de cliente y te sirve para pagar más rápido, guardar favoritos y seguir tus pedidos.',
     sort_order: 1,
   },
   {
     question: '¿Cómo hago un pedido?',
     answer:
-      'Armas tu carrito libremente. Al iniciar el proceso de compra te pedimos iniciar sesión o crear tu cuenta, y desde ahí eliges método de pago y de entrega.',
+      'Armas tu carrito libremente. Al iniciar la compra te pedimos iniciar sesión o crear tu cuenta, y desde ahí eliges el método de pago y el de entrega.',
     sort_order: 2,
   },
   {
-    question: '¿Qué pasa si no está el producto que necesito?',
+    question: '¿Cómo pago?',
     answer:
-      'Si una prenda no aparece, no tiene existencia disponible en este momento. Puedes agregarla a tu lista de deseados: cuando vuelva, te avisamos.',
+      'Aceptamos pago móvil, transferencia y tarjeta, entre otros. En los métodos que requieren comprobante, cargas el soporte y la referencia al finalizar, y nuestro equipo lo verifica antes de confirmar el pedido.',
     sort_order: 3,
+  },
+  {
+    question: '¿Cómo sé si mi pago fue verificado?',
+    answer:
+      'El estado de tu pago está siempre visible en tu cuenta, con su historial. Cuando verificamos o rechazamos un pago con comprobante, te notificamos.',
+    sort_order: 4,
   },
   {
     question: '¿Cómo elijo mi talla?',
     answer:
       'Cada producto incluye su tabla de medidas. Si tienes dudas, puedes consultarnos por WhatsApp desde la misma ficha del producto.',
-    sort_order: 4,
+    sort_order: 5,
   },
   {
     question: '¿Cómo funcionan los envíos?',
     answer:
-      'Trabajamos con Zoom y MRW (flete pagado en destino al retirar), delivery local y retiro en tienda. El costo y las condiciones se muestran siempre en el checkout, sin sorpresas.',
-    sort_order: 5,
+      'Trabajamos con Zoom y MRW (el flete se paga en destino al retirar), delivery local y retiro en tienda. El costo y las condiciones se muestran siempre en el checkout, sin sorpresas.',
+    sort_order: 6,
+  },
+  {
+    question: '¿Cómo sigo mi envío?',
+    answer:
+      'Cuando despachamos un pedido por Zoom o MRW, cargamos el número de guía en tu pedido. Lo ves en tu cuenta, dentro del detalle de la orden, y con él haces el seguimiento en la página de la empresa de encomiendas.',
+    sort_order: 7,
+  },
+  {
+    question: '¿Puedo guardar mi oficina de Zoom o MRW?',
+    answer:
+      'Sí. En "Mi cuenta → Mis datos" puedes guardar tu casillero o la oficina de Zoom/MRW más cercana, con los datos para retirar. Así la eliges rápido al comprar, sin escribirla cada vez.',
+    sort_order: 8,
+  },
+  {
+    question: '¿Qué pasa si no está el producto que necesito?',
+    answer:
+      'Si una prenda no aparece, no tiene existencia disponible en este momento. Puedes agregarla a tu lista de deseados: cuando vuelva, te avisamos.',
+    sort_order: 9,
   },
   {
     question: '¿Puedo devolver un producto?',
     answer:
       'No aceptamos devoluciones. Por eso te acompañamos antes de comprar con tablas de medidas y atención por WhatsApp. La condición se muestra explícitamente antes de pagar.',
-    sort_order: 6,
-  },
-  {
-    question: '¿Cómo sé si mi pago fue verificado?',
-    answer:
-      'El estado de tu pago está siempre visible en tu cuenta, con su historial. Cuando verificamos o rechazamos un pago offline, te notificamos.',
-    sort_order: 7,
+    sort_order: 10,
   },
 ];
