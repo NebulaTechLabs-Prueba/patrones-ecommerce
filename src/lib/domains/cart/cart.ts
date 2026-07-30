@@ -138,7 +138,7 @@ export function summarizeCart(
   promotions: Promotion[],
   settings: PricingSettings,
   now: Date,
-  couponCode: string | null = null,
+  couponCodes: string[] = [],
 ): PricedCart {
-  return priceCart(toPricingLines(cart), promotions, settings, now, couponCode);
+  return priceCart(toPricingLines(cart), promotions, settings, now, couponCodes);
 }

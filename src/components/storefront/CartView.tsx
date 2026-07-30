@@ -17,10 +17,29 @@ import { useQuotes } from '@/lib/store/quotes-context';
 import styles from './CartView.module.css';
 
 export function CartView() {
-  const { items, hydrated, summary, setQty, remove, couponCode, setCouponCode, couponStatus, couponName } = useCart();
+  const { items, hydrated, summary, setQty, remove, appliedCoupons, addCoupon, removeCoupon } = useCart();
   const { formatCents } = useCurrency();
   const { add: addQuote } = useQuotes();
   const [quoteNumber, setQuoteNumber] = useState<string | null>(null);
+  const [showCoupon, setShowCoupon] = useState(false);
+  const [code, setCode] = useState('');
+  const [couponMsg, setCouponMsg] = useState('');
+
+  function applyCoupon() {
+    const res = addCoupon(code);
+    if (res.ok) {
+      setCode('');
+      setCouponMsg('');
+      return;
+    }
+    setCouponMsg(
+      res.reason === 'duplicate'
+        ? 'Ese cupón ya está aplicado.'
+        : res.reason === 'exclusive'
+          ? 'Ese cupón no se puede combinar con otro. Quita el actual para usarlo.'
+          : 'Cupón inválido o vencido.',
+    );
+  }
 
   function requestQuote() {
     const now = new Date();
@@ -178,23 +197,61 @@ export function CartView() {
           ) : null}
 
           <div style={{ margin: '4px 0 16px' }}>
-            <label htmlFor="cupon" style={{ display: 'block', fontSize: 13, marginBottom: 6, color: 'var(--ptr-neutral-500, #7a7a78)' }}>
-              Cupón de descuento
-            </label>
-            <input
-              id="cupon"
-              value={couponCode}
-              onChange={(e) => setCouponCode(e.target.value)}
-              placeholder="Ingresa tu código"
-              autoComplete="off"
-              style={{ width: '100%', padding: '9px 11px', border: `1px solid ${couponStatus === 'invalid' ? '#c0563f' : 'var(--ptr-neutral-200, #e3e3e0)'}`, borderRadius: 8, font: 'inherit', textTransform: 'uppercase' }}
-            />
-            {couponStatus === 'applied' ? (
-              <p style={{ color: 'var(--ptr-primary)', fontSize: 13, margin: '6px 0 0', fontWeight: 700 }}>✓ {couponName} aplicado</p>
+            {appliedCoupons.length > 0 ? (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
+                {appliedCoupons.map((c) => (
+                  <span
+                    key={c.code}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 6px 4px 11px', borderRadius: 999, background: 'color-mix(in srgb, var(--ptr-primary) 10%, transparent)', color: 'var(--ptr-primary)', fontSize: 13, fontWeight: 700 }}
+                  >
+                    ✓ {c.name}
+                    <button
+                      type="button"
+                      aria-label={`Quitar ${c.name}`}
+                      onClick={() => removeCoupon(c.code)}
+                      style={{ border: 0, background: 'none', color: 'inherit', cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: '0 2px' }}
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+              </div>
             ) : null}
-            {couponStatus === 'invalid' ? (
-              <p style={{ color: '#c0563f', fontSize: 13, margin: '6px 0 0' }}>Cupón inválido o vencido.</p>
-            ) : null}
+
+            {!showCoupon && appliedCoupons.length === 0 ? (
+              <button
+                type="button"
+                onClick={() => setShowCoupon(true)}
+                style={{ border: 0, background: 'none', padding: 0, color: 'var(--ptr-primary)', fontSize: 14, fontWeight: 600, cursor: 'pointer', textDecoration: 'underline' }}
+              >
+                Tengo un cupón
+              </button>
+            ) : (
+              <>
+                <label htmlFor="cupon" style={{ display: 'block', fontSize: 13, marginBottom: 6, color: 'var(--ptr-neutral-500, #7a7a78)' }}>
+                  {appliedCoupons.length > 0 ? '¿Otro cupón?' : 'Código de cupón'}
+                </label>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <input
+                    id="cupon"
+                    value={code}
+                    onChange={(e) => { setCode(e.target.value); setCouponMsg(''); }}
+                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); applyCoupon(); } }}
+                    placeholder="Ingresa tu código"
+                    autoComplete="off"
+                    style={{ flex: 1, minWidth: 0, padding: '9px 11px', border: `1px solid ${couponMsg ? '#c0563f' : 'var(--ptr-neutral-200, #e3e3e0)'}`, borderRadius: 8, font: 'inherit', textTransform: 'uppercase' }}
+                  />
+                  <button
+                    type="button"
+                    onClick={applyCoupon}
+                    style={{ flexShrink: 0, padding: '9px 16px', border: 0, borderRadius: 8, background: 'var(--ptr-primary)', color: 'var(--ptr-white)', fontWeight: 600, cursor: 'pointer' }}
+                  >
+                    Aplicar
+                  </button>
+                </div>
+                {couponMsg ? <p style={{ color: '#c0563f', fontSize: 13, margin: '6px 0 0' }}>{couponMsg}</p> : null}
+              </>
+            )}
           </div>
 
           <Link href="/checkout/" className={styles.checkout}>

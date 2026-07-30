@@ -182,14 +182,15 @@ export function priceCart(
   promotions: Promotion[],
   settings: PricingSettings,
   now: Date,
-  couponCode: string | null = null,
+  couponCodes: string[] = [],
 ): PricedCart {
-  const code = couponCode ? couponCode.trim().toLowerCase() : '';
-  // Las promos con `code` (cupones) NO se aplican solas: solo si se ingresa el
-  // código correcto y quedan usos. Las sin código se aplican automáticamente.
+  const codes = new Set(couponCodes.map((c) => c.trim().toLowerCase()).filter(Boolean));
+  // Las promos con `code` (cupones) NO se aplican solas: solo si se ingresó el código
+  // correcto (uno de varios) y quedan usos. Las sin código se aplican automáticamente.
+  // Que dos cupones apilen o sean excluyentes lo decide `stackable` (por promo).
   const live = promotions.filter((p) => isPromotionLive(p, now)).filter((p) => {
     if (!p.code) return true;
-    if (!code || p.code.toLowerCase() !== code) return false;
+    if (!codes.has(p.code.toLowerCase())) return false;
     if (p.max_uses != null && (p.uses ?? 0) >= p.max_uses) return false;
     return true;
   });

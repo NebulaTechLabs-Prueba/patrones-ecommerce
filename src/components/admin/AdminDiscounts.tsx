@@ -416,7 +416,7 @@ export function AdminDiscounts({ initial, options }: { initial: Promotion[]; opt
 
                 <label className={ui.check}>
                   <input type="checkbox" checked={draft.stackable} onChange={(e) => setDraft({ ...draft, stackable: e.target.checked })} />
-                  <span>Se puede apilar con otras promociones</span>
+                  <span>Apilable: se combina con otros cupones/promos. Si se desmarca, es excluyente (solo uno a la vez).</span>
                 </label>
               </div>
             ) : null}
