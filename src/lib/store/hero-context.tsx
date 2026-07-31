@@ -80,8 +80,11 @@ export const DEFAULT_HERO: HeroConfig = {
   textColor: 'var(--ptr-ink)',
   textAlign: 'left',
   textEffect: 'none',
-  layout: 'pattern',
-  images: [],
+  layout: 'split',
+  images: [
+    'https://scontent-mia3-2.cdninstagram.com/v/t51.82787-15/747625932_18007691663929974_153071854530449864_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ig_cache_key=Mzk0MjEwMjMwNDkwNzE3MzkxNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=uCNnpabbRIEQ7kNvwFH__Ix&_nc_oc=AdprwNMwmNf2CA-ubdi66uSyPllYAnxjN8UFmxRnyNUSQajTQ6LpygWA988JrbTzD-c&_nc_zt=23&_nc_ht=scontent-mia3-2.cdninstagram.com&_nc_gid=8T2-EPDn3IXqUCC_q2YY1g&_nc_ss=7b689&oh=00_AQHTRIVHcON4DRHGQM0o54Nh-ysdz7D1JDLwOtViUVoVIA&oe=6A72F784',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrsh7fDvlUbdtODyVrGvGPHPQjXXg-DpeytWpXvMf_PPKXZbVRCDH7ItAq&s=10',
+  ],
   buttons: [
     { label: 'Explora los rubros', href: '/uniformes/salud/', visible: true, variant: 'primary', bg: 'var(--ptr-primary)', color: '#ffffff' },
     { label: 'Conoce la Línea PATRONES', href: '/linea-patrones/', visible: true, variant: 'secondary', bg: '#ffffff', color: 'var(--ptr-ink)' },
@@ -98,7 +101,7 @@ interface HeroContextValue {
 
 const HeroContext = createContext<HeroContextValue | null>(null);
 // Bump de versión al cambiar la forma de la config (descarta local viejo).
-const STORAGE_KEY = 'ptr-hero-v5';
+const STORAGE_KEY = 'ptr-hero-v6';
 
 export function HeroProvider({ children }: { children: React.ReactNode }) {
   const [hero, setHeroState] = useState<HeroConfig>(DEFAULT_HERO);
