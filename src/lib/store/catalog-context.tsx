@@ -47,8 +47,9 @@ const CatalogContext = createContext<CatalogContextValue | null>(null);
 // v3: consolidacion de inventario (variantes), marcas fantasma fuera, tagline/
 // descripcion + hero_style por marca. v4: imagen de hero por marca. v5: logos por
 // URL + Victoria Secret. v6: logos Skywox/Juanita Jo/Sooverki/Zhmo/Duuv + hero de
-// Salud con foto real. Sin bump, el navegador muestra el cache viejo.
-const STORAGE_KEY = 'ptr-catalog-v6';
+// Salud con foto real. v7: fotos locales estables (Healing Hands, Salud). Sin bump,
+// el navegador muestra el cache viejo.
+const STORAGE_KEY = 'ptr-catalog-v7';
 
 export function CatalogProvider({ initial, children }: { initial: CatalogData; children: React.ReactNode }) {
   const [data, setData] = useState<CatalogData>(initial);

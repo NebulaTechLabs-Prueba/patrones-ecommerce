@@ -31,7 +31,7 @@ export const verticals: Vertical[] = [
     tagline: 'Uniformes que acompañan cada guardia.',
     description:
       'Scrubs, casacas y calzado profesional para el personal de salud. Telas que resisten la jornada y sostienen la compostura.',
-    hero_image: { url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ5uZ8G3dBrbVVwbGw8dpVid6jMxxi4YBhKV5LnnImnHOrZ-83eqD1OZqD&s=10', alt: 'Profesional de salud con uniforme PATRONES', is_placeholder: false, sort_order: 0 },
+    hero_image: { url: '/brand/patrones-scrub-negro.jpg', alt: 'Profesional de salud con uniforme PATRONES', is_placeholder: false, sort_order: 0 },
     sort_order: 1,
     is_active: true,
   },
@@ -178,7 +178,7 @@ export const brands: Brand[] = [
     description: 'Uniformes médicos con suavidad, elasticidad y estilo para quienes cuidan a los demás.',
     is_own_line: false,
     logo_image: { url: 'https://healinghandsscrubs.com/cdn/shop/files/header-logo-dark.png?v=1782765020&width=300', alt: 'Healing Hands', is_placeholder: false, sort_order: 0 },
-    hero_image: stock('1483985988355-763728e1935b', 'Healing Hands'),
+    hero_image: { url: '/brand/patrones-healing-hands-hombre.jpg', alt: 'Healing Hands', is_placeholder: false, sort_order: 0 },
     hero_style: 'split',
   },
   {

@@ -83,7 +83,8 @@ export const DEFAULT_CONTENT: ContentConfig = {
       eyebrow: 'Para ella',
       title: 'Mujer',
       description: 'Uniformes, calzado y complementos para la profesional. De pies a cabeza.',
-      image: '',
+      image: '/brand/patrones-scrub-negro-mujer.jpg',
+      imageStyle: 'full',
     },
   },
   gallery: {
@@ -107,7 +108,7 @@ export const DEFAULT_CONTENT: ContentConfig = {
     subtitle:
       'Consúltanos por tallas, disponibilidad o pedidos institucionales. Te respondemos en horario de atención.',
     ctaText: 'Escríbenos por WhatsApp',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLHOVqMbFo_v7SCBdlwHp2cvg3bPK_zup1A8qVTzQEvwJgdSLG6fJ5MtOd&s=10',
+    image: '/brand/patrones-dudas.jpg',
   },
 };
 
@@ -118,7 +119,7 @@ interface ContentContextValue {
 }
 
 const ContentContext = createContext<ContentContextValue | null>(null);
-const STORAGE_KEY = 'ptr-content-v4';
+const STORAGE_KEY = 'ptr-content-v5';
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
   const [content, setContentState] = useState<ContentConfig>(DEFAULT_CONTENT);
