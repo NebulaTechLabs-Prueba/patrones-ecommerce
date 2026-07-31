@@ -5,7 +5,7 @@
  * deshabilita métodos de pago. En memoria (se resetea al recargar).
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AdminModal } from './AdminModal';
 import type { AppSettings, PaymentMethod, PaymentMethodKind } from '@/lib/data/types';
 import { CART_MESSAGE_PRESETS, DEFAULT_CART_MESSAGE } from '@/lib/data/mock/seed/settings';
@@ -59,6 +59,56 @@ export function AdminSettings({
   const [saved, setSaved] = useState(false);
   const [methodDraft, setMethodDraft] = useState<MethodDraft | null>(null);
   const [methodError, setMethodError] = useState('');
+  const [methodsView, setMethodsView] = useState<'list' | 'cards'>('list');
+  const cartMsgRef = useRef<HTMLTextAreaElement | null>(null);
+
+  // Inserta un placeholder ({nombre}, {items}…) en la posición del cursor del mensaje.
+  function insertPlaceholder(ph: string) {
+    const current = s.abandoned_cart_message ?? DEFAULT_CART_MESSAGE;
+    const el = cartMsgRef.current;
+    const start = el?.selectionStart ?? current.length;
+    const end = el?.selectionEnd ?? current.length;
+    const next = current.slice(0, start) + ph + current.slice(end);
+    update('abandoned_cart_message', next);
+    requestAnimationFrame(() => {
+      if (!el) return;
+      el.focus();
+      const pos = start + ph.length;
+      el.setSelectionRange(pos, pos);
+    });
+  }
+
+  // Acciones de un método de pago (se reusan en la vista lista y en la de tarjetas).
+  function methodActions(m: PaymentMethod) {
+    return (
+      <div className={ui.actions}>
+        <button
+          type="button"
+          className={ui.actionBtn}
+          onClick={() => {
+            setMethodError('');
+            setMethodDraft({ id: m.id, label: m.label, kind: m.kind, isOffline: m.is_offline, isEnabled: m.is_enabled, instructions: m.instructions ?? '' });
+          }}
+        >
+          Editar
+        </button>
+        <button
+          type="button"
+          className={ui.actionBtn}
+          onClick={() => setMethods((prev) => prev.map((x) => (x.id === m.id ? { ...x, is_enabled: !x.is_enabled } : x)))}
+        >
+          {m.is_enabled ? 'Deshabilitar' : 'Habilitar'}
+        </button>
+        <button
+          type="button"
+          className={`${ui.actionBtn} ${ui.actionDanger}`}
+          onClick={() => setMethods((prev) => prev.filter((x) => x.id !== m.id))}
+        >
+          Eliminar
+        </button>
+      </div>
+    );
+  }
 
   // Hidrata desde localStorage al montar (si el admin guardó antes en este navegador).
   useEffect(() => {
@@ -205,16 +255,22 @@ export function AdminSettings({
         <label className={ui.field} style={{ marginTop: 'var(--ptr-space-4)' }}>
           <span>Mensaje de seguimiento de carritos (WhatsApp/correo)</span>
           <textarea
+            ref={cartMsgRef}
             className={ui.input}
             rows={3}
             value={s.abandoned_cart_message ?? DEFAULT_CART_MESSAGE}
             onChange={(e) => update('abandoned_cart_message', e.target.value)}
           />
-          <span className={ui.formSectionHint} style={{ margin: 0 }}>
-            Placeholders: {'{nombre}'}, {'{items}'}, {'{total}'}, {'{productos}'}.
-          </span>
         </label>
-        <div className={ui.actions} style={{ marginTop: 'var(--ptr-space-2)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--ptr-space-2)', flexWrap: 'wrap', marginTop: 'var(--ptr-space-2)' }}>
+          <span className={ui.formSectionHint} style={{ margin: 0 }}>Insertar:</span>
+          {['{nombre}', '{items}', '{total}', '{productos}'].map((ph) => (
+            <button key={ph} type="button" className={ui.actionBtn} onClick={() => insertPlaceholder(ph)}>
+              {ph}
+            </button>
+          ))}
+        </div>
+        <div className={ui.actions} style={{ marginTop: 'var(--ptr-space-3)' }}>
           {CART_MESSAGE_PRESETS.map((preset, i) => (
             <button
               key={i}
@@ -258,72 +314,76 @@ export function AdminSettings({
         <h2 className={styles.subtitle} style={{ marginBottom: 0 }}>
           Métodos de pago
         </h2>
-        <button
-          type="button"
-          className={ui.newBtn}
-          onClick={() => {
-            setMethodError('');
-            setMethodDraft({ id: null, label: '', kind: 'pago_movil', isOffline: true, isEnabled: true, instructions: '' });
-          }}
-        >
-          Nuevo método
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--ptr-space-3)', flexWrap: 'wrap' }}>
+          <div className={ui.viewSwitch} role="group" aria-label="Vista de métodos">
+            <button type="button" className={`${ui.viewBtn} ${methodsView === 'list' ? ui.viewBtnActive : ''}`} aria-pressed={methodsView === 'list'} onClick={() => setMethodsView('list')}>
+              <span aria-hidden="true">☰</span>
+              <span className={ui.viewBtnLabel}>Lista</span>
+            </button>
+            <button type="button" className={`${ui.viewBtn} ${methodsView === 'cards' ? ui.viewBtnActive : ''}`} aria-pressed={methodsView === 'cards'} onClick={() => setMethodsView('cards')}>
+              <span aria-hidden="true">▦</span>
+              <span className={ui.viewBtnLabel}>Tarjetas</span>
+            </button>
+          </div>
+          <button
+            type="button"
+            className={ui.newBtn}
+            onClick={() => {
+              setMethodError('');
+              setMethodDraft({ id: null, label: '', kind: 'pago_movil', isOffline: true, isEnabled: true, instructions: '' });
+            }}
+          >
+            Nuevo método
+          </button>
+        </div>
       </div>
-      <div className={ui.tableWrap}>
-        <table className={ui.table}>
-          <thead>
-            <tr>
-              <th>Método</th>
-              <th>Modo</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {methods.map((m) => (
-              <tr key={m.id}>
-                <td data-label="Método">{m.label}</td>
-                <td data-label="Modo">{m.is_offline ? 'Con comprobante' : 'En línea'}</td>
-                <td data-label="Estado">
-                  <span className={`${ui.badge} ${m.is_enabled ? ui.success : ui.neutral}`}>
-                    {m.is_enabled ? 'Habilitado' : 'Deshabilitado'}
-                  </span>
-                </td>
-                <td data-label="Acciones">
-                  <div className={ui.actions}>
-                    <button
-                      type="button"
-                      className={ui.actionBtn}
-                      onClick={() => {
-                        setMethodError('');
-                        setMethodDraft({ id: m.id, label: m.label, kind: m.kind, isOffline: m.is_offline, isEnabled: m.is_enabled, instructions: m.instructions ?? '' });
-                      }}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      type="button"
-                      className={ui.actionBtn}
-                      onClick={() =>
-                        setMethods((prev) => prev.map((x) => (x.id === m.id ? { ...x, is_enabled: !x.is_enabled } : x)))
-                      }
-                    >
-                      {m.is_enabled ? 'Deshabilitar' : 'Habilitar'}
-                    </button>
-                    <button
-                      type="button"
-                      className={`${ui.actionBtn} ${ui.actionDanger}`}
-                      onClick={() => setMethods((prev) => prev.filter((x) => x.id !== m.id))}
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                </td>
+
+      {methodsView === 'list' ? (
+        <div className={ui.tableWrap}>
+          <table className={ui.table}>
+            <thead>
+              <tr>
+                <th>Método</th>
+                <th>Modo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {methods.map((m) => (
+                <tr key={m.id}>
+                  <td data-label="Método">{m.label}</td>
+                  <td data-label="Modo">{m.is_offline ? 'Con comprobante' : 'En línea'}</td>
+                  <td data-label="Estado">
+                    <span className={`${ui.badge} ${m.is_enabled ? ui.success : ui.neutral}`}>
+                      {m.is_enabled ? 'Habilitado' : 'Deshabilitado'}
+                    </span>
+                  </td>
+                  <td data-label="Acciones">{methodActions(m)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className={ui.gallery}>
+          {methods.map((m) => (
+            <article key={m.id} className={ui.card} style={{ padding: 'var(--ptr-space-5)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'var(--ptr-space-3)', marginBottom: 'var(--ptr-space-2)' }}>
+                <h3 className={ui.cardName}>{m.label}</h3>
+                <span className={`${ui.badge} ${m.is_enabled ? ui.success : ui.neutral}`}>
+                  {m.is_enabled ? 'Habilitado' : 'Deshabilitado'}
+                </span>
+              </div>
+              <p className={ui.cardBrand}>{m.is_offline ? 'Con comprobante' : 'En línea'}</p>
+              {m.is_offline && m.instructions ? (
+                <p className={ui.cardTags} style={{ whiteSpace: 'pre-wrap' }}>{m.instructions}</p>
+              ) : null}
+              <div style={{ marginTop: 'var(--ptr-space-4)' }}>{methodActions(m)}</div>
+            </article>
+          ))}
+        </div>
+      )}
 
       {methodDraft ? (
         <AdminModal

@@ -88,6 +88,31 @@ export const customers: Customer[] = [
     customer_type: 'institucion',
     created_at: '2026-05-10T12:00:00-04:00',
   },
+  {
+    // Cliente COMPLETO: con direcciones de encomienda y métodos de pago guardados,
+    // para que el admin vea de verdad todos los datos de un cliente.
+    id: 'cus-maria',
+    first_name: 'María',
+    last_name: 'González',
+    email: 'maria.gonzalez@example.com',
+    email_verified: true,
+    phone: '+58 412 5557788',
+    address: 'Av. Las Américas, Res. El Roble, Torre B, Puerto Ordaz, Bolívar',
+    doc_kind: 'V',
+    doc_number: '20123456',
+    birth_date: '1988-07-22',
+    age: 37,
+    customer_type: 'individual',
+    created_at: '2026-06-15T12:00:00-04:00',
+    shipping_locations: [
+      { id: 'loc-m1', label: 'Casa', carrier: 'zoom', state: 'Bolívar', city: 'Puerto Ordaz', office: 'Zoom Alta Vista', recipient: 'María González', doc: 'V-20123456', notes: 'Retiro por la tarde.' },
+      { id: 'loc-m2', label: 'Trabajo', carrier: 'mrw', state: 'Bolívar', city: 'Puerto Ordaz', office: 'MRW Centro Cívico', recipient: 'María González', doc: 'V-20123456', notes: '' },
+    ],
+    payment_methods: [
+      { id: 'pmm-1', label: 'Mi Pago Móvil', kind: 'pago_movil', holder: 'María González', doc: 'V-20123456', bank: 'Banco de Venezuela', phone: '0412-5557788', account: '', notes: '' },
+      { id: 'pmm-2', label: 'Zelle personal', kind: 'zelle', holder: 'Maria Gonzalez', doc: '', bank: '', phone: '', account: 'maria.g@example.com', notes: '' },
+    ],
+  },
 ];
 
 // --- Helpers de snapshot de linea ------------------------------------------

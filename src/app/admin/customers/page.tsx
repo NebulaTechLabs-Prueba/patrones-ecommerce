@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { customerRepo, orderRepo } from '@/lib/data';
 import type { OrderStatus, PaymentStatus } from '@/lib/data/types';
 import { formatUsd } from '@/lib/format';
-import { ORDER_STATUS_LABELS, PAYMENT_STATUS_LABELS } from '@/lib/labels';
+import { ORDER_STATUS_LABELS, PAYMENT_METHOD_LABELS, PAYMENT_STATUS_LABELS } from '@/lib/labels';
 import { CustomerNote } from '@/components/admin/CustomerNote';
 import ui from '@/components/admin/adminUI.module.css';
 import styles from './customers.module.css';
@@ -75,6 +75,33 @@ export default async function AdminCustomersPage() {
                       Enviar correo
                     </a>
                   </div>
+
+                  {c.shipping_locations && c.shipping_locations.length > 0 ? (
+                    <>
+                      <h3 className={styles.subhead}>Direcciones de encomienda</h3>
+                      {c.shipping_locations.map((l) => (
+                        <p key={l.id} className={styles.detailLine}>
+                          <strong>{l.label}</strong> · {l.carrier === 'zoom' ? 'Zoom' : 'MRW'} — {l.office}, {l.city}
+                          {l.state ? `, ${l.state}` : ''}
+                          {l.recipient ? ` · Retira: ${l.recipient}${l.doc ? ` (${l.doc})` : ''}` : ''}
+                        </p>
+                      ))}
+                    </>
+                  ) : null}
+
+                  {c.payment_methods && c.payment_methods.length > 0 ? (
+                    <>
+                      <h3 className={styles.subhead}>Métodos de pago</h3>
+                      {c.payment_methods.map((p) => (
+                        <p key={p.id} className={styles.detailLine}>
+                          <strong>{p.label}</strong> · {PAYMENT_METHOD_LABELS[p.kind]} — {p.holder}
+                          {p.bank ? ` · ${p.bank}` : ''}
+                          {p.phone ? ` · ${p.phone}` : ''}
+                          {p.account ? ` · ${p.account}` : ''}
+                        </p>
+                      ))}
+                    </>
+                  ) : null}
 
                   <h3 className={styles.subhead}>Pedidos</h3>
                   {cOrders.length === 0 ? (
