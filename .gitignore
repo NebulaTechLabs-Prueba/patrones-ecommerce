@@ -29,3 +29,7 @@ Thumbs.db
 
 # Playwright MCP
 /.playwright-mcp
+
+# Inventario fuente (NO publicar: tiene precios de costo)
+/.brand-source/
+public/brand/DATA.xlsx
