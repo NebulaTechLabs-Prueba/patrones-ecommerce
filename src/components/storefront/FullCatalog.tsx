@@ -108,7 +108,7 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
       ? blockToHero(content.heros.ofertas)
       : generoHero
         ? blockToHero(generoHero)
-        : { eyebrow: 'Catálogo', title, description };
+        : blockToHero(content.heros.catalogo);
 
   return (
     <main>

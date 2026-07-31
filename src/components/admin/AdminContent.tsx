@@ -121,6 +121,7 @@ export function AdminContent() {
         <button type="button" className={ui.newBtn} onClick={save}>Guardar contenido</button>
       </div>
 
+      <HeroEditor label="Hero · Catálogo" block={draft.heros.catalogo} onChange={(b) => setHero('catalogo', b)} />
       <HeroEditor label="Hero · Ofertas" block={draft.heros.ofertas} onChange={(b) => setHero('ofertas', b)} />
       <HeroEditor label="Hero · Hombre" block={draft.heros.hombre} onChange={(b) => setHero('hombre', b)} />
       <HeroEditor label="Hero · Mujer" block={draft.heros.mujer} onChange={(b) => setHero('mujer', b)} />

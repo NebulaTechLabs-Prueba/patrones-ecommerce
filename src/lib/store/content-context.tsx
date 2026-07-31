@@ -44,6 +44,7 @@ export interface StatementBlock {
 
 export interface ContentConfig {
   heros: {
+    catalogo: HeroBlock;
     ofertas: HeroBlock;
     hombre: HeroBlock;
     mujer: HeroBlock;
@@ -59,6 +60,13 @@ const uns = (id: string) => `https://images.unsplash.com/photo-${id}?q=80&w=800&
 
 export const DEFAULT_CONTENT: ContentConfig = {
   heros: {
+    catalogo: {
+      eyebrow: 'Catálogo',
+      title: 'Todo el catálogo',
+      description: 'Explora todas las piezas. Filtra por categoría, marca, color y género, o busca por nombre.',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh7bz_rSzZJoN3-RSsamnnRb31M83ibr-kyCxnpew8pHeA9K58epI5pPk&s=10',
+      imageStyle: 'full',
+    },
     ofertas: {
       eyebrow: 'Ofertas',
       title: 'Ofertas de temporada',
@@ -110,7 +118,7 @@ interface ContentContextValue {
 }
 
 const ContentContext = createContext<ContentContextValue | null>(null);
-const STORAGE_KEY = 'ptr-content-v3';
+const STORAGE_KEY = 'ptr-content-v4';
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
   const [content, setContentState] = useState<ContentConfig>(DEFAULT_CONTENT);
@@ -124,6 +132,7 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
         const p = JSON.parse(raw) as Partial<ContentConfig>;
         setContentState({
           heros: {
+            catalogo: { ...DEFAULT_CONTENT.heros.catalogo, ...(p.heros?.catalogo ?? {}) },
             ofertas: { ...DEFAULT_CONTENT.heros.ofertas, ...(p.heros?.ofertas ?? {}) },
             hombre: { ...DEFAULT_CONTENT.heros.hombre, ...(p.heros?.hombre ?? {}) },
             mujer: { ...DEFAULT_CONTENT.heros.mujer, ...(p.heros?.mujer ?? {}) },
