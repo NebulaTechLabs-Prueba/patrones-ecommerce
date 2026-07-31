@@ -10,6 +10,7 @@
  */
 
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import type { HeroImageStyle } from '@/lib/data/types';
 
 export interface HeroBlock {
   eyebrow: string;
@@ -17,6 +18,8 @@ export interface HeroBlock {
   description: string;
   /** URL o data-URL; vacío = hero de una sola columna (sin foto). */
   image: string;
+  /** Estilo de presentación de la imagen (split | full | portrait). Default: split. */
+  imageStyle?: HeroImageStyle;
 }
 
 export interface GalleryItem {

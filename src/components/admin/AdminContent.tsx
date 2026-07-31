@@ -9,6 +9,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useContent, type ContentConfig, type HeroBlock } from '@/lib/store/content-context';
 import { useToast } from '@/lib/store/toast-context';
+import type { HeroImageStyle } from '@/lib/data/types';
 import ui from './adminUI.module.css';
 
 /** Redimensiona en el navegador (máx. 1600px, JPEG) para no llenar el almacenamiento. */
@@ -78,6 +79,14 @@ function HeroEditor({ label, block, onChange }: { label: string; block: HeroBloc
       <div style={{ marginTop: 'var(--ptr-space-3)' }}>
         <ImageField value={block.image} onChange={(url) => onChange({ ...block, image: url })} />
       </div>
+      <label className={ui.field} style={{ marginTop: 'var(--ptr-space-3)' }}>
+        <span>Estilo de la imagen</span>
+        <select className={ui.select} value={block.imageStyle ?? 'split'} onChange={(e) => onChange({ ...block, imageStyle: e.target.value as HeroImageStyle })}>
+          <option value="split">Split (imagen al lado)</option>
+          <option value="full">Inmersivo (a sangre)</option>
+          <option value="portrait">Retrato (vertical)</option>
+        </select>
+      </label>
     </section>
   );
 }

@@ -29,6 +29,7 @@ function blockToHero(b: HeroBlock) {
     title: b.title,
     description: b.description,
     image: b.image ? { url: b.image, alt: b.title, is_placeholder: false, sort_order: 0 } : undefined,
+    style: b.imageStyle,
   };
 }
 
@@ -101,6 +102,7 @@ export function FullCatalog({ mode = 'all', title, description }: FullCatalogPro
         title: activeBrand.tagline?.trim() || activeBrand.name,
         description: activeBrand.description?.trim() || `Toda la selección de ${activeBrand.name}, disponible en PATRONES.`,
         image: activeBrand.hero_image ?? undefined,
+        style: activeBrand.hero_style,
       }
     : mode === 'ofertas'
       ? blockToHero(content.heros.ofertas)

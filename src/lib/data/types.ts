@@ -44,6 +44,9 @@ export interface Vertical {
   is_active: boolean;
 }
 
+/** Estilo con que se muestra la imagen del hero de una landing (marca/faceta). */
+export type HeroImageStyle = 'split' | 'full' | 'portrait';
+
 /** Marca. `is_own_line = true` para la LINEA PATRONES. Ortogonal al origen. */
 export interface Brand {
   id: ID;
@@ -55,6 +58,8 @@ export interface Brand {
   tagline?: string;
   description?: string;
   hero_image?: ProductImage | null;
+  /** Cómo se presenta la imagen del hero (split | full | portrait). Default: split. */
+  hero_style?: HeroImageStyle;
 }
 
 /** Categoria: scrubs, filipinas, pantalones, calzado, accesorios... CRUD admin. */

@@ -121,6 +121,8 @@ export const brands: Brand[] = [
     description: 'La marca que redefinió el uniforme médico: tela técnica, corte moderno y color. Una referencia mundial en salud.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1576091160399-112ba8d25d1d', 'FIGS'),
+    hero_style: 'full',
   },
   {
     id: 'b-cherokee',
@@ -130,6 +132,8 @@ export const brands: Brand[] = [
     description: 'Décadas vistiendo al personal de salud: resistencia, comodidad y funcionalidad probadas turno tras turno.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1559839734-2b71ea197ec2', 'Cherokee'),
+    hero_style: 'split',
   },
   {
     id: 'b-infinity',
@@ -193,6 +197,8 @@ export const brands: Brand[] = [
     description: 'Calzado y ropa deportiva Nike: rendimiento e innovación para dentro y fuera del trabajo.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1542291026-7eec264c27ff', 'Nike'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-skechers',

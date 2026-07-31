@@ -5,9 +5,15 @@
 
 import { useRef, useState } from 'react';
 import { AdminModal } from '../AdminModal';
-import type { Brand } from '@/lib/data/types';
+import type { Brand, HeroImageStyle } from '@/lib/data/types';
 import { slugify } from '@/lib/slug';
 import ui from '../adminUI.module.css';
+
+const HERO_STYLES: Array<{ value: HeroImageStyle; label: string }> = [
+  { value: 'split', label: 'Split (imagen al lado)' },
+  { value: 'full', label: 'Inmersivo (a sangre)' },
+  { value: 'portrait', label: 'Retrato (vertical)' },
+];
 
 interface Draft {
   id: string | null;
@@ -17,6 +23,7 @@ interface Draft {
   tagline: string;
   description: string;
   hero: string;
+  heroStyle: HeroImageStyle;
 }
 
 export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (items: Brand[]) => void }) {
@@ -77,6 +84,7 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
       tagline: draft.tagline.trim(),
       description: draft.description.trim(),
       hero_image: hero ? { url: hero, alt: name, is_placeholder: false, sort_order: 0 } : null,
+      hero_style: draft.heroStyle,
     };
     onChange(draft.id ? items.map((b) => (b.id === draft.id ? rec : b)) : [...items, rec]);
     setDraft(null);
@@ -92,7 +100,7 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
           className={ui.newBtn}
           onClick={() => {
             setError('');
-            setDraft({ id: null, name: '', isOwnLine: false, logo: '', tagline: '', description: '', hero: '' });
+            setDraft({ id: null, name: '', isOwnLine: false, logo: '', tagline: '', description: '', hero: '', heroStyle: 'split' });
           }}
         >
           Nueva marca
@@ -127,7 +135,7 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
                     <button
                       type="button"
                       className={ui.actionBtn}
-                      onClick={() => setDraft({ id: b.id, name: b.name, isOwnLine: b.is_own_line, logo: b.logo_image?.url ?? '', tagline: b.tagline ?? '', description: b.description ?? '', hero: b.hero_image?.url ?? '' })}
+                      onClick={() => setDraft({ id: b.id, name: b.name, isOwnLine: b.is_own_line, logo: b.logo_image?.url ?? '', tagline: b.tagline ?? '', description: b.description ?? '', hero: b.hero_image?.url ?? '', heroStyle: b.hero_style ?? 'split' })}
                     >
                       Editar
                     </button>
@@ -202,6 +210,16 @@ export function BrandsCrud({ items, onChange }: { items: Brand[]; onChange: (ite
                   onChange={(e) => setDraft({ ...draft, hero: e.target.value })}
                 />
               </div>
+
+              <label className={ui.field} style={{ marginTop: 'var(--ptr-space-3)' }}>
+                <span>Estilo de la imagen en el hero</span>
+                <select className={ui.select} value={draft.heroStyle} onChange={(e) => setDraft({ ...draft, heroStyle: e.target.value as HeroImageStyle })}>
+                  {HERO_STYLES.map((s) => (
+                    <option key={s.value} value={s.value}>{s.label}</option>
+                  ))}
+                </select>
+                <span className={ui.formSectionHint} style={{ margin: 0 }}>Aplica cuando hay imagen. Sin imagen, el hero es solo texto.</span>
+              </label>
             </section>
 
             {error ? <p className={ui.formError}>{error}</p> : null}

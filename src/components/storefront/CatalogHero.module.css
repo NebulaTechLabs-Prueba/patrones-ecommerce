@@ -86,3 +86,81 @@
     order: -1;
   }
 }
+
+/* --- Estilo INMERSIVO (full): imagen a sangre + velo, texto claro encima --- */
+.full {
+  display: block;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  background: var(--ptr-ink);
+}
+.fullBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.fullImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.fullTile {
+  position: absolute;
+  inset: 0;
+}
+.fullTile > * {
+  height: 100%;
+}
+.fullVeil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 20, 18, 0.2) 0%, rgba(20, 20, 18, 0.62) 100%),
+    linear-gradient(90deg, rgba(20, 20, 18, 0.6) 0%, transparent 62%);
+}
+.fullInner {
+  position: relative;
+  z-index: 1;
+  min-height: clamp(340px, 44vw, 560px);
+  display: flex;
+  align-items: flex-end;
+  max-width: var(--ptr-container);
+  margin: 0 auto;
+  padding: clamp(var(--ptr-space-7), 6vw, var(--ptr-space-10)) var(--ptr-space-6);
+}
+.textLight .eyebrow {
+  color: var(--ptr-mint);
+}
+.textLight .title {
+  color: var(--ptr-white);
+}
+.textLight .description {
+  color: color-mix(in srgb, var(--ptr-white) 85%, transparent);
+}
+
+/* --- Estilo RETRATO (portrait): imagen vertical sobre panel de acento --- */
+.portraitMedia {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ptr-space-5);
+}
+.portraitPanel {
+  position: absolute;
+  inset: 8% 6% 4% 22%;
+  background: color-mix(in srgb, var(--ptr-primary) 12%, transparent);
+  border-radius: var(--ptr-radius-lg);
+}
+.portraitFrame {
+  position: relative;
+  width: min(80%, 360px);
+}
+.portraitFrame :global(img),
+.portraitFrame > div {
+  border-radius: var(--ptr-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--ptr-shadow-3);
+}
