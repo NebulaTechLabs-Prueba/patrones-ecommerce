@@ -893,7 +893,7 @@ export const products: Product[] = [
     id: "p-inv-080", slug: "monedero-juanita",
     name: "Monedero Juanita",
     description: "Complemento para llevar lo esencial con estilo. Marca Juanita.",
-    type: 'simple', model_id: '', brand_id: "b-juanita", origin: "importado",
+    type: 'simple', model_id: '', brand_id: "b-juanita-jo", origin: "importado",
     vertical_ids: ["v-complementos"], category_ids: ["cat-carteras"],
     price: 4000, featured: false, low_stock_threshold: null,
     gender: 'unisex', on_sale: false,
