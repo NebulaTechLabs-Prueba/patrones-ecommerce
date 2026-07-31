@@ -31,7 +31,7 @@ export function ShopByColor() {
   if (fams.length === 0) return null;
 
   return (
-    <section style={{ padding: 'var(--ptr-space-9) 0' }}>
+    <section style={{ padding: 'var(--ptr-space-5) 0 var(--ptr-space-7)' }}>
       <div style={{ maxWidth: 'var(--ptr-container)', margin: '0 auto', padding: '0 var(--ptr-space-6)' }}>
         <p
           style={{
