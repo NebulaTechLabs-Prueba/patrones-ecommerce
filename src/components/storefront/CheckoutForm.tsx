@@ -24,6 +24,7 @@ import { useAuth, readStoredProfile, type StoredAccount } from '@/lib/store/auth
 import { useCart } from '@/lib/store/cart-context';
 import { useCurrency } from '@/lib/store/currency-context';
 import { PAYMENT_METHOD_LABELS } from '@/lib/labels';
+import { PaymentInstructions } from './PaymentInstructions';
 import styles from './CheckoutForm.module.css';
 
 export interface CustomerPrefill {
@@ -199,6 +200,13 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
 
   // Fase de pago offline: datos de la empresa + referencia + comprobante, sin esperas.
   if (phase === 'pay') {
+    // Cuentas a mostrar: variantes del método (varios bancos) o una sola (instructions).
+    const payAccounts =
+      selectedPayment?.variants && selectedPayment.variants.length > 0
+        ? selectedPayment.variants
+        : selectedPayment?.instructions?.trim()
+          ? [{ id: 'single', label: '', instructions: selectedPayment.instructions }]
+          : [];
     return (
       <main className={styles.main}>
         <div className={styles.payWrap}>
@@ -209,12 +217,21 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
           </p>
 
           <div className={styles.payBox}>
-            <p className={styles.payBoxTitle}>Datos para el pago</p>
-            <pre className={styles.payData}>
-              {selectedPayment?.instructions?.trim()
-                ? selectedPayment.instructions
-                : 'Te enviaremos los datos de pago por WhatsApp para completar tu pedido.'}
-            </pre>
+            <p className={styles.payBoxTitle}>
+              Datos para el pago{payAccounts.length > 1 ? ' · elige el banco que prefieras' : ''}
+            </p>
+            {payAccounts.length === 0 ? (
+              <p className={styles.payData}>Te enviaremos los datos de pago por WhatsApp para completar tu pedido.</p>
+            ) : payAccounts.length === 1 ? (
+              <PaymentInstructions text={payAccounts[0]!.instructions} />
+            ) : (
+              payAccounts.map((a) => (
+                <div key={a.id} className={styles.payVariant}>
+                  <p className={styles.payVariantLabel}>{a.label}</p>
+                  <PaymentInstructions text={a.instructions} />
+                </div>
+              ))
+            )}
             <p className={styles.payAmount}>
               Monto a pagar: <strong>{formatCents(totalWithShipping)}</strong>
             </p>

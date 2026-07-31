@@ -393,3 +393,17 @@
   color: var(--ptr-neutral-600);
   margin-top: 2px;
 }
+
+/* Variantes de un método de pago (varios bancos) en la fase de pago */
+.payVariant {
+  padding: var(--ptr-space-4) 0;
+  border-bottom: 1px solid var(--ptr-neutral-200);
+}
+.payVariant:first-of-type {
+  padding-top: 0;
+}
+.payVariantLabel {
+  font-weight: var(--ptr-weight-bold);
+  color: var(--ptr-ink);
+  margin-bottom: var(--ptr-space-2);
+}

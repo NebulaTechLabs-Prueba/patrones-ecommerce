@@ -357,6 +357,15 @@ export type PaymentStatus =
   | 'refunded'
   | 'partially_refunded';
 
+/** Variante/cuenta de un método (p. ej. Pago Móvil de distintos bancos). */
+export interface PaymentMethodVariant {
+  id: ID;
+  /** Etiqueta que distingue la variante: "Banco Mercantil", "Cuenta USD". */
+  label: string;
+  /** Datos de pago de esta variante (banco, teléfono/cuenta, RIF, titular). */
+  instructions: string;
+}
+
 export interface PaymentMethod {
   id: ID;
   kind: PaymentMethodKind;
@@ -364,9 +373,10 @@ export interface PaymentMethod {
   is_enabled: boolean;
   /** true = requiere comprobante + verificacion manual (offline). */
   is_offline: boolean;
-  /** Datos de pago de la empresa que se le muestran al cliente al pagar (offline):
-   *  banco, teléfono/cuenta, cédula/RIF y titular. En online no aplica. */
+  /** Datos de pago de la empresa (offline) cuando hay una sola cuenta. En online no aplica. */
   instructions?: string;
+  /** Variantes/cuentas del método (p. ej. varios bancos). Si hay, priman sobre instructions. */
+  variants?: PaymentMethodVariant[];
   sort_order: number;
 }
 

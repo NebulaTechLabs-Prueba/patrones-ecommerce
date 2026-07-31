@@ -58,8 +58,20 @@ export const appSettings: AppSettings = {
  * El resto se modela desde el dia 1 con is_enabled=false (§10).
  */
 export const paymentMethods: PaymentMethod[] = [
-  { id: 'pm-pago-movil', kind: 'pago_movil', label: 'Pago Móvil', is_enabled: true, is_offline: true, sort_order: 1, instructions: 'Banco de Venezuela (0102)\nTeléfono: 0424-0000000\nRIF: J-00000000-0\nA nombre de PATRONES C.A.' },
-  { id: 'pm-transferencia', kind: 'transferencia', label: 'Transferencia bancaria', is_enabled: true, is_offline: true, sort_order: 2, instructions: 'Banco Mercantil\nCuenta corriente: 0105-0000-00-0000000000\nRIF: J-00000000-0\nA nombre de PATRONES C.A.' },
+  {
+    id: 'pm-pago-movil', kind: 'pago_movil', label: 'Pago Móvil', is_enabled: true, is_offline: true, sort_order: 1,
+    variants: [
+      { id: 'pmv-bdv', label: 'Banco de Venezuela', instructions: 'Banco de Venezuela (0102)\nTeléfono: 0424-0000000\nRIF: J-00000000-0\nA nombre de PATRONES C.A.' },
+      { id: 'pmv-mercantil', label: 'Mercantil', instructions: 'Mercantil (0105)\nTeléfono: 0414-1111111\nRIF: J-00000000-0\nA nombre de PATRONES C.A.' },
+    ],
+  },
+  {
+    id: 'pm-transferencia', kind: 'transferencia', label: 'Transferencia bancaria', is_enabled: true, is_offline: true, sort_order: 2,
+    variants: [
+      { id: 'trv-mercantil', label: 'Banco Mercantil', instructions: 'Banco Mercantil\nCuenta corriente: 0105-0000-00-0000000000\nRIF: J-00000000-0\nA nombre de PATRONES C.A.' },
+      { id: 'trv-banesco', label: 'Banesco', instructions: 'Banesco\nCuenta corriente: 0134-0000-00-0000000000\nRIF: J-00000000-0\nA nombre de PATRONES C.A.' },
+    ],
+  },
   { id: 'pm-stripe', kind: 'stripe', label: 'Tarjeta (Stripe)', is_enabled: true, is_offline: false, sort_order: 3 },
   { id: 'pm-zelle', kind: 'zelle', label: 'Zelle', is_enabled: false, is_offline: true, sort_order: 4, instructions: 'Zelle a: pagos@patrones.example\nA nombre de PATRONES' },
   { id: 'pm-usdt', kind: 'usdt', label: 'USDT', is_enabled: false, is_offline: true, sort_order: 5, instructions: 'Red: TRON (TRC20)\nWallet: TXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' },

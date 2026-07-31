@@ -7,7 +7,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AdminModal } from './AdminModal';
-import type { AppSettings, PaymentMethod, PaymentMethodKind } from '@/lib/data/types';
+import type { AppSettings, PaymentMethod, PaymentMethodKind, PaymentMethodVariant } from '@/lib/data/types';
 import { CART_MESSAGE_PRESETS, DEFAULT_CART_MESSAGE } from '@/lib/data/mock/seed/settings';
 import { PAYMENT_METHOD_LABELS } from '@/lib/labels';
 import ui from './adminUI.module.css';
@@ -29,7 +29,19 @@ interface MethodDraft {
   kind: PaymentMethodKind;
   isOffline: boolean;
   isEnabled: boolean;
-  instructions: string;
+  variants: PaymentMethodVariant[];
+}
+
+let variantSeq = 0;
+function newVariant(): PaymentMethodVariant {
+  variantSeq += 1;
+  return { id: `pmv-new-${variantSeq}`, label: '', instructions: '' };
+}
+/** Migra un método a variantes editables: usa las que tenga, o envuelve instructions. */
+function draftVariants(m: PaymentMethod): PaymentMethodVariant[] {
+  if (m.variants && m.variants.length > 0) return m.variants.map((v) => ({ ...v }));
+  if (m.instructions?.trim()) return [{ id: 'pmv-legacy', label: '', instructions: m.instructions }];
+  return [];
 }
 
 const DAYS = [
@@ -87,7 +99,7 @@ export function AdminSettings({
           className={ui.actionBtn}
           onClick={() => {
             setMethodError('');
-            setMethodDraft({ id: m.id, label: m.label, kind: m.kind, isOffline: m.is_offline, isEnabled: m.is_enabled, instructions: m.instructions ?? '' });
+            setMethodDraft({ id: m.id, label: m.label, kind: m.kind, isOffline: m.is_offline, isEnabled: m.is_enabled, variants: draftVariants(m) });
           }}
         >
           Editar
@@ -136,13 +148,19 @@ export function AdminSettings({
   function saveMethod() {
     if (!methodDraft) return;
     if (!methodDraft.label.trim()) return setMethodError('Pon un nombre.');
+    const cleanVariants = methodDraft.isOffline
+      ? methodDraft.variants
+          .map((v) => ({ ...v, label: v.label.trim(), instructions: v.instructions.trim() }))
+          .filter((v) => v.instructions)
+      : [];
     const rec: PaymentMethod = {
       id: methodDraft.id ?? `pm-${Date.now()}`,
       kind: methodDraft.kind,
       label: methodDraft.label.trim(),
       is_enabled: methodDraft.isEnabled,
       is_offline: methodDraft.isOffline,
-      instructions: methodDraft.isOffline ? methodDraft.instructions.trim() : '',
+      instructions: cleanVariants.length === 1 ? cleanVariants[0]!.instructions : '',
+      variants: cleanVariants.length > 0 ? cleanVariants : undefined,
       sort_order: methodDraft.id
         ? (methods.find((m) => m.id === methodDraft.id)?.sort_order ?? methods.length + 1)
         : methods.length + 1,
@@ -330,7 +348,7 @@ export function AdminSettings({
             className={ui.newBtn}
             onClick={() => {
               setMethodError('');
-              setMethodDraft({ id: null, label: '', kind: 'pago_movil', isOffline: true, isEnabled: true, instructions: '' });
+              setMethodDraft({ id: null, label: '', kind: 'pago_movil', isOffline: true, isEnabled: true, variants: [newVariant()] });
             }}
           >
             Nuevo método
@@ -376,7 +394,11 @@ export function AdminSettings({
                 </span>
               </div>
               <p className={ui.cardBrand}>{m.is_offline ? 'Con comprobante' : 'En línea'}</p>
-              {m.is_offline && m.instructions ? (
+              {m.is_offline && m.variants && m.variants.length > 0 ? (
+                <p className={ui.cardTags}>
+                  {m.variants.length} cuenta{m.variants.length === 1 ? '' : 's'}: {m.variants.map((v) => v.label || 'Cuenta').join(', ')}
+                </p>
+              ) : m.is_offline && m.instructions ? (
                 <p className={ui.cardTags} style={{ whiteSpace: 'pre-wrap' }}>{m.instructions}</p>
               ) : null}
               <div style={{ marginTop: 'var(--ptr-space-4)' }}>{methodActions(m)}</div>
@@ -422,16 +444,46 @@ export function AdminSettings({
               <span>Requiere comprobante de pago (offline)</span>
             </label>
             {methodDraft.isOffline ? (
-              <label className={ui.field}>
-                <span>Datos de pago que ve el cliente</span>
-                <textarea
-                  className={ui.input}
-                  rows={4}
-                  value={methodDraft.instructions}
-                  placeholder={'Banco, teléfono/cuenta, RIF y titular…'}
-                  onChange={(e) => setMethodDraft({ ...methodDraft, instructions: e.target.value })}
-                />
-              </label>
+              <div className={ui.field}>
+                <span>Cuentas / variantes (banco, teléfono/cuenta, RIF y titular)</span>
+                <p className={ui.formSectionHint} style={{ margin: '0 0 var(--ptr-space-2)' }}>
+                  Agrega una por cada banco o cuenta (ej. Pago Móvil de varios bancos). El cliente elige al pagar.
+                </p>
+                {methodDraft.variants.map((v, i) => (
+                  <div key={v.id} style={{ border: '1px solid var(--ptr-neutral-200)', borderRadius: 'var(--ptr-radius-md)', padding: 'var(--ptr-space-3)', marginBottom: 'var(--ptr-space-2)' }}>
+                    <div style={{ display: 'flex', gap: 'var(--ptr-space-2)', alignItems: 'center', marginBottom: 'var(--ptr-space-2)' }}>
+                      <input
+                        className={ui.input}
+                        style={{ flex: 1 }}
+                        value={v.label}
+                        placeholder="Etiqueta (ej. Banco Mercantil) — opcional si es única"
+                        onChange={(e) => setMethodDraft({ ...methodDraft, variants: methodDraft.variants.map((x, j) => (j === i ? { ...x, label: e.target.value } : x)) })}
+                      />
+                      <button
+                        type="button"
+                        className={`${ui.actionBtn} ${ui.actionDanger}`}
+                        onClick={() => setMethodDraft({ ...methodDraft, variants: methodDraft.variants.filter((_, j) => j !== i) })}
+                      >
+                        Quitar
+                      </button>
+                    </div>
+                    <textarea
+                      className={ui.input}
+                      rows={3}
+                      value={v.instructions}
+                      placeholder={'Banco, teléfono/cuenta, RIF y titular…'}
+                      onChange={(e) => setMethodDraft({ ...methodDraft, variants: methodDraft.variants.map((x, j) => (j === i ? { ...x, instructions: e.target.value } : x)) })}
+                    />
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className={ui.actionBtn}
+                  onClick={() => setMethodDraft({ ...methodDraft, variants: [...methodDraft.variants, newVariant()] })}
+                >
+                  ＋ Agregar cuenta/variante
+                </button>
+              </div>
             ) : null}
             <label className={ui.check}>
               <input
