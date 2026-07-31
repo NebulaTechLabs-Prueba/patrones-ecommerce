@@ -86,12 +86,16 @@ export const DEFAULT_CONTENT: ContentConfig = {
         'Del quirófano a la cocina, de la oficina a la calle: profesionales que no paran, equipados por PATRONES. Toca cada punto para descubrir la colección.',
     },
     items: [
-      { title: 'Salud', url: uns('1576091160399-112ba8d25d1d') },
-      { title: 'Gastronomía', url: uns('1612349317150-e413f6a5b16d') },
-      { title: 'Corporativo', url: uns('1559839734-2b71ea197ec2') },
-      { title: 'Equipos completos', url: uns('1537368910025-700350fe46c7') },
-      { title: 'Nueva colección', url: uns('1582750433449-648ed127bb54') },
-      { title: 'A todo color', url: uns('1622253692010-333f2da6031d') },
+      { title: 'De pies a cabeza', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROMVLBYN5DzOrmCguhxP2bBmKYal9Mwop29XVYCKZG1eAGWjQvQDEyW0ji&s=10' },
+      { title: 'Tu jornada, con carácter', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUAwv-UDpmwcIjWZFMukz9DUcWcNamP0aWXuN6ZQG-O9VYEl1BASkHxbw&s=10' },
+      { title: 'Estilo profesional', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIgqRs4OPcsWYXL-JIzd7YT_lN7gS4qILoXGByV9YDYNjOdi2GaaA0Pw8&s=10' },
+      { title: 'A todo color', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTaWCpY3q8UY-NvqfjeSZRtpRFo-kJ9XX90RuRV9nvt-U4gxMkSvT0tv4&s=10' },
+      { title: 'Lista para la guardia', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ5uZ8G3dBrbVVwbGw8dpVid6jMxxi4YBhKV5LnnImnHOrZ-83eqD1OZqD&s=10' },
+      { title: 'En PATRONES', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRN8dBamJPKc-b8iu9G9lGA0IvHLMBxnFf0z1qFvrPy94vaj_pPnZ1ANU&s=10' },
+      { title: 'Nuestra gente', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS429xaCj7wQsNKmxe7QK3RxlSFV6xv2DQf26wPD08G6CTkdCHpxW7I3pEo&s=10' },
+      { title: 'Viste tu oficio', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBOGa3hZSBDmGxMqdJOT-hvdQYwdaz_tsxm1fPM0ieql5eIRkawrfhZ5w&s=10' },
+      { title: 'Cada rubro, su carácter', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNyfmNO7gtxJ72UnxRiQjHNeqxYccXeoNBEqEoT-PQGj7eXUeHuP_DNnYN&s=10' },
+      { title: 'Presencia que se nota', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh7bz_rSzZJoN3-RSsamnnRb31M83ibr-kyCxnpew8pHeA9K58epI5pPk&s=10' },
     ],
   },
   statement: {
@@ -100,7 +104,7 @@ export const DEFAULT_CONTENT: ContentConfig = {
     subtitle:
       'Consúltanos por tallas, disponibilidad o pedidos institucionales. Te respondemos en horario de atención.',
     ctaText: 'Escríbenos por WhatsApp',
-    image: 'https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?q=80&w=1100&h=1500&fit=crop',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLHOVqMbFo_v7SCBdlwHp2cvg3bPK_zup1A8qVTzQEvwJgdSLG6fJ5MtOd&s=10',
   },
 };
 
@@ -111,7 +115,7 @@ interface ContentContextValue {
 }
 
 const ContentContext = createContext<ContentContextValue | null>(null);
-const STORAGE_KEY = 'ptr-content-v1';
+const STORAGE_KEY = 'ptr-content-v2';
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
   const [content, setContentState] = useState<ContentConfig>(DEFAULT_CONTENT);
