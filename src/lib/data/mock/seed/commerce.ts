@@ -219,10 +219,10 @@ export const orders: Order[] = [
     lines: [
       line({
         product_name: 'Conjunto Quirúrgico Estéril',
-        variant_sku: 'MDW-QX-SET-VQ-M',
+        variant_sku: 'CU-QX-SET-VQ-M',
         product_type: 'set',
         vertical: 'Salud',
-        brand: 'MediWear',
+        brand: 'CU',
         model: 'Quirúrgico',
         size: 'M',
         color: 'Verde quirófano',
@@ -261,9 +261,9 @@ export const orders: Order[] = [
     lines: [
       line({
         product_name: 'Camisa Corporativa Oxford',
-        variant_sku: 'MDW-OXF-CAM-CL-L',
+        variant_sku: 'CU-OXF-CAM-CL-L',
         vertical: 'Corporativo',
-        brand: 'MediWear',
+        brand: 'CU',
         model: 'Oxford',
         size: 'L',
         color: 'Celeste',
@@ -305,9 +305,9 @@ export const orders: Order[] = [
       }),
       line({
         product_name: 'Zueco Profesional Terra',
-        variant_sku: 'CHL-TRR-ZUE-BL-40',
+        variant_sku: 'CRC-TRR-ZUE-BL-40',
         vertical: 'Gastronomía',
-        brand: 'ChefLine',
+        brand: 'Crocs',
         model: 'Terra',
         size: '40',
         color: 'Blanco',
