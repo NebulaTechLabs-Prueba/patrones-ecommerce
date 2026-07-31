@@ -45,8 +45,9 @@ interface CatalogContextValue extends CatalogData {
 const CatalogContext = createContext<CatalogContextValue | null>(null);
 // Bump la version para descartar datos locales viejos tras cambios de semilla.
 // v3: consolidacion de inventario (variantes), marcas fantasma fuera, tagline/
-// descripcion + hero_style por marca. Sin esto, el navegador muestra el cache viejo.
-const STORAGE_KEY = 'ptr-catalog-v3';
+// descripcion + hero_style por marca. v4: imagen de hero por marca. Sin bump, el
+// navegador muestra el cache viejo.
+const STORAGE_KEY = 'ptr-catalog-v4';
 
 export function CatalogProvider({ initial, children }: { initial: CatalogData; children: React.ReactNode }) {
   const [data, setData] = useState<CatalogData>(initial);

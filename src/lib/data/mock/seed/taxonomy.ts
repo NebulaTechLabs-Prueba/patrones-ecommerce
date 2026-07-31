@@ -112,6 +112,8 @@ export const brands: Brand[] = [
     description: 'La línea propia de PATRONES: diseñada y producida por la casa, con la calidad y el criterio que definen cada prenda.',
     is_own_line: true,
     logo_image: { url: '/brand/logo.png', alt: 'Línea PATRONES', is_placeholder: false, sort_order: 0 },
+    hero_image: stock('1434389677669-e08b4cac3105', 'Línea PATRONES'),
+    hero_style: 'split',
   },
   {
     id: 'b-figs',
@@ -143,6 +145,8 @@ export const brands: Brand[] = [
     description: 'Uniformes médicos con tejidos elásticos y ligeros, pensados para largas jornadas con total libertad de movimiento.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1445205170230-053b83016050', 'Infinity'),
+    hero_style: 'split',
   },
   {
     id: 'b-barco',
@@ -152,6 +156,8 @@ export const brands: Brand[] = [
     description: 'Barco y sus líneas de autor: scrubs de tejidos de alto desempeño con estética cuidada.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1483985988355-763728e1935b', 'Barco'),
+    hero_style: 'full',
   },
   {
     id: 'b-cu',
@@ -161,6 +167,8 @@ export const brands: Brand[] = [
     description: 'Prendas de trabajo para salud y gastronomía, con foco en durabilidad y comodidad diaria.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1503342217505-b0a15ec3261c', 'CU'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-healing-hands',
@@ -170,6 +178,8 @@ export const brands: Brand[] = [
     description: 'Uniformes médicos con suavidad, elasticidad y estilo para quienes cuidan a los demás.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1483985988355-763728e1935b', 'Healing Hands'),
+    hero_style: 'split',
   },
   {
     id: 'b-medicapparel',
@@ -179,6 +189,8 @@ export const brands: Brand[] = [
     description: 'Uniformes y prendas médicas para el profesional clínico, con acabados prácticos.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'Medicapparel'),
+    hero_style: 'full',
   },
   {
     id: 'b-butter-soft',
@@ -188,6 +200,8 @@ export const brands: Brand[] = [
     description: 'Scrubs de tejidos ultrasuaves y livianos, para máxima comodidad durante toda la jornada.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1483985988355-763728e1935b', 'Butter-Soft'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-nike',
@@ -208,6 +222,8 @@ export const brands: Brand[] = [
     description: 'Calzado con amortiguación y ligereza para acompañarte cómodo todo el día.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1490114538077-0a7f8cb49891', 'Skechers'),
+    hero_style: 'full',
   },
   {
     id: 'b-crocs',
@@ -217,6 +233,8 @@ export const brands: Brand[] = [
     description: 'Calzado liviano, cómodo y fácil de limpiar, ideal para largas jornadas de pie.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1618354691373-d851c5c3a990', 'Crocs'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-skywox',
@@ -226,6 +244,8 @@ export const brands: Brand[] = [
     description: 'Prendas frescas y transpirables para el día a día y el descanso, con telas cómodas.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1523381210434-271e8be1f52b', 'Skywox'),
+    hero_style: 'split',
   },
   {
     id: 'b-dickies',
@@ -235,6 +255,8 @@ export const brands: Brand[] = [
     description: 'Ropa de trabajo con durabilidad legendaria para las exigencias del día a día.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1483985988355-763728e1935b', 'Dickies'),
+    hero_style: 'full',
   },
   {
     id: 'b-parchita',
@@ -244,6 +266,8 @@ export const brands: Brand[] = [
     description: 'Bandoleras, carteras y complementos con carácter para darle personalidad a tu look.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1590874103328-eac38a683ce7', 'Parchita'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-juanita-jo',
@@ -253,6 +277,8 @@ export const brands: Brand[] = [
     description: 'Piezas y accesorios de diseño con acabados cuidados y un toque distintivo.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1590874103328-eac38a683ce7', 'Juanita Jo'),
+    hero_style: 'split',
   },
   {
     id: 'b-project',
@@ -262,6 +288,8 @@ export const brands: Brand[] = [
     description: 'Propuestas modernas y funcionales para el profesional de hoy.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1483985988355-763728e1935b', 'Project'),
+    hero_style: 'full',
   },
   {
     id: 'b-babalu',
@@ -271,6 +299,8 @@ export const brands: Brand[] = [
     description: 'Prendas y accesorios de onda casual y colores vivos para lo cotidiano.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1523381210434-271e8be1f52b', 'Babalu'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-michael-kors',
@@ -280,6 +310,8 @@ export const brands: Brand[] = [
     description: 'Carteras y accesorios de diseño para complementar tu imagen con estatus.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1590874103328-eac38a683ce7', 'Michael Kors'),
+    hero_style: 'split',
   },
   {
     id: 'b-victoria',
@@ -289,6 +321,8 @@ export const brands: Brand[] = [
     description: 'Accesorios y complementos con estilo femenino para completar tu conjunto.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1590874103328-eac38a683ce7', 'Victoria'),
+    hero_style: 'full',
   },
   {
     id: 'b-industry-line',
@@ -298,6 +332,8 @@ export const brands: Brand[] = [
     description: 'Prendas utilitarias y resistentes para entornos de trabajo exigentes.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1503342217505-b0a15ec3261c', 'Industry Line'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-chef',
@@ -307,6 +343,8 @@ export const brands: Brand[] = [
     description: 'Prendas y complementos pensados para el ritmo y las exigencias de la cocina.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1503342217505-b0a15ec3261c', 'Chef'),
+    hero_style: 'split',
   },
   {
     id: 'b-inizio',
@@ -316,6 +354,8 @@ export const brands: Brand[] = [
     description: 'Prendas versátiles para empezar cada día con buena presencia.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1523381210434-271e8be1f52b', 'Inizio'),
+    hero_style: 'full',
   },
   {
     id: 'b-bonlife',
@@ -325,6 +365,8 @@ export const brands: Brand[] = [
     description: 'Ropa cómoda y práctica para acompañar tu bienestar diario.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1523381210434-271e8be1f52b', 'Bonlife'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-timberbrother',
@@ -334,6 +376,8 @@ export const brands: Brand[] = [
     description: 'Prendas y accesorios resistentes con espíritu outdoor.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1523381210434-271e8be1f52b', 'Timberbrother'),
+    hero_style: 'split',
   },
   {
     id: 'b-hypothesis',
@@ -343,6 +387,8 @@ export const brands: Brand[] = [
     description: 'Piezas contemporáneas para quienes buscan algo distinto.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1490114538077-0a7f8cb49891', 'Hypothesis'),
+    hero_style: 'full',
   },
   {
     id: 'b-cavn',
@@ -352,6 +398,8 @@ export const brands: Brand[] = [
     description: 'Prendas de líneas limpias para el día a día.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'Cavn'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-sooverki',
@@ -361,6 +409,8 @@ export const brands: Brand[] = [
     description: 'Prendas y accesorios prácticos para tu rutina.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'Sooverki'),
+    hero_style: 'split',
   },
   {
     id: 'b-sandjest',
@@ -370,6 +420,8 @@ export const brands: Brand[] = [
     description: 'Accesorios y complementos con un toque personal.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'Sandjest'),
+    hero_style: 'full',
   },
   {
     id: 'b-neer',
@@ -379,6 +431,8 @@ export const brands: Brand[] = [
     description: 'Prendas y accesorios seleccionados para complementar tu look.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1490114538077-0a7f8cb49891', 'Neer'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-duuv',
@@ -388,6 +442,8 @@ export const brands: Brand[] = [
     description: 'Piezas cómodas y versátiles para todos los días.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'Duuv'),
+    hero_style: 'split',
   },
   {
     id: 'b-zhmo',
@@ -397,6 +453,8 @@ export const brands: Brand[] = [
     description: 'Prendas y accesorios con buena relación estilo-precio.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'Zhmo'),
+    hero_style: 'full',
   },
   {
     id: 'b-zhehao',
@@ -406,6 +464,8 @@ export const brands: Brand[] = [
     description: 'Artículos funcionales para el día a día.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'Zhehao'),
+    hero_style: 'portrait',
   },
   {
     id: 'b-importado',
@@ -415,6 +475,8 @@ export const brands: Brand[] = [
     description: 'Selección de prendas importadas elegidas por su calidad y durabilidad.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'Importado'),
+    hero_style: 'split',
   },
   {
     id: 'b-general',
@@ -424,6 +486,8 @@ export const brands: Brand[] = [
     description: 'Piezas varias de nuestra selección para complementar tu compra.',
     is_own_line: false,
     logo_image: null,
+    hero_image: stock('1556905055-8f358a7a47b2', 'General'),
+    hero_style: 'full',
   },
 ];
 
