@@ -13,6 +13,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { IdentityDocKind } from '@/lib/data/types';
 import { validateDocument } from '@/lib/domains/identity/identity';
+import { sendWelcomeEmail } from '@/lib/email/actions';
 
 export type Role = 'customer' | 'admin';
 
@@ -186,6 +187,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const session: Session = { email: account.email, name: account.name, role: 'customer' };
         setUser(session);
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+        // Correo de bienvenida (Fase 2). Fire-and-forget: no bloquea el registro y,
+        // sin RESEND_API_KEY, no envía nada.
+        void sendWelcomeEmail(account.email, account.name).catch(() => {});
         return { ok: true };
       },
       updateProfile: (input) => {

@@ -9,7 +9,7 @@
  * Al confirmar NO crea orden ni cobra: muestra una confirmacion marcada como demo.
  */
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import type {
   IdentityDocKind,
@@ -21,6 +21,7 @@ import type {
 import { validateDocument } from '@/lib/domains/identity/identity';
 import { quoteShipping } from '@/lib/domains/shipping/shipping';
 import { useAuth, readStoredProfile, type StoredAccount } from '@/lib/store/auth-context';
+import { sendOrderConfirmationEmail } from '@/lib/email/actions';
 import { useCart } from '@/lib/store/cart-context';
 import { useCurrency } from '@/lib/store/currency-context';
 import { PAYMENT_METHOD_LABELS } from '@/lib/labels';
@@ -180,6 +181,22 @@ export function CheckoutForm({ paymentMethods, customerFallback }: CheckoutFormP
 
   const isOnlinePay = selectedPayment !== null && !selectedPayment.is_offline;
   const proofReady = reference.trim() !== '' || proofName !== '';
+
+  // Correo de confirmación (Fase 2). Se envía una sola vez al confirmar el pedido.
+  // Fire-and-forget y, sin RESEND_API_KEY, no envía nada (la demo sigue igual).
+  const confirmationSent = useRef(false);
+  useEffect(() => {
+    if (phase !== 'done' || confirmationSent.current || items.length === 0) return;
+    confirmationSent.current = true;
+    void sendOrderConfirmationEmail({
+      email,
+      name: `${firstName} ${lastName}`.trim(),
+      total: formatCents(totalWithShipping),
+      items: items.map((i) => ({ name: i.productName, quantity: i.quantity })),
+      reference: reference.trim() || undefined,
+    }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
 
   function handleConfirm() {
     setAttempted(true);
